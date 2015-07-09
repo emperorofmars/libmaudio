@@ -1,0 +1,5 @@
+/*
+ * Some description
+ * 
+ * Copyright (C) 2015 Martin Schwarz
+ */

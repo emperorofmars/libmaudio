@@ -1,0 +1,7 @@
+maudio.depend
+maudio.layout
+.directory
+obj
+bin
+*.flac
+*.wav

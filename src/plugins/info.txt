@@ -1,0 +1,2 @@
+
+plugins for: generator, mixer, manipulator

@@ -29,8 +29,10 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="../include" />
 		</Compiler>
 		<Unit filename="../include/core/audiosink/FileWriter.hpp" />
 		<Unit filename="../include/core/audiosink/IAudioSink.hpp" />
@@ -47,7 +49,9 @@
 		<Unit filename="../include/core/mixer/IMixer.hpp" />
 		<Unit filename="../include/core/pluginmanager/PluhinManager.hpp" />
 		<Unit filename="../include/core/util/AudioBuffer.hpp" />
+		<Unit filename="../include/core/util/AudioInfo.hpp" />
 		<Unit filename="../include/core/util/Config.hpp" />
+		<Unit filename="../include/core/util/FileInfo.hpp" />
 		<Unit filename="../include/core/util/Sample.hpp" />
 		<Unit filename="../src/core/audiosink/FileWriter.cpp" />
 		<Unit filename="../src/core/audiosink/Player.cpp" />

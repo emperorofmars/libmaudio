@@ -19,8 +19,11 @@ public:
 	~Sample();
 
 	std::vector<float> get();
-	float operator[](unsigned char i);
+	float get(unsigned char i);
+	//float operator[](unsigned char i);
+	float& operator[](unsigned int i);
 	void set(std::vector<float> data);
+	void set(int position, float data);
 	unsigned int getChannels();
 
 private:

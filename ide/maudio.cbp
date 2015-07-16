@@ -49,6 +49,7 @@
 		<Unit filename="../include/core/mixer/IMixer.hpp" />
 		<Unit filename="../include/core/pluginmanager/PluhinManager.hpp" />
 		<Unit filename="../include/core/util/AudioBuffer.hpp" />
+		<Unit filename="../include/core/util/AudioException.hpp" />
 		<Unit filename="../include/core/util/AudioInfo.hpp" />
 		<Unit filename="../include/core/util/Config.hpp" />
 		<Unit filename="../include/core/util/FileInfo.hpp" />

@@ -16,10 +16,11 @@ namespace maudio{
 ///holds an audio stream
 class AudioBuffer{
 public:
-	AudioBuffer();
+	AudioBuffer(AudioInfo info);
+	AudioBuffer(unsigned long samples = 0, unsigned int channels = 2);
 	~AudioBuffer();
 
-    void setLength(unsigned long samples);
+    void setLength();
 
     std::vector<float> get();
     Sample get(unsigned long sample);

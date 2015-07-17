@@ -7,24 +7,23 @@
 #ifndef MAUDIO_SAMPLE
 #define MAUDIO_SAMPLE
 
+#include "core/util/ISample.hpp"
 #include <vector>
 
 namespace maudio{
 
-///holds a frame of audio
-class Sample{
+///ISample implementation with vectors
+class Sample : public ISample{
 public:
-	Sample();
-	Sample(std::vector<float> data);
-	~Sample();
+	Sample(unsigned int channels = 1);
+	Sample(const std::vector<float> data);
+	virtual ~Sample();
 
-	std::vector<float> get();
-	float get(unsigned char i);
-	//float operator[](unsigned char i);
-	float& operator[](unsigned int i);
-	void set(std::vector<float> data);
-	void set(int position, float data);
-	unsigned int getChannels();
+	virtual float& operator[](unsigned int pos);
+	virtual void operator=(ISample &data);
+	virtual float get(unsigned int pos);
+	virtual void set(float data, unsigned int pos);
+	virtual unsigned int getChannels();
 
 private:
 	std::vector<float> mData; ///one value per channel

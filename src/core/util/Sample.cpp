@@ -9,41 +9,38 @@
 
 namespace maudio{
 
-Sample::Sample(){
+Sample::Sample(unsigned int channels){
+	mData.resize(channels);
 }
 
-Sample::Sample(std::vector<float> data){
+Sample::Sample(const std::vector<float> data){
 	mData = data;
 }
 
 Sample::~Sample(){
 }
-/*
-float Sample::operator[](unsigned char i){
-	if(i >= mData.size()) throw ChannelsException();
-	return mData[i];
-}
-*/
-float& Sample::operator[](unsigned int i){
-	return mData[i];
+
+float& Sample::operator[](unsigned int pos){
+	if(pos >= mData.size()) throw ChannelsException();
+	return mData[pos];
 }
 
-float Sample::get(unsigned char i){
-	if(i >= mData.size()) throw ChannelsException();
-	return mData[i];
+void Sample::operator=(ISample &data){
+	if(data.getChannels() != mData.size()) throw ChannelsException();
+	for(unsigned int i = 0; i < mData.size(); i++){
+		mData[i] = data[i];
+	}
+	return;
 }
 
-std::vector<float> Sample::get(){
-	return mData;
+float Sample::get(unsigned int pos){
+	if(pos >= mData.size()) throw ChannelsException();
+	return mData[pos];
 }
 
-void Sample::set(std::vector<float> data){
-	mData = data;
-}
-
-void Sample::set(int position, float data){
-	if(position >= mData.size()) throw ChannelsException();
-	mData[position] = data;
+void Sample::set(float data, unsigned int pos){
+	if(pos >= mData.size()) throw ChannelsException();
+	mData[pos] = data;
 }
 
 unsigned int Sample::getChannels(){

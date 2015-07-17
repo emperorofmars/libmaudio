@@ -4,7 +4,7 @@
  * Copyright (C) 2015 Martin Schwarz
  */
 
-#include "core/util/Sample.hpp"
+#include "core/audiodata/Sample.hpp"
 #include "core/util/AudioException.hpp"
 
 namespace maudio{

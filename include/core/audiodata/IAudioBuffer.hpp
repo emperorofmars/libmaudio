@@ -7,8 +7,8 @@
 #ifndef MAUDIO_IAUDIOBUFFER
 #define MAUDIO_IAUDIOBUFFER
 
-#include "core/util/ISample.hpp"
-#include "core/util/AudioInfo.hpp"
+#include "ISample.hpp"
+#include "AudioInfo.hpp"
 
 namespace maudio{
 

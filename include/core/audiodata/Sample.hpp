@@ -7,7 +7,7 @@
 #ifndef MAUDIO_SAMPLE
 #define MAUDIO_SAMPLE
 
-#include "core/util/ISample.hpp"
+#include "ISample.hpp"
 #include <vector>
 
 namespace maudio{

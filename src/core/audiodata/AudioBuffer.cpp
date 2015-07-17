@@ -2,9 +2,9 @@
  * Copyright (C) 2015 Martin Schwarz
  */
 
-#include "core/util/AudioBuffer.hpp"
+#include "core/audiodata/AudioBuffer.hpp"
+#include "core/audiodata/Sample.hpp"
 #include "core/util/AudioException.hpp"
-#include "core/util/Sample.hpp"
 
 namespace maudio{
 
@@ -33,7 +33,8 @@ ISample& AudioBuffer::operator[](unsigned long pos){
 }
 
 void AudioBuffer::operator=(IAudioBuffer &data){
-	mData.resize(data.getInfo().Samples, new Sample(data.getInfo().Channels));
+	mInfo = data.getInfo();
+	resize(mInfo.Samples);
 	for(unsigned int i = 0; i < data.getInfo().Samples; i++){
 		*(mData[i]) = data[i];
 	}
@@ -45,7 +46,8 @@ ISample& AudioBuffer::get(unsigned long pos){
 }
 
 void AudioBuffer::set(ISample &data, unsigned long pos){
-	if(pos >= mData.size() + mInfo.Offset || pos < mInfo.Offset) throw ChannelsException();
+	if(pos >= mData.size() + mInfo.Offset || pos < mInfo.Offset) throw OutOfBoundsException();
+	if(data.getChannels() != mInfo.Channels) throw ChannelsException();
 	*(mData[pos - mInfo.Offset]) = data;
 	return;
 }

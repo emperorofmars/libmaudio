@@ -5,21 +5,25 @@
  */
 
 #include <iostream>
-#include "core/util/Sample.hpp"
-#include "core/util/AudioBuffer.hpp"
+#include "core/audiodata/Sample.hpp"
+#include "core/audiodata/AudioBuffer.hpp"
+#include "core/audiodata/RawSample.hpp"
+#include "core/audiodata/RawAudioBuffer.hpp"
 
 using namespace maudio;
 
 int main(int argc, char *argv[]){
 	std::cerr << "test" << std::endl;
 
-	Sample s(std::vector<float>{5, 2});
+	//Sample s(std::vector<float>{5, 2});
+	float arr[] = {5, 2};
+	RawSample s(arr, 2);
 	float x = s[1];
 	s[1] = 50;
 	x = 10;
 	std::cout << s[1] << " " << x << std::endl;
 
-	AudioBuffer b(2, 10);
+	RawAudioBuffer b(2, 10);
 	b.set(s, 2);
 
 	try{

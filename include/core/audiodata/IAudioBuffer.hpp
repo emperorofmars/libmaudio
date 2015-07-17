@@ -19,8 +19,8 @@ public:
 
 	virtual ISample& operator[](unsigned long pos) = 0;
 	virtual void operator=(IAudioBuffer &data) = 0;
-	virtual ISample& get(unsigned long pos) = 0;
-	virtual void set(ISample &data, unsigned long pos) = 0;
+	virtual ISample* get(unsigned long pos) = 0;
+	virtual void set(unsigned long pos, ISample &data) = 0;
 
 	virtual void resize(unsigned long samples) = 0;
 	virtual void setInfo(const AudioInfo &info) = 0;

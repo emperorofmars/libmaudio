@@ -38,7 +38,7 @@ float Sample::get(unsigned int pos){
 	return mData[pos];
 }
 
-void Sample::set(float data, unsigned int pos){
+void Sample::set(unsigned int pos, float data){
 	if(pos >= mData.size()) throw ChannelsException();
 	mData[pos] = data;
 }

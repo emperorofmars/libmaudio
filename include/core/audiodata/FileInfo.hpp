@@ -25,7 +25,6 @@ public:
 	std::string License;
 	std::string Tracknumber;
 	std::string Genre;
-	AudioInfo Info;
 };
 
 } // maudio

@@ -43,7 +43,7 @@ float RawSample::get(unsigned int pos){
 	return mData[pos];
 }
 
-void RawSample::set(float data, unsigned int pos){
+void RawSample::set(unsigned int pos, float data){
 	if(pos >= mChannels) throw ChannelsException();
 	mData[pos] = data;
 }

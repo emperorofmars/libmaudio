@@ -22,7 +22,7 @@ public:
 	virtual float& operator[](unsigned int pos);
 	virtual void operator=(ISample &data);
 	virtual float get(unsigned int pos);
-	virtual void set(float data, unsigned int pos);
+	virtual void set(unsigned int pos, float data);
 	virtual unsigned int getChannels();
 
 private:

@@ -40,12 +40,12 @@ void AudioBuffer::operator=(IAudioBuffer &data){
 	}
 }
 
-ISample& AudioBuffer::get(unsigned long pos){
+ISample* AudioBuffer::get(unsigned long pos){
 	if(pos >= mData.size() + mInfo.Offset || pos < mInfo.Offset) throw OutOfBoundsException();
-	return *mData[pos - mInfo.Offset];
+	return mData[pos - mInfo.Offset];
 }
 
-void AudioBuffer::set(ISample &data, unsigned long pos){
+void AudioBuffer::set(unsigned long pos, ISample &data){
 	if(pos >= mData.size() + mInfo.Offset || pos < mInfo.Offset) throw OutOfBoundsException();
 	if(data.getChannels() != mInfo.Channels) throw ChannelsException();
 	*(mData[pos - mInfo.Offset]) = data;

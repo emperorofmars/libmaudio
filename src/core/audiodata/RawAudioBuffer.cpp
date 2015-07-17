@@ -36,16 +36,16 @@ void RawAudioBuffer::operator=(IAudioBuffer &data){
 	mInfo = data.getInfo();
 	resize(mInfo.Samples);
 	for(unsigned int i = 0; i < mInfo.Samples; i++){
-		set(data[i], i);
+		set(i, data[i]);
 	}
 }
 
-ISample& RawAudioBuffer::get(unsigned long pos){
+ISample* RawAudioBuffer::get(unsigned long pos){
 	if(pos >= mData.size() + mInfo.Offset || pos < mInfo.Offset) throw OutOfBoundsException();
-	return *createSample(pos);
+	return createSample(pos);
 }
 
-void RawAudioBuffer::set(ISample &data, unsigned long pos){
+void RawAudioBuffer::set(unsigned long pos, ISample &data){
 	if(pos >= mData.size() + mInfo.Offset || pos < mInfo.Offset) throw OutOfBoundsException();
 	if(data.getChannels() != mInfo.Channels) throw ChannelsException();
 	for(unsigned int i = 0; i < mInfo.Channels; i++){

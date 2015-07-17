@@ -46,8 +46,8 @@
 		<Unit filename="../../include/core/audiosink/FileWriter.hpp" />
 		<Unit filename="../../include/core/audiosink/IAudioSink.hpp" />
 		<Unit filename="../../include/core/audiosink/Player.hpp" />
+		<Unit filename="../../include/core/audiosink/TerminalPrinter.hpp" />
 		<Unit filename="../../include/core/audiosource/BulkReader.hpp" />
-		<Unit filename="../../include/core/audiosource/IAudioFileReader.hpp" />
 		<Unit filename="../../include/core/audiosource/IAudioGenerator.hpp" />
 		<Unit filename="../../include/core/audiosource/IAudioSource.hpp" />
 		<Unit filename="../../include/core/audiosource/SinusGenerator.hpp" />
@@ -59,12 +59,15 @@
 		<Unit filename="../../include/core/pluginmanager/PluhinManager.hpp" />
 		<Unit filename="../../include/core/util/AudioException.hpp" />
 		<Unit filename="../../include/core/util/Config.hpp" />
+		<Unit filename="../../include/core/util/IDeletionObserver.hpp" />
+		<Unit filename="../../include/core/util/IDeletionSubject.hpp" />
 		<Unit filename="../../src/core/audiodata/AudioBuffer.cpp" />
 		<Unit filename="../../src/core/audiodata/RawAudioBuffer.cpp" />
 		<Unit filename="../../src/core/audiodata/RawSample.cpp" />
 		<Unit filename="../../src/core/audiodata/Sample.cpp" />
 		<Unit filename="../../src/core/audiosink/FileWriter.cpp" />
 		<Unit filename="../../src/core/audiosink/Player.cpp" />
+		<Unit filename="../../src/core/audiosink/TerminalPrinter.cpp" />
 		<Unit filename="../../src/core/audiosource/BulkReader.cpp" />
 		<Unit filename="../../src/core/audiosource/SinusGenerator.cpp" />
 		<Unit filename="../../src/core/audiosource/StreamReader.cpp" />
@@ -73,8 +76,6 @@
 		<Unit filename="../../src/core/pluginmanager/PluhinManager.cpp" />
 		<Unit filename="../../src/core/util/AudioDevice.cpp" />
 		<Unit filename="../../src/core/util/AudioDevice.hpp" />
-		<Unit filename="../../src/core/util/AudioFile.cpp" />
-		<Unit filename="../../src/core/util/AudioFile.hpp" />
 		<Unit filename="../../src/core/util/Config.cpp" />
 		<Unit filename="../../src/examples/test1.cpp" />
 		<Extensions>

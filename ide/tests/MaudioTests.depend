@@ -1,0 +1,102 @@
+# depslib dependency file v1.0
+1437147988 source:/home/mars/Projekte/maudio/src/test/allTests.cpp
+	<gtest/gtest.h>
+	"test/core/audiodata/SampleTest.cpp"
+
+1437148905 /home/mars/Projekte/maudio/src/test/core/audiodata/SampleTest.cpp
+	"test/MaudioTest.hpp"
+	"core/audiodata/Sample.hpp"
+
+1437143776 /home/mars/Projekte/maudio/include/core/audiodata/Sample.hpp
+	"ISample.hpp"
+	<vector>
+
+1437133730 /home/mars/Projekte/maudio/include/core/audiodata/ISample.hpp
+
+1437148304 source:/home/mars/Projekte/maudio/src/test/core/audiodata/AudioBufferTest.cpp
+	"MaudioTest.hpp"
+
+1437143721 /home/mars/Projekte/maudio/include/core/audiodata/AudioBuffer.hpp
+	"IAudioBuffer.hpp"
+	"ISample.hpp"
+	"AudioInfo.hpp"
+	<vector>
+
+1437143676 /home/mars/Projekte/maudio/include/core/audiodata/IAudioBuffer.hpp
+	"ISample.hpp"
+	"AudioInfo.hpp"
+
+1436476746 /home/mars/Projekte/maudio/include/core/audiodata/AudioInfo.hpp
+
+1437074857 /home/mars/Projekte/maudio/include/core/util/AudioException.hpp
+	<exception>
+
+1437148340 source:/home/mars/Projekte/maudio/src/test/core/audiodata/RawAudioBufferTest.cpp
+	"MaudioTest.hpp"
+
+1437145012 /home/mars/Projekte/maudio/include/core/audiodata/RawAudioBuffer.hpp
+	"core/audiodata/IAudioBuffer.hpp"
+	"core/audiodata/ISample.hpp"
+	"core/audiodata/AudioInfo.hpp"
+	<vector>
+
+1437146132 /home/mars/Projekte/maudio/include/core/audiodata/RawSample.hpp
+	"core/audiodata/ISample.hpp"
+	<vector>
+
+1437148304 source:/home/mars/Projekte/maudio/src/test/core/audiodata/RawSampleTest.cpp
+	"MaudioTest.hpp"
+
+1437148905 source:/home/mars/Projekte/maudio/src/test/core/audiodata/SampleTest.cpp
+	"test/MaudioTest.hpp"
+	"core/audiodata/Sample.hpp"
+
+1437148475 /home/mars/Projekte/maudio/src/test/MaudioTest.hpp
+	<gtest/gtest.h>
+
+1437148284 source:/home/mars/Projekte/maudio/src/test/core/util/AudioFileTest.cpp
+	"MaudioTest.hpp"
+
+1437149151 source:/home/mars/Projekte/maudio/src/test/MaudioTest.cpp
+	"MaudioTest.hpp"
+
+1437145473 source:/home/mars/Projekte/maudio/src/core/audiodata/AudioBuffer.cpp
+	"core/audiodata/AudioBuffer.hpp"
+	"core/audiodata/Sample.hpp"
+	"core/util/AudioException.hpp"
+
+1437145630 source:/home/mars/Projekte/maudio/src/core/audiodata/RawAudioBuffer.cpp
+	"core/audiodata/RawAudioBuffer.hpp"
+	"core/audiodata/RawSample.hpp"
+	"core/util/AudioException.hpp"
+
+1437146128 source:/home/mars/Projekte/maudio/src/core/audiodata/RawSample.cpp
+	"core/audiodata/RawSample.hpp"
+	"core/util/AudioException.hpp"
+
+1437143876 source:/home/mars/Projekte/maudio/src/core/audiodata/Sample.cpp
+	"core/audiodata/Sample.hpp"
+	"core/util/AudioException.hpp"
+
+1436446544 source:/home/mars/Projekte/maudio/src/core/audiosink/FileWriter.cpp
+
+1436451950 source:/home/mars/Projekte/maudio/src/core/audiosink/Player.cpp
+
+1436446523 source:/home/mars/Projekte/maudio/src/core/audiosource/BulkReader.cpp
+
+1436446703 source:/home/mars/Projekte/maudio/src/core/audiosource/SinusGenerator.cpp
+
+1436446643 source:/home/mars/Projekte/maudio/src/core/audiosource/StreamReader.cpp
+
+1436454440 source:/home/mars/Projekte/maudio/src/core/manipulator/Resampler.cpp
+
+1436456383 source:/home/mars/Projekte/maudio/src/core/pluginmanager/PluhinManager.cpp
+
+1436454769 source:/home/mars/Projekte/maudio/src/core/util/AudioDevice.cpp
+
+1436446555 source:/home/mars/Projekte/maudio/src/core/util/AudioFile.cpp
+
+1436467033 source:/home/mars/Projekte/maudio/src/core/util/Config.cpp
+
+1437149136 /home/mars/Projekte/maudio/src/test/AllTests.hpp
+

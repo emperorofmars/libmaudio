@@ -19,10 +19,12 @@ int main(int argc, char *argv[]){
 	x = 10;
 	std::cout << s[1] << " " << x << std::endl;
 
-	AudioBuffer b(10, 2);
-	b.set(2, s);
+	AudioBuffer b(2, 10);
+	b.set(s, 2);
 
 	try{
+		std::cout << b[2][0] << std::endl;
+		b[2][0] = 42;
 		std::cout << b[2][0] << std::endl;
 	}
 	catch(std::exception &e){

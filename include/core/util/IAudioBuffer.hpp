@@ -15,17 +15,16 @@ namespace maudio{
 ///holds an audio stream
 class IAudioBuffer{
 public:
-	IAudioBuffer(AudioInfo info) = 0;
-	IAudioBuffer(unsigned int channels, unsigned long samples, unsigned long offset, unsigned int samplerate) = 0;
 	virtual ~IAudioBuffer(){};
 
-	virtual Sample operator[](unsigned long sample);
-	virtual Sample get(unsigned long pos);
-	virtual void set(Sample data, unsigned long pos);
+	virtual ISample& operator[](unsigned long pos) = 0;
+	virtual void operator=(IAudioBuffer &data) = 0;
+	virtual ISample& get(unsigned long pos) = 0;
+	virtual void set(ISample &data, unsigned long pos) = 0;
 
-	virtual void setLength();
-	virtual void setInfo(AudioInfo info);
-	virtual AudioInfo getInfo();
+	virtual void resize(unsigned long samples) = 0;
+	virtual void setInfo(const AudioInfo &info) = 0;
+	virtual const AudioInfo getInfo() = 0;
 };
 
 } // maudio

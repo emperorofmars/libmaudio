@@ -53,6 +53,8 @@
 		<Unit filename="../include/core/util/AudioInfo.hpp" />
 		<Unit filename="../include/core/util/Config.hpp" />
 		<Unit filename="../include/core/util/FileInfo.hpp" />
+		<Unit filename="../include/core/util/IAudioBuffer.hpp" />
+		<Unit filename="../include/core/util/ISample.hpp" />
 		<Unit filename="../include/core/util/Sample.hpp" />
 		<Unit filename="../src/core/audiosink/FileWriter.cpp" />
 		<Unit filename="../src/core/audiosink/Player.cpp" />

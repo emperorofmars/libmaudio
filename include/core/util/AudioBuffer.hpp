@@ -4,39 +4,39 @@
  * Copyright (C) 2015 Martin Schwarz
  */
 
-#ifndef MAUDIO_BUFFER
-#define MAUDIO_BUFFER
+#ifndef MAUDIO_AUDIOBUFFER
+#define MAUDIO_AUDIOBUFFER
 
-#include <vector>
-#include "core/util/Sample.hpp"
+#include "core/util/IAudioBuffer.hpp"
+#include "core/util/ISample.hpp"
 #include "core/util/AudioInfo.hpp"
+#include <vector>
 
 namespace maudio{
 
-///holds an audio stream
-class AudioBuffer{
+///holds an audio stream in a vector of ISamples
+class AudioBuffer : public IAudioBuffer{
 public:
 	AudioBuffer(AudioInfo info);
-	AudioBuffer(unsigned long samples = 0, unsigned int channels = 2);
-	~AudioBuffer();
+	AudioBuffer(unsigned int channels = 1, unsigned long samples = 0, unsigned long offset = 0, unsigned int samplerate = 44100);
+	virtual ~AudioBuffer();
 
-    void setLength();
+	virtual ISample& operator[](unsigned long pos);
+	virtual void operator=(IAudioBuffer &data);
+	virtual ISample& get(unsigned long pos);
+	virtual void set(ISample &data, unsigned long pos);
 
-    std::vector<float> get();
-    Sample get(unsigned long sample);
-	Sample operator[](unsigned long sample);
-    void set(unsigned long sample, Sample data);
-
-	void setInfo(AudioInfo info);
-	AudioInfo getInfo();
+	virtual void resize(unsigned long samples);
+	virtual void setInfo(const AudioInfo &info);
+	virtual const AudioInfo getInfo();
 
 private:
-	std::vector<float> mData;
+	std::vector<ISample*> mData;
 	AudioInfo mInfo;
 };
 
 } // maudio
 
-#endif // MAUDIO_BUFFER
+#endif // MAUDIO_AUDIOBUFFER
 
 

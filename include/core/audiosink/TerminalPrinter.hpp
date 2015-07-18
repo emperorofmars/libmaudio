@@ -17,9 +17,12 @@ public:
 	TerminalPrinter();
 	virtual ~TerminalPrinter();
 
-	virtual void setSource(std::shared_ptr<IAudioSource> source);
+	virtual void setSource(std::weak_ptr<IAudioSource> source);
 	virtual std::shared_ptr<IAudioSource> getSource();
-	void print(unsigned long pos);
+	void print(unsigned long pos) const;
+
+    virtual AudioInfo getAudioInfo();
+    virtual FileInfo getFileInfo();
 
 private:
 	std::weak_ptr<IAudioSource> mSource;

@@ -46,14 +46,14 @@ int main(int argc, char *argv[]){
 
 	SinusGenerator *sg = new SinusGenerator();
 	std::shared_ptr<IAudioSource> sgptr(sg);
-	sg->setFrequency(5000);
-	sg->setLength(990);
+	sg->setFrequency(3000);
+	sg->setLength(45);
+
 	TerminalPrinter *tp = new TerminalPrinter();
 	std::shared_ptr<IAudioSink> tpptr(tp);
 	tp->setSource(sgptr);
 
-	for(unsigned int i = 0; i < 1000; i++){
-		//std::cout << sg->get(i)->get(0) << std::endl;
+	for(unsigned int i = 0; i < 50; i++){
 		tp->print(i);
 	}
 

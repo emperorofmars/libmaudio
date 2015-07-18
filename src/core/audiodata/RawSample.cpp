@@ -38,7 +38,7 @@ void RawSample::operator=(ISample &data){
 	return;
 }
 
-float RawSample::get(unsigned int pos){
+float RawSample::get(unsigned int pos) const{
 	if(pos >= mChannels) throw ChannelsException();
 	return mData[pos];
 }
@@ -48,7 +48,7 @@ void RawSample::set(unsigned int pos, float data){
 	mData[pos] = data;
 }
 
-unsigned int RawSample::getChannels(){
+unsigned int RawSample::getChannels() const{
 	return mChannels;
 }
 

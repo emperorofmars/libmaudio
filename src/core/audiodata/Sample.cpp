@@ -33,7 +33,7 @@ void Sample::operator=(ISample &data){
 	return;
 }
 
-float Sample::get(unsigned int pos){
+float Sample::get(unsigned int pos) const{
 	if(pos >= mData.size()) throw ChannelsException();
 	return mData[pos];
 }
@@ -43,7 +43,7 @@ void Sample::set(unsigned int pos, float data){
 	mData[pos] = data;
 }
 
-unsigned int Sample::getChannels(){
+unsigned int Sample::getChannels() const{
 	return mData.size();
 }
 

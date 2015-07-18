@@ -54,13 +54,9 @@
 		<Unit filename="../../include/core/audiosource/StreamReader.hpp" />
 		<Unit filename="../../include/core/manipulator/IManipulator.hpp" />
 		<Unit filename="../../include/core/manipulator/Resampler.hpp" />
-		<Unit filename="../../include/core/mixer/AdditiveMixer.hpp" />
-		<Unit filename="../../include/core/mixer/IMixer.hpp" />
 		<Unit filename="../../include/core/pluginmanager/PluhinManager.hpp" />
 		<Unit filename="../../include/core/util/AudioException.hpp" />
 		<Unit filename="../../include/core/util/Config.hpp" />
-		<Unit filename="../../include/core/util/IDeletionObserver.hpp" />
-		<Unit filename="../../include/core/util/IDeletionSubject.hpp" />
 		<Unit filename="../../src/core/audiodata/AudioBuffer.cpp" />
 		<Unit filename="../../src/core/audiodata/RawAudioBuffer.cpp" />
 		<Unit filename="../../src/core/audiodata/RawSample.cpp" />
@@ -72,7 +68,6 @@
 		<Unit filename="../../src/core/audiosource/SinusGenerator.cpp" />
 		<Unit filename="../../src/core/audiosource/StreamReader.cpp" />
 		<Unit filename="../../src/core/manipulator/Resampler.cpp" />
-		<Unit filename="../../src/core/mixer/AdditiveMixer.cpp" />
 		<Unit filename="../../src/core/pluginmanager/PluhinManager.cpp" />
 		<Unit filename="../../src/core/util/AudioDevice.cpp" />
 		<Unit filename="../../src/core/util/AudioDevice.hpp" />

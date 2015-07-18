@@ -20,9 +20,9 @@ class IManipulator : public IAudioSource{
 public:
 	virtual ~IManipulator(){};
 
-	virtual void addSource(unsigned int pos, std::shared_ptr<IAudioSource> source) = 0;
+	virtual void addSource(unsigned int pos, std::weak_ptr<IAudioSource> source) = 0;
 	virtual std::shared_ptr<IAudioSource> getSource(unsigned int position) = 0;
-	virtual unsigned int getHighestSourcePosition() = 0;
+	virtual int getHighestSourcePosition() = 0;
 };
 
 } // maudio

@@ -16,7 +16,7 @@ TerminalPrinter::TerminalPrinter(){
 TerminalPrinter::~TerminalPrinter(){
 }
 
-void TerminalPrinter::setSource(std::shared_ptr<IAudioSource> source){
+void TerminalPrinter::setSource(std::weak_ptr<IAudioSource> source){
 	mSource = source;
 }
 
@@ -24,7 +24,7 @@ std::shared_ptr<IAudioSource> TerminalPrinter::getSource(){
 	return mSource.lock();
 }
 
-void TerminalPrinter::print(unsigned long pos){
+void TerminalPrinter::print(unsigned long pos) const{
 	std::shared_ptr<IAudioSource> tmp = mSource.lock();
 	if(!tmp) return;
 	try{
@@ -39,6 +39,18 @@ void TerminalPrinter::print(unsigned long pos){
 		std::cout << "An Exception occurred";
 	}
 	std::cout << std::endl;
+}
+
+AudioInfo TerminalPrinter::getAudioInfo(){
+	std::shared_ptr<IAudioSource> tmp = mSource.lock();
+	if(!tmp) return AudioInfo();
+	return tmp->getAudioInfo();
+}
+
+FileInfo TerminalPrinter::getFileInfo(){
+	std::shared_ptr<IAudioSource> tmp = mSource.lock();
+	if(!tmp) return FileInfo();
+	return tmp->getFileInfo();
 }
 
 } // maudio

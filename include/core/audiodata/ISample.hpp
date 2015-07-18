@@ -16,9 +16,9 @@ public:
 
 	virtual float& operator[](unsigned int pos) = 0;
 	virtual void operator=(ISample &data) = 0;
-	virtual float get(unsigned int pos) = 0;
+	virtual float get(unsigned int pos) const = 0;
 	virtual void set(unsigned int pos, float data) = 0;
-	virtual unsigned int getChannels() = 0;
+	virtual unsigned int getChannels() const = 0;
 };
 
 } // maudio

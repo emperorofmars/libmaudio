@@ -21,9 +21,9 @@ public:
 
 	virtual float& operator[](unsigned int pos);
 	virtual void operator=(ISample &data);
-	virtual float get(unsigned int pos);
+	virtual float get(unsigned int pos) const;
 	virtual void set(unsigned int pos, float data);
-	virtual unsigned int getChannels();
+	virtual unsigned int getChannels() const;
 
 private:
 	float *mData; ///one value per channel

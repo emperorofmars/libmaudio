@@ -7,8 +7,6 @@
 #include <iostream>
 #include "core/audiodata/Sample.hpp"
 #include "core/audiodata/AudioBuffer.hpp"
-#include "core/audiodata/RawSample.hpp"
-#include "core/audiodata/RawAudioBuffer.hpp"
 #include "core/audiosource/SinusGenerator.hpp"
 #include "core/audiosink/TerminalPrinter.hpp"
 
@@ -17,18 +15,29 @@ using namespace maudio;
 int main(int argc, char *argv[]){
 	std::cerr << "test" << std::endl;
 
-	//Sample s(std::vector<float>{5, 2});
-	float arr[] = {5, 2};
-	RawSample s(arr, 2);
+	std::shared_ptr<SinusGenerator> src(new SinusGenerator());
+	src->setFrequency(3000);
+	src->setLength(45);
+
+	std::shared_ptr<TerminalPrinter> dst(new TerminalPrinter());
+
+	dst->addNode(src);
+
+	for(unsigned int i = 0; i < 50; i++){
+		dst->print(i);
+	}
+
+/*
+	Sample s(std::vector<float>{5, 2});
 	float x = s[1];
 	s[1] = 50;
 	x = 10;
 	std::cout << s[1] << " " << x << std::endl;
 
-	RawAudioBuffer b(2, 10);
+	AudioBuffer b(2, 10);
 	b.set(2, s);
 
-	ISample &is = b[2];
+	Sample &is = b[2];
 	std::cout << is[1] << std::endl;
 	std::cout << b[2][1] << std::endl;
 	is[1] = 666;
@@ -56,9 +65,21 @@ int main(int argc, char *argv[]){
 	for(unsigned int i = 0; i < 50; i++){
 		tp->print(i);
 	}
-
+*/
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

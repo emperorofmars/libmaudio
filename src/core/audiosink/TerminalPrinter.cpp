@@ -16,20 +16,14 @@ TerminalPrinter::TerminalPrinter(){
 TerminalPrinter::~TerminalPrinter(){
 }
 
-void TerminalPrinter::setSource(std::weak_ptr<IAudioSource> source){
-	mSource = source;
-}
-
-std::shared_ptr<IAudioSource> TerminalPrinter::getSource(){
-	return mSource.lock();
-}
-
 void TerminalPrinter::print(unsigned long pos) const{
-	std::shared_ptr<IAudioSource> tmp = mSource.lock();
-	if(!tmp) return;
+	if(mNodes.size() < 1 || !mNodes[0]){
+		std::cout << "no Node" << std::endl;
+		return;
+	}
 	try{
-		for(unsigned int i = 0; i < tmp->getAudioInfo().Channels; i++){
-			std::cout << tmp->get(pos)->get(i) << " ";
+		for(unsigned int i = 0; i < mNodes[0]->getAudioInfo().Channels; i++){
+			std::cout << mNodes[0]->get(pos, 0).get(i) << " ";
 		}
 	}
 	catch(OutOfBoundsException &e){
@@ -42,15 +36,11 @@ void TerminalPrinter::print(unsigned long pos) const{
 }
 
 AudioInfo TerminalPrinter::getAudioInfo(){
-	std::shared_ptr<IAudioSource> tmp = mSource.lock();
-	if(!tmp) return AudioInfo();
-	return tmp->getAudioInfo();
+	return mAudioInfo;
 }
 
 FileInfo TerminalPrinter::getFileInfo(){
-	std::shared_ptr<IAudioSource> tmp = mSource.lock();
-	if(!tmp) return FileInfo();
-	return tmp->getFileInfo();
+	return mFileInfo;
 }
 
 } // maudio

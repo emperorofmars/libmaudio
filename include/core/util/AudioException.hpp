@@ -23,6 +23,20 @@ public:
 	}
 };
 
+class BadOutputException : public std::exception{
+public:
+	virtual const char* what() const throw(){
+		return "maudio: accessing non existing output index";
+	}
+};
+
+class BadInputException : public std::exception{
+public:
+	virtual const char* what() const throw(){
+		return "maudio: accessing non existing input index";
+	}
+};
+
 } // maudio
 
 #endif // MAUDIO_OUTOFBOUNDSEXCEPTION

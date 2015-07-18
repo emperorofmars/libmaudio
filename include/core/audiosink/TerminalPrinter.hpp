@@ -1,5 +1,5 @@
 /*
- * Interface for releasing audio
+ * Prints values to cout
  *
  * Copyright (C) 2015 Martin Schwarz
  */
@@ -7,25 +7,23 @@
 #ifndef MAUDIO_TERMINALPRINTER
 #define MAUDIO_TERMINALPRINTER
 
-#include "core/audiosink/IAudioSink.hpp"
-#include <memory>
+#include "core/audiosink/BaseAudioSink.hpp"
 
 namespace maudio{
 
-class TerminalPrinter : public IAudioSink{
+class TerminalPrinter : public BaseAudioSink{
 public:
 	TerminalPrinter();
 	virtual ~TerminalPrinter();
 
-	virtual void setSource(std::weak_ptr<IAudioSource> source);
-	virtual std::shared_ptr<IAudioSource> getSource();
 	void print(unsigned long pos) const;
 
     virtual AudioInfo getAudioInfo();
     virtual FileInfo getFileInfo();
 
-private:
-	std::weak_ptr<IAudioSource> mSource;
+protected:
+	AudioInfo mAudioInfo;
+	FileInfo mFileInfo;
 };
 
 } // maudio

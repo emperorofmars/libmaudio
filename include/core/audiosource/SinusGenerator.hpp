@@ -7,11 +7,11 @@
 #ifndef MAUDIO_SINUSGENERATOR
 #define MAUDIO_SINUSGENERATOR
 
-#include "core/audiosource/IAudioGenerator.hpp"
+#include "core/audiosource/BaseAudioSource.hpp"
 
 namespace maudio{
 
-class SinusGenerator : public IAudioGenerator{
+class SinusGenerator : public BaseAudioSource{
 public:
 	SinusGenerator();
 	virtual ~SinusGenerator();
@@ -20,11 +20,12 @@ public:
 	virtual unsigned long getLength();
 	virtual void setFrequency(float freq);
 
-    virtual ISample* get(unsigned long pos);
+    virtual Sample get(unsigned long pos, int output);
+    virtual int getMaxOutput();
     virtual AudioInfo getAudioInfo();
     virtual FileInfo getFileInfo();
 
-private:
+protected:
 	AudioInfo mAudioInfo;
 	FileInfo mFileInfo;
 	float mFreq;

@@ -5,7 +5,6 @@
  */
 
 #include "core/audiosource/SinusGenerator.hpp"
-#include "core/audiodata/Sample.hpp"
 #include "core/util/AudioException.hpp"
 #include <cmath>
 
@@ -37,13 +36,17 @@ void SinusGenerator::setFrequency(float freq){
 	mFreq = freq;
 }
 
-ISample* SinusGenerator::get(unsigned long pos){
+Sample SinusGenerator::get(unsigned long pos, int output){
 	if(pos >= mAudioInfo.Samples + mAudioInfo.Offset || pos < mAudioInfo.Offset) throw OutOfBoundsException();
-	ISample *ret = new Sample(mAudioInfo.Channels);
+	Sample ret(mAudioInfo.Channels);
 	float index = pos;
 	index = fmod(index, 360);
-	ret->set(0, sin(mFreq * index * (2 * M_PI) / mAudioInfo.Samplerate));
+	ret.set(0, sin(mFreq * index * (2 * M_PI) / mAudioInfo.Samplerate));
 	return ret;
+}
+
+int SinusGenerator::getMaxOutput(){
+	return 1;
 }
 
 AudioInfo SinusGenerator::getAudioInfo(){

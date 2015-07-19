@@ -2,8 +2,8 @@
  * Copyright (C) 2015 Martin Schwarz
  */
 
-#ifndef MAUDIO_OUTOFBOUNDSEXCEPTION
-#define MAUDIO_OUTOFBOUNDSEXCEPTION
+#ifndef MAUDIO_EXCEPTION
+#define MAUDIO_EXCEPTION
 
 #include <exception>
 
@@ -44,8 +44,36 @@ public:
 	}
 };
 
+class PlayerException : public std::exception{
+public:
+	virtual const char* what() const throw(){
+		return "maudio: could not open audio output stream";
+	}
+};
+
+class InvalidDataException : public std::exception{
+public:
+	virtual const char* what() const throw(){
+		return "maudio: received invalid data";
+	}
+};
+
+class InternalException : public std::exception{
+public:
+	virtual const char* what() const throw(){
+		return "maudio: an error occurred";
+	}
+};
+
+class InvalidAudioDeviceException : public std::exception{
+public:
+	virtual const char* what() const throw(){
+		return "maudio: attempting to open an invalid audiodevice";
+	}
+};
+
 } // maudio
 
-#endif // MAUDIO_OUTOFBOUNDSEXCEPTION
+#endif // MAUDIO_EXCEPTION
 
 

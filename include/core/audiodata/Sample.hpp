@@ -18,6 +18,7 @@ public:
 
 	virtual float& operator[](unsigned int pos);
 	virtual void operator=(Sample &data);
+	virtual void operator=(Sample data);
 	virtual float get(unsigned int pos) const;
 	virtual void set(unsigned int pos, float data);
 	virtual unsigned int getChannels() const;

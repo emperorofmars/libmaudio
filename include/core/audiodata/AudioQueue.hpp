@@ -9,7 +9,7 @@
 
 #include "core/audiodata/Sample.hpp"
 #include "core/audiodata/AudioInfo.hpp"
-#include <queue>
+#include <deque>
 
 namespace maudio{
 
@@ -30,7 +30,7 @@ public:
 private:
 	unsigned int mChannels;
 	AudioInfo mAudioInfo;
-	std::queue<Sample> mQueue;
+	std::deque<Sample> mData;
 };
 
 } // maudio

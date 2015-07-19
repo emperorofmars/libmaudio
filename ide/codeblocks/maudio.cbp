@@ -35,6 +35,9 @@
 			<Add directory="../../include" />
 			<Add directory="../../src" />
 		</Compiler>
+		<Linker>
+			<Add option="-lportaudio" />
+		</Linker>
 		<Unit filename="../../include/core/audiodata/AudioBuffer.hpp" />
 		<Unit filename="../../include/core/audiodata/AudioInfo.hpp" />
 		<Unit filename="../../include/core/audiodata/AudioQueue.hpp" />

@@ -26,8 +26,15 @@ float& Sample::operator[](unsigned int pos){
 }
 
 void Sample::operator=(Sample &data){
-	//if(data.getChannels() != mData.size()) throw ChannelsException();
-	mData.resize(data.getChannels());
+	if(data.getChannels() != mData.size()) mData.resize(data.getChannels());
+	for(unsigned int i = 0; i < mData.size(); i++){
+		mData[i] = data[i];
+	}
+	return;
+}
+
+void Sample::operator=(Sample data){
+	if(data.getChannels() != mData.size()) mData.resize(data.getChannels());
 	for(unsigned int i = 0; i < mData.size(); i++){
 		mData[i] = data[i];
 	}

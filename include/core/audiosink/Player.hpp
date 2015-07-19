@@ -29,18 +29,19 @@ public:
 
 	void play();
 	void pause();
+	void unpause();
 	void stop();
+
 	void setPosition(unsigned long samples);
 	unsigned long getPosition();
 	void setPosition(float seconds);
-	float getPosition();
+	float getPosition_sek();
 
 	std::string getStatus();
 	bool getOpened();
 	bool playing();
 
     virtual AudioInfo getAudioInfo();
-    virtual FileInfo getFileInfo();
 
 private:
 	AudioDevice *mDevice;

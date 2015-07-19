@@ -12,33 +12,22 @@ namespace maudio{
 BaseAudioSink::~BaseAudioSink(){
 }
 
-Sample BaseAudioSink::get(unsigned long pos, int output){
-	throw BadInputException();
+Sample BaseAudioSink::get(unsigned long pos){
+	throw BadOutputException();
 }
 
-void BaseAudioSink::addNode(std::shared_ptr<INode> node, int inputPos){
-	if(inputPos > 0) throw BadOutputException();
-	mNodes.resize(1);
-	mNodes[0] = node;
-	return;
+AudioInfo BaseAudioSink::getAudioInfo(){
+	AudioInfo ret;
+	if(mInputs.size() > 0 && mInputs[0] && mInputs[0]->valid()) ret = mInputs[0]->getInput()->getAudioInfo();
+	return ret;
 }
 
-void BaseAudioSink::removeNode(std::shared_ptr<INode> node){
-	if(mNodes.size() > 0 && mNodes[0] == node) mNodes[0].reset();
-	return;
-}
-
-void BaseAudioSink::removeNode(int inputPos){
-	if(inputPos == 0 && mNodes.size() > 0) mNodes[0].reset();
-	return;
-}
-
-std::vector<std::shared_ptr<INode>> BaseAudioSink::getNodes(){
-	return mNodes;
-}
-
-int BaseAudioSink::getMaxInput(){
+int BaseAudioSink::getMaxInputs(){
 	return 1;
+}
+
+std::shared_ptr<Edge> BaseAudioSink::getEdge(std::weak_ptr<INode> output){
+	throw BadOutputException();
 }
 
 } // maudio

@@ -12,15 +12,21 @@ BaseNode::~BaseNode(){
 
 void BaseNode::addInput(std::shared_ptr<INode> node, int inputSlot){
 	if(inputSlot >= getMaxInputs()) throw BadInputException();
-	if(checkCycles(std::vector<INode*>{node.get()})) throw CircleException();
+	if(node->checkCycles(std::vector<INode*>{this})) throw CircleException();
 
 	if(inputSlot >= (int)mInputs.size()) mInputs.resize(inputSlot);
 
-	if(inputSlot < 0){
-		mInputs.push_back(node->getLink(shared_from_this()));
+	try{
+		if(inputSlot < 0){
+			mInputs.push_back(node->getEdge(shared_from_this()));
+		}
+		else{
+			mInputs[inputSlot] = node->getEdge(shared_from_this());
+		}
 	}
-	else{
-		mInputs[inputSlot] = node->getLink(shared_from_this());
+	catch(std::exception &e){
+	}
+	catch(...){
 	}
 	return;
 }
@@ -43,10 +49,22 @@ std::shared_ptr<INode> BaseNode::getInput(int inputSlot){
 	return mInputs[inputSlot]->getInput();
 }
 
+std::shared_ptr<INode> BaseNode::getByID(unsigned int id){
+	if(getID() == id) return shared_from_this();
+	std::shared_ptr<INode> ret;
+	for(unsigned int i = 0; i < mInputs.size(); i++){
+		if(mInputs[i]){
+			ret = mInputs[i]->getInput()->getByID(id);
+			if(ret && ret->getID() == id) return ret;
+		}
+	}
+	return NULL;
+}
+
 std::vector<std::shared_ptr<INode>> BaseNode::getOutputs(){
 	std::vector<std::shared_ptr<INode>> ret;
 	for(unsigned int i = 0; i < mOutputs.size(); i++){
-		std::shared_ptr<ILink> tmp = mOutputs[i].lock();
+		std::shared_ptr<Edge> tmp = mOutputs[i].lock();
 		if(tmp && tmp->valid()) ret.push_back(tmp->getOutput());
 	}
 	return ret;
@@ -56,11 +74,19 @@ void BaseNode::disconnect(){
 	mInputs.clear();
 
 	for(unsigned int i = 0; i < mOutputs.size(); i++){
-		std::shared_ptr<ILink> tmp = mOutputs[i].lock();
+		std::shared_ptr<Edge> tmp = mOutputs[i].lock();
 		if(tmp && tmp->valid()) tmp->expire();
 	}
 	mOutputs.clear();
 	return;
+}
+
+int BaseNode::getNumInputs(){
+	return mInputs.size();
+}
+
+std::shared_ptr<Edge> BaseNode::getEdge(std::weak_ptr<INode> output){
+	return std::shared_ptr<Edge>(new Edge(shared_from_this(), output));
 }
 
 bool BaseNode::checkCycles(std::vector<INode*> elements){
@@ -72,38 +98,6 @@ bool BaseNode::checkCycles(std::vector<INode*> elements){
 		if(mInputs[i] && mInputs[i]->getInput() && mInputs[i]->getInput()->checkCycles(elements)) return true;
 	}
 	return false;
-}
-
-
-BaseNode::BaseLink::~BaseLink(){
-}
-
-bool BaseNode::BaseLink::valid(){
-	if(mInput || !mOutput.expired()) return true;
-	return false;
-}
-
-void BaseNode::BaseLink::expire(){
-	mInput.reset();
-	mOutput.reset();
-}
-
-std::shared_ptr<INode> BaseNode::BaseLink::getInput(){
-	return mInput;
-}
-
-std::shared_ptr<INode> BaseNode::BaseLink::getOutput(){
-	return mOutput.lock();
-}
-
-void BaseNode::BaseLink::setInput(std::shared_ptr<INode> node){
-	mInput = node;
-	return;
-}
-
-void BaseNode::BaseLink::setOutput(std::weak_ptr<INode> node){
-	mOutput = node;
-	return;
 }
 
 } // maudio

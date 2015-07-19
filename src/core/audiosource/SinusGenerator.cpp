@@ -11,7 +11,7 @@
 namespace maudio{
 
 SinusGenerator::SinusGenerator(){
-	mFileInfo.Title = "Sinus Test Generator from Maudio";
+	mAudioInfo.mFileInfo.Title = "Sinus Test Generator from Maudio";
 
 	mAudioInfo.Channels = 1;
 	mAudioInfo.Offset = 0;
@@ -36,7 +36,7 @@ void SinusGenerator::setFrequency(float freq){
 	mFreq = freq;
 }
 
-Sample SinusGenerator::get(unsigned long pos, int output){
+Sample SinusGenerator::get(unsigned long pos){
 	if(pos >= mAudioInfo.Samples + mAudioInfo.Offset || pos < mAudioInfo.Offset) throw OutOfBoundsException();
 	Sample ret(mAudioInfo.Channels);
 	float index = pos;
@@ -45,16 +45,8 @@ Sample SinusGenerator::get(unsigned long pos, int output){
 	return ret;
 }
 
-int SinusGenerator::getMaxOutput(){
-	return 1;
-}
-
 AudioInfo SinusGenerator::getAudioInfo(){
 	return mAudioInfo;
-}
-
-FileInfo SinusGenerator::getFileInfo(){
-	return mFileInfo;
 }
 
 } // maudio

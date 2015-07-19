@@ -17,10 +17,6 @@ public:
 	virtual ~TerminalPrinter();
 
 	void print(unsigned long pos) const;
-
-protected:
-	AudioInfo mAudioInfo;
-	FileInfo mFileInfo;
 };
 
 } // maudio

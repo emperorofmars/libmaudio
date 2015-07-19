@@ -14,7 +14,7 @@ using namespace maudio;
 
 int main(int argc, char *argv[]){
 	std::cerr << "test" << std::endl;
-/*
+
 	std::shared_ptr<SinusGenerator> src(new SinusGenerator());
 	src->setFrequency(3000);
 	src->setLength(45);
@@ -23,12 +23,12 @@ int main(int argc, char *argv[]){
 
 	std::shared_ptr<TerminalPrinter> dst(new TerminalPrinter());
 
-	dst->addNode(cpy);
+	dst->addInput(cpy);
 
 	for(unsigned int i = 0; i < 50; i++){
 		dst->print(i);
 	}
-*/
+
 /*
 	Sample s(std::vector<float>{5, 2});
 	float x = s[1];

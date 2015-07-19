@@ -15,7 +15,7 @@ class BaseAudioSource : public BaseNode{
 public:
 	virtual ~BaseAudioSource();
 
-    virtual int getMaxInput() final;
+    virtual int getMaxInputs() final;
 };
 
 } // maudio

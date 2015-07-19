@@ -52,12 +52,13 @@
 		<Unit filename="../../include/core/manipulator/Mixer.hpp" />
 		<Unit filename="../../include/core/manipulator/Resampler.hpp" />
 		<Unit filename="../../include/core/node/BaseNode.hpp" />
+		<Unit filename="../../include/core/node/Edge.hpp" />
 		<Unit filename="../../include/core/node/INode.hpp" />
 		<Unit filename="../../include/core/node/IScene.hpp" />
 		<Unit filename="../../include/core/pluginmanager/PluginManager.hpp" />
 		<Unit filename="../../include/core/util/AudioException.hpp" />
 		<Unit filename="../../include/core/util/Config.hpp" />
-		<Unit filename="../../include/core/util/Id.hpp" />
+		<Unit filename="../../include/core/util/UniqueID.hpp" />
 		<Unit filename="../../src/core/audiodata/AudioBuffer.cpp" />
 		<Unit filename="../../src/core/audiodata/AudioQueue.cpp" />
 		<Unit filename="../../src/core/audiodata/Sample.cpp" />
@@ -72,11 +73,12 @@
 		<Unit filename="../../src/core/manipulator/BaseManipulator.cpp" />
 		<Unit filename="../../src/core/manipulator/Resampler.cpp" />
 		<Unit filename="../../src/core/node/BaseNode.cpp" />
+		<Unit filename="../../src/core/node/Edge.cpp" />
 		<Unit filename="../../src/core/pluginmanager/PluginManager.cpp" />
 		<Unit filename="../../src/core/util/AudioDevice.cpp" />
 		<Unit filename="../../src/core/util/AudioDevice.hpp" />
 		<Unit filename="../../src/core/util/Config.cpp" />
-		<Unit filename="../../src/core/util/Id.cpp" />
+		<Unit filename="../../src/core/util/UniqueID.cpp" />
 		<Unit filename="../../src/examples/test1.cpp" />
 		<Extensions>
 			<envvars />

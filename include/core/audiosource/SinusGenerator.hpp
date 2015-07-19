@@ -20,14 +20,11 @@ public:
 	virtual unsigned long getLength();
 	virtual void setFrequency(float freq);
 
-    virtual Sample get(unsigned long pos, int output);
-    virtual int getMaxOutput();
+    virtual Sample get(unsigned long pos);
     virtual AudioInfo getAudioInfo();
-    virtual FileInfo getFileInfo();
 
 protected:
 	AudioInfo mAudioInfo;
-	FileInfo mFileInfo;
 	float mFreq;
 };
 

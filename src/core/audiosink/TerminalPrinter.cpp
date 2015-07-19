@@ -17,14 +17,13 @@ TerminalPrinter::~TerminalPrinter(){
 }
 
 void TerminalPrinter::print(unsigned long pos) const{
-	/*
-	if(mNodes.size() < 1 || !mNodes[0]){
-		std::cout << "no Node" << std::endl;
+	if(mInputs.size() < 1 || !mInputs[0] || !mInputs[0]->valid()){
+		std::cout << "invalid or no Input" << std::endl;
 		return;
 	}
 	try{
-		for(unsigned int i = 0; i < mNodes[0]->getAudioInfo().Channels; i++){
-			std::cout << mNodes[0]->get(pos, 0).get(i) << " ";
+		for(unsigned int i = 0; i < mInputs[0]->getInput()->getAudioInfo().Channels; i++){
+			std::cout << mInputs[0]->getInput()->get(pos).get(i) << " ";
 		}
 	}
 	catch(OutOfBoundsException &e){
@@ -34,7 +33,6 @@ void TerminalPrinter::print(unsigned long pos) const{
 		std::cout << "An Exception occurred";
 	}
 	std::cout << std::endl;
-	*/
 }
 
 } // maudio

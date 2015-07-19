@@ -4,6 +4,7 @@
 
 #include "core/util/AudioDevice.hpp"
 #include "core/util/AudioException.hpp"
+#include <iostream>
 
 namespace maudio{
 
@@ -13,6 +14,7 @@ bool AudioDevice::mAPIInited = false;
 AudioDevice::AudioDevice(int device){
 	mStream = NULL;
 	mID = device;
+	mPlaying = false;
 	mPaused = false;
 }
 
@@ -83,6 +85,8 @@ void AudioDevice::play(std::shared_ptr<AudioQueue> data){
 	if(mStream) stop();
 	PaError err;
 
+	mStreamData = data;
+
 	PaStreamParameters params;
 	params.channelCount = data->getChannels();
 	params.device = mID;
@@ -90,21 +94,27 @@ void AudioDevice::play(std::shared_ptr<AudioQueue> data){
 	params.sampleFormat = paFloat32;
 	params.suggestedLatency = 0;
 
+	std::cerr << "channels: " << params.channelCount << std::endl;
+	std::cerr << "samplerate: " << data->getAudioInfo().Samplerate << std::endl;
+	std::cerr << "device: " << mID << " " << listDevices()[mID] << std::endl;
+
 	err = Pa_OpenStream(&mStream, NULL, &params, data->getAudioInfo().Samplerate, 512, paNoFlag, &AudioCallback, data.get());
+	std::cerr << "STARTED PLAYING: " << params.channelCount << std::endl;
 	if(err != paNoError){
 		if(mStream){
 			try{stop();}
 			catch(...){}
 		}
-		throw PlayerException();
+		throw MaudioException(Pa_GetErrorText(err));
 	}
 	if((err = Pa_StartStream(mStream)) != paNoError){
 		if(mStream){
 			try{stop();}
 			catch(...){}
 		}
-		throw PlayerException();
+		throw MaudioException(Pa_GetErrorText(err));
 	}
+	mPlaying = true;
 	return;
 }
 
@@ -137,7 +147,16 @@ void AudioDevice::stop(){
 	Pa_CloseStream(mStream);
 
 	mStream = NULL;
+	mPlaying = false;
 	return;
+}
+
+int AudioDevice::getStatus(){
+	if(!mAPIInited) return -1;
+	if(!mPlaying) return 0;
+	if(mPlaying) return 1;
+	if(!mPaused) return 2;
+	return -1;
 }
 
 void AudioDevice::initAPI(){
@@ -145,6 +164,8 @@ void AudioDevice::initAPI(){
 	PaError err;
 	if((err = Pa_Initialize()) != paNoError) return;
 	mAPIInited = true;
+
+	std::cerr << "PA inited" << std::endl;
 	return;
 }
 
@@ -174,6 +195,13 @@ int AudioDevice::AudioCallback(const void *input,
 	AudioQueue *data = (AudioQueue*)userData;
 	float *out = (float *)output;
 
+	std::cerr << "playing" << std::endl;
+
+	for(unsigned int i = 0; i < frameCount; i++){
+		for(unsigned int j = 0; j < data->getChannels(); j++){
+			out[i * data->getChannels() + j] = 0;
+		}
+	}
 	Sample tmp(data->getChannels());
 	for(unsigned int i = 0; i < frameCount; i++){
 		tmp = data->pop();

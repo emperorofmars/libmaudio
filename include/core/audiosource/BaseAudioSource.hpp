@@ -16,6 +16,7 @@ public:
 	virtual ~BaseAudioSource();
 
     virtual int getMaxInputs() final;
+    virtual bool HasOutputs() final;
 };
 
 } // maudio

@@ -15,6 +15,7 @@ class BaseManipulator : public BaseNode{
 public:
 	virtual ~BaseManipulator();
 
+    virtual bool HasOutputs() final;
 };
 
 } // maudio

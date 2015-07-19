@@ -26,6 +26,10 @@ int BaseAudioSink::getMaxInputs(){
 	return 1;
 }
 
+bool BaseAudioSink::HasOutputs(){
+	return true;
+}
+
 std::shared_ptr<Edge> BaseAudioSink::getEdge(std::weak_ptr<INode> output){
 	throw BadOutputException();
 }

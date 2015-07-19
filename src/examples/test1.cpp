@@ -5,16 +5,32 @@
  */
 
 #include <iostream>
+#include <chrono>
+#include <thread>
 #include "core/audiodata/Sample.hpp"
 #include "core/audiodata/AudioBuffer.hpp"
 #include "core/audiosource/SinusGenerator.hpp"
 #include "core/audiosink/TerminalPrinter.hpp"
+#include "core/audiosink/Player.hpp"
 
 using namespace maudio;
 
 int main(int argc, char *argv[]){
 	std::cerr << "test" << std::endl;
 
+	std::shared_ptr<SinusGenerator> src(new SinusGenerator());
+	src->setFrequency(1000);
+	src->setLength(44100 * 3);
+
+	std::shared_ptr<Player> dst(new Player());
+	dst->addInput(src);
+
+	dst->play();
+	std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+	dst->stop();
+
+
+/*
 	std::shared_ptr<SinusGenerator> src(new SinusGenerator());
 	src->setFrequency(3000);
 	src->setLength(45);
@@ -28,7 +44,7 @@ int main(int argc, char *argv[]){
 	for(unsigned int i = 0; i < 50; i++){
 		dst->print(i);
 	}
-
+*/
 /*
 	Sample s(std::vector<float>{5, 2});
 	float x = s[1];

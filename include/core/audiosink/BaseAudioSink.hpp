@@ -18,6 +18,7 @@ public:
 	virtual Sample get(unsigned long pos) final;
 	virtual AudioInfo getAudioInfo();
     virtual int getMaxInputs() final;
+    virtual bool HasOutputs() final;
 
     virtual std::shared_ptr<Edge> getEdge(std::weak_ptr<INode> output) final;
 

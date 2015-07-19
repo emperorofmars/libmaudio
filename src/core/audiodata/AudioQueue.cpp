@@ -6,31 +6,42 @@
 
 namespace maudio{
 
-AudioQueue::AudioQueue(unsigned int channels){
-	mChannels = channels;
+AudioQueue::AudioQueue(AudioInfo info){
+	mAudioInfo = info;
+	mChannels = mAudioInfo.Channels;
 }
 
 void AudioQueue::push(Sample data){
-	if(data.getChannels() == mChannels) mData.push_back(data);
-	mAudioInfo.Samples++;
+	if(data.getChannels() == mChannels){
+		mData.push_back(data);
+		mAudioInfo.Samples++;
+	}
 	return;
 }
 
 Sample AudioQueue::pop(){
-	Sample ret = mData.front();
-	mData.pop_front();
-	mAudioInfo.Offset++;
-	mAudioInfo.Samples--;
+	Sample ret(getChannels());
+	if(mData.size() > 0){
+		ret = mData.front();
+		mData.pop_front();
+		mAudioInfo.Offset++;
+		mAudioInfo.Samples--;
+	}
 	return ret;
 }
 
-Sample AudioQueue::get(unsigned long pos){
-	if(pos < mAudioInfo.Offset + mAudioInfo.Samples && pos >= mAudioInfo.Offset) return mData[pos - mAudioInfo.Offset];
-	return Sample(mChannels);
+Sample& AudioQueue::get(unsigned long pos){
+	Sample ret(mChannels);
+	if(pos < mAudioInfo.Offset + mAudioInfo.Samples && pos >= mAudioInfo.Offset) ret = mData[pos - mAudioInfo.Offset];
+	return ret;
 }
 
 unsigned int AudioQueue::getChannels(){
-	return mChannels;
+	return mAudioInfo.Channels;
+}
+
+unsigned int AudioQueue::size(){
+	return mData.size();
 }
 
 AudioInfo AudioQueue::getAudioInfo(){

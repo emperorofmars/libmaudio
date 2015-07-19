@@ -15,14 +15,15 @@ namespace maudio{
 
 class AudioQueue{
 public:
-	AudioQueue(unsigned int channels);
+	AudioQueue(AudioInfo info);
 
 	void push(Sample data);
 	Sample pop();
 
-	Sample get(unsigned long pos);
+	Sample& get(unsigned long pos);
 
 	unsigned int getChannels();
+	unsigned int size();
 
 	AudioInfo getAudioInfo();
 	void setAudioInfo(AudioInfo info);

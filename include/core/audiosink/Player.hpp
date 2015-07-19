@@ -10,6 +10,7 @@
 #include "core/audiosink/BaseAudioSink.hpp"
 #include "core/util/AudioDevice.hpp"
 #include "core/audiodata/AudioQueue.hpp"
+#include <thread>
 
 namespace maudio{
 
@@ -44,8 +45,18 @@ public:
     virtual AudioInfo getAudioInfo();
 
 private:
+	void feed();
+	void startFeed();
+	void stopFeed();
+	static void asyncFeed(Player *player);
+
 	AudioDevice *mDevice;
 	std::shared_ptr<AudioQueue> mQueue;
+	std::shared_ptr<std::thread> mThread;
+	bool mFeederRun = false;
+	unsigned long mPosition = 0;
+
+	unsigned int mQueueSize = 1024;
 };
 
 } // maudio

@@ -6,8 +6,20 @@
 #define MAUDIO_EXCEPTION
 
 #include <exception>
+#include <string>
 
 namespace maudio{
+
+class MaudioException : public std::exception{
+public:
+	MaudioException(std::string &info){mInfo = "maudio: " + info;}
+	MaudioException(const char *info){mInfo = "maudio: "; mInfo.append(info);}
+	virtual const char* what() const throw(){
+		return mInfo.c_str();
+	}
+private:
+	std::string mInfo;
+};
 
 class OutOfBoundsException : public std::exception{
 public:

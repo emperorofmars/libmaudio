@@ -32,6 +32,7 @@ public:
     virtual void disconnect() = 0;
     virtual int getNumInputs() = 0;
     virtual int getMaxInputs() = 0;
+    virtual bool HasOutputs() = 0;
 
     virtual std::shared_ptr<Edge> getEdge(std::weak_ptr<INode> output) = 0;
     virtual bool checkCycles(std::vector<INode*> elements) = 0;

@@ -11,6 +11,10 @@ namespace maudio{
 BaseManipulator::~BaseManipulator(){
 }
 
+bool BaseManipulator::HasOutputs(){
+	return true;
+}
+
 } // maudio
 
 

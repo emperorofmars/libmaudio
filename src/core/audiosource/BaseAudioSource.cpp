@@ -15,6 +15,10 @@ int BaseAudioSource::getMaxInputs(){
 	return 0;
 }
 
+bool BaseAudioSource::HasOutputs(){
+	return true;
+}
+
 } // maudio
 
 

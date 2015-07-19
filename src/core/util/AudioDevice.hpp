@@ -61,7 +61,9 @@ private:
 	int mID;
 	std::string mName;
 
-	PaStream *mStream;
+	PaStream *mStream = NULL;
+	std::shared_ptr<AudioQueue> mStreamData;
+	bool mPlaying;
 	bool mPaused;
 
 	static bool mAPIInited;

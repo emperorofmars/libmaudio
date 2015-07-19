@@ -17,15 +17,7 @@ Sample::Sample(const std::vector<float> data){
 	mData = data;
 }
 
-Sample::~Sample(){
-}
-
-float& Sample::operator[](unsigned int pos){
-	if(pos >= mData.size()) throw ChannelsException();
-	return mData[pos];
-}
-
-void Sample::operator=(Sample &data){
+Sample::Sample(const Sample &data){
 	if(data.getChannels() != mData.size()) mData.resize(data.getChannels());
 	for(unsigned int i = 0; i < mData.size(); i++){
 		mData[i] = data[i];
@@ -33,7 +25,15 @@ void Sample::operator=(Sample &data){
 	return;
 }
 
-void Sample::operator=(Sample data){
+Sample::~Sample(){
+}
+
+const float& Sample::operator[](unsigned int pos) const{
+	if(pos >= mData.size()) throw ChannelsException();
+	return mData[pos];
+}
+
+void Sample::operator=(const Sample &data){
 	if(data.getChannels() != mData.size()) mData.resize(data.getChannels());
 	for(unsigned int i = 0; i < mData.size(); i++){
 		mData[i] = data[i];

@@ -12,7 +12,7 @@ namespace maudio{
 class OutOfBoundsException : public std::exception{
 public:
 	virtual const char* what() const throw(){
-		return "maudio: out of bounds of array of vector!";
+		return "maudio: out of bounds of array of vector";
 	}
 };
 
@@ -34,6 +34,13 @@ class BadInputException : public std::exception{
 public:
 	virtual const char* what() const throw(){
 		return "maudio: accessing non existing input index";
+	}
+};
+
+class CircleException : public std::exception{
+public:
+	virtual const char* what() const throw(){
+		return "maudio: attempting to create cycle in an acyclic graph";
 	}
 };
 

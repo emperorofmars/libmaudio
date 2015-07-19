@@ -17,6 +17,7 @@ TerminalPrinter::~TerminalPrinter(){
 }
 
 void TerminalPrinter::print(unsigned long pos) const{
+	/*
 	if(mNodes.size() < 1 || !mNodes[0]){
 		std::cout << "no Node" << std::endl;
 		return;
@@ -33,14 +34,7 @@ void TerminalPrinter::print(unsigned long pos) const{
 		std::cout << "An Exception occurred";
 	}
 	std::cout << std::endl;
-}
-
-AudioInfo TerminalPrinter::getAudioInfo(){
-	return mAudioInfo;
-}
-
-FileInfo TerminalPrinter::getFileInfo(){
-	return mFileInfo;
+	*/
 }
 
 } // maudio

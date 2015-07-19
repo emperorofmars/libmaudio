@@ -18,9 +18,6 @@ public:
 
 	void print(unsigned long pos) const;
 
-    virtual AudioInfo getAudioInfo();
-    virtual FileInfo getFileInfo();
-
 protected:
 	AudioInfo mAudioInfo;
 	FileInfo mFileInfo;

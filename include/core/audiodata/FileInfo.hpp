@@ -8,7 +8,6 @@
 #define MAUDIO_FILEINFO
 
 #include <string>
-#include "AudioInfo.hpp"
 
 namespace maudio{
 

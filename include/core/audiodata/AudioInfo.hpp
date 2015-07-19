@@ -7,6 +7,8 @@
 #ifndef MAUDIO_AUDIOINFO
 #define MAUDIO_AUDIOINFO
 
+#include "core/audiodata/FileInfo.hpp"
+
 namespace maudio{
 
 class AudioInfo{
@@ -15,6 +17,7 @@ public:
 	unsigned long Offset;
 	unsigned int Samplerate;
 	unsigned int Channels;
+	FileInfo mFileInfo;
 };
 
 } // maudio

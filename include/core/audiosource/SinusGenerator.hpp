@@ -16,8 +16,6 @@ public:
 	SinusGenerator();
 	virtual ~SinusGenerator();
 
-	virtual void setLength(unsigned long samples);
-	virtual unsigned long getLength();
 	virtual void setFrequency(float freq);
 
     virtual Sample get(unsigned long pos);

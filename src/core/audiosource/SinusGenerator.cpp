@@ -24,23 +24,13 @@ SinusGenerator::SinusGenerator(){
 SinusGenerator::~SinusGenerator(){
 }
 
-void SinusGenerator::setLength(unsigned long samples){
-	mAudioInfo.Samples = samples;
-}
-
-unsigned long SinusGenerator::getLength(){
-	return mAudioInfo.Samples;
-}
-
 void SinusGenerator::setFrequency(float freq){
 	mFreq = freq;
 }
 
 Sample SinusGenerator::get(unsigned long pos){
-	if(pos >= mAudioInfo.Samples + mAudioInfo.Offset || pos < mAudioInfo.Offset) throw OutOfBoundsException();
 	Sample ret(mAudioInfo.Channels);
 	float index = pos;
-	index = fmod(index, 360);
 	ret.set(0, sin(mFreq * index * (2 * M_PI) / mAudioInfo.Samplerate));
 	return ret;
 }

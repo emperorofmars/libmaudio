@@ -54,6 +54,7 @@ void Player::play(){
 	tmp.Samplerate = 44100;
 	mQueue.reset(new AudioQueue(tmp));
 	startFeed();
+	std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	mDevice->play(mQueue);
 	return;
 }
@@ -129,16 +130,22 @@ AudioInfo Player::getAudioInfo(){
 void Player::feed(){
 	if(!mQueue) return;
 	if(mInputs.size() == 0 || !mInputs[0] || !mInputs[0]->valid()) return;
+
+	mQueue->lock();
 	for(unsigned int i = 0; i < mQueueSize - mQueue->size(); i++){
 		try{
 			mQueue->push(mInputs[0]->getInput()->get(mPosition));
-			Sample s = mInputs[0]->getInput()->get(mPosition);
+			//Sample s = mInputs[0]->getInput()->get(mPosition);
 			mPosition++;
+		}
+		catch(std::exception &e){
+			std::cerr << "feed error: " << e.what() << std::endl;
 		}
 		catch(...){
 		}
 	}
-	std::cerr << "feeding" << std::endl;
+	mQueue->unlock();
+	//std::cerr << "feeding" << std::endl;
 	return;
 }
 
@@ -150,6 +157,7 @@ void Player::startFeed(){
 
 void Player::stopFeed(){
 	mFeederRun = false;
+	if(mThread->joinable()) mThread->join();
 	mThread.reset();
 	return;
 }
@@ -157,7 +165,6 @@ void Player::stopFeed(){
 void Player::asyncFeed(Player *player){
 	while(player && player->mFeederRun){
 		player->feed();
-		std::cerr << "sleep: " << (player->mQueueSize * 44100) / 2000000 << std::endl;
 		//std::this_thread::sleep_for(std::chrono::milliseconds((player->mQueueSize / 2 * 44100) / 2000000));
 	}
 	return;

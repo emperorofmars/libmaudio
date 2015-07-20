@@ -19,21 +19,18 @@ int main(int argc, char *argv[]){
 	std::cerr << "test" << std::endl;
 
 	std::shared_ptr<SinusGenerator> src(new SinusGenerator());
-	src->setFrequency(1000);
-	src->setLength(44100 * 3);
+	src->setFrequency(2000);
 
 	std::shared_ptr<Player> dst(new Player());
 	dst->addInput(src);
 
 	dst->play();
-	std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 	dst->stop();
-
 
 /*
 	std::shared_ptr<SinusGenerator> src(new SinusGenerator());
 	src->setFrequency(3000);
-	src->setLength(45);
 	std::shared_ptr<INode> cpy = src.get()->shared_from_this();
 	src.reset();
 

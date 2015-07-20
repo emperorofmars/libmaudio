@@ -10,6 +10,7 @@
 #include "core/audiodata/Sample.hpp"
 #include "core/audiodata/AudioInfo.hpp"
 #include <deque>
+#include <mutex>
 
 namespace maudio{
 
@@ -20,7 +21,10 @@ public:
 	void push(Sample data);
 	Sample pop();
 
-	Sample& get(unsigned long pos);
+	Sample get(unsigned long pos);
+
+	void lock();
+	void unlock();
 
 	unsigned int getChannels();
 	unsigned int size();
@@ -29,9 +33,10 @@ public:
 	void setAudioInfo(AudioInfo info);
 
 private:
-	unsigned int mChannels;
+	unsigned int mOffset = 0;
 	AudioInfo mAudioInfo;
 	std::deque<Sample> mData;
+	std::mutex mMutex;
 };
 
 } // maudio

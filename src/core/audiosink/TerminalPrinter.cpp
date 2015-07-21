@@ -17,7 +17,7 @@ TerminalPrinter::~TerminalPrinter(){
 }
 
 void TerminalPrinter::print(unsigned long pos) const{
-	if(mInputs.size() < 1 || !mInputs[0] || !mInputs[0]->valid()){
+	/*if(mInputs.size() < 1 || !mInputs[0] || !mInputs[0]->valid()){
 		std::cout << "invalid or no Input" << std::endl;
 		return;
 	}
@@ -32,7 +32,7 @@ void TerminalPrinter::print(unsigned long pos) const{
 	catch(...){
 		std::cout << "An Exception occurred";
 	}
-	std::cout << std::endl;
+	std::cout << std::endl;*/
 }
 
 } // maudio

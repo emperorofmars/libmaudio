@@ -33,7 +33,6 @@ public:
 	void setAudioInfo(AudioInfo info);
 
 private:
-	unsigned int mOffset = 0;
 	AudioInfo mAudioInfo;
 	std::deque<Sample> mData;
 	std::mutex mMutex;

@@ -11,7 +11,7 @@ namespace maudio{
 BaseAudioSource::~BaseAudioSource(){
 }
 
-int BaseAudioSource::getMaxInputs(){
+int BaseAudioSource::MaxInputs(){
 	return 0;
 }
 

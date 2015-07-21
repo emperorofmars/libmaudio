@@ -1,0 +1,127 @@
+/*
+ * Project Maudio
+ * Copyright (C) 2015 Martin Schwarz
+ * See LICENSE.txt for the full license
+ */
+
+#include "core/node/Node.hpp"
+#include "core/util/AudioException.hpp"
+
+namespace maudio{
+
+Node::~Node(){
+}
+
+void Node::addInput(std::shared_ptr<Node> node, int slot){
+	if(!node) throw MaudioException("passed invalid node");
+	if(!node->HasOutputs()) throw MaudioException("node has no outputs");
+	if(slot >= MaxInputs()) throw MaudioException("invalid input slot");
+	if(checkCycles(std::vector<std::shared_ptr<Node>>{shared_from_this()})){
+		throw MaudioException("adding this would create a cycle");
+	}
+
+	if(slot < 0){
+		mInputs.push_back(node);
+	}
+	else if((unsigned int)slot >= mInputs.size()){
+		mInputs.resize(slot + 1);
+		mInputs[slot] = node;
+	}
+	else{
+		mInputs[slot] = node;
+	}
+	node->mOutputs.push_back(shared_from_this());
+	return;
+}
+
+void Node::removeInput(std::shared_ptr<Node> node){
+	for(unsigned int i = 0; i < mInputs.size(); i++){
+		if(mInputs[i] == node){
+			removeInput(i);
+		}
+	}
+	return;
+}
+
+void Node::removeInput(int slot){
+	if((unsigned int)slot < mInputs.size()){
+		for(unsigned int i = 0; i < mInputs[slot]->mOutputs.size(); i++){
+			if(mInputs[slot]->mOutputs[i].lock().get() == this){
+				mInputs[slot]->mOutputs.erase(mInputs[slot]->mOutputs.begin() + i);
+				i--;
+			}
+		}
+		mInputs.erase(mInputs.begin() + slot);
+	}
+	return;
+}
+
+std::shared_ptr<Node> Node::getInput(int slot){
+	if((unsigned int)slot < mInputs.size()){
+		return mInputs[slot];
+	}
+	return NULL;
+}
+
+std::shared_ptr<Node> Node::getOutput(int slot){
+	if((unsigned int)slot < mOutputs.size()){
+		return mOutputs[slot].lock();
+	}
+	return NULL;
+}
+
+std::shared_ptr<Node> Node::getByID(unsigned int id){
+	if(id == getID()) return shared_from_this();
+	for(unsigned int i = 0; i < mInputs.size(); i++){
+		std::shared_ptr<Node> tmp = mInputs[i]->getByID(id);
+		if(tmp) return tmp;
+	}
+	return NULL;
+}
+
+void Node::disconnect(){
+	for(unsigned int i = 0; i < mOutputs.size(); i++){
+		mOutputs[i].lock()->removeInput(shared_from_this());
+	}
+	mOutputs.clear();
+	mInputs.clear();
+	return;
+}
+
+int Node::NumInputs(){
+	return mInputs.size();
+}
+
+int Node::NumOutputs(){
+	return mOutputs.size();
+}
+
+Sample Node::getFromSlot(unsigned int slot, unsigned long pos) noexcept{
+	if(slot < mInputs.size()){
+		return mInputs[slot]->get(pos);
+	}
+	return Sample(getInfo().Channels);
+}
+
+AudioInfo Node::getInfoFromSlot(unsigned int slot) noexcept{
+	if(slot < mInputs.size()){
+		return mInputs[slot]->getInfo();
+	}
+	return AudioInfo();
+}
+
+bool Node::checkCycles(std::vector<std::shared_ptr<Node>> nodes){
+	for(unsigned int i = 0; i < nodes.size(); i++){
+		if(nodes[i].get() == this) return true;
+	}
+	nodes.push_back(shared_from_this());
+	for(unsigned int i = 0; i < mInputs.size(); i++){
+		if(mInputs[i]->checkCycles(nodes)) return true;
+	}
+	return false;
+}
+
+} // maudio
+
+
+

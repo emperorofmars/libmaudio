@@ -7,23 +7,18 @@
 #ifndef MAUDIO_BASEAUDIOSINK
 #define MAUDIO_BASEAUDIOSINK
 
-#include "core/node/BaseNode.hpp"
+#include "core/node/Node.hpp"
 
 namespace maudio{
 
-class BaseAudioSink : public BaseNode{
+class BaseAudioSink : public Node{
 public:
 	virtual ~BaseAudioSink();
 
-	virtual Sample get(unsigned long pos) final;
-	virtual AudioInfo getAudioInfo();
-    virtual int getMaxInputs() final;
+	virtual Sample get(unsigned long pos) noexcept final;
+	virtual AudioInfo getInfo() noexcept;
+    virtual int MaxInputs() final;
     virtual bool HasOutputs() final;
-
-    virtual std::shared_ptr<Edge> getEdge(std::weak_ptr<INode> output) final;
-
-protected:
-	std::vector<std::shared_ptr<INode>> mNodes;
 };
 
 } // maudio

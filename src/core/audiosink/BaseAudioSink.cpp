@@ -12,26 +12,22 @@ namespace maudio{
 BaseAudioSink::~BaseAudioSink(){
 }
 
-Sample BaseAudioSink::get(unsigned long pos){
+Sample BaseAudioSink::get(unsigned long pos) noexcept{
 	throw BadOutputException();
 }
 
-AudioInfo BaseAudioSink::getAudioInfo(){
+AudioInfo BaseAudioSink::getInfo() noexcept{
 	AudioInfo ret;
-	if(mInputs.size() > 0 && mInputs[0] && mInputs[0]->valid()) ret = mInputs[0]->getInput()->getAudioInfo();
+	if(NumInputs() > 0) return getInfoFromSlot(0);
 	return ret;
 }
 
-int BaseAudioSink::getMaxInputs(){
+int BaseAudioSink::MaxInputs(){
 	return 1;
 }
 
 bool BaseAudioSink::HasOutputs(){
 	return true;
-}
-
-std::shared_ptr<Edge> BaseAudioSink::getEdge(std::weak_ptr<INode> output){
-	throw BadOutputException();
 }
 
 } // maudio

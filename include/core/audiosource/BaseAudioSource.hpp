@@ -7,15 +7,15 @@
 #ifndef MAUDIO_BASEAUDIOSOURCE
 #define MAUDIO_BASEAUDIOSOURCE
 
-#include "core/node/BaseNode.hpp"
+#include "core/node/Node.hpp"
 
 namespace maudio{
 
-class BaseAudioSource : public BaseNode{
+class BaseAudioSource : public Node{
 public:
 	virtual ~BaseAudioSource();
 
-    virtual int getMaxInputs() final;
+    virtual int MaxInputs() final;
     virtual bool HasOutputs() final;
 };
 

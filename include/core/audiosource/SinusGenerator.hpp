@@ -16,10 +16,10 @@ public:
 	SinusGenerator();
 	virtual ~SinusGenerator();
 
-	virtual void setFrequency(float freq);
-
-    virtual Sample get(unsigned long pos);
+    virtual Sample get(unsigned long pos) noexcept;
     virtual AudioInfo getAudioInfo();
+
+	virtual void setFrequency(float freq);
 
 protected:
 	AudioInfo mAudioInfo;

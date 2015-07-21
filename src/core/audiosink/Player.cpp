@@ -54,7 +54,7 @@ void Player::play(){
 	tmp.Samplerate = 44100;
 	mQueue.reset(new AudioQueue(tmp));
 	startFeed();
-	std::this_thread::sleep_for(std::chrono::milliseconds(100));
+	//std::this_thread::sleep_for(std::chrono::milliseconds(100));
 	mDevice->play(mQueue);
 	return;
 }
@@ -90,16 +90,16 @@ unsigned long Player::getPosition(){
 }
 
 void Player::setPosition(float seconds){
-	if(mInputs.size() > 0 && mInputs[0] && mInputs[0]->valid()){
-		mPosition =  seconds * (float)mInputs[0]->getInput()->getAudioInfo().Samplerate;
-	}
+	//if(mInputs.size() > 0 && mInputs[0] && mInputs[0]->valid()){
+	//	mPosition =  seconds * (float)mInputs[0]->getInput()->getAudioInfo().Samplerate;
+	//}
 	return;
 }
 
 float Player::getPosition_sek(){
-	if(mInputs.size() > 0 && mInputs[0] && mInputs[0]->valid()){
-		return (float)mPosition / (float)mInputs[0]->getInput()->getAudioInfo().Samplerate;
-	}
+	//if(mInputs.size() > 0 && mInputs[0] && mInputs[0]->valid()){
+	//	return (float)mPosition / (float)mInputs[0]->getInput()->getAudioInfo().Samplerate;
+	//}
 	return 0;
 }
 
@@ -123,29 +123,29 @@ bool Player::playing(){
 }
 
 AudioInfo Player::getAudioInfo(){
-	if(mInputs.size() > 0 && mInputs[0] && mInputs[0]->valid()) return mInputs[0]->getInput()->getAudioInfo();
+	//if(mInputs.size() > 0 && mInputs[0] && mInputs[0]->valid()) return mInputs[0]->getInput()->getAudioInfo();
 	return AudioInfo();
 }
 
 void Player::feed(){
 	if(!mQueue) return;
-	if(mInputs.size() == 0 || !mInputs[0] || !mInputs[0]->valid()) return;
+	//if(mInputs.size() == 0 || !mInputs[0] || !mInputs[0]->valid()) return;
 
-	mQueue->lock();
+	//mQueue->lock();
 	for(unsigned int i = 0; i < mQueueSize - mQueue->size(); i++){
 		try{
-			mQueue->push(mInputs[0]->getInput()->get(mPosition));
-			//Sample s = mInputs[0]->getInput()->get(mPosition);
+			//mQueue->push(mInputs[0]->getInput()->get(mPosition));
 			mPosition++;
 		}
 		catch(std::exception &e){
 			std::cerr << "feed error: " << e.what() << std::endl;
 		}
 		catch(...){
+			std::cerr << "feed error" << std::endl;
 		}
 	}
-	mQueue->unlock();
-	//std::cerr << "feeding" << std::endl;
+
+	//mQueue->unlock();
 	return;
 }
 
@@ -165,7 +165,7 @@ void Player::stopFeed(){
 void Player::asyncFeed(Player *player){
 	while(player && player->mFeederRun){
 		player->feed();
-		//std::this_thread::sleep_for(std::chrono::milliseconds((player->mQueueSize / 2 * 44100) / 2000000));
+		std::this_thread::sleep_for(std::chrono::milliseconds((player->mQueueSize / 2 * 44100) / 4000000));
 	}
 	return;
 }

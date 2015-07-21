@@ -28,7 +28,7 @@ void SinusGenerator::setFrequency(float freq){
 	mFreq = freq;
 }
 
-Sample SinusGenerator::get(unsigned long pos){
+Sample SinusGenerator::get(unsigned long pos) noexcept{
 	Sample ret(mAudioInfo.Channels);
 	float index = pos;
 	ret.set(0, sin(mFreq * index * (2 * M_PI) / mAudioInfo.Samplerate));

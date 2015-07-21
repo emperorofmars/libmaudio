@@ -7,11 +7,11 @@
 #ifndef MAUDIO_BASEMANIPULATOR
 #define MAUDIO_BASEMANIPULATOR
 
-#include "core/node/BaseNode.hpp"
+#include "core/node/Node.hpp"
 
 namespace maudio{
 
-class BaseManipulator : public BaseNode{
+class BaseManipulator : public Node{
 public:
 	virtual ~BaseManipulator();
 

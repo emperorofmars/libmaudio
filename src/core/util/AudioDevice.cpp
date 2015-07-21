@@ -202,19 +202,11 @@ int AudioDevice::AudioCallback(const void *input,
 		tmp = data->pop();
 		for(unsigned int j = 0; j < data->getChannels(); j++){
 			out[i * data->getChannels() + j] = tmp[j];
-			std::cerr << out[i * data->getChannels() + j] << std::endl;
+			//std::cerr << out[i * data->getChannels() + j] << std::endl;
 		}
 	}
 	//data->unlock();
 
-/*
-	unsigned static int index;
-	for(unsigned int i = 0; i < frameCount; i++){
-		index++;
-		out[i] = sin(2000 * index * (2 * M_PI) / 44100);
-		std::cerr << out[i] << std::endl;
-	}
-*/
 	return paContinue;
 }
 

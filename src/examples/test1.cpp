@@ -1,7 +1,7 @@
 /*
- * Testapplication for use when developing
- *
+ * Project Maudio
  * Copyright (C) 2015 Martin Schwarz
+ * See LICENSE.txt for the full license
  */
 
 #include <iostream>
@@ -17,7 +17,7 @@ using namespace maudio;
 
 int main(int argc, char *argv[]){
 	std::cerr << "test" << std::endl;
-
+/*
 	std::shared_ptr<SinusGenerator> src(new SinusGenerator());
 	src->setFrequency(2000);
 
@@ -27,7 +27,7 @@ int main(int argc, char *argv[]){
 	dst->play();
 	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 	dst->stop();
-
+*/
 /*
 	std::shared_ptr<SinusGenerator> src(new SinusGenerator());
 	src->setFrequency(3000);

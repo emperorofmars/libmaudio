@@ -16,7 +16,7 @@ void Node::addInput(std::shared_ptr<Node> node, int slot){
 	if(!node) throw MaudioException("passed invalid node");
 	if(!node->HasOutputs()) throw MaudioException("node has no outputs");
 	if(slot >= MaxInputs()) throw MaudioException("invalid input slot");
-	if(checkCycles(std::vector<std::shared_ptr<Node>>{shared_from_this()})){
+	if(checkCycles(std::vector<std::shared_ptr<Node>>())){
 		throw MaudioException("adding this would create a cycle");
 	}
 
@@ -88,11 +88,11 @@ void Node::disconnect(){
 	return;
 }
 
-int Node::NumInputs(){
+int Node::NumInputs() const{
 	return mInputs.size();
 }
 
-int Node::NumOutputs(){
+int Node::NumOutputs() const{
 	return mOutputs.size();
 }
 

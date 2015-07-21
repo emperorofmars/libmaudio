@@ -16,23 +16,22 @@ TerminalPrinter::TerminalPrinter(){
 TerminalPrinter::~TerminalPrinter(){
 }
 
-void TerminalPrinter::print(unsigned long pos) const{
-	/*if(mInputs.size() < 1 || !mInputs[0] || !mInputs[0]->valid()){
+AudioInfo TerminalPrinter::getInfo() noexcept{
+	AudioInfo ret;
+	if(NumInputs() > 0) return getInfoFromSlot(0);
+	return ret;
+}
+
+void TerminalPrinter::print(unsigned long pos){
+	if(NumInputs() == 0){
 		std::cout << "invalid or no Input" << std::endl;
 		return;
 	}
-	try{
-		for(unsigned int i = 0; i < mInputs[0]->getInput()->getAudioInfo().Channels; i++){
-			std::cout << mInputs[0]->getInput()->get(pos).get(i) << " ";
-		}
+	for(unsigned int i = 0; i < getInfoFromSlot(0).Channels; i++){
+		std::cout << getFromSlot(0, pos).get(i) << " ";
 	}
-	catch(OutOfBoundsException &e){
-		std::cout << "Out of Bounds";
-	}
-	catch(...){
-		std::cout << "An Exception occurred";
-	}
-	std::cout << std::endl;*/
+	std::cout << std::endl;
+	return;
 }
 
 } // maudio

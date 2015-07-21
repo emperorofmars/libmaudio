@@ -15,8 +15,8 @@ class BaseAudioSource : public Node{
 public:
 	virtual ~BaseAudioSource();
 
-    virtual int MaxInputs() final;
-    virtual bool HasOutputs() final;
+    virtual int MaxInputs() const final;
+    virtual bool HasOutputs() const final;
 };
 
 } // maudio

@@ -28,10 +28,10 @@ int main(int argc, char *argv[]){
 	std::this_thread::sleep_for(std::chrono::milliseconds(2000));
 	dst->stop();
 */
-/*
+
 	std::shared_ptr<SinusGenerator> src(new SinusGenerator());
 	src->setFrequency(3000);
-	std::shared_ptr<INode> cpy = src.get()->shared_from_this();
+	std::shared_ptr<Node> cpy = src.get()->shared_from_this();
 	src.reset();
 
 	std::shared_ptr<TerminalPrinter> dst(new TerminalPrinter());
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]){
 	for(unsigned int i = 0; i < 50; i++){
 		dst->print(i);
 	}
-*/
+
 /*
 	Sample s(std::vector<float>{5, 2});
 	float x = s[1];

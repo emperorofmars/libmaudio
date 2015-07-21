@@ -22,21 +22,21 @@ public:
 	virtual Sample get(unsigned long pos) noexcept = 0;
 	virtual AudioInfo getInfo() noexcept = 0;
 
-	void addInput(std::shared_ptr<Node> node, int slot);
+	void addInput(std::shared_ptr<Node> node, int slot = -1);
 	void removeInput(std::shared_ptr<Node> node);
 	void removeInput(int slot);
 	std::shared_ptr<Node> getInput(int slot);
 	std::shared_ptr<Node> getOutput(int slot);
 	std::shared_ptr<Node> getByID(unsigned int id);
 	void disconnect();
-	int NumInputs();
-	int NumOutputs();
+	int NumInputs() const;
+	int NumOutputs() const;
 
 	Sample getFromSlot(unsigned int slot, unsigned long pos) noexcept;
 	AudioInfo getInfoFromSlot(unsigned int slot) noexcept;
 
-	virtual int MaxInputs() = 0;
-	virtual bool HasOutputs() = 0;
+	virtual int MaxInputs() const = 0;
+	virtual bool HasOutputs() const = 0;
 
 private:
 	bool checkCycles(std::vector<std::shared_ptr<Node>> nodes);

@@ -17,8 +17,8 @@ public:
 
 	virtual Sample get(unsigned long pos) noexcept final;
 	virtual AudioInfo getInfo() noexcept;
-    virtual int MaxInputs() final;
-    virtual bool HasOutputs() final;
+    virtual int MaxInputs() const final;
+    virtual bool HasOutputs() const final;
 };
 
 } // maudio

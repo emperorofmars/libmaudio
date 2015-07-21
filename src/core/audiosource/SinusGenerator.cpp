@@ -35,7 +35,7 @@ Sample SinusGenerator::get(unsigned long pos) noexcept{
 	return ret;
 }
 
-AudioInfo SinusGenerator::getAudioInfo(){
+AudioInfo SinusGenerator::getInfo() noexcept{
 	return mAudioInfo;
 }
 

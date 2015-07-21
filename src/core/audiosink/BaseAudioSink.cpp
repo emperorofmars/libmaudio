@@ -22,11 +22,11 @@ AudioInfo BaseAudioSink::getInfo() noexcept{
 	return ret;
 }
 
-int BaseAudioSink::MaxInputs(){
+int BaseAudioSink::MaxInputs() const{
 	return 1;
 }
 
-bool BaseAudioSink::HasOutputs(){
+bool BaseAudioSink::HasOutputs() const{
 	return true;
 }
 

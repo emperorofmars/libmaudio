@@ -17,7 +17,7 @@ public:
 	virtual ~SinusGenerator();
 
     virtual Sample get(unsigned long pos) noexcept;
-    virtual AudioInfo getAudioInfo();
+    virtual AudioInfo getInfo() noexcept;
 
 	virtual void setFrequency(float freq);
 

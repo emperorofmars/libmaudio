@@ -11,11 +11,11 @@ namespace maudio{
 BaseAudioSource::~BaseAudioSource(){
 }
 
-int BaseAudioSource::MaxInputs(){
+int BaseAudioSource::MaxInputs() const{
 	return 0;
 }
 
-bool BaseAudioSource::HasOutputs(){
+bool BaseAudioSource::HasOutputs() const{
 	return true;
 }
 

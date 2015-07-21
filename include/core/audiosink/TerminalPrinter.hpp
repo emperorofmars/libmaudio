@@ -16,7 +16,9 @@ public:
 	TerminalPrinter();
 	virtual ~TerminalPrinter();
 
-	void print(unsigned long pos) const;
+	virtual AudioInfo getInfo() noexcept;
+
+	void print(unsigned long pos);
 };
 
 } // maudio

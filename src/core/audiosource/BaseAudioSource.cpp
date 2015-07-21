@@ -1,7 +1,7 @@
 /*
- * INode specialisation for AudioSource
- *
+ * Project Maudio
  * Copyright (C) 2015 Martin Schwarz
+ * See LICENSE.txt for the full license
  */
 
 #include "core/audiosource/BaseAudioSource.hpp"

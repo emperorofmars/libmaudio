@@ -1,7 +1,7 @@
 /*
- * Generates a sinus
- *
+ * Project Maudio
  * Copyright (C) 2015 Martin Schwarz
+ * See LICENSE.txt for the full license
  */
 
 #ifndef MAUDIO_SINUSGENERATOR
@@ -18,6 +18,7 @@ public:
 
     virtual Sample get(unsigned long pos) noexcept;
     virtual AudioInfo getInfo() noexcept;
+    virtual bool checkIfCompatible(std::shared_ptr<Node> node, int slot = -1);
 
 	virtual void setFrequency(float freq);
 

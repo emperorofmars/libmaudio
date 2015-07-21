@@ -29,14 +29,17 @@ public:
 	std::shared_ptr<Node> getOutput(int slot);
 	std::shared_ptr<Node> getByID(unsigned int id);
 	void disconnect();
-	int NumInputs() const;
-	int NumOutputs() const;
+	int unsigned NumInputs() const;
+	int unsigned NumOutputs() const;
 
+	bool checkInput(unsigned int slot) noexcept;
 	Sample getFromSlot(unsigned int slot, unsigned long pos) noexcept;
 	AudioInfo getInfoFromSlot(unsigned int slot) noexcept;
 
 	virtual int MaxInputs() const = 0;
 	virtual bool HasOutputs() const = 0;
+
+	virtual bool checkIfCompatible(std::shared_ptr<Node> node, int slot = -1) = 0;
 
 private:
 	bool checkCycles(std::vector<std::shared_ptr<Node>> nodes);

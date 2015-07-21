@@ -1,7 +1,7 @@
 /*
- * Generates a sinus
- *
+ * Project Maudio
  * Copyright (C) 2015 Martin Schwarz
+ * See LICENSE.txt for the full license
  */
 
 #include "core/audiosource/SinusGenerator.hpp"
@@ -33,6 +33,10 @@ Sample SinusGenerator::get(unsigned long pos) noexcept{
 	float index = pos;
 	ret.set(0, sin(mFreq * index * (2 * M_PI) / mAudioInfo.Samplerate));
 	return ret;
+}
+
+bool SinusGenerator::checkIfCompatible(std::shared_ptr<Node> node, int slot){
+	return true;
 }
 
 AudioInfo SinusGenerator::getInfo() noexcept{

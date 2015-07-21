@@ -1,5 +1,7 @@
 /*
+ * Project Maudio
  * Copyright (C) 2015 Martin Schwarz
+ * See LICENSE.txt for the full license
  */
 
 #include "core/audiodata/AudioQueue.hpp"
@@ -13,14 +15,17 @@ AudioQueue::AudioQueue(AudioInfo info){
 }
 
 void AudioQueue::push(Sample data){
+	mMutex.lock();
 	if(data.getChannels() == getChannels()){
 		mData.push_back(data);
 		mAudioInfo.Samples++;
 	}
+	mMutex.unlock();
 	return;
 }
 
 Sample AudioQueue::pop(){
+	mMutex.lock();
 	Sample ret(getChannels());
 	if(mData.size() > 0){
 		ret = mData.front();
@@ -31,6 +36,7 @@ Sample AudioQueue::pop(){
 	else{
 		std::cerr << "POP ERROR" << std::endl;
 	}
+	mMutex.unlock();
 	return ret;
 }
 
@@ -40,16 +46,6 @@ Sample AudioQueue::get(unsigned long pos){
 		ret = mData[pos - mAudioInfo.Offset];
 	}
 	return ret;
-}
-
-void AudioQueue::lock(){
-	mMutex.lock();
-	return;
-}
-
-void AudioQueue::unlock(){
-	mMutex.unlock();
-	return;
 }
 
 unsigned int AudioQueue::getChannels(){

@@ -1,8 +1,9 @@
 /*
- * INode specialisation for AudioSource
- *
+ * Project Maudio
  * Copyright (C) 2015 Martin Schwarz
+ * See LICENSE.txt for the full license
  */
+
 
 #ifndef MAUDIO_BASEAUDIOSOURCE
 #define MAUDIO_BASEAUDIOSOURCE

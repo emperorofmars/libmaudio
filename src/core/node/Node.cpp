@@ -15,7 +15,8 @@ Node::~Node(){
 void Node::addInput(std::shared_ptr<Node> node, int slot){
 	if(!node) throw MaudioException("passed invalid node");
 	if(!node->HasOutputs()) throw MaudioException("node has no outputs");
-	if(slot >= MaxInputs()) throw MaudioException("invalid input slot");
+	if(MaxInputs() >= 0 && slot >= MaxInputs()) throw MaudioException("invalid input slot");
+	if(!checkIfCompatible(node)) throw MaudioException("input is not compatible");
 	if(checkCycles(std::vector<std::shared_ptr<Node>>())){
 		throw MaudioException("adding this would create a cycle");
 	}
@@ -88,23 +89,28 @@ void Node::disconnect(){
 	return;
 }
 
-int Node::NumInputs() const{
+unsigned int Node::NumInputs() const{
 	return mInputs.size();
 }
 
-int Node::NumOutputs() const{
+unsigned int Node::NumOutputs() const{
 	return mOutputs.size();
 }
 
+bool Node::checkInput(unsigned int slot) noexcept{
+	if(slot < mInputs.size() && mInputs[slot]) return true;
+	return false;
+}
+
 Sample Node::getFromSlot(unsigned int slot, unsigned long pos) noexcept{
-	if(slot < mInputs.size()){
+	if(slot < mInputs.size() && mInputs[slot]){
 		return mInputs[slot]->get(pos);
 	}
 	return Sample(getInfo().Channels);
 }
 
 AudioInfo Node::getInfoFromSlot(unsigned int slot) noexcept{
-	if(slot < mInputs.size()){
+	if(slot < mInputs.size() && mInputs[slot]){
 		return mInputs[slot]->getInfo();
 	}
 	return AudioInfo();

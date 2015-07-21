@@ -1,8 +1,9 @@
 /*
- * Class for managing audiodevices
- *
+ * Project Maudio
  * Copyright (C) 2015 Martin Schwarz
+ * See LICENSE.txt for the full license
  */
+
 
 #ifndef MAUDIO_AUDIODEVICE
 #define MAUDIO_AUDIODEVICE

@@ -72,6 +72,7 @@
 		<Unit filename="../../src/core/audiosource/SinusGenerator.cpp" />
 		<Unit filename="../../src/core/audiosource/StreamReader.cpp" />
 		<Unit filename="../../src/core/manipulator/BaseManipulator.cpp" />
+		<Unit filename="../../src/core/manipulator/Mixer.cpp" />
 		<Unit filename="../../src/core/manipulator/Resampler.cpp" />
 		<Unit filename="../../src/core/node/Node.cpp" />
 		<Unit filename="../../src/core/node/Scene.cpp" />

@@ -1,8 +1,9 @@
 /*
- * class to get unique IDs
- *
+ * Project Maudio
  * Copyright (C) 2015 Martin Schwarz
+ * See LICENSE.txt for the full license
  */
+
 
 #ifndef MAUDIO_ID
 #define MAUDIO_ID

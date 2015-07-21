@@ -1,5 +1,7 @@
 /*
+ * Project Maudio
  * Copyright (C) 2015 Martin Schwarz
+ * See LICENSE.txt for the full license
  */
 
 #include "core/audiosink/Player.hpp"
@@ -53,10 +55,8 @@ std::vector<std::string> Player::listDevices(){
 
 void Player::play(){
 	if(!mDevice) throw InvalidAudioDeviceException();
-	AudioInfo tmp;
-	tmp.Channels = 1;
-	tmp.Samplerate = 44100;
-	mQueue.reset(new AudioQueue(tmp));
+	if(!checkInput(0)) throw MaudioException("invalid input");
+	mQueue.reset(new AudioQueue(getInfoFromSlot(0)));
 	startFeed();
 	mDevice->play(mQueue);
 	return;
@@ -129,7 +129,6 @@ void Player::feed(){
 	if(!mQueue) return;
 	if(NumInputs() == 0) return;
 
-	mQueue->lock();
 	for(unsigned int i = 0; i < mQueueSize - mQueue->size(); i++){
 		try{
 			mQueue->push(getFromSlot(0, mPosition));
@@ -142,7 +141,6 @@ void Player::feed(){
 			//std::cerr << "feed error" << std::endl;
 		}
 	}
-	mQueue->unlock();
 	return;
 }
 

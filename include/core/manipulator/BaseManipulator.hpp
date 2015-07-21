@@ -1,8 +1,9 @@
 /*
- * INode specialisation for Manipulating Audio
- *
+ * Project Maudio
  * Copyright (C) 2015 Martin Schwarz
+ * See LICENSE.txt for the full license
  */
+
 
 #ifndef MAUDIO_BASEMANIPULATOR
 #define MAUDIO_BASEMANIPULATOR
@@ -15,7 +16,7 @@ class BaseManipulator : public Node{
 public:
 	virtual ~BaseManipulator();
 
-    virtual bool HasOutputs() final;
+    virtual bool HasOutputs() const final;
 };
 
 } // maudio

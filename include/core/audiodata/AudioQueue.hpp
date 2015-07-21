@@ -1,7 +1,7 @@
 /*
- * Class for queuing audiostreams
- *
+ * Project Maudio
  * Copyright (C) 2015 Martin Schwarz
+ * See LICENSE.txt for the full license
  */
 
 #ifndef MAUDIO_AUDIOQUEUE
@@ -22,9 +22,6 @@ public:
 	Sample pop();
 
 	Sample get(unsigned long pos);
-
-	void lock();
-	void unlock();
 
 	unsigned int getChannels();
 	unsigned int size();

@@ -1,7 +1,7 @@
 /*
- * INode specialisation for AudioSinks
- *
+ * Project Maudio
  * Copyright (C) 2015 Martin Schwarz
+ * See LICENSE.txt for the full license
  */
 
 #include "core/audiosink/BaseAudioSink.hpp"
@@ -17,9 +17,8 @@ Sample BaseAudioSink::get(unsigned long pos) noexcept{
 }
 
 AudioInfo BaseAudioSink::getInfo() noexcept{
-	AudioInfo ret;
-	if(NumInputs() > 0) return getInfoFromSlot(0);
-	return ret;
+	if(checkInput(0)) return getInfoFromSlot(0);
+	return AudioInfo();
 }
 
 int BaseAudioSink::MaxInputs() const{
@@ -27,6 +26,10 @@ int BaseAudioSink::MaxInputs() const{
 }
 
 bool BaseAudioSink::HasOutputs() const{
+	return true;
+}
+
+bool BaseAudioSink::checkIfCompatible(std::shared_ptr<Node> node, int slot){
 	return true;
 }
 

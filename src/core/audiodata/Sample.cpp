@@ -1,7 +1,7 @@
 /*
- * Holds a single sample of audio
- *
+ * Project Maudio
  * Copyright (C) 2015 Martin Schwarz
+ * See LICENSE.txt for the full license
  */
 
 #include "core/audiodata/Sample.hpp"

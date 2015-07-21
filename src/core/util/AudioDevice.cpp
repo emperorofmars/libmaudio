@@ -189,7 +189,6 @@ int AudioDevice::AudioCallback(const void *input,
 	AudioQueue *data = (AudioQueue*)userData;
 	float *out = (float *)output;
 
-	data->lock();
 	Sample tmp(data->getChannels());
 	for(unsigned int i = 0; i < frameCount; i++){
 		tmp = data->pop();
@@ -198,7 +197,6 @@ int AudioDevice::AudioCallback(const void *input,
 			//std::cerr << out[i * data->getChannels() + j] << std::endl;
 		}
 	}
-	data->unlock();
 
 	return paContinue;
 }

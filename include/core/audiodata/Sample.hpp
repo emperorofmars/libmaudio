@@ -17,13 +17,23 @@ public:
 	Sample(unsigned int channels);
 	Sample(const std::vector<float> data);
 	Sample(const Sample &data);
-	virtual ~Sample();
+	~Sample();
 
-	virtual const float& operator[](unsigned int pos) const;
-	virtual void operator=(const Sample &data);
-	virtual float get(unsigned int pos) const;
-	virtual void set(unsigned int pos, float data);
-	virtual unsigned int getChannels() const;
+	const float& operator[](unsigned int pos) const;
+	void operator=(const Sample &data);
+	float get(unsigned int pos) const;
+	void set(unsigned int pos, float data);
+	unsigned int getChannels() const;
+
+	Sample operator+(const Sample &data);
+	Sample operator-(const Sample &data);
+	Sample operator*(const Sample &data);
+	Sample operator/(const Sample &data);
+
+	void operator+=(const Sample &data);
+	void operator-=(const Sample &data);
+	void operator*=(const Sample &data);
+	void operator/=(const Sample &data);
 
 private:
 	std::vector<float> mData; ///one value per channel

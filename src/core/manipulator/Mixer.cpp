@@ -15,9 +15,7 @@ Mixer::~Mixer(){
 Sample Mixer::get(unsigned long pos) noexcept{
 	Sample ret(getInfo().Channels);
 	for(unsigned int i = 0; i < NumInputs(); i++){
-		for(unsigned int j = 0; j < getInfo().Channels; j++){
-			ret.set(j, ret.get(j) + getFromSlot(i, pos).get(j));
-		}
+		ret += getFromSlot(i, pos);
 	}
 	for(unsigned int j = 0; j < getInfo().Channels; j++){
 		ret.set(j, ret.get(j) / ret.getChannels());

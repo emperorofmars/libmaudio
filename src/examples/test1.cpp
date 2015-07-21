@@ -25,14 +25,20 @@ int main(int argc, char *argv[]){
 	std::shared_ptr<SinusGenerator> sinus2(new SinusGenerator());
 	sinus2->setFrequency(1000);
 
+	std::shared_ptr<SinusGenerator> sinus3(new SinusGenerator());
+	sinus3->setFrequency(1500);
+
 	std::shared_ptr<Mixer> mix(new Mixer());
 	mix->addInput(sinus1, 0);
 	mix->addInput(sinus2, 1);
+	mix->addInput(sinus3, 2);
 
 	std::shared_ptr<Player> player(new Player());
 	player->addInput(mix);
 
 	player->play();
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	sinus3->setFrequency(1510);
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	std::cerr << "stop" << std::endl;
 	player->stop();

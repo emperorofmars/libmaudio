@@ -57,6 +57,7 @@ void Player::play(){
 	if(!mDevice) throw InvalidAudioDeviceException();
 	if(!checkInput(0)) throw MaudioException("invalid input");
 	mQueue.reset(new AudioQueue(getInfoFromSlot(0)));
+	feed();
 	startFeed();
 	mDevice->play(mQueue);
 	return;

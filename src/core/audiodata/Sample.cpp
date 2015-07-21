@@ -55,7 +55,88 @@ unsigned int Sample::getChannels() const{
 	return mData.size();
 }
 
+Sample Sample::operator+(const Sample &data){
+	Sample ret(*this);
+	if(getChannels() == data.getChannels()){
+		for(unsigned int i = 0; i < getChannels(); i++){
+			ret.set(i, ret[i] + data[i]);
+		}
+	}
+	return ret;
+}
+
+Sample Sample::operator-(const Sample &data){
+	Sample ret(*this);
+	if(getChannels() == data.getChannels()){
+		for(unsigned int i = 0; i < getChannels(); i++){
+			ret.set(i, ret[i] - data[i]);
+		}
+	}
+	return ret;
+}
+
+Sample Sample::operator*(const Sample &data){
+	Sample ret(*this);
+	if(getChannels() == data.getChannels()){
+		for(unsigned int i = 0; i < getChannels(); i++){
+			ret.set(i, ret[i] * data[i]);
+		}
+	}
+	return ret;
+}
+
+Sample Sample::operator/(const Sample &data){
+	Sample ret(*this);
+	if(getChannels() == data.getChannels()){
+		for(unsigned int i = 0; i < getChannels(); i++){
+			if(data[i] != 0) ret.set(i, ret[i] / data[i]);
+		}
+	}
+	return ret;
+}
+
+void Sample::operator+=(const Sample &data){
+	if(getChannels() == data.getChannels()){
+		for(unsigned int i = 0; i < getChannels(); i++){
+			mData[i] += data[i];
+		}
+	}
+	return;
+}
+
+void Sample::operator-=(const Sample &data){
+	if(getChannels() == data.getChannels()){
+		for(unsigned int i = 0; i < getChannels(); i++){
+			mData[i] -= data[i];
+		}
+	}
+	return;
+}
+
+void Sample::operator*=(const Sample &data){
+	if(getChannels() == data.getChannels()){
+		for(unsigned int i = 0; i < getChannels(); i++){
+			mData[i] *= data[i];
+		}
+	}
+	return;
+}
+
+void Sample::operator/=(const Sample &data){
+	if(getChannels() == data.getChannels()){
+		for(unsigned int i = 0; i < getChannels(); i++){
+			if(data[i] != 0) mData[i] /= data[i];
+		}
+	}
+	return;
+}
+
 } // maudio
+
+
+
+
+
 
 
 

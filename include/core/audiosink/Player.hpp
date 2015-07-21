@@ -42,8 +42,6 @@ public:
 	bool getOpened();
 	bool playing();
 
-    virtual AudioInfo getAudioInfo();
-
 private:
 	void feed();
 	void startFeed();

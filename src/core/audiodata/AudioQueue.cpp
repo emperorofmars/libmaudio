@@ -22,14 +22,14 @@ void AudioQueue::push(Sample data){
 
 Sample AudioQueue::pop(){
 	Sample ret(getChannels());
-	if(mData.size() <= 1){
-		std::cerr << "POP ERROR" << std::endl;
-	}
-	if(mData.size() > 1){
+	if(mData.size() > 0){
 		ret = mData.front();
 		mData.pop_front();
 		mAudioInfo.Offset++;
 		mAudioInfo.Samples--;
+	}
+	else{
+		std::cerr << "POP ERROR" << std::endl;
 	}
 	return ret;
 }

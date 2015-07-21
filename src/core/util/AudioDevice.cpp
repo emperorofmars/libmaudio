@@ -95,12 +95,7 @@ void AudioDevice::play(std::shared_ptr<AudioQueue> data){
 	params.sampleFormat = paFloat32;
 	params.suggestedLatency = 0;
 
-	std::cerr << "channels: " << params.channelCount << std::endl;
-	std::cerr << "samplerate: " << data->getAudioInfo().Samplerate << std::endl;
-	std::cerr << "device: " << mID << " " << listDevices()[mID] << std::endl;
-
 	err = Pa_OpenStream(&mStream, NULL, &params, data->getAudioInfo().Samplerate, 512, paNoFlag, &AudioCallback, data.get());
-	std::cerr << "STARTED PLAYING: " << params.channelCount << std::endl;
 	if(err != paNoError){
 		if(mStream){
 			try{stop();}
@@ -165,8 +160,6 @@ void AudioDevice::initAPI(){
 	PaError err;
 	if((err = Pa_Initialize()) != paNoError) return;
 	mAPIInited = true;
-
-	std::cerr << "PA inited" << std::endl;
 	return;
 }
 
@@ -196,7 +189,7 @@ int AudioDevice::AudioCallback(const void *input,
 	AudioQueue *data = (AudioQueue*)userData;
 	float *out = (float *)output;
 
-	//data->lock();
+	data->lock();
 	Sample tmp(data->getChannels());
 	for(unsigned int i = 0; i < frameCount; i++){
 		tmp = data->pop();
@@ -205,7 +198,7 @@ int AudioDevice::AudioCallback(const void *input,
 			//std::cerr << out[i * data->getChannels() + j] << std::endl;
 		}
 	}
-	//data->unlock();
+	data->unlock();
 
 	return paContinue;
 }

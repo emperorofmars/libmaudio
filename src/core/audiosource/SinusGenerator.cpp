@@ -13,19 +13,15 @@ namespace maudio{
 SinusGenerator::SinusGenerator(){
 	mAudioInfo.mFileInfo.Title = "Sinus Test Generator from Maudio";
 
+	mFreq = 1000;
+
 	mAudioInfo.Channels = 1;
 	mAudioInfo.Offset = 0;
 	mAudioInfo.Samplerate = 44100;
-	mAudioInfo.Samples = 44100;
-
-	mFreq = 1000;
+	mAudioInfo.Samples = -1;
 }
 
 SinusGenerator::~SinusGenerator(){
-}
-
-void SinusGenerator::setFrequency(float freq){
-	mFreq = freq;
 }
 
 Sample SinusGenerator::get(unsigned long pos) noexcept{
@@ -41,6 +37,18 @@ bool SinusGenerator::checkIfCompatible(std::shared_ptr<Node> node, int slot){
 
 AudioInfo SinusGenerator::getInfo() noexcept{
 	return mAudioInfo;
+}
+
+void SinusGenerator::setFrequency(float freq){
+	mFreq = freq;
+}
+
+void SinusGenerator::setSamplerate(unsigned int samplerate){
+	mAudioInfo.Samplerate = samplerate;
+}
+
+void SinusGenerator::setChannels(unsigned int channels){
+	mAudioInfo.Channels = channels;
 }
 
 } // maudio

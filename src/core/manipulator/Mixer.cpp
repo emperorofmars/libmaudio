@@ -5,7 +5,6 @@
  */
 
 #include "core/manipulator/Mixer.hpp"
-#include <iostream>
 
 namespace maudio{
 

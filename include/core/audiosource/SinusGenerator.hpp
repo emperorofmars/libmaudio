@@ -21,6 +21,8 @@ public:
     virtual bool checkIfCompatible(std::shared_ptr<Node> node, int slot = -1);
 
 	virtual void setFrequency(float freq);
+	virtual void setSamplerate(unsigned int samplerate);
+	virtual void setChannels(unsigned int channels);
 
 protected:
 	AudioInfo mAudioInfo;

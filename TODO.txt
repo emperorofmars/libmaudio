@@ -1,0 +1,22 @@
+
+Todo:
+- rethink sample and buffer
+- node: get function to return buffer
+- buffer: copy constructur and assign to copy dynamic content
+- create keyable properties
+- node: get keyable properties in one structure
+- node: make api stable
+- write cmakelists
+- write tests
+- create channel converter
+- player: make multiple players work on the same device
+- create renderer
+- create file reader
+- create file writer
+- implement scene
+- implement plugin api
+- lua plugins
+- python plugins
+- save and reload scene
+- export scene to svg
+- qt gui

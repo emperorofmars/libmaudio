@@ -5,7 +5,6 @@
  */
 
 #include "core/manipulator/Resampler.hpp"
-#include <iostream>
 
 namespace maudio{
 

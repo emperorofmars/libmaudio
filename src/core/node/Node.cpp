@@ -6,6 +6,7 @@
 
 #include "core/node/Node.hpp"
 #include "core/util/AudioException.hpp"
+#include <iostream>
 
 namespace maudio{
 
@@ -17,7 +18,7 @@ void Node::addInput(std::shared_ptr<Node> node, int slot){
 	if(!node->HasOutputs()) throw MaudioException("node has no outputs");
 	if(MaxInputs() >= 0 && slot >= MaxInputs()) throw MaudioException("invalid input slot");
 	if(!checkIfCompatible(node)) throw MaudioException("input is not compatible");
-	if(checkCycles(std::vector<std::shared_ptr<Node>>())){
+	if(checkCycles(node)){
 		throw MaudioException("adding this would create a cycle");
 	}
 
@@ -116,13 +117,18 @@ AudioInfo Node::getInfoFromSlot(unsigned int slot) noexcept{
 	return AudioInfo();
 }
 
-bool Node::checkCycles(std::vector<std::shared_ptr<Node>> nodes){
+bool Node::checkCycles(std::shared_ptr<Node> node){
+	if(node.get() == this) return true;
+	return node->checkCyclesDeep(std::vector<std::shared_ptr<Node>>{shared_from_this()});
+}
+
+bool Node::checkCyclesDeep(std::vector<std::shared_ptr<Node>> nodes){
 	for(unsigned int i = 0; i < nodes.size(); i++){
 		if(nodes[i].get() == this) return true;
 	}
 	nodes.push_back(shared_from_this());
 	for(unsigned int i = 0; i < mInputs.size(); i++){
-		if(mInputs[i]->checkCycles(nodes)) return true;
+		if(mInputs[i] && mInputs[i]->checkCyclesDeep(nodes)) return true;
 	}
 	return false;
 }

@@ -42,7 +42,8 @@ public:
 	virtual bool checkIfCompatible(std::shared_ptr<Node> node, int slot = -1) = 0;
 
 private:
-	bool checkCycles(std::vector<std::shared_ptr<Node>> nodes);
+	bool checkCycles(std::shared_ptr<Node> node);
+	bool checkCyclesDeep(std::vector<std::shared_ptr<Node>> nodes);
 
 	std::vector<std::shared_ptr<Node>> mInputs;
 	std::vector<std::weak_ptr<Node>> mOutputs;

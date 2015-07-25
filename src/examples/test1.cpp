@@ -14,6 +14,7 @@
 #include "core/audiosink/Player.hpp"
 #include "core/manipulator/Mixer.hpp"
 #include "core/manipulator/Resampler.hpp"
+#include "core/audiosink/Performance.hpp"
 
 using namespace maudio;
 
@@ -40,7 +41,7 @@ int main(int argc, char *argv[]){
 
 	std::shared_ptr<Player> player(new Player());
 	player->addInput(mix);
-
+/*
 	std::cerr << "play" << std::endl;
 	player->play();
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
@@ -49,6 +50,15 @@ int main(int argc, char *argv[]){
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	std::cerr << "stop" << std::endl;
 	player->stop();
+*/
+
+	std::shared_ptr<Performance> perf(new Performance());
+	perf->addInput(mix);
+
+	perf->measure(44100 * 60, 1024 * 10);
+	perf->measure(44100 * 60, 1024);
+	perf->measure(44100 * 60, 12);
+	perf->measure(44100 * 60, 1);
 
 /*
 	std::shared_ptr<TerminalPrinter> printer(new TerminalPrinter());

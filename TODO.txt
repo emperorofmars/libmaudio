@@ -3,9 +3,10 @@ Todo:
 - ////rethink sample and buffer
 - ////buffer: copy constructur and assign to copy dynamic content
 - ////node: get function to return buffer
-- think about Sample vs Buffer
-- create profiler audio sink for measuring Sample vs Buffer
+- ////think about Sample vs Buffer
+- ////create profiler audio sink for measuring Sample vs Buffer
 - node: onAdd, onRemove to handle input changes in inherited classes
+- node: inline
 - implement config
 - node: read config
 - create keyable and non keyable properties

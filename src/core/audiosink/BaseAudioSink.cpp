@@ -6,6 +6,7 @@
 
 #include "core/audiosink/BaseAudioSink.hpp"
 #include "core/util/AudioException.hpp"
+#include <iostream>
 
 namespace maudio{
 

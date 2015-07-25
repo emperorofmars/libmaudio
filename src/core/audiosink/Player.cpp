@@ -23,7 +23,7 @@ Player::Player(std::string &device){
 }
 
 Player::~Player(){
-	close();
+    close();
 }
 
 void Player::open(){
@@ -42,8 +42,10 @@ void Player::open(std::string &device){
 }
 
 void Player::close(){
-	stop();
-	mDevice = NULL;
+    if(mDevice != NULL){
+        stop();
+        mDevice = NULL;
+    }
 	return;
 }
 
@@ -152,9 +154,11 @@ void Player::startFeed(){
 }
 
 void Player::stopFeed(){
-	mFeederRun = false;
-	if(mThread->joinable()) mThread->join();
-	else mThread.reset();
+    if(mFeederRun){
+        mFeederRun = false;
+        if(mThread->joinable()) mThread->join();
+        else mThread.reset();
+    }
 	return;
 }
 

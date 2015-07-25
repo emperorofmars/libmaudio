@@ -20,7 +20,7 @@ AudioBuffer Resampler::get(unsigned long pos, unsigned int length) noexcept{
 	if(NumInputs() > 0){
 		unsigned int imputSamplerate = getInfoFromSlot(0).Samplerate;
 		double multiplier = (double)imputSamplerate / (double)mOutputSamplerate;
-		AudioBuffer tmp = getFromSlot(pos * multiplier, length * multiplier, 0);
+		AudioBuffer tmp = getFromSlot(pos * multiplier, length * multiplier + 1, 0);
 
 		for(unsigned int i = 0; i < length; i++){
             ret.set(i, tmp.get(i * multiplier));

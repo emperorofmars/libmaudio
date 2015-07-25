@@ -27,7 +27,6 @@ public:
 	virtual void set(unsigned long pos, const Sample &data);
 
 	virtual void resize(unsigned long samples);
-	virtual void setInfo(const AudioInfo &info);
 	virtual AudioInfo getInfo() const;
 
 private:

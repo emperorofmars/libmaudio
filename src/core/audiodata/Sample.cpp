@@ -25,8 +25,8 @@ Sample::Sample(const Sample &data){
 Sample::~Sample(){
 }
 
-const float& Sample::operator[](unsigned int pos) const{
-	if(pos >= mData.size()) throw ChannelsException();
+const float Sample::operator[](unsigned int pos) const{
+	if(pos >= mData.size()) return 0;
 	return mData[pos];
 }
 
@@ -36,12 +36,12 @@ void Sample::operator=(const Sample &data){
 }
 
 float Sample::get(unsigned int pos) const{
-	if(pos >= mData.size()) throw ChannelsException();
+	if(pos >= mData.size()) return 0;
 	return mData[pos];
 }
 
 void Sample::set(unsigned int pos, float data){
-	if(pos >= mData.size()) throw ChannelsException();
+	if(pos >= mData.size()) return;
 	mData[pos] = data;
 }
 

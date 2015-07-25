@@ -28,7 +28,7 @@ void TerminalPrinter::print(unsigned long pos){
 		return;
 	}
 	for(unsigned int i = 0; i < getInfoFromSlot(0).Channels; i++){
-		std::cout << getFromSlot(pos, 0).get(i) << " ";
+		std::cout << getFromSlot(pos, 1, 0).get(0).get(i) << " ";
 	}
 	std::cout << std::endl;
 	return;

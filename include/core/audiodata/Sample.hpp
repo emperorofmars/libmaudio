@@ -19,7 +19,7 @@ public:
 	Sample(const Sample &data);
 	~Sample();
 
-	const float& operator[](unsigned int pos) const;
+	const float operator[](unsigned int pos) const;
 	void operator=(const Sample &data);
 	float get(unsigned int pos) const;
 	void set(unsigned int pos, float data);

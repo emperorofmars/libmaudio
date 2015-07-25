@@ -16,7 +16,7 @@ public:
 	SinusGenerator();
 	virtual ~SinusGenerator();
 
-    virtual Sample get(unsigned long pos) noexcept;
+    virtual AudioBuffer get(unsigned long pos, unsigned int length) noexcept;
     virtual AudioInfo getInfo() noexcept;
     virtual bool checkIfCompatible(std::shared_ptr<Node> node, int slot = -1);
 

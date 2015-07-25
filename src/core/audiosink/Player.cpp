@@ -131,15 +131,10 @@ void Player::feed(){
 	if(NumInputs() == 0) return;
 
 	for(unsigned int i = 0; i < mQueueSize - mQueue->size(); i++){
-		try{
-			mQueue->push(getFromSlot(mPosition, 0));
+		AudioBuffer tmp = getFromSlot(mPosition, mQueueSize - mQueue->size(), 0);
+		for(unsigned int j = 0; j < tmp.getInfo().Samples; j++){
+			mQueue->push(tmp.get(j));
 			mPosition++;
-		}
-		catch(std::exception &e){
-			//std::cerr << "feed error: " << e.what() << std::endl;
-		}
-		catch(...){
-			//std::cerr << "feed error" << std::endl;
 		}
 	}
 	return;

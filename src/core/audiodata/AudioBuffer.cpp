@@ -34,7 +34,6 @@ AudioBuffer::~AudioBuffer(){
 }
 
 Sample AudioBuffer::operator[](unsigned long pos) const{
-	if(pos >= mData.size() + mInfo.Offset || pos < mInfo.Offset) throw OutOfBoundsException();
 	return createSample(pos);
 }
 
@@ -44,15 +43,14 @@ void AudioBuffer::operator=(const AudioBuffer &data){
 }
 
 Sample AudioBuffer::get(unsigned long pos) const{
-	if(pos >= mData.size() + mInfo.Offset || pos < mInfo.Offset) throw OutOfBoundsException();
 	return createSample(pos);
 }
 
 void AudioBuffer::set(unsigned long pos, const Sample &data){
-	if(pos >= mData.size() + mInfo.Offset || pos < mInfo.Offset) throw OutOfBoundsException();
-	if(data.getChannels() != mInfo.Channels) throw ChannelsException();
+	if(pos >= mData.size()) return;
+	if(data.getChannels() != mInfo.Channels) return;
 	for(unsigned int i = 0; i < mInfo.Channels; i++){
-		mData[(pos - mInfo.Offset) * mInfo.Channels + i] = data[i];
+		mData[pos * mInfo.Channels + i] = data.get(i);
 	}
 	return;
 }
@@ -61,17 +59,13 @@ void AudioBuffer::resize(unsigned long samples){
 	mData.resize(samples * mInfo.Channels);
 }
 
-void AudioBuffer::setInfo(const AudioInfo &info){
-	if(info.Channels != mInfo.Channels) throw ChannelsException();
-	mInfo = info;
-}
-
 AudioInfo AudioBuffer::getInfo() const{
 	return mInfo;
 }
 
 Sample AudioBuffer::createSample(unsigned long pos) const{
-    return Sample(std::vector<float>(mData.begin() + (pos - mInfo.Offset) * mInfo.Channels, mData.begin() + (pos + 1 - mInfo.Offset) * mInfo.Channels));
+	if(pos >= mData.size()) return Sample(mInfo.Channels);
+    return Sample(std::vector<float>(mData.begin() + (pos) * mInfo.Channels, mData.begin() + (pos + 1) * mInfo.Channels));
 }
 
 } // maudio

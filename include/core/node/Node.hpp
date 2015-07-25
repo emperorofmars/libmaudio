@@ -9,6 +9,7 @@
 
 #include "core/util/UniqueID.hpp"
 #include "core/audiodata/Sample.hpp"
+#include "core/audiodata/AudioBuffer.hpp"
 #include "core/audiodata/AudioInfo.hpp"
 #include <vector>
 #include <memory>
@@ -19,7 +20,7 @@ class Node : public std::enable_shared_from_this<Node>, public UniqueID{
 public:
 	virtual ~Node();
 
-	virtual Sample get(unsigned long pos) noexcept = 0;
+	virtual AudioBuffer get(unsigned long pos, unsigned int length) noexcept = 0;
 	virtual AudioInfo getInfo() noexcept = 0;
 
 	void addInput(std::shared_ptr<Node> node, int slot = -1);
@@ -33,7 +34,7 @@ public:
 	int unsigned NumOutputs() const;
 
 	bool checkInput(unsigned int slot) noexcept;
-	Sample getFromSlot(unsigned long pos, unsigned int slot) noexcept;
+	AudioBuffer getFromSlot(unsigned long pos, unsigned int length, unsigned int slot) noexcept;
 	AudioInfo getInfoFromSlot(unsigned int slot) noexcept;
 
 	virtual int MaxInputs() const = 0;

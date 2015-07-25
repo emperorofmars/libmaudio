@@ -103,11 +103,11 @@ bool Node::checkInput(unsigned int slot) noexcept{
 	return false;
 }
 
-Sample Node::getFromSlot(unsigned long pos, unsigned int slot) noexcept{
+AudioBuffer Node::getFromSlot(unsigned long pos, unsigned int length, unsigned int slot) noexcept{
 	if(slot < mInputs.size() && mInputs[slot]){
-		return mInputs[slot]->get(pos);
+		return mInputs[slot]->get(pos, length);
 	}
-	return Sample(getInfo().Channels);
+	return AudioBuffer(getInfo().Channels);
 }
 
 AudioInfo Node::getInfoFromSlot(unsigned int slot) noexcept{

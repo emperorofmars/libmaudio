@@ -24,10 +24,13 @@ SinusGenerator::SinusGenerator(){
 SinusGenerator::~SinusGenerator(){
 }
 
-Sample SinusGenerator::get(unsigned long pos) noexcept{
-	Sample ret(mAudioInfo.Channels);
-	float index = pos;
-	ret.set(0, sin(mFreq * index * (2 * M_PI) / mAudioInfo.Samplerate));
+AudioBuffer SinusGenerator::get(unsigned long pos, unsigned int length) noexcept{
+	AudioBuffer ret(mAudioInfo.Channels, length, pos, mAudioInfo.Samplerate);
+	for(unsigned int i = 0; i < length; i++){
+		Sample ret(mAudioInfo.Channels);
+		float index = pos;
+		ret.set(0, sin(mFreq * index * (2 * M_PI) / mAudioInfo.Samplerate));
+	}
 	return ret;
 }
 

@@ -55,20 +55,7 @@ int main(int argc, char *argv[]){
 		printer->print(i);
 	}
 */
-/*
-	std::shared_ptr<SinusGenerator> src(new SinusGenerator());
-	src->setFrequency(3000);
-	std::shared_ptr<Node> cpy = src.get()->shared_from_this();
-	src.reset();
 
-	std::shared_ptr<TerminalPrinter> dst(new TerminalPrinter());
-
-	dst->addInput(cpy);
-
-	for(unsigned int i = 0; i < 50; i++){
-		dst->print(i);
-	}
-*/
 	std::cerr << "closing main" << std::endl;
 	return 0;
 }

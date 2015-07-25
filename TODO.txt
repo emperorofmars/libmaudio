@@ -1,11 +1,12 @@
 
 Todo:
 - rethink sample and buffer
-- node: get function to return buffer
 - buffer: copy constructur and assign to copy dynamic content
+- node: get function to return buffer
 - create keyable properties
 - node: get keyable properties in one structure
 - node: make api stable
+- move player, filereader and writer from core to extended
 - write cmakelists
 - write tests
 - create channel converter

@@ -18,19 +18,20 @@ class AudioBuffer{
 public:
 	AudioBuffer(AudioInfo info);
 	AudioBuffer(unsigned int channels = 1, unsigned long samples = 0, unsigned long offset = 0, unsigned int samplerate = 44100);
+	AudioBuffer(const AudioBuffer &data);
 	virtual ~AudioBuffer();
 
-	virtual Sample operator[](unsigned long pos);
-	virtual void operator=(AudioBuffer &data);
-	virtual Sample get(unsigned long pos);
-	virtual void set(unsigned long pos, Sample &data);
+	virtual Sample operator[](unsigned long pos) const;
+	virtual void operator=(const AudioBuffer &data);
+	virtual Sample get(unsigned long pos) const;
+	virtual void set(unsigned long pos, const Sample &data);
 
 	virtual void resize(unsigned long samples);
 	virtual void setInfo(const AudioInfo &info);
-	virtual const AudioInfo getInfo();
+	virtual AudioInfo getInfo() const;
 
 private:
-	Sample createSample(unsigned long pos);
+	Sample createSample(unsigned long pos) const;
 
 	std::vector<float> mData;
 	AudioInfo mInfo;

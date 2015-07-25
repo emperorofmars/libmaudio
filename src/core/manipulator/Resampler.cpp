@@ -15,12 +15,16 @@ Resampler::Resampler(unsigned int samplerate){
 Resampler::~Resampler(){
 }
 
-Sample Resampler::get(unsigned long pos) noexcept{
-	Sample ret(getInfo().Channels);
+AudioBuffer Resampler::get(unsigned long pos, unsigned int length) noexcept{
+	AudioBuffer ret(getInfo().Channels, length, pos, getInfo().Samplerate);
 	if(NumInputs() > 0){
 		unsigned int imputSamplerate = getInfoFromSlot(0).Samplerate;
-		unsigned long realPos = (double)pos * ((double)imputSamplerate / (double)mOutputSamplerate);
-		ret = getFromSlot(realPos, 0);
+		double multiplier = (double)imputSamplerate / (double)mOutputSamplerate;
+		AudioBuffer tmp = getFromSlot(pos * multiplier, length * multiplier, 0);
+
+		for(unsigned int i = 0; i < length; i++){
+            ret.set(i, tmp.get(i * multiplier));
+		}
 	}
 	return ret;
 }

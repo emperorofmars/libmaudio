@@ -15,7 +15,7 @@ class Mixer : public BaseManipulator{
 public:
 	virtual ~Mixer();
 
-	virtual Sample get(unsigned long pos) noexcept;
+	virtual AudioBuffer get(unsigned long pos, unsigned int length) noexcept;
 	virtual AudioInfo getInfo() noexcept;
 	virtual int MaxInputs() const;
 	virtual bool checkIfCompatible(std::shared_ptr<Node> node, int slot = -1);

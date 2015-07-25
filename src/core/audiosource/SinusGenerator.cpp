@@ -27,9 +27,12 @@ SinusGenerator::~SinusGenerator(){
 AudioBuffer SinusGenerator::get(unsigned long pos, unsigned int length) noexcept{
 	AudioBuffer ret(mAudioInfo.Channels, length, pos, mAudioInfo.Samplerate);
 	for(unsigned int i = 0; i < length; i++){
-		Sample ret(mAudioInfo.Channels);
-		float index = pos;
-		ret.set(0, sin(mFreq * index * (2 * M_PI) / mAudioInfo.Samplerate));
+		Sample tmp(mAudioInfo.Channels);
+		float index = pos + i;
+		for(unsigned int j = 0; j < mAudioInfo.Channels; j++){
+            tmp.set(j, sin(mFreq * index * (2 * M_PI) / mAudioInfo.Samplerate));
+		}
+		ret.set(i, tmp);
 	}
 	return ret;
 }

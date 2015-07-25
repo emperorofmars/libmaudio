@@ -12,8 +12,8 @@ namespace maudio{
 BaseAudioSink::~BaseAudioSink(){
 }
 
-Sample BaseAudioSink::get(unsigned long pos) noexcept{
-	throw BadOutputException();
+AudioBuffer BaseAudioSink::get(unsigned long pos, unsigned int length) noexcept{
+	return AudioBuffer();
 }
 
 AudioInfo BaseAudioSink::getInfo() noexcept{

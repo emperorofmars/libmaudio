@@ -89,6 +89,22 @@ Sample Sample::operator/(const Sample &data){
 	return ret;
 }
 
+Sample Sample::operator*(float data){
+	Sample ret(*this);
+    for(unsigned int i = 0; i < getChannels(); i++){
+        ret.set(i, ret[i] * data);
+    }
+	return ret;
+}
+
+Sample Sample::operator/(float data){
+	Sample ret(*this);
+    for(unsigned int i = 0; i < getChannels(); i++){
+        ret.set(i, ret[i] / data);
+    }
+	return ret;
+}
+
 void Sample::operator+=(const Sample &data){
 	if(getChannels() == data.getChannels()){
 		for(unsigned int i = 0; i < getChannels(); i++){
@@ -122,6 +138,20 @@ void Sample::operator/=(const Sample &data){
 			if(data[i] != 0) mData[i] /= data[i];
 		}
 	}
+	return;
+}
+
+void Sample::operator*=(float data){
+    for(unsigned int i = 0; i < getChannels(); i++){
+        mData[i] *= data;
+    }
+	return;
+}
+
+void Sample::operator/=(float data){
+    for(unsigned int i = 0; i < getChannels(); i++){
+        mData[i] /= data;
+    }
 	return;
 }
 

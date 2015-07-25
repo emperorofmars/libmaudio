@@ -6,7 +6,6 @@
 
 #include "core/node/Node.hpp"
 #include "core/util/AudioException.hpp"
-#include <iostream>
 
 namespace maudio{
 

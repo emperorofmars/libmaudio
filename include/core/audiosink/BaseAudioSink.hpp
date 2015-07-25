@@ -15,7 +15,7 @@ class BaseAudioSink : public Node{
 public:
 	virtual ~BaseAudioSink();
 
-	virtual Sample get(unsigned long pos) noexcept final;
+	virtual AudioBuffer get(unsigned long pos, unsigned int length) noexcept final;
 	virtual AudioInfo getInfo() noexcept;
     virtual int MaxInputs() const final;
     virtual bool HasOutputs() const final;

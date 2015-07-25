@@ -129,13 +129,14 @@ bool Player::playing(){
 void Player::feed(){
 	if(!mQueue) return;
 	if(NumInputs() == 0) return;
+	if(mQueueSize <= mQueue->size()) return;
 
 	for(unsigned int i = 0; i < mQueueSize - mQueue->size(); i++){
 		AudioBuffer tmp = getFromSlot(mPosition, mQueueSize - mQueue->size(), 0);
 		for(unsigned int j = 0; j < tmp.getInfo().Samples; j++){
 			mQueue->push(tmp.get(j));
-			mPosition++;
 		}
+		mPosition += tmp.getInfo().Samples;
 	}
 	return;
 }

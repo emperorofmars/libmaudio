@@ -41,6 +41,7 @@ int main(int argc, char *argv[]){
 	std::shared_ptr<Player> player(new Player());
 	player->addInput(mix);
 
+	std::cerr << "play" << std::endl;
 	player->play();
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	sinus3->setFrequency(1510);

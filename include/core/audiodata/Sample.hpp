@@ -30,10 +30,16 @@ public:
 	Sample operator*(const Sample &data);
 	Sample operator/(const Sample &data);
 
+	Sample operator*(float data);
+	Sample operator/(float data);
+
 	void operator+=(const Sample &data);
 	void operator-=(const Sample &data);
 	void operator*=(const Sample &data);
 	void operator/=(const Sample &data);
+
+	void operator*=(float data);
+	void operator/=(float data);
 
 private:
 	std::vector<float> mData; ///one value per channel

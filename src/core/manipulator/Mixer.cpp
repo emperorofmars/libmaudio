@@ -11,13 +11,16 @@ namespace maudio{
 Mixer::~Mixer(){
 }
 
-Sample Mixer::get(unsigned long pos) noexcept{
-	Sample ret(getInfo().Channels);
+AudioBuffer Mixer::get(unsigned long pos, unsigned int length) noexcept{
+	AudioBuffer ret(getInfo().Channels, length, pos, getInfo().Samplerate);
 	for(unsigned int i = 0; i < NumInputs(); i++){
-		ret += getFromSlot(pos, i);
+        AudioBuffer tmp = getFromSlot(pos, length, i);
+        for(unsigned int j = 0; j < length; j++){
+            ret.set(j, ret.get(j) + tmp.get(j));
+        }
 	}
-	for(unsigned int j = 0; j < getInfo().Channels; j++){
-		ret.set(j, ret.get(j) / ret.getChannels());
+	for(unsigned int j = 0; j < length; j++){
+		ret.set(j, ret.get(j) / getInfo().Channels);
 	}
 	return ret;
 }

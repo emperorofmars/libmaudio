@@ -33,7 +33,7 @@ public:
 	int unsigned NumOutputs() const;
 
 	bool checkInput(unsigned int slot) noexcept;
-	Sample getFromSlot(unsigned int slot, unsigned long pos) noexcept;
+	Sample getFromSlot(unsigned long pos, unsigned int slot) noexcept;
 	AudioInfo getInfoFromSlot(unsigned int slot) noexcept;
 
 	virtual int MaxInputs() const = 0;

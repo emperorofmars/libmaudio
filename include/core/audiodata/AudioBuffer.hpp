@@ -20,9 +20,9 @@ public:
 	AudioBuffer(unsigned int channels = 1, unsigned long samples = 0, unsigned long offset = 0, unsigned int samplerate = 44100);
 	virtual ~AudioBuffer();
 
-	virtual Sample& operator[](unsigned long pos);
+	virtual Sample operator[](unsigned long pos);
 	virtual void operator=(AudioBuffer &data);
-	virtual Sample* get(unsigned long pos);
+	virtual Sample get(unsigned long pos);
 	virtual void set(unsigned long pos, Sample &data);
 
 	virtual void resize(unsigned long samples);
@@ -30,7 +30,7 @@ public:
 	virtual const AudioInfo getInfo();
 
 private:
-	Sample* createSample(unsigned long pos);
+	Sample createSample(unsigned long pos);
 
 	std::vector<float> mData;
 	AudioInfo mInfo;

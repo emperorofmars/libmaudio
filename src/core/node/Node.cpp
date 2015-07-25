@@ -103,7 +103,7 @@ bool Node::checkInput(unsigned int slot) noexcept{
 	return false;
 }
 
-Sample Node::getFromSlot(unsigned int slot, unsigned long pos) noexcept{
+Sample Node::getFromSlot(unsigned long pos, unsigned int slot) noexcept{
 	if(slot < mInputs.size() && mInputs[slot]){
 		return mInputs[slot]->get(pos);
 	}

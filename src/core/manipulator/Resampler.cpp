@@ -20,7 +20,7 @@ Sample Resampler::get(unsigned long pos) noexcept{
 	if(NumInputs() > 0){
 		unsigned int imputSamplerate = getInfoFromSlot(0).Samplerate;
 		unsigned long realPos = (double)pos * ((double)imputSamplerate / (double)mOutputSamplerate);
-		ret = getFromSlot(0, realPos);
+		ret = getFromSlot(realPos, 0);
 	}
 	return ret;
 }

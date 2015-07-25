@@ -132,7 +132,7 @@ void Player::feed(){
 
 	for(unsigned int i = 0; i < mQueueSize - mQueue->size(); i++){
 		try{
-			mQueue->push(getFromSlot(0, mPosition));
+			mQueue->push(getFromSlot(mPosition, 0));
 			mPosition++;
 		}
 		catch(std::exception &e){

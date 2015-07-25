@@ -8,9 +8,9 @@
 #define MAUDIO_NODE
 
 #include "core/util/UniqueID.hpp"
-#include "core/audiodata/Sample.hpp"
 #include "core/audiodata/AudioBuffer.hpp"
 #include "core/audiodata/AudioInfo.hpp"
+#include "core/util/Config.hpp"
 #include <vector>
 #include <memory>
 
@@ -41,6 +41,8 @@ public:
 	virtual bool HasOutputs() const = 0;
 
 	virtual bool checkIfCompatible(std::shared_ptr<Node> node, int slot = -1) = 0;
+
+	virtual void readConfig(const Config &conf) = 0;
 
 private:
 	bool checkCycles(std::shared_ptr<Node> node);

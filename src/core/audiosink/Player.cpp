@@ -126,6 +126,10 @@ bool Player::playing(){
 	return false;
 }
 
+void Player::readConfig(const Config &conf){
+    return;
+}
+
 void Player::feed(){
 	if(!mQueue) return;
 	if(NumInputs() == 0) return;

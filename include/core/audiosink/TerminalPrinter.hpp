@@ -17,6 +17,7 @@ public:
 	virtual ~TerminalPrinter();
 
 	virtual AudioInfo getInfo() noexcept;
+	virtual void readConfig(const Config &conf);
 
 	void print(unsigned long pos);
 };

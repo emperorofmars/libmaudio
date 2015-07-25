@@ -20,6 +20,7 @@ public:
 	virtual AudioInfo getInfo() noexcept;
 	virtual int MaxInputs() const;
 	virtual bool checkIfCompatible(std::shared_ptr<Node> node, int slot = -1);
+	virtual void readConfig(const Config &conf);
 
 	virtual void setSampleRate(unsigned int samplerate);
 	virtual unsigned int getSampleRate();

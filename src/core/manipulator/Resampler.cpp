@@ -44,6 +44,10 @@ bool Resampler::checkIfCompatible(std::shared_ptr<Node> node, int slot){
 	return true;
 }
 
+void Resampler::readConfig(const Config &conf){
+    return;
+}
+
 void Resampler::setSampleRate(unsigned int samplerate){
 	mOutputSamplerate = samplerate;
 }

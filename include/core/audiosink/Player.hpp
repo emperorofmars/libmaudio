@@ -42,6 +42,8 @@ public:
 	bool getOpened();
 	bool playing();
 
+	virtual void readConfig(const Config &conf);
+
 private:
 	void feed();
 	void startFeed();

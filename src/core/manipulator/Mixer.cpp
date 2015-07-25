@@ -8,6 +8,9 @@
 
 namespace maudio{
 
+Mixer::Mixer(){
+}
+
 Mixer::~Mixer(){
 }
 
@@ -42,6 +45,10 @@ bool Mixer::checkIfCompatible(std::shared_ptr<Node> node, int slot){
 	if(getInfo().Channels != node->getInfo().Channels) return false;
 	if(getInfo().Samplerate != node->getInfo().Samplerate) return false;
 	return true;
+}
+
+void Mixer::readConfig(const Config &conf){
+    return;
 }
 
 } // maudio

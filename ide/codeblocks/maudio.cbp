@@ -59,6 +59,7 @@
 		<Unit filename="../../include/core/pluginmanager/PluginManager.hpp" />
 		<Unit filename="../../include/core/util/AudioException.hpp" />
 		<Unit filename="../../include/core/util/Config.hpp" />
+		<Unit filename="../../include/core/util/ConfigManager.hpp" />
 		<Unit filename="../../include/core/util/UniqueID.hpp" />
 		<Unit filename="../../src/core/audiodata/AudioBuffer.cpp" />
 		<Unit filename="../../src/core/audiodata/AudioQueue.cpp" />
@@ -80,6 +81,7 @@
 		<Unit filename="../../src/core/util/AudioDevice.cpp" />
 		<Unit filename="../../src/core/util/AudioDevice.hpp" />
 		<Unit filename="../../src/core/util/Config.cpp" />
+		<Unit filename="../../src/core/util/ConfigManager.cpp" />
 		<Unit filename="../../src/core/util/UniqueID.cpp" />
 		<Unit filename="../../src/examples/test1.cpp" />
 		<Extensions>

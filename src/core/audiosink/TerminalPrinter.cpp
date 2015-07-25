@@ -22,6 +22,10 @@ AudioInfo TerminalPrinter::getInfo() noexcept{
 	return ret;
 }
 
+void TerminalPrinter::readConfig(const Config &conf){
+    return;
+}
+
 void TerminalPrinter::print(unsigned long pos){
 	if(NumInputs() == 0){
 		std::cout << "invalid or no Input" << std::endl;

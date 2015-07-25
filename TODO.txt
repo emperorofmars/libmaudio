@@ -1,9 +1,11 @@
 
 Todo:
-- rethink sample and buffer
-- buffer: copy constructur and assign to copy dynamic content
-- node: get function to return buffer
-- node: get and read config
+- ////rethink sample and buffer
+- ////buffer: copy constructur and assign to copy dynamic content
+- ////node: get function to return buffer
+- think about Sample vs Buffer
+- implement config
+- node: read config
 - create keyable properties
 - node: get keyable properties in one structure
 - node: make api stable

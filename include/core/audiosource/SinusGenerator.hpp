@@ -19,6 +19,7 @@ public:
     virtual AudioBuffer get(unsigned long pos, unsigned int length) noexcept;
     virtual AudioInfo getInfo() noexcept;
     virtual bool checkIfCompatible(std::shared_ptr<Node> node, int slot = -1);
+	virtual void readConfig(const Config &conf);
 
 	virtual void setFrequency(float freq);
 	virtual void setSamplerate(unsigned int samplerate);

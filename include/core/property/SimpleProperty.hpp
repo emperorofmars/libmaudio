@@ -8,7 +8,9 @@
 #define MAUDIO_SIMPLEPROPERTY
 
 #include "core/property/Property.hpp"
+#include "core/util/Util.hpp"
 #include <vector>
+#include <limits>
 
 namespace maudio{
 
@@ -48,6 +50,8 @@ SimpleProperty<T>::SimpleProperty(const std::string &name, T value)
 	:Property(name)
 {
 	set(value);
+	mBottomBound = std::numeric_limits<T>::min();
+	mUpperBound = std::numeric_limits<T>::max();
 }
 
 template<typename T>
@@ -55,8 +59,21 @@ SimpleProperty<T>::~SimpleProperty(){
 }
 
 template<typename T>
+std::string SimpleProperty<T>::getString() const{
+	return std::to_string(mValue);
+}
+
+template<typename T>
 T SimpleProperty<T>::get() const{
 	return mValue;
+}
+
+template<typename T>
+void SimpleProperty<T>::set(const std::string &value){
+	try{set(string_to<T>(value));}
+	catch(std::exception &e){
+	}
+	return;
 }
 
 template<typename T>
@@ -67,14 +84,15 @@ void SimpleProperty<T>::set(const char *value){
 
 template<typename T>
 void SimpleProperty<T>::set(T value){
-	if(value >= mBottomBound && value <= mUpperBound){
-		mValue = value;
-	}
+	if(value < mBottomBound) mValue = mBottomBound;
+	else if(value > mUpperBound) mValue = mUpperBound;
+	else mValue = value;
 	return;
 }
 
 template<typename T>
 void SimpleProperty<T>::setBounds(T bottom, T upper){
+	if(bottom >= upper) return;
 	mBottomBound = bottom;
 	mUpperBound = upper;
 	return;

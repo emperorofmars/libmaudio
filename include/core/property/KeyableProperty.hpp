@@ -19,9 +19,12 @@ public:
 
     virtual std::string getString(long double pos) const = 0;
     virtual std::string getKeyString(unsigned int keynum) const = 0;
-    virtual unsigned int getNumKeys() = 0;
-    virtual void set(const std::string &value, long double pos) = 0;
-	virtual void set(const char *value, long double pos) = 0;
+    virtual unsigned int getNumKeys() const = 0;
+    virtual void addKey(const std::string &value, long double pos) = 0;
+    virtual void setKey(const std::string &value, unsigned int keynum) = 0;
+    virtual void removeKey(unsigned int keynum) = 0;
+    virtual void addKey(const char *value, long double pos) = 0;
+    virtual void setKey(const char *value, unsigned int keynum) = 0;
 
     std::string getName() const;
 	virtual std::vector<std::string> getBoundsString() const = 0;

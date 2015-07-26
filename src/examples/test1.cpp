@@ -16,6 +16,7 @@
 #include "core/manipulator/Resampler.hpp"
 #include "core/audiosink/Performance.hpp"
 #include "core/property/SimpleProperty.hpp"
+#include "core/util/Util.hpp"
 
 using namespace maudio;
 
@@ -64,6 +65,8 @@ int main(int argc, char *argv[]){
     std::cerr << fp.getName() << " " << fp.get() << " " << fp.getString() << std::endl;
     fp.set("34.9");
     std::cerr << fp.getName() << " " << fp.get() << " " << fp.getString() << std::endl;
+
+    std::cerr << string_to<long double>("560.45") << std::endl;
 
 /*
 	std::shared_ptr<Performance> perf(new Performance());

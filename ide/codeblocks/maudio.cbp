@@ -44,13 +44,10 @@
 		<Unit filename="../../include/core/audiodata/FileInfo.hpp" />
 		<Unit filename="../../include/core/audiodata/Sample.hpp" />
 		<Unit filename="../../include/core/audiosink/BaseAudioSink.hpp" />
-		<Unit filename="../../include/core/audiosink/FileWriter.hpp" />
 		<Unit filename="../../include/core/audiosink/Performance.hpp" />
 		<Unit filename="../../include/core/audiosink/TerminalPrinter.hpp" />
 		<Unit filename="../../include/core/audiosource/BaseAudioSource.hpp" />
-		<Unit filename="../../include/core/audiosource/BulkReader.hpp" />
 		<Unit filename="../../include/core/audiosource/SinusGenerator.hpp" />
-		<Unit filename="../../include/core/audiosource/StreamReader.hpp" />
 		<Unit filename="../../include/core/manipulator/BaseManipulator.hpp" />
 		<Unit filename="../../include/core/manipulator/Mixer.hpp" />
 		<Unit filename="../../include/core/manipulator/Resampler.hpp" />
@@ -65,18 +62,18 @@
 		<Unit filename="../../include/core/util/Config.hpp" />
 		<Unit filename="../../include/core/util/ConfigManager.hpp" />
 		<Unit filename="../../include/core/util/UniqueID.hpp" />
+		<Unit filename="../../include/extended/audiosink/FileWriter.hpp" />
 		<Unit filename="../../include/extended/audiosink/Player.hpp" />
+		<Unit filename="../../include/extended/audiosource/BulkReader.hpp" />
+		<Unit filename="../../include/extended/audiosource/StreamReader.hpp" />
 		<Unit filename="../../src/core/audiodata/AudioBuffer.cpp" />
 		<Unit filename="../../src/core/audiodata/AudioQueue.cpp" />
 		<Unit filename="../../src/core/audiodata/Sample.cpp" />
 		<Unit filename="../../src/core/audiosink/BaseAudioSink.cpp" />
-		<Unit filename="../../src/core/audiosink/FileWriter.cpp" />
 		<Unit filename="../../src/core/audiosink/Performance.cpp" />
 		<Unit filename="../../src/core/audiosink/TerminalPrinter.cpp" />
 		<Unit filename="../../src/core/audiosource/BaseAudioSource.cpp" />
-		<Unit filename="../../src/core/audiosource/BulkReader.cpp" />
 		<Unit filename="../../src/core/audiosource/SinusGenerator.cpp" />
-		<Unit filename="../../src/core/audiosource/StreamReader.cpp" />
 		<Unit filename="../../src/core/manipulator/BaseManipulator.cpp" />
 		<Unit filename="../../src/core/manipulator/Mixer.cpp" />
 		<Unit filename="../../src/core/manipulator/Resampler.cpp" />
@@ -91,7 +88,10 @@
 		<Unit filename="../../src/core/util/ConfigManager.cpp" />
 		<Unit filename="../../src/core/util/UniqueID.cpp" />
 		<Unit filename="../../src/examples/test1.cpp" />
+		<Unit filename="../../src/extended/audiosink/FileWriter.cpp" />
 		<Unit filename="../../src/extended/audiosink/Player.cpp" />
+		<Unit filename="../../src/extended/audiosource/BulkReader.cpp" />
+		<Unit filename="../../src/extended/audiosource/StreamReader.cpp" />
 		<Unit filename="../../src/extended/util/AudioDevice.cpp" />
 		<Unit filename="../../src/extended/util/AudioDevice.hpp" />
 		<Extensions>

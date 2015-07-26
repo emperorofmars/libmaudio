@@ -7,6 +7,7 @@ Todo:
 - ////create profiler audio sink for measuring Sample vs Buffer
 - ////node: onAdd, onRemove to handle input changes in inherited classes
 - ////node: inline
+- ////move player, filereader and writer from core to extended
 - create keyable and non keyable properties
 - node: get keyable properties in one structure
 - implement config
@@ -14,7 +15,6 @@ Todo:
 - node: make api stable
 - save and reload scene
 - export scene to svg
-- move player, filereader and writer from core to extended
 - write cmakelists
 - write tests
 - create channel converter

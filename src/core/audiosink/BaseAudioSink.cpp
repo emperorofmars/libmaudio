@@ -34,6 +34,14 @@ bool BaseAudioSink::checkIfCompatible(std::shared_ptr<Node> node, int slot){
 	return true;
 }
 
+void BaseAudioSink::onAdd(unsigned int slot){
+	return;
+}
+
+void BaseAudioSink::onRemove(unsigned int slot){
+	return;
+}
+
 } // maudio
 
 

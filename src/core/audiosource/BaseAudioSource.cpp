@@ -19,6 +19,14 @@ bool BaseAudioSource::HasOutputs() const{
 	return true;
 }
 
+void BaseAudioSource::onAdd(unsigned int slot){
+	return;
+}
+
+void BaseAudioSource::onRemove(unsigned int slot){
+	return;
+}
+
 } // maudio
 
 

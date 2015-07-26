@@ -16,14 +16,16 @@ Mixer::~Mixer(){
 
 AudioBuffer Mixer::get(unsigned long pos, unsigned int length) noexcept{
 	AudioBuffer ret(getInfo().Channels, length, pos, getInfo().Samplerate);
-	for(unsigned int i = 0; i < NumInputs(); i++){
-        AudioBuffer tmp = getFromSlot(pos, length, i);
-        for(unsigned int j = 0; j < length; j++){
-            ret.set(j, ret.get(j) + tmp.get(j));
-        }
-	}
-	for(unsigned int j = 0; j < length; j++){
-		ret.set(j, ret.get(j) / getInfo().Channels);
+	if(NumInputs() > 0){
+		for(unsigned int i = 0; i < NumInputs(); i++){
+			AudioBuffer tmp = getFromSlot(pos, length, i);
+			for(unsigned int j = 0; j < length; j++){
+				ret.set(j, ret.get(j) + tmp.get(j));
+			}
+		}
+		for(unsigned int j = 0; j < length; j++){
+			ret.set(j, ret.get(j) / NumInputs());
+		}
 	}
 	return ret;
 }

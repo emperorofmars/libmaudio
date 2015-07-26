@@ -18,6 +18,9 @@ public:
 
     virtual int MaxInputs() const final;
     virtual bool HasOutputs() const final;
+
+	virtual void onAdd(unsigned int slot);
+	virtual void onRemove(unsigned int slot);
 };
 
 } // maudio

@@ -34,16 +34,21 @@ public:
 	int unsigned NumInputs() const;
 	int unsigned NumOutputs() const;
 
-	bool checkInput(unsigned int slot) noexcept;
-	AudioBuffer getFromSlot(unsigned long pos, unsigned int length, unsigned int slot) noexcept;
-	AudioInfo getInfoFromSlot(unsigned int slot) noexcept;
-
 	virtual int MaxInputs() const = 0;
 	virtual bool HasOutputs() const = 0;
 
 	virtual bool checkIfCompatible(std::shared_ptr<Node> node, int slot = -1) = 0;
 
 	virtual void readConfig(const Config &conf) = 0;
+
+protected:
+	AudioBuffer getFromSlot(unsigned long pos, unsigned int length, unsigned int slot) noexcept;
+	AudioInfo getInfoFromSlot(unsigned int slot) noexcept;
+
+	bool checkInput(unsigned int slot) noexcept;
+
+	virtual void onAdd(unsigned int slot) = 0;
+	virtual void onRemove(unsigned int slot) = 0;
 
 private:
 	bool checkCycles(std::shared_ptr<Node> node);

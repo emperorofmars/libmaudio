@@ -15,6 +15,14 @@ bool BaseManipulator::HasOutputs() const{
 	return true;
 }
 
+void BaseManipulator::onAdd(unsigned int slot){
+	return;
+}
+
+void BaseManipulator::onRemove(unsigned int slot){
+	return;
+}
+
 } // maudio
 
 

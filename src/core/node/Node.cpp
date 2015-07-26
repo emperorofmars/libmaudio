@@ -32,6 +32,8 @@ void Node::addInput(std::shared_ptr<Node> node, int slot){
 		mInputs[slot] = node;
 	}
 	node->mOutputs.push_back(shared_from_this());
+
+	onAdd(slot);
 	return;
 }
 
@@ -54,6 +56,7 @@ void Node::removeInput(int slot){
 		}
 		mInputs.erase(mInputs.begin() + slot);
 	}
+	onRemove(slot);
 	return;
 }
 

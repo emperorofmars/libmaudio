@@ -10,6 +10,7 @@
 #include "core/util/UniqueID.hpp"
 #include "core/audiodata/AudioBuffer.hpp"
 #include "core/audiodata/AudioInfo.hpp"
+#include "core/property/Property.hpp"
 #include "core/util/Config.hpp"
 #include <vector>
 #include <memory>

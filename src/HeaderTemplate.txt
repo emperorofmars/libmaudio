@@ -1,0 +1,22 @@
+/*
+ * Project Maudio
+ * Copyright (C) 2015 Martin Schwarz
+ * See LICENSE.txt for the full license
+ */
+
+#ifndef MAUDIO_HEADER
+#define MAUDIO_HEADER
+
+#include "stuff.hpp"
+
+namespace maudio{
+
+
+
+} // maudio
+
+#endif // MAUDIO_HEADER
+
+
+
+

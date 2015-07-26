@@ -15,6 +15,7 @@
 #include "core/manipulator/Mixer.hpp"
 #include "core/manipulator/Resampler.hpp"
 #include "core/audiosink/Performance.hpp"
+#include "core/property/BaseProperty.hpp"
 
 using namespace maudio;
 
@@ -51,15 +52,33 @@ int main(int argc, char *argv[]){
 	std::cerr << "stop" << std::endl;
 	player->stop();
 */
+/*
+    IntProperty p("test", 1);
+    p.set(5);
+    std::cerr << p.getName() << " " << p.get() << std::endl;
+*/
+	BoolProperty p("test", false);
+    p.set(false);
+    std::cerr << p.getName() << " " << p.get() << " " << p.getString() << std::endl;
+    p.set("true");
+    std::cerr << p.getName() << " " << p.get() << " " << p.getString() << std::endl;
 
+	FloatProperty fp("test", false);
+    fp.set(5.68);
+    std::cerr << fp.getName() << " " << fp.get() << " " << fp.getString() << std::endl;
+    fp.set("34.9");
+    std::cerr << fp.getName() << " " << fp.get() << " " << fp.getString() << std::endl;
+/*
 	std::shared_ptr<Performance> perf(new Performance());
 	perf->addInput(mix);
 
 	perf->measure(44100 * 60, 1024 * 10);
 	perf->measure(44100 * 60, 1024);
 	perf->measure(44100 * 60, 12);
+	perf->measure(44100 * 60, 6);
+	perf->measure(44100 * 60, 3);
 	perf->measure(44100 * 60, 1);
-
+*/
 /*
 	std::shared_ptr<TerminalPrinter> printer(new TerminalPrinter());
 	printer->addInput(mix);

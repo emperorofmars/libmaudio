@@ -58,6 +58,9 @@
 		<Unit filename="../../include/core/node/Node.hpp" />
 		<Unit filename="../../include/core/node/Scene.hpp" />
 		<Unit filename="../../include/core/pluginmanager/PluginManager.hpp" />
+		<Unit filename="../../include/core/property/BaseProperty.hpp" />
+		<Unit filename="../../include/core/property/Property.hpp" />
+		<Unit filename="../../include/core/property/PropertyManager.hpp" />
 		<Unit filename="../../include/core/util/AudioException.hpp" />
 		<Unit filename="../../include/core/util/Config.hpp" />
 		<Unit filename="../../include/core/util/ConfigManager.hpp" />
@@ -80,6 +83,9 @@
 		<Unit filename="../../src/core/node/Node.cpp" />
 		<Unit filename="../../src/core/node/Scene.cpp" />
 		<Unit filename="../../src/core/pluginmanager/PluginManager.cpp" />
+		<Unit filename="../../src/core/property/BaseProperty.cpp" />
+		<Unit filename="../../src/core/property/Property.cpp" />
+		<Unit filename="../../src/core/property/PropertyManager.cpp" />
 		<Unit filename="../../src/core/util/AudioDevice.cpp" />
 		<Unit filename="../../src/core/util/AudioDevice.hpp" />
 		<Unit filename="../../src/core/util/Config.cpp" />

@@ -8,6 +8,7 @@
 #define MAUDIO_SIMPLEPROPERTY
 
 #include "core/property/Property.hpp"
+#include <vector>
 
 namespace maudio{
 
@@ -23,10 +24,14 @@ public:
 	virtual void set(const char *value);
 	virtual void set(T value);
 
-	virtual std::string getBounds() const;
+	virtual void setBounds(T bottom, T upper);
+	virtual std::vector<std::string> getBoundsString() const;
+	virtual std::vector<T> getBounds() const;
 
 private:
 	T mValue;
+	T mBottomBound;
+	T mUpperBound;
 };
 
 typedef SimpleProperty<bool> BoolProperty;
@@ -62,13 +67,27 @@ void SimpleProperty<T>::set(const char *value){
 
 template<typename T>
 void SimpleProperty<T>::set(T value){
-	mValue = value;
+	if(value >= mBottomBound && value <= mUpperBound){
+		mValue = value;
+	}
 	return;
 }
 
 template<typename T>
-std::string SimpleProperty<T>::getBounds() const{
-	return "none";
+void SimpleProperty<T>::setBounds(T bottom, T upper){
+	mBottomBound = bottom;
+	mUpperBound = upper;
+	return;
+}
+
+template<typename T>
+std::vector<std::string> SimpleProperty<T>::getBoundsString() const{
+	return std::vector<std::string>{std::to_string(mBottomBound), std::to_string(mUpperBound)};
+}
+
+template<typename T>
+std::vector<T> SimpleProperty<T>::getBounds() const{
+	return std::vector<T>{mBottomBound, mUpperBound};
 }
 
 } // maudio

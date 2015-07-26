@@ -8,6 +8,7 @@
 #define MAUDIO_PROPERTY
 
 #include <string>
+#include <vector>
 
 namespace maudio{
 
@@ -21,7 +22,7 @@ public:
 	virtual void set(const char *value) = 0;
 
     std::string getName() const;
-	virtual std::string getBounds() const = 0;
+	virtual std::vector<std::string> getBoundsString() const = 0;
 
 private:
     std::string mName;

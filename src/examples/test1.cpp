@@ -64,6 +64,7 @@ int main(int argc, char *argv[]){
     std::cerr << fp.getName() << " " << fp.get() << " " << fp.getString() << std::endl;
     fp.set("34.9");
     std::cerr << fp.getName() << " " << fp.get() << " " << fp.getString() << std::endl;
+
 /*
 	std::shared_ptr<Performance> perf(new Performance());
 	perf->addInput(mix);

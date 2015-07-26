@@ -14,6 +14,8 @@
 #include <map>
 #include <cmath>
 
+#include <iostream>
+
 namespace maudio{
 
 template<typename T>
@@ -25,7 +27,7 @@ public:
     virtual std::string getString(long double pos) const;
     virtual T get(long double pos) const;
     virtual std::string getKeyString(unsigned int keynum) const;
-    virtual T get(unsigned int keynum) const;
+    virtual T getKey(unsigned int keynum) const;
     virtual unsigned int getNumKeys() const;
     virtual void addKey(const std::string &value, long double pos);
     virtual void addKey(T value, long double pos);
@@ -40,10 +42,11 @@ public:
 	virtual std::vector<T> getBounds() const;
 
 private:
-	unsigned int getClosest(long double pos);
+	T getElement(unsigned int pos) const;
+	T interpolate(long double pos) const;
 
     std::string mName;
-    std::map<std::string, T> mValues;
+    std::map<long double, T> mValues;
 	T mBottomBound;
 	T mUpperBound;
 };
@@ -61,9 +64,9 @@ template<typename T>
 SimpleKeyableProperty<T>::SimpleKeyableProperty(const std::string &name, T value)
 	:KeyableProperty(name)
 {
-	set(value, 0);
 	mBottomBound = std::numeric_limits<T>::min();
 	mUpperBound = std::numeric_limits<T>::max();
+	addKey(value, 0);
 }
 
 template<typename T>
@@ -72,23 +75,22 @@ SimpleKeyableProperty<T>::~SimpleKeyableProperty(){
 
 template<typename T>
 std::string SimpleKeyableProperty<T>::getString(long double pos) const{
-	return std::to_string(mValues[getClosest(pos)]);
+	return std::to_string(interpolate(pos));
 }
 
 template<typename T>
 T SimpleKeyableProperty<T>::get(long double pos) const{
-	//TODO: interpolate
-	return mValues[getClosest(pos)];
+	return interpolate(pos);
 }
 
 template<typename T>
 std::string SimpleKeyableProperty<T>::getKeyString(unsigned int keynum) const{
-	return std::to_string(mValues.begin() + keynum);
+	return std::to_string(getKey(keynum));
 }
 
 template<typename T>
-T SimpleKeyableProperty<T>::get(unsigned int keynum) const{
-	return mValues[mValues.begin() + keynum];
+T SimpleKeyableProperty<T>::getKey(unsigned int keynum) const{
+	return getElement(keynum);
 }
 
 template<typename T>
@@ -108,8 +110,8 @@ void SimpleKeyableProperty<T>::addKey(const std::string &value, long double pos)
 
 template<typename T>
 void SimpleKeyableProperty<T>::addKey(T value, long double pos){
-	if(value < mBottomBound) value = mBottomBound;
-	else if(value > mUpperBound) value = mUpperBound;
+	if(value <= mBottomBound) value = mBottomBound;
+	else if(value >= mUpperBound) value = mUpperBound;
 	mValues[pos] = value;
 	return;
 }
@@ -136,7 +138,8 @@ void SimpleKeyableProperty<T>::setKey(T value, unsigned int keynum){
 	if(value < mBottomBound) value = mBottomBound;
 	else if(value > mUpperBound) value = mUpperBound;
 
-	auto iter = mValues.begin() + keynum;
+	auto iter = mValues.begin();
+	while(iter != mValues.end() && keynum > 0) iter++;
 	iter->second = value;
 	return;
 }
@@ -151,7 +154,10 @@ template<typename T>
 void SimpleKeyableProperty<T>::removeKey(unsigned int keynum){
 	if(mValues.size() <= 1) return;
 	if(keynum >= mValues.size()) return;
-	mValues.erase(mValues.begin() + keynum);
+
+	auto iter = mValues.begin();
+	while(iter != mValues.end() && keynum > 0) iter++;
+	mValues.erase(iter);
 	return;
 }
 
@@ -174,17 +180,33 @@ std::vector<T> SimpleKeyableProperty<T>::getBounds() const{
 }
 
 template<typename T>
-unsigned int SimpleKeyableProperty<T>::getClosest(long double pos){
-	unsigned int best = 0;
-	long double dist = pos;
+T SimpleKeyableProperty<T>::getElement(unsigned int pos) const{
+	auto iter = mValues.begin();
+	while(iter != mValues.end() && pos > 0) iter++;
+	return iter->second;
+}
+
+template<typename T>
+T SimpleKeyableProperty<T>::interpolate(long double pos) const{
+	T best = mValues.begin()->second;
 	for(auto iter = mValues.begin(); iter != mValues.end(); iter++){
-		if(fabs(pos - (iter)->first) < dist){
-			dist = fabs(pos - (iter)->first);
-			best++;
+		if(iter->first <= pos){
+			best = iter->second;
 		}
-		else return best;
+		else{
+			iter--;
+			long double pos1 = fabs(iter->first - pos);
+			iter++;
+			long double pos2 = fabs(iter->first - pos);
+			long double div = pos1 + pos2;
+			pos1 = 1 - (pos1 / div);
+			pos2 = 1 - (pos2 / div);
+			T next = iter->second;
+			best = best * pos1 + next * pos2;
+			return best;
+		}
 	}
-	return 0;
+	return best;
 }
 
 } // maudio

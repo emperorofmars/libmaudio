@@ -16,7 +16,7 @@
 #include "core/manipulator/Resampler.hpp"
 #include "core/audiosink/Performance.hpp"
 #include "core/property/SimpleProperty.hpp"
-#include "core/util/Util.hpp"
+#include "core/property/SimpleKeyableProperty.hpp"
 
 using namespace maudio;
 
@@ -55,18 +55,25 @@ int main(int argc, char *argv[]){
 
 
 	BoolProperty p("test", false);
-    p.set(false);
-    std::cerr << p.getName() << " " << p.get() << " " << p.getString() << std::endl;
-    p.set("true");
-    std::cerr << p.getName() << " " << p.get() << " " << p.getString() << std::endl;
+	p.set(false);
+	std::cerr << p.getName() << " " << p.get() << " " << p.getString() << std::endl;
+	p.set("true");
+	std::cerr << p.getName() << " " << p.get() << " " << p.getString() << std::endl;
 
 	FloatProperty fp("test", false);
-    fp.set(5.68);
-    std::cerr << fp.getName() << " " << fp.get() << " " << fp.getString() << std::endl;
-    fp.set("34.9");
-    std::cerr << fp.getName() << " " << fp.get() << " " << fp.getString() << std::endl;
+	fp.set(5.68);
+	std::cerr << fp.getName() << " " << fp.get() << " " << fp.getString() << std::endl;
+	fp.set("34.9");
+	std::cerr << fp.getName() << " " << fp.get() << " " << fp.getString() << std::endl;
 
-    std::cerr << string_to<long double>("560.45") << std::endl;
+	KeyableIntProperty ikp("keytest", 5);
+	ikp.addKey("625.975", 6.2);
+	ikp.addKey(333, 2);
+	std::cerr << ikp.getName() << " " << ikp.get(2) << std::endl;
+	std::cerr << ikp.getName() << " " << ikp.get(1.8) << std::endl;
+	std::cerr << ikp.getName() << " " << ikp.get(0.8) << std::endl;
+	std::cerr << ikp.getName() << " " << ikp.get(3.8) << std::endl;
+	std::cerr << ikp.getName() << " " << ikp.get(7) << std::endl;
 
 /*
 	std::shared_ptr<Performance> perf(new Performance());

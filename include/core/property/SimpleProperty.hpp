@@ -49,9 +49,9 @@ template<typename T>
 SimpleProperty<T>::SimpleProperty(const std::string &name, T value)
 	:Property(name)
 {
-	set(value);
 	mBottomBound = std::numeric_limits<T>::min();
 	mUpperBound = std::numeric_limits<T>::max();
+	set(value);
 }
 
 template<typename T>

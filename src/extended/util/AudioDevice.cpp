@@ -2,7 +2,7 @@
  * Copyright (C) 2015 Martin Schwarz
  */
 
-#include "core/util/AudioDevice.hpp"
+#include "extended/util/AudioDevice.hpp"
 #include "core/util/AudioException.hpp"
 #include <iostream>
 #include <cmath>

@@ -11,11 +11,11 @@
 #include "core/audiodata/AudioBuffer.hpp"
 #include "core/audiosource/SinusGenerator.hpp"
 #include "core/audiosink/TerminalPrinter.hpp"
-#include "core/audiosink/Player.hpp"
+#include "extended/audiosink/Player.hpp"
 #include "core/manipulator/Mixer.hpp"
 #include "core/manipulator/Resampler.hpp"
 #include "core/audiosink/Performance.hpp"
-#include "core/property/BaseProperty.hpp"
+#include "core/property/SimpleProperty.hpp"
 
 using namespace maudio;
 
@@ -42,7 +42,7 @@ int main(int argc, char *argv[]){
 
 	std::shared_ptr<Player> player(new Player());
 	player->addInput(mix);
-/*
+
 	std::cerr << "play" << std::endl;
 	player->play();
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
@@ -51,12 +51,8 @@ int main(int argc, char *argv[]){
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	std::cerr << "stop" << std::endl;
 	player->stop();
-*/
-/*
-    IntProperty p("test", 1);
-    p.set(5);
-    std::cerr << p.getName() << " " << p.get() << std::endl;
-*/
+
+
 	BoolProperty p("test", false);
     p.set(false);
     std::cerr << p.getName() << " " << p.get() << " " << p.getString() << std::endl;

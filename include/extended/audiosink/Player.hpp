@@ -8,7 +8,7 @@
 #define MAUDIO_PLAYER
 
 #include "core/audiosink/BaseAudioSink.hpp"
-#include "core/util/AudioDevice.hpp"
+#include "extended/util/AudioDevice.hpp"
 #include "core/audiodata/AudioQueue.hpp"
 #include <thread>
 

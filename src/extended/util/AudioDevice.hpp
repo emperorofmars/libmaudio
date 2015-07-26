@@ -8,8 +8,8 @@
 #ifndef MAUDIO_AUDIODEVICE
 #define MAUDIO_AUDIODEVICE
 
-#include "portaudio.h"
 #include "core/audiodata/AudioQueue.hpp"
+#include "portaudio.h"
 #include <string>
 #include <vector>
 #include <memory>

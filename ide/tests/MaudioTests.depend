@@ -7,8 +7,7 @@
 	"test/MaudioTest.hpp"
 	"core/audiodata/Sample.hpp"
 
-1437143776 /home/mars/Projekte/maudio/include/core/audiodata/Sample.hpp
-	"ISample.hpp"
+1437845329 /home/mars/Projekte/maudio/include/core/audiodata/Sample.hpp
 	<vector>
 
 1437133730 /home/mars/Projekte/maudio/include/core/audiodata/ISample.hpp
@@ -28,8 +27,9 @@
 
 1436476746 /home/mars/Projekte/maudio/include/core/audiodata/AudioInfo.hpp
 
-1437074857 /home/mars/Projekte/maudio/include/core/util/AudioException.hpp
+1437842320 /home/mars/Projekte/maudio/include/core/util/AudioException.hpp
 	<exception>
+	<string>
 
 1437148340 source:/home/mars/Projekte/maudio/src/test/core/audiodata/RawAudioBufferTest.cpp
 	"MaudioTest.hpp"
@@ -74,7 +74,7 @@
 	"core/audiodata/RawSample.hpp"
 	"core/util/AudioException.hpp"
 
-1437143876 source:/home/mars/Projekte/maudio/src/core/audiodata/Sample.cpp
+1437845506 source:/home/mars/Projekte/maudio/src/core/audiodata/Sample.cpp
 	"core/audiodata/Sample.hpp"
 	"core/util/AudioException.hpp"
 
@@ -99,4 +99,14 @@
 1436467033 source:/home/mars/Projekte/maudio/src/core/util/Config.cpp
 
 1437149136 /home/mars/Projekte/maudio/src/test/AllTests.hpp
+
+1437944783 source:/home/mars/Projekte/maudio/test/core/audiodata/SampleTest.cpp
+	"MaudioTest.hpp"
+	"core/audiodata/Sample.hpp"
+
+1437842320 /home/mars/Projekte/maudio/test/MaudioTest.hpp
+	<gtest/gtest.h>
+
+1437842320 source:/home/mars/Projekte/maudio/test/MaudioTest.cpp
+	"MaudioTest.hpp"
 

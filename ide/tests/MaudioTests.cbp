@@ -34,34 +34,16 @@
 			<Add option="-fexceptions" />
 			<Add directory="../../include" />
 			<Add directory="../../src" />
+			<Add directory="../../test" />
 		</Compiler>
 		<Linker>
 			<Add option="-lgtest" />
 			<Add option="-pthread" />
 		</Linker>
-		<Unit filename="../../src/core/audiodata/AudioBuffer.cpp" />
-		<Unit filename="../../src/core/audiodata/RawAudioBuffer.cpp" />
-		<Unit filename="../../src/core/audiodata/RawSample.cpp" />
 		<Unit filename="../../src/core/audiodata/Sample.cpp" />
-		<Unit filename="../../src/core/audiosink/FileWriter.cpp" />
-		<Unit filename="../../src/core/audiosink/Player.cpp" />
-		<Unit filename="../../src/core/audiosource/BulkReader.cpp" />
-		<Unit filename="../../src/core/audiosource/SinusGenerator.cpp" />
-		<Unit filename="../../src/core/audiosource/StreamReader.cpp" />
-		<Unit filename="../../src/core/manipulator/Resampler.cpp" />
-		<Unit filename="../../src/core/pluginmanager/PluhinManager.cpp" />
-		<Unit filename="../../src/core/util/AudioDevice.cpp" />
-		<Unit filename="../../src/core/util/AudioDevice.hpp" />
-		<Unit filename="../../src/core/util/AudioFile.cpp" />
-		<Unit filename="../../src/core/util/AudioFile.hpp" />
-		<Unit filename="../../src/core/util/Config.cpp" />
-		<Unit filename="../../src/test/MaudioTest.cpp" />
-		<Unit filename="../../src/test/MaudioTest.hpp" />
-		<Unit filename="../../src/test/core/audiodata/AudioBufferTest.cpp" />
-		<Unit filename="../../src/test/core/audiodata/RawAudioBufferTest.cpp" />
-		<Unit filename="../../src/test/core/audiodata/RawSampleTest.cpp" />
-		<Unit filename="../../src/test/core/audiodata/SampleTest.cpp" />
-		<Unit filename="../../src/test/core/util/AudioFileTest.cpp" />
+		<Unit filename="../../test/MaudioTest.cpp" />
+		<Unit filename="../../test/MaudioTest.hpp" />
+		<Unit filename="../../test/core/audiodata/SampleTest.cpp" />
 		<Extensions>
 			<envvars />
 			<code_completion />

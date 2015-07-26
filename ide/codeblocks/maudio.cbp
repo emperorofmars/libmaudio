@@ -38,6 +38,7 @@
 		<Linker>
 			<Add option="-lportaudio" />
 		</Linker>
+		<Unit filename="../../examples/test1.cpp" />
 		<Unit filename="../../include/core/audiodata/AudioBuffer.hpp" />
 		<Unit filename="../../include/core/audiodata/AudioInfo.hpp" />
 		<Unit filename="../../include/core/audiodata/AudioQueue.hpp" />
@@ -91,7 +92,6 @@
 		<Unit filename="../../src/core/util/ConfigManager.cpp" />
 		<Unit filename="../../src/core/util/UniqueID.cpp" />
 		<Unit filename="../../src/core/util/Util.cpp" />
-		<Unit filename="../../src/examples/test1.cpp" />
 		<Unit filename="../../src/extended/audiosink/FileWriter.cpp" />
 		<Unit filename="../../src/extended/audiosink/Player.cpp" />
 		<Unit filename="../../src/extended/audiosource/BulkReader.cpp" />

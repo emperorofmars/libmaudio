@@ -77,14 +77,17 @@ int main(int argc, char *argv[]){
 
 /*
 	std::shared_ptr<Performance> perf(new Performance());
-	perf->addInput(mix);
+	perf->addInput(resampler);
 
-	perf->measure(44100 * 60, 1024 * 10);
-	perf->measure(44100 * 60, 1024);
-	perf->measure(44100 * 60, 12);
-	perf->measure(44100 * 60, 6);
-	perf->measure(44100 * 60, 3);
-	perf->measure(44100 * 60, 1);
+	perf->measure(44100 * 6, 1024 * 10);
+	perf->measure(44100 * 6, 1024);
+	perf->measure(44100 * 6, 14);
+	perf->measure(44100 * 6, 13);
+	perf->measure(44100 * 6, 12);
+	perf->measure(44100 * 6, 6);
+	perf->measure(44100 * 6, 3);
+	perf->measure(44100 * 6, 2);
+	perf->measure(44100 * 6, 1);
 */
 /*
 	std::shared_ptr<TerminalPrinter> printer(new TerminalPrinter());

@@ -20,11 +20,11 @@ AudioBuffer Mixer::get(unsigned long pos, unsigned int length) noexcept{
 		for(unsigned int i = 0; i < NumInputs(); i++){
 			AudioBuffer tmp = getFromSlot(pos, length, i);
 			for(unsigned int j = 0; j < length; j++){
-				ret.set(j, ret.get(j) + tmp.get(j));
+				ret.set(ret.get(j) + tmp.get(j), j);
 			}
 		}
 		for(unsigned int j = 0; j < length; j++){
-			ret.set(j, ret.get(j) / NumInputs());
+			ret.set(ret.get(j) / NumInputs(), j);
 		}
 	}
 	return ret;

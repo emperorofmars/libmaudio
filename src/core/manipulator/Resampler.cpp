@@ -5,6 +5,9 @@
  */
 
 #include "core/manipulator/Resampler.hpp"
+#include <cmath>
+
+#include <iostream>
 
 namespace maudio{
 
@@ -18,12 +21,14 @@ Resampler::~Resampler(){
 AudioBuffer Resampler::get(unsigned long pos, unsigned int length) noexcept{
 	AudioBuffer ret(getInfo().Channels, length, pos, getInfo().Samplerate);
 	if(NumInputs() > 0){
-		unsigned int imputSamplerate = getInfoFromSlot(0).Samplerate;
-		double multiplier = (double)imputSamplerate / (double)mOutputSamplerate;
+		double multiplier = (double)getInfoFromSlot(0).Samplerate / (double)mOutputSamplerate;
 		AudioBuffer tmp = getFromSlot(pos * multiplier, length * multiplier + 1, 0);
-
 		for(unsigned int i = 0; i < length; i++){
-            ret.set(i, tmp.get(i * multiplier));
+			double realpos = 0;
+			double mul = modf((double)i * multiplier, &realpos);
+			Sample val1 = tmp.get(realpos);
+			Sample val2 = tmp.get(realpos + 1);
+			ret.set(val1 * (1 - mul) + val2 * mul, i);
 		}
 	}
 	return ret;
@@ -45,7 +50,7 @@ bool Resampler::checkIfCompatible(std::shared_ptr<Node> node, int slot){
 }
 
 void Resampler::readConfig(const Config &conf){
-    return;
+	return;
 }
 
 void Resampler::setSampleRate(unsigned int samplerate){

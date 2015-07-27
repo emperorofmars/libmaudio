@@ -8,8 +8,9 @@ Todo:
 - ////node: onAdd, onRemove to handle input changes in inherited classes
 - ////node: inline
 - ////move player, filereader and writer from core to extended
-- create keyable and non keyable properties
-- node: get keyable properties in one structure
+- ////create keyable and non keyable properties
+- //switch pos and data in audiodata classes
+- node: get properties in one structure
 - implement config
 - node: read config
 - node: make api reasonably stable

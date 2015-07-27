@@ -40,7 +40,7 @@ float Sample::get(unsigned int pos) const{
 	return mData[pos];
 }
 
-void Sample::set(unsigned int pos, float data){
+void Sample::set(float data, unsigned int pos){
 	if(pos >= mData.size()) return;
 	mData[pos] = data;
 }
@@ -53,7 +53,7 @@ Sample Sample::operator+(const Sample &data){
 	Sample ret(*this);
 	if(getChannels() == data.getChannels()){
 		for(unsigned int i = 0; i < getChannels(); i++){
-			ret.set(i, ret[i] + data[i]);
+			ret.set(ret[i] + data[i], i);
 		}
 	}
 	return ret;
@@ -63,7 +63,7 @@ Sample Sample::operator-(const Sample &data){
 	Sample ret(*this);
 	if(getChannels() == data.getChannels()){
 		for(unsigned int i = 0; i < getChannels(); i++){
-			ret.set(i, ret[i] - data[i]);
+			ret.set(ret[i] - data[i], i);
 		}
 	}
 	return ret;
@@ -73,7 +73,7 @@ Sample Sample::operator*(const Sample &data){
 	Sample ret(*this);
 	if(getChannels() == data.getChannels()){
 		for(unsigned int i = 0; i < getChannels(); i++){
-			ret.set(i, ret[i] * data[i]);
+			ret.set(ret[i] * data[i], i);
 		}
 	}
 	return ret;
@@ -83,7 +83,7 @@ Sample Sample::operator/(const Sample &data){
 	Sample ret(*this);
 	if(getChannels() == data.getChannels()){
 		for(unsigned int i = 0; i < getChannels(); i++){
-			if(data[i] != 0) ret.set(i, ret[i] / data[i]);
+			if(data[i] != 0) ret.set(ret[i] / data[i], i);
 		}
 	}
 	return ret;
@@ -92,15 +92,16 @@ Sample Sample::operator/(const Sample &data){
 Sample Sample::operator*(float data){
 	Sample ret(*this);
     for(unsigned int i = 0; i < getChannels(); i++){
-        ret.set(i, ret[i] * data);
+        ret.set(ret[i] * data, i);
     }
 	return ret;
 }
 
 Sample Sample::operator/(float data){
 	Sample ret(*this);
+	if(data == 0) Sample(getChannels());
     for(unsigned int i = 0; i < getChannels(); i++){
-        ret.set(i, ret[i] / data);
+        ret.set(ret[i] / data, i);
     }
 	return ret;
 }
@@ -149,6 +150,7 @@ void Sample::operator*=(float data){
 }
 
 void Sample::operator/=(float data){
+	if(data == 0) return;
     for(unsigned int i = 0; i < getChannels(); i++){
         mData[i] /= data;
     }

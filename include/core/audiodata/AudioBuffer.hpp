@@ -24,7 +24,7 @@ public:
 	virtual Sample operator[](unsigned long pos) const;
 	virtual void operator=(const AudioBuffer &data);
 	virtual Sample get(unsigned long pos) const;
-	virtual void set(unsigned long pos, const Sample &data);
+	virtual void set(const Sample &data, unsigned long pos);
 
 	virtual void resize(unsigned long samples);
 	virtual AudioInfo getInfo() const;

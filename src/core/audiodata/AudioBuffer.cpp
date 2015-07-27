@@ -46,7 +46,7 @@ Sample AudioBuffer::get(unsigned long pos) const{
 	return createSample(pos);
 }
 
-void AudioBuffer::set(unsigned long pos, const Sample &data){
+void AudioBuffer::set(const Sample &data, unsigned long pos){
 	if(pos >= mData.size()) return;
 	if(data.getChannels() != mInfo.Channels) return;
 	for(unsigned int i = 0; i < mInfo.Channels; i++){

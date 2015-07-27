@@ -45,6 +45,7 @@ void Performance::measure(unsigned long length, unsigned int buflen){
     std::chrono::high_resolution_clock::time_point t2 = std::chrono::high_resolution_clock::now();
     auto time = std::chrono::duration_cast<std::chrono::microseconds>(t2 - t1).count();
 
+    std::cout << "Buffer size: " << buflen << ", total Samples: " << length << ", ";
     std::cout << "Time used: " << time << "us, " << time / 1000000 << "s, Final value: " << val << std::endl;
     return;
 }

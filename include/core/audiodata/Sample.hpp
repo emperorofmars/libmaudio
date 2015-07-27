@@ -22,7 +22,7 @@ public:
 	const float operator[](unsigned int pos) const;
 	void operator=(const Sample &data);
 	float get(unsigned int pos) const;
-	void set(unsigned int pos, float data);
+	void set(float data, unsigned int pos);
 	unsigned int getChannels() const;
 
 	Sample operator+(const Sample &data);

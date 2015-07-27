@@ -11,6 +11,8 @@
 #include "core/audiodata/AudioBuffer.hpp"
 #include "core/audiodata/AudioInfo.hpp"
 #include "core/property/Property.hpp"
+#include "core/property/KeyableProperty.hpp"
+#include "core/property/PropertyManager.hpp"
 #include "core/util/Config.hpp"
 #include <vector>
 #include <memory>
@@ -41,6 +43,8 @@ public:
 
 	virtual void readConfig(const Config &conf) = 0;
 
+	PropertyManager getProperties();
+
 protected:
 	AudioBuffer getFromSlot(unsigned long pos, unsigned int length, unsigned int slot) noexcept;
 	AudioInfo getInfoFromSlot(unsigned int slot) noexcept;
@@ -49,6 +53,8 @@ protected:
 
 	virtual void onAdd(unsigned int slot) = 0;
 	virtual void onRemove(unsigned int slot) = 0;
+
+	PropertyManager mProperties;
 
 private:
 	bool checkCycles(std::shared_ptr<Node> node);

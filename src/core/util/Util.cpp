@@ -9,6 +9,14 @@
 
 namespace maudio{
 
+double PositionToSeconds(unsigned long pos, unsigned int samplerate){
+	return (double)pos / (double)samplerate;
+}
+
+unsigned long SecondsToPosition(double pos, unsigned int samplerate){
+	return pos * samplerate;
+}
+
 template<>
 bool string_to(const std::string &str){
 	std::string tmp = str;

@@ -9,8 +9,8 @@ Todo:
 - ////node: inline
 - ////move player, filereader and writer from core to extended
 - ////create keyable and non keyable properties
-- //switch pos and data in audiodata classes
-- node: get properties in one structure
+- ////switch pos and data in audiodata classes
+- ////node: get properties in one structure
 - implement config
 - node: read config
 - node: make api reasonably stable
@@ -24,7 +24,6 @@ Todo:
 - create renderer
 - create file reader
 - create file writer
-- implement scene
 - implement plugin api
 - lua plugins
 - python plugins

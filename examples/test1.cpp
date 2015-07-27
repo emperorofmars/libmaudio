@@ -33,6 +33,14 @@ int main(int argc, char *argv[]){
 	sinus3->setFrequency(1500);
 	sinus3->setSamplerate(22050);
 
+	if(sinus3->getProperties().KeyablePropertyExists("Frequency")){
+		std::cerr << "NAME: " << sinus3->getProperties().getKeyableProperty("Frequency")->getName() << std::endl;
+		sinus3->getProperties().getKeyableProperty("Frequency")->addKey("2000", 0.5);
+	}
+	else{
+		std::cerr << "FOOOOOOOOOOOOO" << std::endl;
+	}
+
 	std::shared_ptr<Resampler> resampler(new Resampler(44100));
 	resampler->addInput(sinus3, 0);
 
@@ -47,7 +55,7 @@ int main(int argc, char *argv[]){
 	std::cerr << "play" << std::endl;
 	player->play();
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
-	sinus3->setFrequency(1510);
+	//sinus3->setFrequency(1510);
 	std::cerr << "half" << std::endl;
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
 	std::cerr << "stop" << std::endl;
@@ -71,6 +79,7 @@ int main(int argc, char *argv[]){
 	ikp.addKey(333, 2);
 	std::cerr << ikp.getName() << " " << ikp.get(2) << std::endl;
 	std::cerr << ikp.getName() << " " << ikp.get(1.8) << std::endl;
+	ikp.setKey("222", 0);
 	std::cerr << ikp.getName() << " " << ikp.get(0.8) << std::endl;
 	std::cerr << ikp.getName() << " " << ikp.get(3.8) << std::endl;
 	std::cerr << ikp.getName() << " " << ikp.get(7) << std::endl;

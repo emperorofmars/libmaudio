@@ -17,9 +17,7 @@ void Node::addInput(std::shared_ptr<Node> node, int slot){
 	if(!node->HasOutputs()) throw MaudioException("node has no outputs");
 	if(MaxInputs() >= 0 && slot >= MaxInputs()) throw MaudioException("invalid input slot");
 	if(!checkIfCompatible(node)) throw MaudioException("input is not compatible");
-	if(checkCycles(node)){
-		throw MaudioException("adding this would create a cycle");
-	}
+	if(checkCycles(node)) throw MaudioException("adding this would create a cycle");
 
 	if(slot < 0){
 		mInputs.push_back(node);
@@ -98,6 +96,10 @@ unsigned int Node::NumInputs() const{
 
 unsigned int Node::NumOutputs() const{
 	return mOutputs.size();
+}
+
+PropertyManager Node::getProperties(){
+	return mProperties;
 }
 
 bool Node::checkInput(unsigned int slot) noexcept{

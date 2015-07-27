@@ -8,6 +8,8 @@
 #define MAUDIO_SINUSGENERATOR
 
 #include "core/audiosource/BaseAudioSource.hpp"
+#include "core/property/SimpleProperty.hpp"
+#include "core/property/SimpleKeyableProperty.hpp"
 
 namespace maudio{
 
@@ -25,9 +27,11 @@ public:
 	virtual void setSamplerate(unsigned int samplerate);
 	virtual void setChannels(unsigned int channels);
 
-protected:
+private:
 	AudioInfo mAudioInfo;
-	float mFreq;
+	std::shared_ptr<KeyableFloatProperty> mFreq;
+	std::shared_ptr<UIntProperty> mSamplerate;
+	std::shared_ptr<UIntProperty> mChannels;
 };
 
 } // maudio

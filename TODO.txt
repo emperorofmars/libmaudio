@@ -12,6 +12,7 @@ Todo:
 - ////switch pos and data in audiodata classes
 - ////node: get properties in one structure
 - implement config
+- create config manager
 - node: read config
 - node: make api reasonably stable
 - implement scene
@@ -19,6 +20,7 @@ Todo:
 - export scene to svg
 - write cmakelists
 - write tests
+- try meson build
 - create channel converter
 - player: make multiple players work on the same device
 - create renderer

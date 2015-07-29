@@ -45,6 +45,9 @@ public:
 
 	PropertyManager getProperties();
 
+	//virtual std::string serialize() const = 0;
+	//virtual void unserialize(const std::string &data) = 0;
+
 protected:
 	AudioBuffer getFromSlot(unsigned long pos, unsigned int length, unsigned int slot) noexcept;
 	AudioInfo getInfoFromSlot(unsigned int slot) noexcept;

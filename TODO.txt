@@ -11,11 +11,12 @@ Todo:
 - ////create keyable and non keyable properties
 - ////switch pos and data in audiodata classes
 - ////node: get properties in one structure
-- implement config
+- ////implement config
 - create config manager
 - node: read config
 - node: make api reasonably stable
 - implement scene
+- node: serialize and parse
 - save and reload scene
 - export scene to svg
 - write cmakelists

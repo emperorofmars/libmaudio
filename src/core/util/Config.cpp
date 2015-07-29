@@ -25,34 +25,22 @@ void Config::parseFile(const std::string &file){
 
 	std::string line;
 	while(std::getline(ifile, line)){
-		while(line.size() > 0 && (line[0] == ' ' || line[0] == '\t')){
-			line.erase(0);
-		}
-		if(line.size() == 0 || line[0] == '\n' || line[0] == '\0' || line[0] == '#'){
-			continue;
-		}
-
-		std::string key = line.substr(0, line.find_first_of(' '));
-		std::string value = line.substr(line.find_first_of(' ') + 1, line.size());
-
-		std::cerr << "CONFIG:  " << key << " : " << value << std::endl;
-
 		try{
-			set(key, value);
+			parseLine(line);
 		}
 		catch(std::exception &e){
-			throw e;
 		}
 	}
+	mFile = file;
 	return;
 }
 
-void Config::saveFile(){
+void Config::saveFile() const{
 	saveFile(mFile);
 	return;
 }
 
-void Config::saveFile(const std::string &file){
+void Config::saveFile(const std::string &file) const{
 	std::ofstream ofile(file);
 	if(!ofile.good()) return;
 	ofile << "# maudio config file" << std::endl;
@@ -62,31 +50,31 @@ void Config::saveFile(const std::string &file){
 	return;
 }
 
-std::string Config::get(const std::string &key){
-	return mData[key];
+std::string Config::get(const std::string &key) const{
+	return mData.at(key);
 }
 
-double Config::get_double(const std::string &key){
+double Config::get_double(const std::string &key) const{
 	try{
-		return string_to<double>(mData[key]);
+		return string_to<double>(mData.at(key));
 	}
 	catch(std::exception &e){
 		throw e;
 	}
 }
 
-long Config::get_long(const std::string &key){
+long Config::get_long(const std::string &key) const{
 	try{
-		return string_to<long>(mData[key]);
+		return string_to<long>(mData.at(key));
 	}
 	catch(std::exception &e){
 		throw e;
 	}
 }
 
-unsigned long Config::get_ulong(const std::string &key){
+unsigned long Config::get_ulong(const std::string &key) const{
 	try{
-		return string_to<unsigned long>(mData[key]);
+		return string_to<unsigned long>(mData.at(key));
 	}
 	catch(std::exception &e){
 		throw e;
@@ -132,11 +120,37 @@ void Config::set(const std::string &key, unsigned long value){
 	return;
 }
 
-bool Config::checkKey(const std::string &key){
+bool Config::checkKey(const std::string &key) const{
 	for(unsigned int i = 0; i < key.size(); i++){
 		if(key[i] == ' ') return false;
 	}
 	return true;
+}
+
+void Config::parseLine(std::string &line){
+	while(line.size() > 0 && (line[0] == ' ' || line[0] == '\t')){
+		line.erase(0);
+	}
+	if(line.size() == 0 || line[0] == '\n' || line[0] == '\0' || line[0] == '#'){
+		return;
+	}
+
+	std::string key = line.substr(0, line.find_first_of(' '));
+	std::string value = line.substr(line.find_first_of(' ') + 1, line.size());
+
+	try{
+		set(key, value);
+	}
+	catch(std::exception &e){
+		throw e;
+	}
+	return;
+}
+
+void Config::setDefaults(){
+	set("PlayerQueueSize", (unsigned long)4096);
+	set("SinkBufferSize", (unsigned long)4096);
+    return;
 }
 
 } // maudio

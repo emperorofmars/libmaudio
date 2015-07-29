@@ -86,8 +86,13 @@ int main(int argc, char *argv[]){
 	std::cerr << ikp.getName() << " " << ikp.get(7) << std::endl;
 
 	Config conf;
-	conf.parseFile("maudio.conf");
-	std::cerr << "config get: " << conf.get_long("PlayerBufferSize") << std::endl;
+	try{
+		conf.parseFile("maudio.conf");
+		std::cerr << "config get: " << conf.get_long("PlayerBufferSize") << std::endl;
+	}
+	catch(std::exception &e){
+		std::cerr << "exception" << std::endl;
+	}
 
 /*
 	std::shared_ptr<Performance> perf(new Performance());

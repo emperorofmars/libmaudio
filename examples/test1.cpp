@@ -98,6 +98,8 @@ int main(int argc, char *argv[]){
 		std::cerr << "exception" << std::endl;
 	}
 
+	ConfigManager::Instance()->getConfig().saveFile("testconfig.txt");
+
 /*
 	std::shared_ptr<Performance> perf(new Performance());
 	perf->addInput(resampler);

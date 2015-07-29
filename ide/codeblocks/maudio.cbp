@@ -60,6 +60,8 @@
 		<Unit filename="../../include/core/property/PropertyManager.hpp" />
 		<Unit filename="../../include/core/property/SimpleKeyableProperty.hpp" />
 		<Unit filename="../../include/core/property/SimpleProperty.hpp" />
+		<Unit filename="../../include/core/serializer/Serializer.hpp" />
+		<Unit filename="../../include/core/serializer/TXTSerializer.hpp" />
 		<Unit filename="../../include/core/util/AudioException.hpp" />
 		<Unit filename="../../include/core/util/Config.hpp" />
 		<Unit filename="../../include/core/util/ConfigManager.hpp" />
@@ -88,6 +90,7 @@
 		<Unit filename="../../src/core/property/PropertyManager.cpp" />
 		<Unit filename="../../src/core/property/SimpleKeyableProperty.cpp" />
 		<Unit filename="../../src/core/property/SimpleProperty.cpp" />
+		<Unit filename="../../src/core/serializer/TXTSerializer.cpp" />
 		<Unit filename="../../src/core/util/Config.cpp" />
 		<Unit filename="../../src/core/util/ConfigManager.cpp" />
 		<Unit filename="../../src/core/util/UniqueID.cpp" />

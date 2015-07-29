@@ -16,12 +16,12 @@ ConfigManager* ConfigManager::Instance(){
 }
 
 ConfigManager::ConfigManager(){
+	mConfig.setDefaults();
 	mPath = CONFIG_DEFAULT_PATH;
 	if(checkFile(mPath)){
 		loadFromFile(mPath);
 	}
 	else{
-		mConfig.setDefaults();
 		mPath = "";
 	}
 }

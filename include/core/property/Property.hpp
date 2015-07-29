@@ -24,6 +24,9 @@ public:
     std::string getName() const;
 	virtual std::vector<std::string> getBoundsString() const = 0;
 
+	//virtual std::string serialize() const;
+	//virtual void unserialize(const std::string &data);
+
 private:
     std::string mName;
 };

@@ -15,7 +15,8 @@ Todo:
 - ////create config manager
 - ////template config for get and set
 - ////node: read config
-- property: serialize and unserialize
+- create serializer
+- property and keyableproperty: serialize and unserialize
 - node: serialize and unserialize
 - node: make api reasonably stable
 - implement scene

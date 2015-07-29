@@ -19,6 +19,7 @@ public:
 
     virtual std::string getString(long double pos) const = 0;
     virtual std::string getKeyString(unsigned int keynum) const = 0;
+    virtual long double getKeyPos(unsigned int keynum) const = 0;
     virtual unsigned int getNumKeys() const = 0;
     virtual void addKey(const std::string &value, long double pos) = 0;
     virtual void setKey(const std::string &value, unsigned int keynum) = 0;
@@ -28,6 +29,9 @@ public:
 
     std::string getName() const;
 	virtual std::vector<std::string> getBoundsString() const = 0;
+
+	//virtual std::string serialize() const;
+	//virtual void unserialize(const std::string &data);
 
 private:
     std::string mName;

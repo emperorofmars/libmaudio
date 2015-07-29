@@ -129,9 +129,13 @@ bool Player::playing(){
 }
 
 void Player::readConfig(const Config &conf){
+	try{
 	unsigned int tmpQueueSize = conf.get<unsigned int>("PlayerQueueSize");
 	if(tmpQueueSize >= 1024 && tmpQueueSize <= 1024 * 16)
 		mQueueSize = tmpQueueSize;
+	}
+	catch(std::exception &e){
+	}
     return;
 }
 

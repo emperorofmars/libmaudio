@@ -1,0 +1,4 @@
+# maudio config file
+PlayerBufferSize 4096
+SinkBufferSize 8192
+PlayerQueueSize 8192

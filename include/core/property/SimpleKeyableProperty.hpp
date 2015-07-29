@@ -27,6 +27,7 @@ public:
     virtual std::string getString(long double pos) const;
     virtual T get(long double pos) const;
     virtual std::string getKeyString(unsigned int keynum) const;
+    virtual long double getKeyPos(unsigned int keynum) const;
     virtual T getKey(unsigned int keynum) const;
     virtual unsigned int getNumKeys() const;
     virtual void addKey(const std::string &value, long double pos);
@@ -86,6 +87,14 @@ T SimpleKeyableProperty<T>::get(long double pos) const{
 template<typename T>
 std::string SimpleKeyableProperty<T>::getKeyString(unsigned int keynum) const{
 	return std::to_string(getKey(keynum));
+}
+
+template<typename T>
+long double SimpleKeyableProperty<T>::getKeyPos(unsigned int keynum) const{
+	if(keynum >= mValues.size()) return -1;
+	auto iter = mValues.begin();
+	while(iter != mValues.end() && keynum > 0) iter++;
+	return iter->first;
 }
 
 template<typename T>

@@ -56,7 +56,7 @@ private:
 	bool mFeederRun = false;
 	unsigned long mPosition = 0;
 
-	unsigned int mQueueSize = 1024 * 5;
+	unsigned int mQueueSize = 1024 * 4;
 };
 
 } // maudio

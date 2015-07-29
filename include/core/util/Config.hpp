@@ -7,6 +7,7 @@
 #ifndef MAUDIO_CONFIG
 #define MAUDIO_CONFIG
 
+#include "core/util/Util.hpp"
 #include <string>
 #include <unordered_map>
 
@@ -14,32 +15,52 @@ namespace maudio{
 
 class Config{
 public:
-    Config();
-    ~Config();
+	Config();
+	~Config();
 
-    void parseFile(const std::string &file);
-    void saveFile() const;
-    void saveFile(const std::string &file) const;
+	void parseFile(const std::string &file);
+	void saveFile() const;
+	void saveFile(const std::string &file) const;
 
-    std::string get(const std::string &key) const;
-    double get_double(const std::string &key) const;
-    long get_long(const std::string &key) const;
-    unsigned long get_ulong(const std::string &key) const;
+	std::string get(const std::string &key) const;
+	template<typename T>
+	T get(const std::string &key) const;
 
-    void set(const std::string &key, const std::string &value);
-    void set(const std::string &key, double value);
-    void set(const std::string &key, long value);
-    void set(const std::string &key, unsigned long value);
+	void set(const std::string &key, const std::string &value);
+	template<typename T>
+	void set(const std::string &key, T value);
 
-    void setDefaults();
+	void setDefaults();
 
 private:
 	bool checkKey(const std::string &key) const;
 	void parseLine(std::string &line);
 
-    std::string mFile;
-    std::unordered_map<std::string, std::string> mData;
+	std::string mFile;
+	std::unordered_map<std::string, std::string> mData;
 };
+
+template<typename T>
+T Config::get(const std::string &key) const{
+	try{
+		return string_to<T>(mData.at(key));
+	}
+	catch(std::exception &e){
+		throw e;
+	}
+}
+
+template<typename T>
+void Config::set(const std::string &key, T value){
+	if(!checkKey(key)) return;
+	try{
+		mData[key] = std::to_string(value);
+	}
+	catch(std::exception &e){
+		throw e;
+	}
+	return;
+}
 
 } // maudio
 

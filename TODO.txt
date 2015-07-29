@@ -12,11 +12,13 @@ Todo:
 - ////switch pos and data in audiodata classes
 - ////node: get properties in one structure
 - ////implement config
-- create config manager
-- node: read config
+- ////create config manager
+- ////template config for get and set
+- ////node: read config
+- property: serialize and unserialize
+- node: serialize and unserialize
 - node: make api reasonably stable
 - implement scene
-- node: serialize and parse
 - save and reload scene
 - export scene to svg
 - write cmakelists

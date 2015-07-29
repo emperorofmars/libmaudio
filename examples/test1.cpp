@@ -18,6 +18,7 @@
 #include "core/property/SimpleProperty.hpp"
 #include "core/property/SimpleKeyableProperty.hpp"
 #include "core/util/Config.hpp"
+#include "core/util/ConfigManager.hpp"
 
 using namespace maudio;
 
@@ -52,6 +53,9 @@ int main(int argc, char *argv[]){
 
 	std::shared_ptr<Player> player(new Player());
 	player->addInput(mix);
+	ConfigManager::Instance()->manipulate().setDefaults();
+	//ConfigManager::Instance()->manipulate().set("PlayerQueueSize", 1024);
+	player->readConfig(ConfigManager::Instance()->getConfig());
 
 	std::cerr << "play" << std::endl;
 	player->play();
@@ -88,7 +92,7 @@ int main(int argc, char *argv[]){
 	Config conf;
 	try{
 		conf.parseFile("maudio.conf");
-		std::cerr << "config get: " << conf.get_long("PlayerBufferSize") << std::endl;
+		std::cerr << "config get: " << conf.get<int>("PlayerBufferSize") << std::endl;
 	}
 	catch(std::exception &e){
 		std::cerr << "exception" << std::endl;

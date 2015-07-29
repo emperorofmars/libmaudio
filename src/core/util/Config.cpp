@@ -5,7 +5,6 @@
  */
 
 #include "core/util/Config.hpp"
-#include "core/util/Util.hpp"
 #include "core/util/AudioException.hpp"
 #include <fstream>
 
@@ -54,27 +53,10 @@ std::string Config::get(const std::string &key) const{
 	return mData.at(key);
 }
 
-double Config::get_double(const std::string &key) const{
+template<>
+std::string Config::get(const std::string &key) const{
 	try{
-		return string_to<double>(mData.at(key));
-	}
-	catch(std::exception &e){
-		throw e;
-	}
-}
-
-long Config::get_long(const std::string &key) const{
-	try{
-		return string_to<long>(mData.at(key));
-	}
-	catch(std::exception &e){
-		throw e;
-	}
-}
-
-unsigned long Config::get_ulong(const std::string &key) const{
-	try{
-		return string_to<unsigned long>(mData.at(key));
+		return mData.at(key);
 	}
 	catch(std::exception &e){
 		throw e;
@@ -87,36 +69,10 @@ void Config::set(const std::string &key, const std::string &value){
 	return;
 }
 
-void Config::set(const std::string &key, double value){
+template<>
+void Config::set(const std::string &key, std::string value){
 	if(!checkKey(key)) return;
-	try{
-		mData[key] = std::to_string(value);
-	}
-	catch(std::exception &e){
-		throw e;
-	}
-	return;
-}
-
-void Config::set(const std::string &key, long value){
-	if(!checkKey(key)) return;
-	try{
-		mData[key] = std::to_string(value);
-	}
-	catch(std::exception &e){
-		throw e;
-	}
-	return;
-}
-
-void Config::set(const std::string &key, unsigned long value){
-	if(!checkKey(key)) return;
-	try{
-		mData[key] = std::to_string(value);
-	}
-	catch(std::exception &e){
-		throw e;
-	}
+	mData[key] = value;
 	return;
 }
 
@@ -148,8 +104,8 @@ void Config::parseLine(std::string &line){
 }
 
 void Config::setDefaults(){
-	set("PlayerQueueSize", (unsigned long)4096);
-	set("SinkBufferSize", (unsigned long)4096);
+	set("PlayerQueueSize", 1024 * 8);
+	set("SinkBufferSize", 1024 * 8);
     return;
 }
 

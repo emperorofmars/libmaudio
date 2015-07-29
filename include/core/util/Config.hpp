@@ -32,6 +32,8 @@ public:
     void set(const std::string &key, unsigned long value);
 
 private:
+	bool checkKey(const std::string &key);
+
     std::string mFile;
     std::unordered_map<std::string, std::string> mData;
 };

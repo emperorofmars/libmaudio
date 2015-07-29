@@ -17,6 +17,7 @@
 #include "core/audiosink/Performance.hpp"
 #include "core/property/SimpleProperty.hpp"
 #include "core/property/SimpleKeyableProperty.hpp"
+#include "core/util/Config.hpp"
 
 using namespace maudio;
 
@@ -83,6 +84,10 @@ int main(int argc, char *argv[]){
 	std::cerr << ikp.getName() << " " << ikp.get(0.8) << std::endl;
 	std::cerr << ikp.getName() << " " << ikp.get(3.8) << std::endl;
 	std::cerr << ikp.getName() << " " << ikp.get(7) << std::endl;
+
+	Config conf;
+	conf.parseFile("maudio.conf");
+	std::cerr << "config get: " << conf.get_long("PlayerBufferSize") << std::endl;
 
 /*
 	std::shared_ptr<Performance> perf(new Performance());

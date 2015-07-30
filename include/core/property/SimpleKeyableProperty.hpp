@@ -9,6 +9,7 @@
 
 #include "core/property/KeyableProperty.hpp"
 #include "core/util/Util.hpp"
+#include "core/util/AudioException.hpp"
 #include <vector>
 #include <limits>
 #include <map>
@@ -91,9 +92,12 @@ std::string SimpleKeyableProperty<T>::getKeyString(unsigned int keynum) const{
 
 template<typename T>
 long double SimpleKeyableProperty<T>::getKeyPos(unsigned int keynum) const{
-	if(keynum >= mValues.size()) return -1;
+	if(keynum >= mValues.size()) throw MaudioException("maudio: keynum out of range");
 	auto iter = mValues.begin();
-	while(iter != mValues.end() && keynum > 0) iter++;
+	while(iter != mValues.end() && keynum > 0){
+		iter++;
+		keynum--;
+	}
 	return iter->first;
 }
 
@@ -113,6 +117,7 @@ void SimpleKeyableProperty<T>::addKey(const std::string &value, long double pos)
 		addKey(string_to<T>(value), pos);
 	}
 	catch(std::exception &e){
+		throw MaudioException("maudio: failed to add value");
 	}
 	return;
 }
@@ -137,6 +142,7 @@ void SimpleKeyableProperty<T>::setKey(const std::string &value, unsigned int key
 		setKey(string_to<T>(value), keynum);
 	}
 	catch(std::exception &e){
+		throw MaudioException("maudio: failed to set value");
 	}
 	return;
 }
@@ -148,7 +154,10 @@ void SimpleKeyableProperty<T>::setKey(T value, unsigned int keynum){
 	else if(value > mUpperBound) value = mUpperBound;
 
 	auto iter = mValues.begin();
-	while(iter != mValues.end() && keynum > 0) iter++;
+	while(iter != mValues.end() && keynum > 0){
+		iter++;
+		keynum--;
+	}
 	iter->second = value;
 	return;
 }
@@ -165,7 +174,10 @@ void SimpleKeyableProperty<T>::removeKey(unsigned int keynum){
 	if(keynum >= mValues.size()) return;
 
 	auto iter = mValues.begin();
-	while(iter != mValues.end() && keynum > 0) iter++;
+	while(iter != mValues.end() && keynum > 0){
+		iter++;
+		keynum--;
+	}
 	mValues.erase(iter);
 	return;
 }
@@ -191,7 +203,10 @@ std::vector<T> SimpleKeyableProperty<T>::getBounds() const{
 template<typename T>
 T SimpleKeyableProperty<T>::getElement(unsigned int pos) const{
 	auto iter = mValues.begin();
-	while(iter != mValues.end() && pos > 0) iter++;
+	while(iter != mValues.end() && pos > 0){
+		iter++;
+		pos--;
+	}
 	return iter->second;
 }
 

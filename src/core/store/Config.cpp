@@ -4,7 +4,7 @@
  * See LICENSE.txt for the full license
  */
 
-#include "core/util/Config.hpp"
+#include "core/store/Config.hpp"
 #include "core/util/AudioException.hpp"
 #include <fstream>
 
@@ -47,40 +47,6 @@ void Config::saveFile(const std::string &file) const{
 		ofile << iter->first << " " << iter->second << std::endl;
 	}
 	return;
-}
-
-std::string Config::get(const std::string &key) const{
-	return mData.at(key);
-}
-
-template<>
-std::string Config::get(const std::string &key) const{
-	try{
-		return mData.at(key);
-	}
-	catch(std::exception &e){
-		throw e;
-	}
-}
-
-void Config::set(const std::string &key, const std::string &value){
-	if(!checkKey(key)) return;
-	mData[key] = value;
-	return;
-}
-
-template<>
-void Config::set(const std::string &key, std::string value){
-	if(!checkKey(key)) return;
-	mData[key] = value;
-	return;
-}
-
-bool Config::checkKey(const std::string &key) const{
-	for(unsigned int i = 0; i < key.size(); i++){
-		if(key[i] == ' ') return false;
-	}
-	return true;
 }
 
 void Config::parseLine(std::string &line){

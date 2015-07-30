@@ -9,6 +9,7 @@
 
 #include "core/property/Property.hpp"
 #include "core/util/Util.hpp"
+#include "core/util/AudioException.hpp"
 #include <vector>
 #include <limits>
 
@@ -72,6 +73,7 @@ template<typename T>
 void SimpleProperty<T>::set(const std::string &value){
 	try{set(string_to<T>(value));}
 	catch(std::exception &e){
+		throw MaudioException("maudio: failed to set value");
 	}
 	return;
 }

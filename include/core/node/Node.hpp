@@ -13,7 +13,7 @@
 #include "core/property/Property.hpp"
 #include "core/property/KeyableProperty.hpp"
 #include "core/property/PropertyManager.hpp"
-#include "core/util/Config.hpp"
+#include "core/store/Config.hpp"
 #include <vector>
 #include <memory>
 
@@ -45,8 +45,11 @@ public:
 
 	PropertyManager getProperties();
 
-	//virtual std::string serialize() const = 0;
-	//virtual void unserialize(const std::string &data) = 0;
+	std::string getName() const;
+	void setName(const std::string &name);
+
+	//virtual KeyValueStore serialize() const = 0;
+	//virtual void unserialize(const KeyValueStore &data) = 0;
 
 protected:
 	AudioBuffer getFromSlot(unsigned long pos, unsigned int length, unsigned int slot) noexcept;
@@ -65,6 +68,8 @@ private:
 
 	std::vector<std::shared_ptr<Node>> mInputs;
 	std::vector<std::weak_ptr<Node>> mOutputs;
+
+	std::string mName;
 };
 
 } // maudio

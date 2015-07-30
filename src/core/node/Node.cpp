@@ -102,6 +102,15 @@ PropertyManager Node::getProperties(){
 	return mProperties;
 }
 
+std::string Node::getName() const{
+	return mName;
+}
+
+void Node::setName(const std::string &name){
+	mName = name;
+	return;
+}
+
 bool Node::checkInput(unsigned int slot) noexcept{
 	if(slot < mInputs.size() && mInputs[slot]) return true;
 	return false;

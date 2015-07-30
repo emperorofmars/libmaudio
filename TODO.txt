@@ -15,6 +15,7 @@ Todo:
 - ////create config manager
 - ////template config for get and set
 - ////node: read config
+- ////node: setName, getName
 - create serializer
 - property and keyableproperty: serialize and unserialize
 - node: serialize and unserialize

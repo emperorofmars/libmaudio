@@ -4,44 +4,43 @@
  * See LICENSE.txt for the full license
  */
 
-#ifndef MAUDIO_CONFIG
-#define MAUDIO_CONFIG
+#ifndef MAUDIO_KEYVALUESTORE
+#define MAUDIO_KEYVALUESTORE
 
 #include "core/util/Util.hpp"
+#include "core/util/AudioException.hpp"
 #include <string>
 #include <unordered_map>
 
 namespace maudio{
 
-class Config{
+class KeyValueStore{
 public:
-	Config();
-	~Config();
-
-	void parseFile(const std::string &file);
-	void saveFile() const;
-	void saveFile(const std::string &file) const;
+	KeyValueStore();
+	virtual ~KeyValueStore();
 
 	std::string get(const std::string &key) const;
 	template<typename T>
 	T get(const std::string &key) const;
 
+	unsigned int getSize() const;
+
+	std::string get(unsigned int numKey) const;
+	template<typename T>
+	T get(unsigned int numKey) const;
+
 	void set(const std::string &key, const std::string &value);
 	template<typename T>
 	void set(const std::string &key, T value);
 
-	void setDefaults();
-
-private:
+protected:
 	bool checkKey(const std::string &key) const;
-	void parseLine(std::string &line);
 
-	std::string mFile;
 	std::unordered_map<std::string, std::string> mData;
 };
 
 template<typename T>
-T Config::get(const std::string &key) const{
+T KeyValueStore::get(const std::string &key) const{
 	try{
 		return string_to<T>(mData.at(key));
 	}
@@ -51,7 +50,23 @@ T Config::get(const std::string &key) const{
 }
 
 template<typename T>
-void Config::set(const std::string &key, T value){
+T KeyValueStore::get(unsigned int numKey) const{
+	try{
+		if(numKey >= mData.size()) throw MaudioException("maudio: numKey out of range");
+		auto iter = mData.begin();
+		while(iter != mData.end() && numKey > 0){
+			iter++;
+			numKey--;
+		}
+		return string_to<T>(iter->second);
+	}
+	catch(std::exception &e){
+		throw e;
+	}
+}
+
+template<typename T>
+void KeyValueStore::set(const std::string &key, T value){
 	if(!checkKey(key)) return;
 	try{
 		mData[key] = std::to_string(value);
@@ -64,7 +79,7 @@ void Config::set(const std::string &key, T value){
 
 } // maudio
 
-#endif // MAUDIO_CONFIG
+#endif // MAUDIO_KEYVALUESTORE
 
 
 

@@ -62,9 +62,10 @@
 		<Unit filename="../../include/core/property/SimpleProperty.hpp" />
 		<Unit filename="../../include/core/serializer/Serializer.hpp" />
 		<Unit filename="../../include/core/serializer/TXTSerializer.hpp" />
+		<Unit filename="../../include/core/store/Config.hpp" />
+		<Unit filename="../../include/core/store/ConfigManager.hpp" />
+		<Unit filename="../../include/core/store/KeyValueStore.hpp" />
 		<Unit filename="../../include/core/util/AudioException.hpp" />
-		<Unit filename="../../include/core/util/Config.hpp" />
-		<Unit filename="../../include/core/util/ConfigManager.hpp" />
 		<Unit filename="../../include/core/util/UniqueID.hpp" />
 		<Unit filename="../../include/core/util/Util.hpp" />
 		<Unit filename="../../include/extended/audiosink/FileWriter.hpp" />
@@ -91,8 +92,9 @@
 		<Unit filename="../../src/core/property/SimpleKeyableProperty.cpp" />
 		<Unit filename="../../src/core/property/SimpleProperty.cpp" />
 		<Unit filename="../../src/core/serializer/TXTSerializer.cpp" />
-		<Unit filename="../../src/core/util/Config.cpp" />
-		<Unit filename="../../src/core/util/ConfigManager.cpp" />
+		<Unit filename="../../src/core/store/Config.cpp" />
+		<Unit filename="../../src/core/store/ConfigManager.cpp" />
+		<Unit filename="../../src/core/store/KeyValueStore.cpp" />
 		<Unit filename="../../src/core/util/UniqueID.cpp" />
 		<Unit filename="../../src/core/util/Util.cpp" />
 		<Unit filename="../../src/extended/audiosink/FileWriter.cpp" />

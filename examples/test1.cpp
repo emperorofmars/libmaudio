@@ -17,8 +17,8 @@
 #include "core/audiosink/Performance.hpp"
 #include "core/property/SimpleProperty.hpp"
 #include "core/property/SimpleKeyableProperty.hpp"
-#include "core/util/Config.hpp"
-#include "core/util/ConfigManager.hpp"
+#include "core/store/Config.hpp"
+#include "core/store/ConfigManager.hpp"
 
 using namespace maudio;
 
@@ -92,7 +92,7 @@ int main(int argc, char *argv[]){
 	Config conf;
 	try{
 		conf.parseFile("maudio.conf");
-		std::cerr << "config get: " << conf.get<int>("PlayerBufferSize") << std::endl;
+		std::cerr << "config get: " << conf.get<long>(1) << std::endl;
 	}
 	catch(std::exception &e){
 		std::cerr << "exception" << std::endl;

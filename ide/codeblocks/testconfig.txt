@@ -1,4 +1,6 @@
 # maudio config file
+BlahBlah 55555555555
+Stuff 666
 PlayerBufferSize 4096
 SinkBufferSize 8192
 PlayerQueueSize 8192

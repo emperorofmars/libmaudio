@@ -4,7 +4,7 @@
  * See LICENSE.txt for the full license
  */
 
-#include "core/util/ConfigManager.hpp"
+#include "core/store/ConfigManager.hpp"
 #include "core/util/AudioException.hpp"
 #include <fstream>
 

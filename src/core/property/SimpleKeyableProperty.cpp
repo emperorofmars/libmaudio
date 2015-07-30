@@ -83,7 +83,10 @@ void SimpleKeyableProperty<std::string>::setKey(const std::string &value, unsign
 	if(keynum >= mValues.size()) return;
 
 	auto iter = mValues.begin();
-	while(iter != mValues.end() && keynum > 0) iter++;
+	while(iter != mValues.end() && keynum > 0){
+		iter++;
+		keynum--;
+	}
 	iter->second = value;
 	return;
 }
@@ -93,7 +96,10 @@ void SimpleKeyableProperty<std::string>::setKey(std::string value, unsigned int 
 	if(keynum >= mValues.size()) return;
 
 	auto iter = mValues.begin();
-	while(iter != mValues.end() && keynum > 0) iter++;
+	while(iter != mValues.end() && keynum > 0){
+		iter++;
+		keynum--;
+	}
 	iter->second = value;
 	return;
 }

@@ -9,7 +9,7 @@
 
 #define CONFIG_DEFAULT_PATH "maudio.conf"
 
-#include "core/util/Config.hpp"
+#include "core/store/Config.hpp"
 #include <string>
 
 namespace maudio{

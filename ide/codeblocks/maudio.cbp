@@ -61,6 +61,7 @@
 		<Unit filename="../../include/core/property/SimpleKeyableProperty.hpp" />
 		<Unit filename="../../include/core/property/SimpleProperty.hpp" />
 		<Unit filename="../../include/core/serializer/Serializer.hpp" />
+		<Unit filename="../../include/core/serializer/SerializerStore.hpp" />
 		<Unit filename="../../include/core/serializer/TXTSerializer.hpp" />
 		<Unit filename="../../include/core/store/Config.hpp" />
 		<Unit filename="../../include/core/store/ConfigManager.hpp" />
@@ -91,6 +92,7 @@
 		<Unit filename="../../src/core/property/PropertyManager.cpp" />
 		<Unit filename="../../src/core/property/SimpleKeyableProperty.cpp" />
 		<Unit filename="../../src/core/property/SimpleProperty.cpp" />
+		<Unit filename="../../src/core/serializer/SerializerStore.cpp" />
 		<Unit filename="../../src/core/serializer/TXTSerializer.cpp" />
 		<Unit filename="../../src/core/store/Config.cpp" />
 		<Unit filename="../../src/core/store/ConfigManager.cpp" />

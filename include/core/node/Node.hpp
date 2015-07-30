@@ -14,6 +14,7 @@
 #include "core/property/KeyableProperty.hpp"
 #include "core/property/PropertyManager.hpp"
 #include "core/store/Config.hpp"
+#include "core/serializer/SerializerStore.hpp"
 #include <vector>
 #include <memory>
 

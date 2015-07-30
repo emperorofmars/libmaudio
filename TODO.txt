@@ -16,12 +16,13 @@ Todo:
 - ////template config for get and set
 - ////node: read config
 - ////node: setName, getName
-- create serializer
+- implement SerializerStore
 - property and keyableproperty: serialize and unserialize
 - node: serialize and unserialize
-- node: make api reasonably stable
+- create serializer
 - implement scene
 - save and reload scene
+- node: make api reasonably stable
 - export scene to svg
 - write cmakelists
 - write tests

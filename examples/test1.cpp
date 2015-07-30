@@ -93,6 +93,7 @@ int main(int argc, char *argv[]){
 	try{
 		conf.parseFile("maudio.conf");
 		std::cerr << "config get: " << conf.get<long>(1) << std::endl;
+		std::cerr << "config get: " << conf.get<long>("Stuff") << std::endl;
 	}
 	catch(std::exception &e){
 		std::cerr << "exception" << std::endl;

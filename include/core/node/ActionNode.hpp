@@ -15,6 +15,8 @@ namespace maudio{
 
 class ActionNode : public Node{
 public:
+	ActionNode(IAction *action);
+	ActionNode(std::unique_ptr<IAction> action);
 	virtual ~ActionNode();
 
 	virtual std::shared_ptr<IAudioBuffer> get(unsigned long pos, unsigned int length) noexcept;
@@ -46,6 +48,8 @@ protected:
 		private:
 			std::shared_ptr<Node> mInput;
 	};
+
+	std::unique_ptr<IAction> mAction;
 };
 
 } // maudio

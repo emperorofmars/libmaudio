@@ -85,6 +85,9 @@ void Node::disconnect(){
 	for(unsigned int i = 0; i < mOutputs.size(); i++){
 		mOutputs[i].lock()->removeInput(shared_from_this());
 	}
+	for(unsigned int i = 0; i < mInputs.size(); i++){
+		removeInput(i);
+	}
 	mOutputs.clear();
 	mInputs.clear();
 	return;

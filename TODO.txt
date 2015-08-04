@@ -16,6 +16,11 @@ Todo:
 - ////template config for get and set
 - ////node: read config
 - ////node: setName, getName
+- node: make checkIfCompatible non virtual
+- ??node: make getProperties return shared_ptr
+- AudioBuffer, Sample, AudioInfo, FileInfo, KeyValueStore, Config, Property, Propertymanager need interfaces
+- implement plugin apis for c and c++
+- create PluginNode node to hold plugin
 - implement SerializerStore
 - property and keyableproperty: serialize and unserialize
 - node: serialize and unserialize
@@ -32,7 +37,6 @@ Todo:
 - create renderer
 - create file reader
 - create file writer
-- implement plugin api
 - lua plugins
 - python plugins
 - qt gui

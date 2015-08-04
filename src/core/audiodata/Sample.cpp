@@ -17,7 +17,7 @@ Sample::Sample(const std::vector<float> data){
 	mData = data;
 }
 
-Sample::Sample(const Sample &data){
+Sample::Sample(const ISample &data){
 	*this = data;
 	return;
 }
@@ -30,8 +30,11 @@ const float Sample::operator[](unsigned int pos) const{
 	return mData[pos];
 }
 
-void Sample::operator=(const Sample &data){
-	mData = data.mData;
+void Sample::operator=(const ISample &data){
+	mData.resize(data.getChannels());
+	for(unsigned int i = 0; i < getChannels(); i++){
+		mData[i] = data[i];
+	}
 	return;
 }
 
@@ -49,64 +52,64 @@ unsigned int Sample::getChannels() const{
 	return mData.size();
 }
 
-Sample Sample::operator+(const Sample &data){
-	Sample ret(*this);
+ISample *Sample::operator+(const ISample &data){
+	Sample *ret = new Sample(*this);
 	if(getChannels() == data.getChannels()){
 		for(unsigned int i = 0; i < getChannels(); i++){
-			ret.set(ret[i] + data[i], i);
+			ret->set((*ret)[i] + data[i], i);
 		}
 	}
 	return ret;
 }
 
-Sample Sample::operator-(const Sample &data){
-	Sample ret(*this);
+ISample *Sample::operator-(const ISample &data){
+	Sample *ret = new Sample(*this);
 	if(getChannels() == data.getChannels()){
 		for(unsigned int i = 0; i < getChannels(); i++){
-			ret.set(ret[i] - data[i], i);
+			ret->set((*ret)[i] - data[i], i);
 		}
 	}
 	return ret;
 }
 
-Sample Sample::operator*(const Sample &data){
-	Sample ret(*this);
+ISample *Sample::operator*(const ISample &data){
+	Sample *ret = new Sample(*this);
 	if(getChannels() == data.getChannels()){
 		for(unsigned int i = 0; i < getChannels(); i++){
-			ret.set(ret[i] * data[i], i);
+			ret->set((*ret)[i] * data[i], i);
 		}
 	}
 	return ret;
 }
 
-Sample Sample::operator/(const Sample &data){
-	Sample ret(*this);
+ISample *Sample::operator/(const ISample &data){
+	Sample *ret = new Sample(*this);
 	if(getChannels() == data.getChannels()){
 		for(unsigned int i = 0; i < getChannels(); i++){
-			if(data[i] != 0) ret.set(ret[i] / data[i], i);
+			if(data[i] != 0) ret->set((*ret)[i] / data[i], i);
 		}
 	}
 	return ret;
 }
 
-Sample Sample::operator*(float data){
-	Sample ret(*this);
+ISample *Sample::operator*(float data){
+	Sample *ret = new Sample(*this);
     for(unsigned int i = 0; i < getChannels(); i++){
-        ret.set(ret[i] * data, i);
+        ret->set((*ret)[i] * data, i);
     }
 	return ret;
 }
 
-Sample Sample::operator/(float data){
-	Sample ret(*this);
+ISample *Sample::operator/(float data){
+	Sample *ret = new Sample(*this);
 	if(data == 0) Sample(getChannels());
     for(unsigned int i = 0; i < getChannels(); i++){
-        ret.set(ret[i] / data, i);
+        ret->set((*ret)[i] / data, i);
     }
 	return ret;
 }
 
-void Sample::operator+=(const Sample &data){
+void Sample::operator+=(const ISample &data){
 	if(getChannels() == data.getChannels()){
 		for(unsigned int i = 0; i < getChannels(); i++){
 			mData[i] += data[i];
@@ -115,7 +118,7 @@ void Sample::operator+=(const Sample &data){
 	return;
 }
 
-void Sample::operator-=(const Sample &data){
+void Sample::operator-=(const ISample &data){
 	if(getChannels() == data.getChannels()){
 		for(unsigned int i = 0; i < getChannels(); i++){
 			mData[i] -= data[i];
@@ -124,7 +127,7 @@ void Sample::operator-=(const Sample &data){
 	return;
 }
 
-void Sample::operator*=(const Sample &data){
+void Sample::operator*=(const ISample &data){
 	if(getChannels() == data.getChannels()){
 		for(unsigned int i = 0; i < getChannels(); i++){
 			mData[i] *= data[i];
@@ -133,7 +136,7 @@ void Sample::operator*=(const Sample &data){
 	return;
 }
 
-void Sample::operator/=(const Sample &data){
+void Sample::operator/=(const ISample &data){
 	if(getChannels() == data.getChannels()){
 		for(unsigned int i = 0; i < getChannels(); i++){
 			if(data[i] != 0) mData[i] /= data[i];

@@ -7,39 +7,40 @@
 #ifndef MAUDIO_SAMPLE
 #define MAUDIO_SAMPLE
 
+#include "core/audiodata/ISample.hpp"
 #include <vector>
 
 namespace maudio{
 
 ///Holds a sample of audio
-class Sample{
+class Sample : public ISample{
 public:
 	Sample(unsigned int channels);
 	Sample(const std::vector<float> data);
-	Sample(const Sample &data);
-	~Sample();
+	Sample(const ISample &data);
+	virtual ~Sample();
 
-	const float operator[](unsigned int pos) const;
-	void operator=(const Sample &data);
-	float get(unsigned int pos) const;
-	void set(float data, unsigned int pos);
-	unsigned int getChannels() const;
+	virtual const float operator[](unsigned int pos) const;
+	virtual void operator=(const ISample &data);
+	virtual float get(unsigned int pos) const;
+	virtual void set(float data, unsigned int pos);
+	virtual unsigned int getChannels() const;
 
-	Sample operator+(const Sample &data);
-	Sample operator-(const Sample &data);
-	Sample operator*(const Sample &data);
-	Sample operator/(const Sample &data);
+	virtual ISample *operator+(const ISample &data);
+	virtual ISample *operator-(const ISample &data);
+	virtual ISample *operator*(const ISample &data);
+	virtual ISample *operator/(const ISample &data);
 
-	Sample operator*(float data);
-	Sample operator/(float data);
+	virtual ISample *operator*(float data);
+	virtual ISample *operator/(float data);
 
-	void operator+=(const Sample &data);
-	void operator-=(const Sample &data);
-	void operator*=(const Sample &data);
-	void operator/=(const Sample &data);
+	virtual void operator+=(const ISample &data);
+	virtual void operator-=(const ISample &data);
+	virtual void operator*=(const ISample &data);
+	virtual void operator/=(const ISample &data);
 
-	void operator*=(float data);
-	void operator/=(float data);
+	virtual void operator*=(float data);
+	virtual void operator/=(float data);
 
 private:
 	std::vector<float> mData; ///one value per channel

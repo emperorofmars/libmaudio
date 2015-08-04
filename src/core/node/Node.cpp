@@ -16,7 +16,6 @@ void Node::addInput(std::shared_ptr<Node> node, int slot){
 	if(!node) throw MaudioException("passed invalid node");
 	if(!node->HasOutputs()) throw MaudioException("node has no outputs");
 	if(MaxInputs() >= 0 && slot >= MaxInputs()) throw MaudioException("invalid input slot");
-	if(!checkIfCompatible(node)) throw MaudioException("input is not compatible");
 	if(checkCycles(node)) throw MaudioException("adding this would create a cycle");
 
 	if(slot < 0){
@@ -29,7 +28,7 @@ void Node::addInput(std::shared_ptr<Node> node, int slot){
 	else{
 		mInputs[slot] = node;
 	}
-	node->mOutputs.push_back(shared_from_this());
+	node->addOutput(shared_from_this());
 
 	onAdd(slot);
 	return;
@@ -46,13 +45,8 @@ void Node::removeInput(std::shared_ptr<Node> node){
 
 void Node::removeInput(int slot){
 	if((unsigned int)slot < mInputs.size()){
-		for(unsigned int i = 0; i < mInputs[slot]->mOutputs.size(); i++){
-			if(mInputs[slot]->mOutputs[i].lock().get() == this){
-				mInputs[slot]->mOutputs.erase(mInputs[slot]->mOutputs.begin() + i);
-				i--;
-			}
-		}
-		mInputs.erase(mInputs.begin() + slot);
+		mInputs[slot]->removeOutput(shared_from_this());
+		mInputs[slot].reset();
 	}
 	onRemove(slot);
 	return;
@@ -84,6 +78,7 @@ std::shared_ptr<Node> Node::getByID(unsigned int id){
 void Node::disconnect(){
 	for(unsigned int i = 0; i < mOutputs.size(); i++){
 		mOutputs[i].lock()->removeInput(shared_from_this());
+		i--;
 	}
 	for(unsigned int i = 0; i < mInputs.size(); i++){
 		removeInput(i);
@@ -101,10 +96,6 @@ unsigned int Node::NumOutputs() const{
 	return mOutputs.size();
 }
 
-PropertyManager Node::getProperties(){
-	return mProperties;
-}
-
 std::string Node::getName() const{
 	return mName;
 }
@@ -114,23 +105,20 @@ void Node::setName(const std::string &name){
 	return;
 }
 
-bool Node::checkInput(unsigned int slot) noexcept{
-	if(slot < mInputs.size() && mInputs[slot]) return true;
-	return false;
+void Node::addOutput(std::weak_ptr<Node> node){
+	mOutputs.push_back(node);
+	return;
 }
 
-AudioBuffer Node::getFromSlot(unsigned long pos, unsigned int length, unsigned int slot) noexcept{
-	if(slot < mInputs.size() && mInputs[slot]){
-		return mInputs[slot]->get(pos, length);
+void Node::removeOutput(std::weak_ptr<Node> node){
+	for(unsigned int i = 0; i < mOutputs.size(); i++){
+		if(mOutputs[i].lock().get() == node.lock().get()){
+			mOutputs.erase(mOutputs.begin() + i);
+			i--;
+			break;
+		}
 	}
-	return AudioBuffer(getInfo().Channels);
-}
-
-AudioInfo Node::getInfoFromSlot(unsigned int slot) noexcept{
-	if(slot < mInputs.size() && mInputs[slot]){
-		return mInputs[slot]->getInfo();
-	}
-	return AudioInfo();
+	return;
 }
 
 bool Node::checkCycles(std::shared_ptr<Node> node){

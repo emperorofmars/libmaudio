@@ -7,6 +7,7 @@
 #ifndef MAUDIO_AUDIOBUFFER
 #define MAUDIO_AUDIOBUFFER
 
+#include "core/audiodata/IAudioBuffer.hpp"
 #include "core/audiodata/Sample.hpp"
 #include "core/audiodata/AudioInfo.hpp"
 #include <vector>
@@ -14,23 +15,25 @@
 namespace maudio{
 
 ///holds an audio stream in a vector of floats
-class AudioBuffer{
+class AudioBuffer : public IAudioBuffer{
 public:
-	AudioBuffer(AudioInfo info);
+	AudioBuffer(IAudioInfo &info);
 	AudioBuffer(unsigned int channels = 1, unsigned long samples = 0, unsigned long offset = 0, unsigned int samplerate = 44100);
 	AudioBuffer(const AudioBuffer &data);
 	virtual ~AudioBuffer();
 
-	virtual Sample operator[](unsigned long pos) const;
-	virtual void operator=(const AudioBuffer &data);
-	virtual Sample get(unsigned long pos) const;
-	virtual void set(const Sample &data, unsigned long pos);
+	virtual ISample *operator[](unsigned long pos) const;
+	virtual void operator=(const IAudioBuffer &data);
+	virtual ISample *get(unsigned long pos) const;
+	virtual void set(const ISample &data, unsigned long pos);
 
 	virtual void resize(unsigned long samples);
-	virtual AudioInfo getInfo() const;
+	virtual const IAudioInfo *getInfo() const;
+
+	virtual const float* getRaw() const;
 
 private:
-	Sample createSample(unsigned long pos) const;
+	Sample *createSample(unsigned long pos) const;
 
 	std::vector<float> mData;
 	AudioInfo mInfo;

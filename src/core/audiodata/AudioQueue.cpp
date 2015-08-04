@@ -18,7 +18,7 @@ void AudioQueue::push(Sample data){
 	mMutex.lock();
 	if(data.getChannels() == getChannels()){
 		mData.push_back(data);
-		mAudioInfo.Samples++;
+		mAudioInfo.setSamples(mAudioInfo.getSamples() + 1);
 	}
 	mMutex.unlock();
 	return;
@@ -30,8 +30,8 @@ Sample AudioQueue::pop(){
 	if(mData.size() > 0){
 		ret = mData.front();
 		mData.pop_front();
-		mAudioInfo.Offset++;
-		mAudioInfo.Samples--;
+		mAudioInfo.setOffset(mAudioInfo.getOffset() + 1);
+		mAudioInfo.setSamples(mAudioInfo.getSamples() - 1);
 	}
 	else{
 		std::cerr << "POP ERROR" << std::endl;
@@ -42,14 +42,14 @@ Sample AudioQueue::pop(){
 
 Sample AudioQueue::get(unsigned long pos){
 	Sample ret(getChannels());
-	if(pos < mAudioInfo.Offset + mAudioInfo.Samples && pos >= mAudioInfo.Offset){
-		ret = mData[pos - mAudioInfo.Offset];
+	if(pos < mAudioInfo.getOffset() + mAudioInfo.getSamples() && pos >= mAudioInfo.getOffset()){
+		ret = mData[pos - mAudioInfo.getOffset()];
 	}
 	return ret;
 }
 
 unsigned int AudioQueue::getChannels(){
-	return mAudioInfo.Channels;
+	return mAudioInfo.getChannels();
 }
 
 unsigned int AudioQueue::size(){

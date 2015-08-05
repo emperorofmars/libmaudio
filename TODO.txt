@@ -16,8 +16,9 @@ Todo:
 - ////template config for get and set
 - ////node: read config
 - ////node: setName, getName
-- ??node: make getProperties return shared_ptr
-- AudioBuffer, Sample, AudioInfo, FileInfo, KeyValueStore, Config, Property, Propertymanager need interfaces
+- ////??node: make getProperties return shared_ptr
+- ////AudioBuffer, Sample, AudioInfo, FileInfo need interfaces
+- KeyValueStore, Property, Propertymanager need interfaces
 - node: implement ActionNode and testActions
 - implement plugin apis for c and c++
 - create PluginNode node to hold plugin

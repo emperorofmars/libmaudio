@@ -10,6 +10,9 @@
 #include "core/node/ISocket.hpp"
 #include "core/audiodata/IAudioBuffer.hpp"
 #include "core/audiodata/IAudioInfo.hpp"
+#include "core/property/Property.hpp"
+#include "core/property/KeyableProperty.hpp"
+#include "core/property/PropertyManager.hpp"
 
 namespace maudio{
 
@@ -29,9 +32,9 @@ public:
 	virtual int MaxInputs() const = 0;
 	virtual bool HasOutputs() const = 0;
 
-	//virtual void readConfig(const IKeyValueStore &conf) = 0;
+	virtual void readConfig(const KeyValueStore &conf) = 0;
 
-	//IPropertyManager *getProperties() = 0;
+	virtual PropertyManager *getProperties() = 0;
 };
 
 } // maudio

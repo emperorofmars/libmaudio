@@ -33,7 +33,7 @@ std::string KeyValueStore::get(const std::string &key) const{
 }
 
 const char *KeyValueStore::get(unsigned int numKey) const{
-	if(numKey >= mData.size()) throw MaudioException("maudio: numKey out of range");
+	if(numKey >= mData.size()) throw MaudioException("numKey out of range");
 	auto iter = mData.begin();
 	while(iter != mData.end() && numKey > 0){
 		iter++;
@@ -44,7 +44,7 @@ const char *KeyValueStore::get(unsigned int numKey) const{
 
 template<>
 std::string KeyValueStore::get(unsigned int numKey) const{
-	if(numKey >= mData.size()) throw MaudioException("maudio: numKey out of range");
+	if(numKey >= mData.size()) throw MaudioException("numKey out of range");
 	auto iter = mData.begin();
 	while(iter != mData.end() && numKey > 0){
 		iter++;

@@ -84,7 +84,7 @@ const char *SimpleKeyableProperty<T>::getName() const{
 
 template<typename T>
 const char *SimpleKeyableProperty<T>::getString(long double pos) const{
-	return std::to_string(interpolate(pos)).c_str();
+	return to_chararray(interpolate(pos));
 }
 
 template<typename T>
@@ -94,12 +94,12 @@ T SimpleKeyableProperty<T>::get(long double pos) const{
 
 template<typename T>
 const char *SimpleKeyableProperty<T>::getKeyString(unsigned int keynum) const{
-	return std::to_string(getKey(keynum)).c_str();
+	return to_chararray(getKey(keynum));
 }
 
 template<typename T>
 long double SimpleKeyableProperty<T>::getKeyPos(unsigned int keynum) const{
-	if(keynum >= mValues.size()) throw MaudioException("maudio: keynum out of range");
+	if(keynum >= mValues.size()) throw MaudioException("keynum out of range");
 	auto iter = mValues.begin();
 	while(iter != mValues.end() && keynum > 0){
 		iter++;
@@ -124,7 +124,7 @@ void SimpleKeyableProperty<T>::addKey(const std::string &value, long double pos)
 		addKey(string_to<T>(value), pos);
 	}
 	catch(std::exception &e){
-		throw MaudioException("maudio: failed to add value");
+		throw MaudioException("failed to add value");
 	}
 	return;
 }
@@ -149,7 +149,7 @@ void SimpleKeyableProperty<T>::setKey(const std::string &value, unsigned int key
 		setKey(string_to<T>(value), keynum);
 	}
 	catch(std::exception &e){
-		throw MaudioException("maudio: failed to set value");
+		throw MaudioException("failed to set value");
 	}
 	return;
 }
@@ -199,12 +199,12 @@ void SimpleKeyableProperty<T>::setBounds(T bottom, T upper){
 
 template<typename T>
 const char *SimpleKeyableProperty<T>::getBottomBoundsString() const{
-	return std::to_string(mBottomBound).c_str();
+	return to_chararray(mBottomBound);
 }
 
 template<typename T>
 const char *SimpleKeyableProperty<T>::getUpperBoundsString() const{
-	return std::to_string(mUpperBound).c_str();
+	return to_chararray(mUpperBound);
 }
 
 template<typename T>

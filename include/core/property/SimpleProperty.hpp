@@ -69,7 +69,7 @@ const char *SimpleProperty<T>::getName() const{
 
 template<typename T>
 const char *SimpleProperty<T>::getString() const{
-	return std::to_string(mValue).c_str();
+	return to_chararray(mValue);
 }
 
 template<typename T>
@@ -81,7 +81,7 @@ template<typename T>
 void SimpleProperty<T>::set(const std::string &value){
 	try{set(string_to<T>(value));}
 	catch(std::exception &e){
-		throw MaudioException("maudio: failed to set value");
+		throw MaudioException("failed to set value");
 	}
 	return;
 }
@@ -110,12 +110,12 @@ void SimpleProperty<T>::setBounds(T bottom, T upper){
 
 template<typename T>
 const char *SimpleProperty<T>::getBottomBoundsString() const{
-	return std::to_string(mBottomBound).c_str();
+	return to_chararray(mBottomBound);
 }
 
 template<typename T>
 const char *SimpleProperty<T>::getUpperBoundsString() const{
-	return std::to_string(mUpperBound).c_str();
+	return to_chararray(mUpperBound);
 }
 
 template<typename T>

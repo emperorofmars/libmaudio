@@ -20,7 +20,7 @@ Config::~Config(){
 
 void Config::parseFile(const std::string &file){
 	std::ifstream ifile(file);
-	if(!ifile.good()) throw MaudioException("maudio: cant open file");
+	if(!ifile.good()) throw MaudioException("cant open file");
 
 	std::string line;
 	while(std::getline(ifile, line)){

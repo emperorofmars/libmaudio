@@ -39,8 +39,12 @@ int main(int argc, char *argv[]){
 
 	IProperty *prop1 = new IntProperty("prop1", 678);
 	prop1->set("432.567");
+	const char *str = prop1->getString();
 	std::cerr << prop1->getName() << " " << prop1->getString() << std::endl;
 	delete prop1;
+
+	std::cerr << "TEST: " << str << std::endl;
+	delete str;
 
 	IKeyableProperty *prop2 = new KeyableDoubleProperty("prop2", 1.5);
 	prop2->addKey("3", 1);

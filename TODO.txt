@@ -19,10 +19,13 @@ Todo:
 - ////??node: make getProperties return shared_ptr
 - ////AudioBuffer, Sample, AudioInfo, FileInfo need interfaces
 - ////KeyValueStore, Property, Propertymanager need interfaces
-- fix maudio exceptions writing "maudio: " twice
-- KeyableProperty: add specialisations for char *
-- add play function to Node and IAction
+- ////fix maudio exceptions writing "maudio: " twice
+- ////KeyableProperty: add specialisations for char *
+- create interface for AudioQueue
+- add functionality to control functions of sinks to Node and IAction
 - node: implement ActionNode and testActions
+- create Observer and Observable
+- make properties and propertymanager observable
 - create serializable interface and inherit it to Node and IAction
 - implement plugin apis for c and c++
 - create PluginNode node to hold plugin

@@ -34,7 +34,7 @@ void ConfigManager::setConfigPath(const std::string &path){
 		loadFromFile(path);
 		mPath = path;
 	}
-	throw MaudioException("maudio: invalid config path");
+	throw MaudioException("invalid config path");
 }
 
 std::string ConfigManager::getConfigPath() const{

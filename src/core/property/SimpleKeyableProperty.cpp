@@ -48,7 +48,7 @@ std::string SimpleKeyableProperty<std::string>::interpolate(long double pos) con
 
 template<>
 const char *SimpleKeyableProperty<std::string>::getString(long double pos) const{
-	return interpolate(pos).c_str();
+	return to_chararray(interpolate(pos));
 }
 
 template<>
@@ -58,7 +58,7 @@ std::string SimpleKeyableProperty<std::string>::get(long double pos) const{
 
 template<>
 const char *SimpleKeyableProperty<std::string>::getKeyString(unsigned int keynum) const{
-	return getElement(keynum).c_str();
+	return to_chararray(getElement(keynum));
 }
 
 template<>

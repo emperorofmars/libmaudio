@@ -9,8 +9,8 @@
 #include <thread>
 #include "core/audiodata/Sample.hpp"
 #include "core/audiodata/AudioBuffer.hpp"
+//#include "core/actions/SinusGenerator.hpp"
 /*
-#include "core/audiosource/SinusGenerator.hpp"
 #include "core/audiosink/TerminalPrinter.hpp"
 #include "extended/audiosink/Player.hpp"
 #include "core/manipulator/Mixer.hpp"
@@ -32,12 +32,12 @@ int main(int argc, char *argv[]){
 	std::cerr << store1->get("stuff") << std::endl;
 	delete store1;
 
-	Property *prop1 = new IntProperty("prop1", 678);
+	IProperty *prop1 = new IntProperty("prop1", 678);
 	prop1->set("432.567");
 	std::cerr << prop1->getName() << " " << prop1->getString() << std::endl;
 	delete prop1;
 
-	KeyableProperty *prop2 = new KeyableDoubleProperty("prop2", 1.5);
+	IKeyableProperty *prop2 = new KeyableDoubleProperty("prop2", 1.5);
 	prop2->addKey("3", 1);
 	std::cerr << prop2->getName() << " " << prop2->getString(0) << std::endl;
 	std::cerr << prop2->getName() << " " << prop2->getString(0.1) << std::endl;

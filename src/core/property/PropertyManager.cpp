@@ -15,14 +15,14 @@ PropertyManager::PropertyManager(){
 PropertyManager::~PropertyManager(){
 }
 
-void PropertyManager::add(Property *prop){
+void PropertyManager::add(IProperty *prop){
 	if(!prop) return;
 	if(PropertyExists(prop->getName())) return;
 	mProperties.push_back(prop);
 	return;
 }
 
-void PropertyManager::add(KeyableProperty *prop){
+void PropertyManager::add(IKeyableProperty *prop){
 	if(!prop) return;
 	if(KeyablePropertyExists(prop->getName())) return;
 	mKeyableProperties.push_back(prop);
@@ -43,24 +43,24 @@ bool PropertyManager::KeyablePropertyExists(const char *name){
 	return false;
 }
 
-Property *PropertyManager::getProperty(unsigned int i){
+IProperty *PropertyManager::getProperty(unsigned int i){
 	if(i >= mProperties.size()) return NULL;
 	return mProperties[i];
 }
 
-Property *PropertyManager::getProperty(const char *name){
+IProperty *PropertyManager::getProperty(const char *name){
 	for(unsigned int i = 0; i < mProperties.size(); i++){
 		if(mProperties[i]->getName() == name) return mProperties[i];
 	}
 	return NULL;
 }
 
-KeyableProperty *PropertyManager::getKeyableProperty(unsigned int i){
+IKeyableProperty *PropertyManager::getKeyableProperty(unsigned int i){
 	if(i >= mKeyableProperties.size()) return NULL;
 	return mKeyableProperties[i];
 }
 
-KeyableProperty *PropertyManager::getKeyableProperty(const char *name){
+IKeyableProperty *PropertyManager::getKeyableProperty(const char *name){
 	for(unsigned int i = 0; i < mKeyableProperties.size(); i++){
 		if(mKeyableProperties[i]->getName() == name) return mKeyableProperties[i];
 	}

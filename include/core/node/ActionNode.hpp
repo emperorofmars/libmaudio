@@ -27,7 +27,7 @@ public:
 
 	virtual void readConfig(const Config &conf);
 
-	virtual PropertyManager *getProperties();
+	virtual IPropertyManager *getProperties();
 
 	virtual IKeyValueStore *serialize() const;
 	virtual void deserialize(const IKeyValueStore *data);

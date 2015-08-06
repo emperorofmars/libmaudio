@@ -4,14 +4,14 @@
  * See LICENSE.txt for the full license
  */
 
-#ifndef MAUDIO_KEYABLEPROPERTY
-#define MAUDIO_KEYABLEPROPERTY
+#ifndef MAUDIO_IKEYABLEPROPERTY
+#define MAUDIO_IKEYABLEPROPERTY
 
 namespace maudio{
 
-class KeyableProperty{
+class IKeyableProperty{
 public:
-	virtual ~KeyableProperty(){};
+	virtual ~IKeyableProperty(){};
 
 	virtual const char *getName() const = 0;
 
@@ -32,7 +32,7 @@ public:
 
 } // maudio
 
-#endif // MAUDIO_KEYABLEPROPERTY
+#endif // MAUDIO_IKEYABLEPROPERTY
 
 
 

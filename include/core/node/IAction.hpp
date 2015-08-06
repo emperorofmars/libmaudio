@@ -10,9 +10,10 @@
 #include "core/node/ISocket.hpp"
 #include "core/audiodata/IAudioBuffer.hpp"
 #include "core/audiodata/IAudioInfo.hpp"
-#include "core/property/Property.hpp"
-#include "core/property/KeyableProperty.hpp"
-#include "core/property/PropertyManager.hpp"
+#include "core/property/IProperty.hpp"
+#include "core/property/IKeyableProperty.hpp"
+#include "core/property/IPropertyManager.hpp"
+#include "core/store/IKeyValueStore.hpp"
 
 namespace maudio{
 
@@ -27,17 +28,16 @@ public:
 	virtual void removeSocket(int slot) = 0;
 
 	virtual int NumInputs() const = 0;
-	virtual int NumOutputs() const = 0;
-
 	virtual int MaxInputs() const = 0;
 	virtual bool HasOutputs() const = 0;
 
-	virtual void readConfig(const KeyValueStore &conf) = 0;
+	virtual void readConfig(const IKeyValueStore &conf) = 0;
 
-	virtual PropertyManager *getProperties() = 0;
-
+	virtual IPropertyManager *getProperties() = 0;
+/*
 	virtual IKeyValueStore *serialize() const = 0;
 	virtual void deserialize(const IKeyValueStore *data) = 0;
+*/
 };
 
 } // maudio

@@ -48,7 +48,7 @@ void ActionNode::readConfig(const Config &conf){
 	return;
 }
 
-PropertyManager *ActionNode::getProperties(){
+IPropertyManager *ActionNode::getProperties(){
 	if(!mAction) return NULL;
 	return mAction->getProperties();
 }

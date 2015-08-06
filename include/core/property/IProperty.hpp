@@ -4,14 +4,14 @@
  * See LICENSE.txt for the full license
  */
 
-#ifndef MAUDIO_PROPERTY
-#define MAUDIO_PROPERTY
+#ifndef MAUDIO_IPROPERTY
+#define MAUDIO_IPROPERTY
 
 namespace maudio{
 
-class Property{
+class IProperty{
 public:
-    virtual ~Property(){};
+    virtual ~IProperty(){};
 
     virtual const char *getString() const = 0;
 	virtual void set(const char *value) = 0;
@@ -26,7 +26,7 @@ public:
 
 } // maudio
 
-#endif // MAUDIO_PROPERTY
+#endif // MAUDIO_IPROPERTY
 
 
 

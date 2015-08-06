@@ -10,9 +10,9 @@
 #include "core/util/UniqueID.hpp"
 #include "core/audiodata/IAudioBuffer.hpp"
 #include "core/audiodata/IAudioInfo.hpp"
-#include "core/property/Property.hpp"
-#include "core/property/KeyableProperty.hpp"
-#include "core/property/PropertyManager.hpp"
+#include "core/property/IProperty.hpp"
+#include "core/property/IKeyableProperty.hpp"
+#include "core/property/IPropertyManager.hpp"
 #include "core/store/Config.hpp"
 #include "core/serializer/SerializerStore.hpp"
 #include <vector>
@@ -42,7 +42,7 @@ public:
 
 	virtual void readConfig(const Config &conf) = 0;
 
-	virtual PropertyManager *getProperties() = 0;
+	virtual IPropertyManager *getProperties() = 0;
 
 	std::string getName() const;
 	void setName(const std::string &name);

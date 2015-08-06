@@ -7,7 +7,7 @@
 #ifndef MAUDIO_SIMPLEKEYABLEPROPERTY
 #define MAUDIO_SIMPLEKEYABLEPROPERTY
 
-#include "core/property/KeyableProperty.hpp"
+#include "core/property/IKeyableProperty.hpp"
 #include "core/util/Util.hpp"
 #include "core/util/AudioException.hpp"
 #include <vector>
@@ -19,7 +19,7 @@
 namespace maudio{
 
 template<typename T>
-class SimpleKeyableProperty : public KeyableProperty{
+class SimpleKeyableProperty : public IKeyableProperty{
 public:
 	SimpleKeyableProperty(const char *name, T initialValue);
 	virtual ~SimpleKeyableProperty();

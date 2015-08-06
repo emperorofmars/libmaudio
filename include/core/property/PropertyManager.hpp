@@ -17,16 +17,16 @@ public:
 	PropertyManager();
 	virtual ~PropertyManager();
 
-	virtual void add(Property *prop);
-	virtual void add(KeyableProperty *prop);
+	virtual void add(IProperty *prop);
+	virtual void add(IKeyableProperty *prop);
 
 	virtual bool PropertyExists(const char *name);
 	virtual bool KeyablePropertyExists(const char *name);
 
-	virtual Property *getProperty(unsigned int i);
-	virtual Property *getProperty(const char *name);
-	virtual KeyableProperty *getKeyableProperty(unsigned int i);
-	virtual KeyableProperty *getKeyableProperty(const char *name);
+	virtual IProperty *getProperty(unsigned int i);
+	virtual IProperty *getProperty(const char *name);
+	virtual IKeyableProperty *getKeyableProperty(unsigned int i);
+	virtual IKeyableProperty *getKeyableProperty(const char *name);
 
 	virtual void removeProperty(unsigned int i);
 	virtual void removeProperty(const char *name);
@@ -37,8 +37,8 @@ public:
 	virtual unsigned int getNumKeyableProperties() const;
 
 private:
-	std::vector<Property *> mProperties;
-	std::vector<KeyableProperty *> mKeyableProperties;
+	std::vector<IProperty *> mProperties;
+	std::vector<IKeyableProperty *> mKeyableProperties;
 };
 
 } // maudio

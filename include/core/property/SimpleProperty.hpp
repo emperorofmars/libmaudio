@@ -7,7 +7,7 @@
 #ifndef MAUDIO_SIMPLEPROPERTY
 #define MAUDIO_SIMPLEPROPERTY
 
-#include "core/property/Property.hpp"
+#include "core/property/IProperty.hpp"
 #include "core/util/Util.hpp"
 #include "core/util/AudioException.hpp"
 #include <vector>
@@ -16,7 +16,7 @@
 namespace maudio{
 
 template<typename T>
-class SimpleProperty : public Property{
+class SimpleProperty : public IProperty{
 public:
 	SimpleProperty(const char *name, T value);
 	virtual ~SimpleProperty();

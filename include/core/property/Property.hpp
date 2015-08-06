@@ -7,28 +7,21 @@
 #ifndef MAUDIO_PROPERTY
 #define MAUDIO_PROPERTY
 
-#include <string>
-#include <vector>
-
 namespace maudio{
 
 class Property{
 public:
-    Property(const std::string &name);
     virtual ~Property();
 
-    virtual std::string getString() const = 0;
-    virtual void set(const std::string &value) = 0;
+    virtual const char *getString() const = 0;
 	virtual void set(const char *value) = 0;
 
-    std::string getName() const;
-	virtual std::vector<std::string> getBoundsString() const = 0;
+    virtual const char *getName() const = 0;
+	virtual const char *getBottomBoundsString() const = 0;
+	virtual const char *getUpperBoundsString() const = 0;
 
 	//virtual std::string serialize() const;
 	//virtual void unserialize(const std::string &data);
-
-private:
-    std::string mName;
 };
 
 } // maudio

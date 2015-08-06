@@ -35,6 +35,9 @@ public:
 	virtual void readConfig(const KeyValueStore &conf) = 0;
 
 	virtual PropertyManager *getProperties() = 0;
+
+	virtual IKeyValueStore *serialize() const = 0;
+	virtual void deserialize(const IKeyValueStore *data) = 0;
 };
 
 } // maudio

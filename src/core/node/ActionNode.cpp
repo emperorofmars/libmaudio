@@ -83,6 +83,14 @@ IAudioInfo *ActionNode::Socket::getInfo() noexcept{
 	return mInput->getInfo().get();
 }
 
+IKeyValueStore *ActionNode::serialize() const{
+	return NULL;
+}
+
+void ActionNode::deserialize(const IKeyValueStore *data){
+	return;
+}
+
 } // maudio
 
 

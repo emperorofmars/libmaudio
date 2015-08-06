@@ -47,8 +47,8 @@ public:
 	std::string getName() const;
 	void setName(const std::string &name);
 
-	//virtual KeyValueStore serialize() const = 0;
-	//virtual void unserialize(const KeyValueStore &data) = 0;
+	virtual IKeyValueStore *serialize() const = 0;
+	virtual void deserialize(const IKeyValueStore *data) = 0;
 
 protected:
 

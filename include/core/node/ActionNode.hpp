@@ -29,8 +29,8 @@ public:
 
 	virtual PropertyManager *getProperties();
 
-	//virtual KeyValueStore serialize() const;
-	//virtual void unserialize(const KeyValueStore &data);
+	virtual IKeyValueStore *serialize() const;
+	virtual void deserialize(const IKeyValueStore *data);
 
 protected:
 

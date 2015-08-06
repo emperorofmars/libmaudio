@@ -14,32 +14,35 @@
 #include <limits>
 #include <map>
 #include <cmath>
-
-#include <iostream>
+#include <string>
 
 namespace maudio{
 
 template<typename T>
 class SimpleKeyableProperty : public KeyableProperty{
 public:
-    SimpleKeyableProperty(const std::string &name, T initialValue);
-    virtual ~SimpleKeyableProperty();
+	SimpleKeyableProperty(const char *name, T initialValue);
+	virtual ~SimpleKeyableProperty();
 
-    virtual std::string getString(long double pos) const;
-    virtual T get(long double pos) const;
-    virtual std::string getKeyString(unsigned int keynum) const;
-    virtual long double getKeyPos(unsigned int keynum) const;
-    virtual T getKey(unsigned int keynum) const;
-    virtual unsigned int getNumKeys() const;
-    virtual void addKey(const std::string &value, long double pos);
-    virtual void addKey(T value, long double pos);
+	virtual const char *getName() const;
+
+	virtual const char *getString(long double pos) const;
+	virtual T get(long double pos) const;
+	virtual const char *getKeyString(unsigned int keynum) const;
+	virtual long double getKeyPos(unsigned int keynum) const;
+	virtual T getKey(unsigned int keynum) const;
+	virtual unsigned int getNumKeys() const;
 	virtual void addKey(const char *value, long double pos);
-    virtual void setKey(const std::string &value, unsigned int keynum);
-    virtual void setKey(T value, unsigned int keynum);
+	virtual void addKey(T value, long double pos);
+	virtual void addKey(const std::string &value, long double pos);
 	virtual void setKey(const char *value, unsigned int keynum);
-    virtual void removeKey(unsigned int keynum);
+	virtual void setKey(T value, unsigned int keynum);
+	virtual void setKey(const std::string &value, unsigned int keynum);
+	virtual void removeKey(unsigned int keynum);
 
 	virtual void setBounds(T bottom, T upper);
+	virtual const char *getBottomBoundsString() const;
+	virtual const char *getUpperBoundsString() const;
 	virtual std::vector<std::string> getBoundsString() const;
 	virtual std::vector<T> getBounds() const;
 
@@ -47,8 +50,8 @@ private:
 	T getElement(unsigned int pos) const;
 	T interpolate(long double pos) const;
 
-    std::string mName;
-    std::map<long double, T> mValues;
+	std::string mName;
+	std::map<long double, T> mValues;
 	T mBottomBound;
 	T mUpperBound;
 };
@@ -63,9 +66,8 @@ typedef SimpleKeyableProperty<double> KeyableDoubleProperty;
 typedef SimpleKeyableProperty<std::string> KeyableStringProperty;
 
 template<typename T>
-SimpleKeyableProperty<T>::SimpleKeyableProperty(const std::string &name, T value)
-	:KeyableProperty(name)
-{
+SimpleKeyableProperty<T>::SimpleKeyableProperty(const char *name, T value){
+	mName = name;
 	mBottomBound = std::numeric_limits<T>::min();
 	mUpperBound = std::numeric_limits<T>::max();
 	addKey(value, 0);
@@ -76,8 +78,13 @@ SimpleKeyableProperty<T>::~SimpleKeyableProperty(){
 }
 
 template<typename T>
-std::string SimpleKeyableProperty<T>::getString(long double pos) const{
-	return std::to_string(interpolate(pos));
+const char *SimpleKeyableProperty<T>::getName() const{
+	return mName.c_str();
+}
+
+template<typename T>
+const char *SimpleKeyableProperty<T>::getString(long double pos) const{
+	return std::to_string(interpolate(pos)).c_str();
 }
 
 template<typename T>
@@ -86,8 +93,8 @@ T SimpleKeyableProperty<T>::get(long double pos) const{
 }
 
 template<typename T>
-std::string SimpleKeyableProperty<T>::getKeyString(unsigned int keynum) const{
-	return std::to_string(getKey(keynum));
+const char *SimpleKeyableProperty<T>::getKeyString(unsigned int keynum) const{
+	return std::to_string(getKey(keynum)).c_str();
 }
 
 template<typename T>
@@ -188,6 +195,16 @@ void SimpleKeyableProperty<T>::setBounds(T bottom, T upper){
 	mBottomBound = bottom;
 	mUpperBound = upper;
 	return;
+}
+
+template<typename T>
+const char *SimpleKeyableProperty<T>::getBottomBoundsString() const{
+	return std::to_string(mBottomBound).c_str();
+}
+
+template<typename T>
+const char *SimpleKeyableProperty<T>::getUpperBoundsString() const{
+	return std::to_string(mUpperBound).c_str();
 }
 
 template<typename T>

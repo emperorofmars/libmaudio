@@ -18,20 +18,24 @@ namespace maudio{
 template<typename T>
 class SimpleProperty : public Property{
 public:
-	SimpleProperty(const std::string &name, T value);
+	SimpleProperty(const char *name, T value);
 	virtual ~SimpleProperty();
 
-	virtual std::string getString() const;
+    virtual const char *getName() const;
+    virtual const char *getString() const;
 	virtual T get() const;
 	virtual void set(const std::string &value);
 	virtual void set(const char *value);
 	virtual void set(T value);
 
 	virtual void setBounds(T bottom, T upper);
+	virtual const char *getBottomBoundsString() const;
+	virtual const char *getUpperBoundsString() const;
 	virtual std::vector<std::string> getBoundsString() const;
 	virtual std::vector<T> getBounds() const;
 
 private:
+	std::string mName;
 	T mValue;
 	T mBottomBound;
 	T mUpperBound;
@@ -47,9 +51,8 @@ typedef SimpleProperty<double> DoubleProperty;
 typedef SimpleProperty<std::string> StringProperty;
 
 template<typename T>
-SimpleProperty<T>::SimpleProperty(const std::string &name, T value)
-	:Property(name)
-{
+SimpleProperty<T>::SimpleProperty(const char *name, T value){
+	mName = std::string(name);
 	mBottomBound = std::numeric_limits<T>::min();
 	mUpperBound = std::numeric_limits<T>::max();
 	set(value);
@@ -60,8 +63,13 @@ SimpleProperty<T>::~SimpleProperty(){
 }
 
 template<typename T>
-std::string SimpleProperty<T>::getString() const{
-	return std::to_string(mValue);
+const char *SimpleProperty<T>::getName() const{
+	return mName.c_str();
+}
+
+template<typename T>
+const char *SimpleProperty<T>::getString() const{
+	return std::to_string(mValue).c_str();
 }
 
 template<typename T>
@@ -98,6 +106,16 @@ void SimpleProperty<T>::setBounds(T bottom, T upper){
 	mBottomBound = bottom;
 	mUpperBound = upper;
 	return;
+}
+
+template<typename T>
+const char *SimpleProperty<T>::getBottomBoundsString() const{
+	return std::to_string(mBottomBound).c_str();
+}
+
+template<typename T>
+const char *SimpleProperty<T>::getUpperBoundsString() const{
+	return std::to_string(mUpperBound).c_str();
 }
 
 template<typename T>

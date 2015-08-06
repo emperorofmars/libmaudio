@@ -53,6 +53,7 @@
 		<Unit filename="../../include/core/node/Node.hpp" />
 		<Unit filename="../../include/core/node/Scene.hpp" />
 		<Unit filename="../../include/core/pluginmanager/PluginManager.hpp" />
+		<Unit filename="../../include/core/property/IPropertyManager.hpp" />
 		<Unit filename="../../include/core/property/KeyableProperty.hpp" />
 		<Unit filename="../../include/core/property/Property.hpp" />
 		<Unit filename="../../include/core/property/PropertyManager.hpp" />
@@ -63,6 +64,7 @@
 		<Unit filename="../../include/core/serializer/TXTSerializer.hpp" />
 		<Unit filename="../../include/core/store/Config.hpp" />
 		<Unit filename="../../include/core/store/ConfigManager.hpp" />
+		<Unit filename="../../include/core/store/IKeyValueStore.hpp" />
 		<Unit filename="../../include/core/store/KeyValueStore.hpp" />
 		<Unit filename="../../include/core/util/AudioException.hpp" />
 		<Unit filename="../../include/core/util/UniqueID.hpp" />
@@ -74,8 +76,6 @@
 		<Unit filename="../../src/core/node/Node.cpp" />
 		<Unit filename="../../src/core/node/Scene.cpp" />
 		<Unit filename="../../src/core/pluginmanager/PluginManager.cpp" />
-		<Unit filename="../../src/core/property/KeyableProperty.cpp" />
-		<Unit filename="../../src/core/property/Property.cpp" />
 		<Unit filename="../../src/core/property/PropertyManager.cpp" />
 		<Unit filename="../../src/core/property/SimpleKeyableProperty.cpp" />
 		<Unit filename="../../src/core/property/SimpleProperty.cpp" />

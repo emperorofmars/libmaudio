@@ -12,7 +12,7 @@ namespace maudio{
 
 //bool
 template<>
-std::string SimpleProperty<bool>::getString() const{
+const char *SimpleProperty<bool>::getString() const{
 	if(mValue) return "true";
 	else return "false";
 }

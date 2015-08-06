@@ -7,40 +7,38 @@
 #ifndef MAUDIO_PROPERTYMANAGER
 #define MAUDIO_PROPERTYMANAGER
 
-#include "core/property/Property.hpp"
-#include "core/property/KeyableProperty.hpp"
+#include "core/property/IPropertyManager.hpp"
 #include <vector>
-#include <memory>
 
 namespace maudio{
 
-class PropertyManager{
+class PropertyManager : public IPropertyManager{
 public:
 	PropertyManager();
-	~PropertyManager();
+	virtual ~PropertyManager();
 
-	void add(std::shared_ptr<Property> prop);
-	void add(std::shared_ptr<KeyableProperty> prop);
+	virtual void add(Property *prop);
+	virtual void add(KeyableProperty *prop);
 
-	bool PropertyExists(const std::string &name);
-	bool KeyablePropertyExists(const std::string &name);
+	virtual bool PropertyExists(const char *name);
+	virtual bool KeyablePropertyExists(const char *name);
 
-	std::shared_ptr<Property> getProperty(unsigned int i);
-	std::shared_ptr<Property> getProperty(const std::string &name);
-	std::shared_ptr<KeyableProperty> getKeyableProperty(unsigned int i);
-	std::shared_ptr<KeyableProperty> getKeyableProperty(const std::string &name);
+	virtual Property *getProperty(unsigned int i);
+	virtual Property *getProperty(const char *name);
+	virtual KeyableProperty *getKeyableProperty(unsigned int i);
+	virtual KeyableProperty *getKeyableProperty(const char *name);
 
-	void removeProperty(unsigned int i);
-	void removeProperty(const std::string &name);
-	void removeKeyableProperty(unsigned int i);
-	void removeKeyableProperty(const std::string &name);
+	virtual void removeProperty(unsigned int i);
+	virtual void removeProperty(const char *name);
+	virtual void removeKeyableProperty(unsigned int i);
+	virtual void removeKeyableProperty(const char *name);
 
-	unsigned int getNumProperties() const;
-	unsigned int getNumKeyableProperties() const;
+	virtual unsigned int getNumProperties() const;
+	virtual unsigned int getNumKeyableProperties() const;
 
 private:
-	std::vector<std::shared_ptr<Property>> mProperties;
-	std::vector<std::shared_ptr<KeyableProperty>> mKeyableProperties;
+	std::vector<Property *> mProperties;
+	std::vector<KeyableProperty *> mKeyableProperties;
 };
 
 } // maudio

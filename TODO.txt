@@ -20,6 +20,7 @@ Todo:
 - ////AudioBuffer, Sample, AudioInfo, FileInfo need interfaces
 - KeyValueStore, Property, Propertymanager need interfaces
 - node: implement ActionNode and testActions
+- create serializable interface and inherit it to Node and IAction
 - implement plugin apis for c and c++
 - create PluginNode node to hold plugin
 - implement SerializerStore

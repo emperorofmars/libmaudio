@@ -5,6 +5,7 @@
  */
 
 #include "core/property/PropertyManager.hpp"
+#include <cstddef>
 
 namespace maudio{
 
@@ -14,50 +15,52 @@ PropertyManager::PropertyManager(){
 PropertyManager::~PropertyManager(){
 }
 
-void PropertyManager::add(std::shared_ptr<Property> prop){
+void PropertyManager::add(Property *prop){
+	if(!prop) return;
 	if(PropertyExists(prop->getName())) return;
 	mProperties.push_back(prop);
 	return;
 }
 
-void PropertyManager::add(std::shared_ptr<KeyableProperty> prop){
+void PropertyManager::add(KeyableProperty *prop){
+	if(!prop) return;
 	if(KeyablePropertyExists(prop->getName())) return;
 	mKeyableProperties.push_back(prop);
 	return;
 }
 
-bool PropertyManager::PropertyExists(const std::string &name){
+bool PropertyManager::PropertyExists(const char *name){
 	for(unsigned int i = 0; i < mProperties.size(); i++){
 		if(mProperties[i]->getName() == name) return true;
 	}
 	return false;
 }
 
-bool PropertyManager::KeyablePropertyExists(const std::string &name){
+bool PropertyManager::KeyablePropertyExists(const char *name){
 	for(unsigned int i = 0; i < mKeyableProperties.size(); i++){
 		if(mKeyableProperties[i]->getName() == name) return true;
 	}
 	return false;
 }
 
-std::shared_ptr<Property> PropertyManager::getProperty(unsigned int i){
+Property *PropertyManager::getProperty(unsigned int i){
 	if(i >= mProperties.size()) return NULL;
 	return mProperties[i];
 }
 
-std::shared_ptr<Property> PropertyManager::getProperty(const std::string &name){
+Property *PropertyManager::getProperty(const char *name){
 	for(unsigned int i = 0; i < mProperties.size(); i++){
 		if(mProperties[i]->getName() == name) return mProperties[i];
 	}
 	return NULL;
 }
 
-std::shared_ptr<KeyableProperty> PropertyManager::getKeyableProperty(unsigned int i){
+KeyableProperty *PropertyManager::getKeyableProperty(unsigned int i){
 	if(i >= mKeyableProperties.size()) return NULL;
 	return mKeyableProperties[i];
 }
 
-std::shared_ptr<KeyableProperty> PropertyManager::getKeyableProperty(const std::string &name){
+KeyableProperty *PropertyManager::getKeyableProperty(const char *name){
 	for(unsigned int i = 0; i < mKeyableProperties.size(); i++){
 		if(mKeyableProperties[i]->getName() == name) return mKeyableProperties[i];
 	}
@@ -70,7 +73,7 @@ void PropertyManager::removeProperty(unsigned int i){
 	return;
 }
 
-void PropertyManager::removeProperty(const std::string &name){
+void PropertyManager::removeProperty(const char *name){
 	for(unsigned int i = 0; i < mProperties.size(); i++){
 		if(mProperties[i]->getName() == name) mProperties.erase(mProperties.begin() + i);
 	}
@@ -83,7 +86,7 @@ void PropertyManager::removeKeyableProperty(unsigned int i){
 	return;
 }
 
-void PropertyManager::removeKeyableProperty(const std::string &name){
+void PropertyManager::removeKeyableProperty(const char *name){
 	for(unsigned int i = 0; i < mKeyableProperties.size(); i++){
 		if(mKeyableProperties[i]->getName() == name) mKeyableProperties.erase(mKeyableProperties.begin() + i);
 	}

@@ -7,6 +7,7 @@
 #ifndef MAUDIO_KEYVALUESTORE
 #define MAUDIO_KEYVALUESTORE
 
+#include "core/store/IKeyValueStore.hpp"
 #include "core/util/Util.hpp"
 #include "core/util/AudioException.hpp"
 #include <string>
@@ -14,21 +15,23 @@
 
 namespace maudio{
 
-class KeyValueStore{
+class KeyValueStore : public IKeyValueStore{
 public:
 	KeyValueStore();
 	virtual ~KeyValueStore();
 
+	virtual const char *get(const char *key) const;
 	std::string get(const std::string &key) const;
 	template<typename T>
 	T get(const std::string &key) const;
 
-	unsigned int getSize() const;
-
-	std::string get(unsigned int numKey) const;
+	virtual const char *get(unsigned int numKey) const;
 	template<typename T>
 	T get(unsigned int numKey) const;
 
+	unsigned int getSize() const;
+
+	virtual void set(const char *key, const char *value);
 	void set(const std::string &key, const std::string &value);
 	template<typename T>
 	void set(const std::string &key, T value);

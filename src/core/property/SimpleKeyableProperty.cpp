@@ -22,13 +22,13 @@ bool SimpleKeyableProperty<bool>::interpolate(long double pos) const{
 }
 
 template<>
-std::string SimpleKeyableProperty<bool>::getString(long double pos) const{
+const char *SimpleKeyableProperty<bool>::getString(long double pos) const{
 	if(interpolate(pos)) return "true";
 	else return "false";
 }
 
 template<>
-std::string SimpleKeyableProperty<bool>::getKeyString(unsigned int keynum) const{
+const char *SimpleKeyableProperty<bool>::getKeyString(unsigned int keynum) const{
 	if(interpolate(keynum)) return "true";
 	else return "false";
 }
@@ -47,8 +47,8 @@ std::string SimpleKeyableProperty<std::string>::interpolate(long double pos) con
 }
 
 template<>
-std::string SimpleKeyableProperty<std::string>::getString(long double pos) const{
-	return interpolate(pos);
+const char *SimpleKeyableProperty<std::string>::getString(long double pos) const{
+	return interpolate(pos).c_str();
 }
 
 template<>
@@ -57,8 +57,8 @@ std::string SimpleKeyableProperty<std::string>::get(long double pos) const{
 }
 
 template<>
-std::string SimpleKeyableProperty<std::string>::getKeyString(unsigned int keynum) const{
-	return getElement(keynum);
+const char *SimpleKeyableProperty<std::string>::getKeyString(unsigned int keynum) const{
+	return getElement(keynum).c_str();
 }
 
 template<>

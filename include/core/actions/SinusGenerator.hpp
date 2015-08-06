@@ -7,21 +7,26 @@
 #ifndef MAUDIO_SINUSGENERATOR
 #define MAUDIO_SINUSGENERATOR
 
-#include "core/node/IAction.hpp"
+#include "core/actions/BaseAction.hpp"
 #include "core/property/SimpleProperty.hpp"
 #include "core/property/SimpleKeyableProperty.hpp"
+#include "core/audiodata/AudioInfo.hpp"
+#include <memory>
 
 namespace maudio{
 
-class SinusGenerator : public BaseAudioSource{
+class SinusGenerator : public BaseAction{
 public:
 	SinusGenerator();
 	virtual ~SinusGenerator();
 
-    virtual AudioBuffer get(unsigned long pos, unsigned int length) noexcept;
-    virtual AudioInfo getInfo() noexcept;
-    virtual bool checkIfCompatible(std::shared_ptr<Node> node, int slot = -1);
-	virtual void readConfig(const Config &conf);
+	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept;
+	virtual IAudioInfo *getInfo() noexcept;
+
+	virtual int MaxInputs() const;
+	virtual bool HasOutputs() const;
+
+	virtual void readConfig(const IKeyValueStore &conf);
 
 	virtual void setFrequency(float freq);
 	virtual void setSamplerate(unsigned int samplerate);

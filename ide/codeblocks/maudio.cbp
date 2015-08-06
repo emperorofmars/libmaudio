@@ -39,6 +39,8 @@
 			<Add option="-lportaudio" />
 		</Linker>
 		<Unit filename="../../examples/test1.cpp" />
+		<Unit filename="../../include/core/actions/BaseAction.hpp" />
+		<Unit filename="../../include/core/actions/SinusGenerator.hpp" />
 		<Unit filename="../../include/core/audiodata/AudioBuffer.hpp" />
 		<Unit filename="../../include/core/audiodata/AudioInfo.hpp" />
 		<Unit filename="../../include/core/audiodata/AudioQueue.hpp" />
@@ -53,9 +55,9 @@
 		<Unit filename="../../include/core/node/Node.hpp" />
 		<Unit filename="../../include/core/node/Scene.hpp" />
 		<Unit filename="../../include/core/pluginmanager/PluginManager.hpp" />
+		<Unit filename="../../include/core/property/IKeyableProperty.hpp" />
+		<Unit filename="../../include/core/property/IProperty.hpp" />
 		<Unit filename="../../include/core/property/IPropertyManager.hpp" />
-		<Unit filename="../../include/core/property/KeyableProperty.hpp" />
-		<Unit filename="../../include/core/property/Property.hpp" />
 		<Unit filename="../../include/core/property/PropertyManager.hpp" />
 		<Unit filename="../../include/core/property/SimpleKeyableProperty.hpp" />
 		<Unit filename="../../include/core/property/SimpleProperty.hpp" />
@@ -69,6 +71,8 @@
 		<Unit filename="../../include/core/util/AudioException.hpp" />
 		<Unit filename="../../include/core/util/UniqueID.hpp" />
 		<Unit filename="../../include/core/util/Util.hpp" />
+		<Unit filename="../../src/core/actions/BaseAction.cpp" />
+		<Unit filename="../../src/core/actions/SinusGenerator.cpp" />
 		<Unit filename="../../src/core/audiodata/AudioBuffer.cpp" />
 		<Unit filename="../../src/core/audiodata/AudioQueue.cpp" />
 		<Unit filename="../../src/core/audiodata/Sample.cpp" />

@@ -9,7 +9,7 @@
 #include <thread>
 #include "core/audiodata/Sample.hpp"
 #include "core/audiodata/AudioBuffer.hpp"
-//#include "core/actions/SinusGenerator.hpp"
+#include "core/actions/SinusGenerator.hpp"
 /*
 #include "core/audiosink/TerminalPrinter.hpp"
 #include "extended/audiosink/Player.hpp"
@@ -29,7 +29,12 @@ int main(int argc, char *argv[]){
 
 	IKeyValueStore *store1 = new KeyValueStore();
 	store1->set("stuff", "value1");
+	store1->set("bla", "value2");
+	store1->set("aaa", "value3");
 	std::cerr << store1->get("stuff") << std::endl;
+	std::cerr << store1->get("aaa") << std::endl;
+	std::cerr << store1->get("bla") << std::endl;
+	std::cerr << store1->get((unsigned int)0) << std::endl;
 	delete store1;
 
 	IProperty *prop1 = new IntProperty("prop1", 678);
@@ -46,6 +51,14 @@ int main(int argc, char *argv[]){
 	std::cerr << prop2->getName() << " " << prop2->getString(1) << std::endl;
 	delete prop2;
 
+	SinusGenerator gen;
+	IAudioBuffer *buf;
+	ISample *smp;
+	buf = gen.get(2423, 1);
+	smp = buf->get(0);
+	std::cerr << smp->get(0) << std::endl;
+	delete smp;
+	delete buf;
 
 	std::cerr << "closing main" << std::endl;
 	return 0;

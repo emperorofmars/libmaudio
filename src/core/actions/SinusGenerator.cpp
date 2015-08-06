@@ -5,6 +5,7 @@
  */
 
 #include "core/actions/SinusGenerator.hpp"
+#include "core/audiodata/AudioBuffer.hpp"
 #include "core/util/AudioException.hpp"
 #include "core/util/Util.hpp"
 #include <cmath>
@@ -12,52 +13,57 @@
 namespace maudio{
 
 SinusGenerator::SinusGenerator(){
-	mAudioInfo.mFileInfo.Title = "Sinus Test Generator from Maudio";
-
 	mFreq.reset(new KeyableFloatProperty("Frequency", 1000));
-	mProperties.add(mFreq);
+	mProperties.add(mFreq.get());
 	mSamplerate.reset(new UIntProperty("Samplerate", 44100));
-	mProperties.add(mSamplerate);
+	mProperties.add(mSamplerate.get());
 	mChannels.reset(new UIntProperty("Channels", 1));
-	mProperties.add(mChannels);
+	mProperties.add(mChannels.get());
 
-	mAudioInfo.Channels = mChannels->get();
-	mAudioInfo.Offset = 0;
-	mAudioInfo.Samplerate = mSamplerate->get();
-	mAudioInfo.Samples = -1;
+	mAudioInfo.setChannels(mChannels->get());
+	mAudioInfo.setOffset(0);
+	mAudioInfo.setSamplerate(mSamplerate->get());
+	mAudioInfo.setSamples(-1);
 }
 
 SinusGenerator::~SinusGenerator(){
 }
 
-AudioBuffer SinusGenerator::get(unsigned long pos, unsigned int length) noexcept{
-	mAudioInfo.Channels = mChannels->get();
-	mAudioInfo.Samplerate = mSamplerate->get();
-	AudioBuffer ret(mAudioInfo.Channels, length, pos, mAudioInfo.Samplerate);
+
+IAudioBuffer *SinusGenerator::get(unsigned long pos, unsigned int length) noexcept{
+	mAudioInfo.setChannels(mChannels->get());
+	mAudioInfo.setSamplerate(mSamplerate->get());
+	AudioBuffer *ret = new AudioBuffer(mAudioInfo.getChannels(), length, pos, mAudioInfo.getSamplerate());
 	for(unsigned int i = 0; i < length; i++){
-		Sample tmp(mAudioInfo.Channels);
+		Sample tmp(mAudioInfo.getChannels());
 		float index = pos + i;
-		for(unsigned int j = 0; j < mAudioInfo.Channels; j++){
-            tmp.set(sin(mFreq->get(PositionToSeconds((pos + i), mAudioInfo.Samplerate))
-						* index * (2 * M_PI) / mAudioInfo.Samplerate), j);
+		for(unsigned int j = 0; j < mAudioInfo.getChannels(); j++){
+            tmp.set(sin(mFreq->get(PositionToSeconds((pos + i), mAudioInfo.getSamplerate()))
+						* index * (2 * M_PI) / mAudioInfo.getSamplerate()), j);
 		}
-		ret.set(tmp, i);
+		ret->set(tmp, i);
 	}
 	return ret;
 }
 
-AudioInfo SinusGenerator::getInfo() noexcept{
-	mAudioInfo.Channels = mChannels->get();
-	mAudioInfo.Samplerate = mSamplerate->get();
-	return mAudioInfo;
+IAudioInfo *SinusGenerator::getInfo() noexcept{
+	mAudioInfo.setChannels(mChannels->get());
+	mAudioInfo.setSamplerate(mSamplerate->get());
+	AudioInfo *ret = new AudioInfo();
+	*ret = mAudioInfo;
+	return ret;
 }
 
-bool SinusGenerator::checkIfCompatible(std::shared_ptr<Node> node, int slot){
+int SinusGenerator::MaxInputs() const{
+	return 0;
+}
+
+bool SinusGenerator::HasOutputs() const{
 	return true;
 }
 
-void SinusGenerator::readConfig(const Config &conf){
-    return;
+void SinusGenerator::readConfig(const IKeyValueStore &conf){
+	return;
 }
 
 void SinusGenerator::setFrequency(float freq){

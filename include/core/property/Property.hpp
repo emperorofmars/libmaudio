@@ -11,7 +11,7 @@ namespace maudio{
 
 class Property{
 public:
-    virtual ~Property();
+    virtual ~Property(){};
 
     virtual const char *getString() const = 0;
 	virtual void set(const char *value) = 0;

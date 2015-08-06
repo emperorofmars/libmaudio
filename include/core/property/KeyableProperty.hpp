@@ -11,7 +11,7 @@ namespace maudio{
 
 class KeyableProperty{
 public:
-	virtual ~KeyableProperty();
+	virtual ~KeyableProperty(){};
 
 	virtual const char *getName() const = 0;
 

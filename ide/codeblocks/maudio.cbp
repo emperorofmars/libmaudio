@@ -69,6 +69,7 @@
 		<Unit filename="../../include/core/store/IKeyValueStore.hpp" />
 		<Unit filename="../../include/core/store/KeyValueStore.hpp" />
 		<Unit filename="../../include/core/util/AudioException.hpp" />
+		<Unit filename="../../include/core/util/String.hpp" />
 		<Unit filename="../../include/core/util/UniqueID.hpp" />
 		<Unit filename="../../include/core/util/Util.hpp" />
 		<Unit filename="../../src/core/actions/BaseAction.cpp" />
@@ -88,6 +89,7 @@
 		<Unit filename="../../src/core/store/Config.cpp" />
 		<Unit filename="../../src/core/store/ConfigManager.cpp" />
 		<Unit filename="../../src/core/store/KeyValueStore.cpp" />
+		<Unit filename="../../src/core/util/String.cpp" />
 		<Unit filename="../../src/core/util/UniqueID.cpp" />
 		<Unit filename="../../src/core/util/Util.cpp" />
 		<Unit filename="../../src/extended/util/AudioDevice.hpp" />

@@ -15,6 +15,7 @@
 #include "core/property/IPropertyManager.hpp"
 #include "core/store/Config.hpp"
 #include "core/serializer/SerializerStore.hpp"
+#include "core/node/IControl.hpp"
 #include <vector>
 #include <memory>
 
@@ -24,8 +25,8 @@ class Node : public std::enable_shared_from_this<Node>, public UniqueID{
 public:
 	virtual ~Node();
 
-	virtual std::shared_ptr<IAudioBuffer> get(unsigned long pos, unsigned int length) noexcept = 0;
-	virtual std::shared_ptr<IAudioInfo> getInfo() noexcept = 0;
+	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept = 0;
+	virtual IAudioInfo *getInfo() noexcept = 0;
 
 	void addInput(std::shared_ptr<Node> node, int slot = -1);
 	void removeInput(std::shared_ptr<Node> node);
@@ -44,6 +45,8 @@ public:
 
 	virtual IPropertyManager *getProperties() = 0;
 
+	virtual IControl *getControl() = 0;
+
 	std::string getName() const;
 	void setName(const std::string &name);
 
@@ -51,7 +54,6 @@ public:
 	virtual void deserialize(const IKeyValueStore *data) = 0;
 
 protected:
-
 	virtual void onAdd(unsigned int slot) = 0;
 	virtual void onRemove(unsigned int slot) = 0;
 

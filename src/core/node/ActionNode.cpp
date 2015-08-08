@@ -20,15 +20,15 @@ ActionNode::ActionNode(std::unique_ptr<IAction> action){
 ActionNode::~ActionNode(){
 }
 
-std::shared_ptr<IAudioBuffer> ActionNode::get(unsigned long pos, unsigned int length) noexcept{
+IAudioBuffer *ActionNode::get(unsigned long pos, unsigned int length) noexcept{
 	if(!mAction) return NULL;
-	std::shared_ptr<IAudioBuffer> ret(mAction->get(pos, length));
+	IAudioBuffer *ret(mAction->get(pos, length));
 	return ret;
 }
 
-std::shared_ptr<IAudioInfo> ActionNode::getInfo() noexcept{
+IAudioInfo *ActionNode::getInfo() noexcept{
 	if(!mAction) return NULL;
-	std::shared_ptr<IAudioInfo> ret(mAction->getInfo());
+	IAudioInfo *ret(mAction->getInfo());
 	return ret;
 }
 
@@ -53,6 +53,11 @@ IPropertyManager *ActionNode::getProperties(){
 	return mAction->getProperties();
 }
 
+IControl *ActionNode::getControl(){
+	if(!mAction) return NULL;
+	return mAction->getControl();
+}
+
 void ActionNode::onAdd(unsigned int slot){
 	if(!mAction) return;
 	mAction->addSocket(new Socket(mInputs[slot]), slot);
@@ -75,12 +80,12 @@ ActionNode::Socket::~Socket(){
 
 IAudioBuffer *ActionNode::Socket::get(unsigned long pos, unsigned int length) noexcept{
 	if(!mInput) return NULL;
-	return mInput->get(pos, length).get();
+	return mInput->get(pos, length);
 }
 
 IAudioInfo *ActionNode::Socket::getInfo() noexcept{
 	if(!mInput) return NULL;
-	return mInput->getInfo().get();
+	return mInput->getInfo();
 }
 
 IKeyValueStore *ActionNode::serialize() const{

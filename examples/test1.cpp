@@ -7,11 +7,12 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include "core/node/ActionNode.hpp"
 #include "core/audiodata/Sample.hpp"
 #include "core/audiodata/AudioBuffer.hpp"
 #include "core/actions/SinusGenerator.hpp"
+#include "core/actions/TerminalPrinter.hpp"
 /*
-#include "core/audiosink/TerminalPrinter.hpp"
 #include "extended/audiosink/Player.hpp"
 #include "core/manipulator/Mixer.hpp"
 #include "core/manipulator/Resampler.hpp"
@@ -57,14 +58,18 @@ int main(int argc, char *argv[]){
 	std::cerr << prop2->getName() << " " << prop2->getString(1) << std::endl;
 	delete prop2;
 
-	SinusGenerator gen;
-	IAudioBuffer *buf;
-	ISample *smp;
-	buf = gen.get(2423, 1);
-	smp = buf->get(0);
-	std::cerr << smp->get(0) << std::endl;
-	delete smp;
-	delete buf;
+	std::shared_ptr<ActionNode> sgen(new ActionNode(std::unique_ptr<SinusGenerator>(new SinusGenerator)));
+
+	std::shared_ptr<ActionNode> tpr(new ActionNode(std::unique_ptr<TerminalPrinter>(new TerminalPrinter)));
+	tpr->addInput(sgen, 0);
+
+	IControl *cntl = tpr->getControl();
+	if(cntl){
+		std::cerr << "Sinusgen: " << std::endl;
+		cntl->callFunction((unsigned int)0, "123123");
+		cntl->callFunction("print", "123124");
+	}
+	delete cntl;
 
 	std::cerr << "closing main" << std::endl;
 	return 0;

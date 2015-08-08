@@ -19,8 +19,8 @@ public:
 	ActionNode(std::unique_ptr<IAction> action);
 	virtual ~ActionNode();
 
-	virtual std::shared_ptr<IAudioBuffer> get(unsigned long pos, unsigned int length) noexcept;
-	virtual std::shared_ptr<IAudioInfo> getInfo() noexcept;
+	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept;
+	virtual IAudioInfo *getInfo() noexcept;
 
 	virtual int MaxInputs() const;
 	virtual bool HasOutputs() const;
@@ -28,6 +28,8 @@ public:
 	virtual void readConfig(const Config &conf);
 
 	virtual IPropertyManager *getProperties();
+
+	virtual IControl *getControl();
 
 	virtual IKeyValueStore *serialize() const;
 	virtual void deserialize(const IKeyValueStore *data);

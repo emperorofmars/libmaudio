@@ -8,6 +8,7 @@
 #define MAUDIO_IACTION
 
 #include "core/node/ISocket.hpp"
+#include "core/node/IControl.hpp"
 #include "core/audiodata/IAudioBuffer.hpp"
 #include "core/audiodata/IAudioInfo.hpp"
 #include "core/property/IProperty.hpp"
@@ -34,6 +35,8 @@ public:
 	virtual void readConfig(const IKeyValueStore &conf) = 0;
 
 	virtual IPropertyManager *getProperties() = 0;
+
+	virtual IControl *getControl() = 0;
 /*
 	virtual IKeyValueStore *serialize() const = 0;
 	virtual void deserialize(const IKeyValueStore *data) = 0;

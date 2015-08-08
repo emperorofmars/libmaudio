@@ -10,10 +10,7 @@ namespace maudio{
 
 BaseAction::~BaseAction(){
 	for(unsigned int i = 0; i < mInputs.size(); i++){
-		if(mInputs[i] != NULL){
-			delete mInputs[i];
-			mInputs[i] = NULL;
-		}
+		removeSocket(i);
 	}
 	return;
 }
@@ -21,10 +18,7 @@ BaseAction::~BaseAction(){
 void BaseAction::addSocket(ISocket *socket, int slot){
 	if(slot < 0 && MaxInputs() < 0) mInputs.push_back(socket);
 	else if((unsigned int)slot < mInputs.size() && slot < MaxInputs()){
-		if(mInputs[slot] != NULL){
-			delete mInputs[slot];
-			mInputs[slot] = NULL;
-		}
+		removeSocket(slot);
 		mInputs[slot] = socket;
 	}
 	return;
@@ -47,6 +41,9 @@ IPropertyManager *BaseAction::getProperties(){
 	return &mProperties;
 }
 
+IControl *BaseAction::getControl(){
+	return NULL;
+}
 
 } // maudio
 

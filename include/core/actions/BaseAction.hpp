@@ -9,6 +9,8 @@
 
 #include "core/node/IAction.hpp"
 #include "core/property/PropertyManager.hpp"
+#include "core/audiodata/AudioBuffer.hpp"
+#include "core/audiodata/AudioInfo.hpp"
 #include <vector>
 
 namespace maudio{
@@ -23,10 +25,9 @@ public:
 	virtual int NumInputs() const final;
 
 	virtual IPropertyManager *getProperties() final;
-/*
-	virtual IKeyValueStore *serialize() const = 0;
-	virtual void deserialize(const IKeyValueStore *data) = 0;
-*/
+
+	virtual IControl *getControl();
+
 protected:
 	PropertyManager mProperties;
 	std::vector<ISocket *> mInputs;

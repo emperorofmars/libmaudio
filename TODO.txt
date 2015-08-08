@@ -22,11 +22,12 @@ Todo:
 - ////fix maudio exceptions writing "maudio: " twice
 - ////KeyableProperty: add specialisations for char *
 - ////create maudioString
-- create interface for AudioQueue
 - add functionality to control functions of sinks to Node and IAction
 - node: implement ActionNode and testActions
 - create Observer and Observable
 - make properties and propertymanager observable
+- fix add function for Node and IAction
+- create interface for AudioQueue
 - create serializable interface and inherit it to Node and IAction
 - implement plugin apis for c and c++
 - create PluginNode node to hold plugin

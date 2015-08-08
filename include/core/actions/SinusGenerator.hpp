@@ -10,7 +10,6 @@
 #include "core/actions/BaseAction.hpp"
 #include "core/property/SimpleProperty.hpp"
 #include "core/property/SimpleKeyableProperty.hpp"
-#include "core/audiodata/AudioInfo.hpp"
 #include <memory>
 
 namespace maudio{

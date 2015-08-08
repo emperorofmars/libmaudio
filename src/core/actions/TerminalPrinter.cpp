@@ -7,6 +7,7 @@
 #include "core/actions/TerminalPrinter.hpp"
 #include "core/util/Util.hpp"
 #include "core/util/AudioException.hpp"
+#include "core/util/simple_ptr.hpp"
 #include <iostream>
 #include <cstring>
 
@@ -47,20 +48,15 @@ void TerminalPrinter::print(unsigned long pos){
 		std::cout << "invalid or no Input" << std::endl;
 		return;
 	}
-	IAudioInfo *tmpInfo = mInputs[0]->getInfo();
+	simple_ptr<IAudioInfo> tmpInfo(mInputs[0]->getInfo());
 	if(!tmpInfo) return;
 	for(unsigned int i = 0; i < tmpInfo->getChannels(); i++){
-		IAudioBuffer *tmpBuf = mInputs[0]->get(pos, 1);
-		if(tmpBuf){
-			ISample *tmpSmp = tmpBuf->get(0);
-			if(tmpSmp){
-				std::cout << tmpSmp->get(i) << " ";
-				delete tmpSmp;
-			}
-			delete tmpBuf;
-		}
+		simple_ptr<IAudioBuffer> tmpBuf(mInputs[0]->get(pos, 1));
+		if(!tmpBuf) return;
+		simple_ptr<ISample> tmpSmp(tmpBuf->get(0));
+		if(!tmpSmp) return;
+		std::cout << tmpSmp->get(i) << " ";
 	}
-	delete tmpInfo;
 	std::cout << std::endl;
 	return;
 }

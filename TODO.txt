@@ -22,8 +22,9 @@ Todo:
 - ////fix maudio exceptions writing "maudio: " twice
 - ////KeyableProperty: add specialisations for char *
 - ////create maudioString
-- add functionality to control functions of sinks to Node and IAction
-- node: implement ActionNode and testActions
+- ////add functionality to control functions of sinks to Node and IAction
+- ////node: implement ActionNode and testActions
+- ////create simple_ptr<>
 - create Observer and Observable
 - make properties and propertymanager observable
 - fix add function for Node and IAction

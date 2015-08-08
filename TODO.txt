@@ -25,14 +25,14 @@ Todo:
 - ////add functionality to control functions of sinks to Node and IAction
 - ////node: implement ActionNode and testActions
 - ////create simple_ptr<>
-- create Observer and Observable
-- make properties and propertymanager observable
-- fix add function for Node and IAction
-- create interface for AudioQueue
-- create serializable interface and inherit it to Node and IAction
+- ////fix add function for Node and IAction
 - implement plugin apis for c and c++
 - create PluginNode node to hold plugin
+- create interface for AudioQueue
 - implement SerializerStore
+- create serializable interface and inherit it to Node, IAction and Properties
+- create Observer and Observable
+- make properties and propertymanager observable
 - property and keyableproperty: serialize and unserialize
 - node: serialize and unserialize
 - create serializer

@@ -21,11 +21,10 @@ void Node::addInput(std::shared_ptr<Node> node, int slot){
 	if(slot < 0){
 		mInputs.push_back(node);
 	}
-	else if((unsigned int)slot >= mInputs.size()){
-		mInputs.resize(slot + 1);
-		mInputs[slot] = node;
-	}
 	else{
+		if((unsigned int)slot >= mInputs.size()){
+			mInputs.resize(slot + 1);
+		}
 		mInputs[slot] = node;
 	}
 	node->addOutput(shared_from_this());

@@ -16,9 +16,11 @@ BaseAction::~BaseAction(){
 }
 
 void BaseAction::addSocket(ISocket *socket, int slot){
-	if(slot < 0 && MaxInputs() < 0) mInputs.push_back(socket);
+	if(slot < 0 && MaxInputs() < 0){
+		mInputs.push_back(socket);
+	}
 	else if(slot < MaxInputs()){
-		if((unsigned int)slot + 1 > mInputs.size()){
+		if((unsigned int)slot  >= mInputs.size()){
 			mInputs.resize(slot + 1);
 		}
 		removeSocket(slot);

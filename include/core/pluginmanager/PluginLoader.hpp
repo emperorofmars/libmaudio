@@ -91,12 +91,17 @@ bool PluginLoader<T>::loaded(){
 
 template<typename T>
 T *PluginLoader<T>::createInstance(){
-	return (T *)mCreateFunc();
+	if(loaded()){
+		return (T *)mCreateFunc();
+	}
+	return NULL;
 }
 
 template<typename T>
 void PluginLoader<T>::deleteInstance(T *data){
-	mDestroyFunc(data);
+	if(loaded()){
+		mDestroyFunc(data);
+	}
 	return;
 }
 

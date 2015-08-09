@@ -67,8 +67,14 @@ int main(int argc, char *argv[]){
 		cntl->callFunction("print", "123124");
 	}
 
-	PluginLoader<IAction> pload("res/plugins/test.so");
+	void *handle = dlopen("testplugin.so", RTLD_LAZY);
+	if(!handle){
+		std::cerr << "FUUUUUUUUUUUUU" << std::endl;
+	}
+
+	PluginLoader<IAction> pload("testplugin.so");
 	IAction *plugin = pload.createInstance();
+	std::cerr << "Plugintest: " << plugin->getInfo()->getSamplerate() << std::endl;
 
 	std::cerr << "closing main" << std::endl;
 	return 0;

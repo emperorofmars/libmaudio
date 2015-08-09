@@ -24,6 +24,7 @@
 #include "core/store/ConfigManager.hpp"
 #include "core/util/String.hpp"
 #include "core/util/simple_ptr.hpp"
+#include "core/pluginmanager/PluginLoader.hpp"
 
 using namespace maudio;
 
@@ -54,9 +55,9 @@ int main(int argc, char *argv[]){
 	std::cerr << prop2->getName() << " " << prop2->getString(0.75) << std::endl;
 	std::cerr << prop2->getName() << " " << prop2->getString(1) << std::endl;
 
-	std::shared_ptr<ActionNode> sgen(new ActionNode(std::unique_ptr<SinusGenerator>(new SinusGenerator)));
+	std::shared_ptr<ActionNode> sgen(new ActionNode(std::unique_ptr<SinusGenerator>(new SinusGenerator())));
 
-	std::shared_ptr<ActionNode> tpr(new ActionNode(std::unique_ptr<TerminalPrinter>(new TerminalPrinter)));
+	std::shared_ptr<ActionNode> tpr(new ActionNode(std::unique_ptr<TerminalPrinter>(new TerminalPrinter())));
 	tpr->addInput(sgen, 0);
 
 	simple_ptr<IControl> cntl(tpr->getControl());
@@ -65,6 +66,9 @@ int main(int argc, char *argv[]){
 		cntl->callFunction((unsigned int)0, "123123");
 		cntl->callFunction("print", "123124");
 	}
+
+	PluginLoader<IAction> pload("res/plugins/test.so");
+	IAction *plugin = pload.createInstance();
 
 	std::cerr << "closing main" << std::endl;
 	return 0;

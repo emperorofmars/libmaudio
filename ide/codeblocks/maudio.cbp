@@ -37,6 +37,7 @@
 		</Compiler>
 		<Linker>
 			<Add option="-lportaudio" />
+			<Add option="-ldl" />
 		</Linker>
 		<Unit filename="../../examples/test1.cpp" />
 		<Unit filename="../../include/core/actions/BaseAction.hpp" />
@@ -56,6 +57,7 @@
 		<Unit filename="../../include/core/node/ISocket.hpp" />
 		<Unit filename="../../include/core/node/Node.hpp" />
 		<Unit filename="../../include/core/node/Scene.hpp" />
+		<Unit filename="../../include/core/pluginmanager/PluginLoader.hpp" />
 		<Unit filename="../../include/core/pluginmanager/PluginManager.hpp" />
 		<Unit filename="../../include/core/property/IKeyableProperty.hpp" />
 		<Unit filename="../../include/core/property/IProperty.hpp" />

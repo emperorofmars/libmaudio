@@ -27,6 +27,7 @@ public:
 
 	void reset(T *data = NULL);
 	void reset(simple_ptr<T> &data);
+	T *release();
 
 	T *get();
 	T *operator->();
@@ -74,9 +75,15 @@ void simple_ptr<T>::reset(simple_ptr<T> &data){
 	if(mData != NULL){
 		delete mData;
 	}
-	mData = data.mData;
-	data.mData = NULL;
+	mData = data.release();
 	return;
+}
+
+template<typename T>
+T *simple_ptr<T>::release(){
+	T *ret = mData;
+	mData = NULL;
+	return ret;
 }
 
 template<typename T>

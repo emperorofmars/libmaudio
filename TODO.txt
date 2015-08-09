@@ -27,6 +27,8 @@ Todo:
 - ////create simple_ptr<>
 - ////fix add function for Node and IAction
 - implement plugin apis for c and c++
+- create IDeleter
+- add stop function to IControl
 - create PluginNode node to hold plugin
 - create interface for AudioQueue
 - implement SerializerStore

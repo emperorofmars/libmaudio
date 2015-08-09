@@ -19,6 +19,10 @@ class BaseAction : public IAction{
 public:
 	virtual ~BaseAction();
 
+	virtual void deleteBuffer(IAudioBuffer *data) noexcept final;
+	virtual void deleteInfo(IAudioInfo *data) noexcept final;
+	virtual void deleteSample(ISample *data) noexcept final;
+
 	virtual void addSocket(ISocket *socket, int slot) final;
 	virtual void removeSocket(int slot) final;
 

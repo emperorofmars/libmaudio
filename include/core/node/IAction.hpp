@@ -7,7 +7,7 @@
 #ifndef MAUDIO_IACTION
 #define MAUDIO_IACTION
 
-#include "core/node/ISocket.hpp"
+#include "core/node/IAudioGetter.hpp"
 #include "core/node/IControl.hpp"
 #include "core/audiodata/IAudioBuffer.hpp"
 #include "core/audiodata/IAudioInfo.hpp"
@@ -18,18 +18,11 @@
 
 namespace maudio{
 
-class IAction{
+class IAction : public IAudioGetter{
 public:
 	virtual ~IAction(){};
 
-	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept = 0;
-	virtual IAudioInfo *getInfo() noexcept = 0;
-
-	virtual void deleteBuffer(IAudioBuffer *data) noexcept = 0;
-	virtual void deleteInfo(IAudioInfo *data) noexcept = 0;
-	virtual void deleteSample(ISample *data) noexcept = 0;
-
-	virtual void addSocket(ISocket *socket, int slot) = 0;
+	virtual void addSocket(IAudioGetter *socket, int slot) = 0;
 	virtual void removeSocket(int slot) = 0;
 
 	virtual int NumInputs() const = 0;

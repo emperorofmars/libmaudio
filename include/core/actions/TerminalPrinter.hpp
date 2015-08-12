@@ -39,6 +39,7 @@ private:
 		virtual const char *getFunctionParam(unsigned int num);
 		virtual unsigned int callFunction(unsigned int num, const char *param = NULL);
 		virtual unsigned int callFunction(const char *name, const char *param = NULL);
+		virtual void stop();
 
 	private:
 		TerminalPrinter *mData;

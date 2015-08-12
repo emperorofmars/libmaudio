@@ -53,8 +53,8 @@
 		<Unit filename="../../include/core/audiodata/Sample.hpp" />
 		<Unit filename="../../include/core/node/ActionNode.hpp" />
 		<Unit filename="../../include/core/node/IAction.hpp" />
+		<Unit filename="../../include/core/node/IAudioGetter.hpp" />
 		<Unit filename="../../include/core/node/IControl.hpp" />
-		<Unit filename="../../include/core/node/ISocket.hpp" />
 		<Unit filename="../../include/core/node/Node.hpp" />
 		<Unit filename="../../include/core/node/Scene.hpp" />
 		<Unit filename="../../include/core/pluginmanager/PluginLoader.hpp" />

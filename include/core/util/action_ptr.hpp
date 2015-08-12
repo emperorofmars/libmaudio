@@ -8,7 +8,7 @@
 #define MAUDIO_ACTIONPTR
 
 #include <cstddef>
-#include "core/node/ISocket.hpp"
+#include "core/node/IAudioGetter.hpp"
 
 namespace maudio{
 
@@ -22,11 +22,11 @@ Warning: its not thread save!
 template<typename T>
 class action_ptr{
 public:
-	action_ptr(T *data = NULL, ISocket *deleter = NULL);
+	action_ptr(T *data = NULL, IAudioGetter *deleter = NULL);
 	action_ptr(action_ptr<T> &data);
 	~action_ptr();
 
-	void reset(T *data = NULL, ISocket *deleter = NULL);
+	void reset(T *data = NULL, IAudioGetter *deleter = NULL);
 	void reset(action_ptr<T> &data);
 	T *release();
 
@@ -41,12 +41,12 @@ public:
 
 private:
 	T *mData = NULL;
-	ISocket *mDeleter = NULL;
+	IAudioGetter *mDeleter = NULL;
 };
 
 
 template<typename T>
-action_ptr<T>::action_ptr(T *data, ISocket *deleter){
+action_ptr<T>::action_ptr(T *data, IAudioGetter *deleter){
 	reset(data);
 	return;
 }
@@ -64,7 +64,7 @@ action_ptr<T>::~action_ptr(){
 }
 
 template<typename T>
-void action_ptr<T>::reset(T *data, ISocket *deleter){
+void action_ptr<T>::reset(T *data, IAudioGetter *deleter){
 	if(mData != NULL){
 		delete mData;
 	}
@@ -74,7 +74,7 @@ void action_ptr<T>::reset(T *data, ISocket *deleter){
 }
 
 template<>
-void action_ptr<IAudioBuffer>::reset(IAudioBuffer *data, ISocket *deleter){
+void action_ptr<IAudioBuffer>::reset(IAudioBuffer *data, IAudioGetter *deleter){
 	if(mData != NULL){
 		if(mDeleter) mDeleter->deleteBuffer(mData);
 		else delete mData;
@@ -85,7 +85,7 @@ void action_ptr<IAudioBuffer>::reset(IAudioBuffer *data, ISocket *deleter){
 }
 
 template<>
-void action_ptr<IAudioInfo>::reset(IAudioInfo *data, ISocket *deleter){
+void action_ptr<IAudioInfo>::reset(IAudioInfo *data, IAudioGetter *deleter){
 	if(mData != NULL){
 		if(mDeleter) mDeleter->deleteInfo(mData);
 		else delete mData;
@@ -96,7 +96,7 @@ void action_ptr<IAudioInfo>::reset(IAudioInfo *data, ISocket *deleter){
 }
 
 template<>
-void action_ptr<ISample>::reset(ISample *data, ISocket *deleter){
+void action_ptr<ISample>::reset(ISample *data, IAudioGetter *deleter){
 	if(mData != NULL){
 		if(mDeleter) mDeleter->deleteSample(mData);
 		else delete mData;

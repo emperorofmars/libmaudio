@@ -26,15 +26,15 @@ Todo:
 - ////node: implement ActionNode and testActions
 - ////create simple_ptr<>
 - ////fix add function for Node and IAction
-- implement plugin apis for c and c++
-- create IDeleter
-- add stop function to IControl
+- ////implement plugin apis for c++
+- ////create IDeleter
+- ////add stop function to IControl
 - create PluginNode node to hold plugin
 - create interface for AudioQueue
+- create Observer and Observable
+- make properties, propertymanager and PluginLoader observable
 - implement SerializerStore
 - create serializable interface and inherit it to Node, IAction and Properties
-- create Observer and Observable
-- make properties and propertymanager observable
 - property and keyableproperty: serialize and unserialize
 - node: serialize and unserialize
 - create serializer

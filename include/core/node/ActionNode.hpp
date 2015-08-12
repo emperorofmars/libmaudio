@@ -9,7 +9,7 @@
 
 #include "core/node/Node.hpp"
 #include "core/node/IAction.hpp"
-#include "core/node/ISocket.hpp"
+#include "core/node/IAudioGetter.hpp"
 
 namespace maudio{
 
@@ -43,7 +43,7 @@ protected:
 	virtual void onAdd(unsigned int slot);
 	virtual void onRemove(unsigned int slot);
 
-	class Socket : public ISocket{
+	class Socket : public IAudioGetter{
 		public:
 			Socket(std::shared_ptr<Node> input);
 			virtual ~Socket();

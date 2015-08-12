@@ -7,6 +7,7 @@
 #ifndef MAUDIO_NODE
 #define MAUDIO_NODE
 
+#include "core/node/IAudioGetter.hpp"
 #include "core/util/UniqueID.hpp"
 #include "core/audiodata/IAudioBuffer.hpp"
 #include "core/audiodata/IAudioInfo.hpp"
@@ -21,16 +22,9 @@
 
 namespace maudio{
 
-class Node : public std::enable_shared_from_this<Node>, public UniqueID{
+class Node : public IAudioGetter, public std::enable_shared_from_this<Node>, public UniqueID{
 public:
 	virtual ~Node();
-
-	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept = 0;
-	virtual IAudioInfo *getInfo() noexcept = 0;
-
-	virtual void deleteBuffer(IAudioBuffer *data) noexcept = 0;
-	virtual void deleteInfo(IAudioInfo *data) noexcept = 0;
-	virtual void deleteSample(ISample *data) noexcept = 0;
 
 	void addInput(std::shared_ptr<Node> node, int slot = -1);
 	void removeInput(std::shared_ptr<Node> node);

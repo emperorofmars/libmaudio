@@ -23,7 +23,7 @@ public:
 	virtual void deleteInfo(IAudioInfo *data) noexcept final;
 	virtual void deleteSample(ISample *data) noexcept final;
 
-	virtual void addSocket(ISocket *socket, int slot) final;
+	virtual void addSocket(IAudioGetter *socket, int slot) final;
 	virtual void removeSocket(int slot) final;
 
 	virtual int NumInputs() const final;
@@ -34,7 +34,7 @@ public:
 
 protected:
 	PropertyManager mProperties;
-	std::vector<ISocket *> mInputs;
+	std::vector<IAudioGetter *> mInputs;
 };
 
 } // maudio

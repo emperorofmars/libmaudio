@@ -57,7 +57,7 @@ bool ActionNode::HasOutputs() const{
 	return mAction->HasOutputs();
 }
 
-void ActionNode::readConfig(const Config &conf){
+void ActionNode::readConfig(const IKeyValueStore &conf){
 	if(!mAction) return;
 	mAction->readConfig(conf);
 	return;

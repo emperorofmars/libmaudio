@@ -77,6 +77,7 @@
 		<Unit filename="../../include/core/util/UniqueID.hpp" />
 		<Unit filename="../../include/core/util/Util.hpp" />
 		<Unit filename="../../include/core/util/action_ptr.hpp" />
+		<Unit filename="../../include/core/util/plugin_ptr.hpp" />
 		<Unit filename="../../include/core/util/simple_ptr.hpp" />
 		<Unit filename="../../src/core/actions/BaseAction.cpp" />
 		<Unit filename="../../src/core/actions/SinusGenerator.cpp" />

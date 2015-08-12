@@ -1,0 +1,207 @@
+\hypertarget{classmaudio_1_1IAction}{\section{maudio\-:\-:I\-Action Class Reference}
+\label{classmaudio_1_1IAction}\index{maudio\-::\-I\-Action@{maudio\-::\-I\-Action}}
+}
+
+
+{\ttfamily \#include $<$I\-Action.\-hpp$>$}
+
+Inheritance diagram for maudio\-:\-:I\-Action\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classmaudio_1_1IAction}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classmaudio_1_1IAction_af416e7ca1070c5b5b48e223664831056}{$\sim$\-I\-Action} ()
+\item 
+virtual \hyperlink{classmaudio_1_1IAudioBuffer}{I\-Audio\-Buffer} $\ast$ \hyperlink{classmaudio_1_1IAction_adcd159456456b1104af6d4f31336fe59}{get} (unsigned long pos, unsigned int length) noexcept=0
+\item 
+virtual \hyperlink{classmaudio_1_1IAudioInfo}{I\-Audio\-Info} $\ast$ \hyperlink{classmaudio_1_1IAction_abf9d7d1a4d66fd1b48d946d672bfe7a0}{get\-Info} () noexcept=0
+\item 
+virtual void \hyperlink{classmaudio_1_1IAction_a6be8c626cd3043c4114d9cf998fd0388}{delete\-Buffer} (\hyperlink{classmaudio_1_1IAudioBuffer}{I\-Audio\-Buffer} $\ast$data) noexcept=0
+\item 
+virtual void \hyperlink{classmaudio_1_1IAction_af02a219faa2361dd14759e1e92003d33}{delete\-Info} (\hyperlink{classmaudio_1_1IAudioInfo}{I\-Audio\-Info} $\ast$data) noexcept=0
+\item 
+virtual void \hyperlink{classmaudio_1_1IAction_ae4bdc7487e1229ded107ff8d42275bd3}{delete\-Sample} (\hyperlink{classmaudio_1_1ISample}{I\-Sample} $\ast$data) noexcept=0
+\item 
+virtual void \hyperlink{classmaudio_1_1IAction_a0dac443df118fafeb020d2254d3c8c8a}{add\-Socket} (\hyperlink{classmaudio_1_1ISocket}{I\-Socket} $\ast$socket, int slot)=0
+\item 
+virtual void \hyperlink{classmaudio_1_1IAction_aa562ad351f4923aeef7d8a7c0450d74e}{remove\-Socket} (int slot)=0
+\item 
+virtual int \hyperlink{classmaudio_1_1IAction_ad850f2f577a12e41c71994479773079f}{Num\-Inputs} () const =0
+\item 
+virtual int \hyperlink{classmaudio_1_1IAction_a3c8825e7f38e0de769af7d81ccf6cf5e}{Max\-Inputs} () const =0
+\item 
+virtual bool \hyperlink{classmaudio_1_1IAction_a148ec76547dc1ac21e47b4b5d10c152a}{Has\-Outputs} () const =0
+\item 
+virtual void \hyperlink{classmaudio_1_1IAction_a610804d37c46509f3eaa1aebceab7e35}{read\-Config} (const \hyperlink{classmaudio_1_1IKeyValueStore}{I\-Key\-Value\-Store} \&conf)=0
+\item 
+virtual \hyperlink{classmaudio_1_1IPropertyManager}{I\-Property\-Manager} $\ast$ \hyperlink{classmaudio_1_1IAction_a59edeb0de77724d42bc51e9b7f7b6d41}{get\-Properties} ()=0
+\item 
+virtual \hyperlink{classmaudio_1_1IControl}{I\-Control} $\ast$ \hyperlink{classmaudio_1_1IAction_a0103686135171d24dc7901a81ae77ace}{get\-Control} ()=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classmaudio_1_1IAction_af416e7ca1070c5b5b48e223664831056}{\index{maudio\-::\-I\-Action@{maudio\-::\-I\-Action}!$\sim$\-I\-Action@{$\sim$\-I\-Action}}
+\index{$\sim$\-I\-Action@{$\sim$\-I\-Action}!maudio::IAction@{maudio\-::\-I\-Action}}
+\subsubsection[{$\sim$\-I\-Action}]{\setlength{\rightskip}{0pt plus 5cm}virtual maudio\-::\-I\-Action\-::$\sim$\-I\-Action (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classmaudio_1_1IAction_af416e7ca1070c5b5b48e223664831056}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classmaudio_1_1IAction_a0dac443df118fafeb020d2254d3c8c8a}{\index{maudio\-::\-I\-Action@{maudio\-::\-I\-Action}!add\-Socket@{add\-Socket}}
+\index{add\-Socket@{add\-Socket}!maudio::IAction@{maudio\-::\-I\-Action}}
+\subsubsection[{add\-Socket}]{\setlength{\rightskip}{0pt plus 5cm}virtual void maudio\-::\-I\-Action\-::add\-Socket (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Socket} $\ast$}]{socket, }
+\item[{int}]{slot}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1IAction_a0dac443df118fafeb020d2254d3c8c8a}
+
+
+Implemented in \hyperlink{classmaudio_1_1BaseAction_a0e3fe3ae02cdf315fd63944d46419e6e}{maudio\-::\-Base\-Action}.
+
+\hypertarget{classmaudio_1_1IAction_a6be8c626cd3043c4114d9cf998fd0388}{\index{maudio\-::\-I\-Action@{maudio\-::\-I\-Action}!delete\-Buffer@{delete\-Buffer}}
+\index{delete\-Buffer@{delete\-Buffer}!maudio::IAction@{maudio\-::\-I\-Action}}
+\subsubsection[{delete\-Buffer}]{\setlength{\rightskip}{0pt plus 5cm}virtual void maudio\-::\-I\-Action\-::delete\-Buffer (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Audio\-Buffer} $\ast$}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}}\label{classmaudio_1_1IAction_a6be8c626cd3043c4114d9cf998fd0388}
+
+
+Implemented in \hyperlink{classmaudio_1_1BaseAction_a2c5422376581a5d01873833516858753}{maudio\-::\-Base\-Action}.
+
+\hypertarget{classmaudio_1_1IAction_af02a219faa2361dd14759e1e92003d33}{\index{maudio\-::\-I\-Action@{maudio\-::\-I\-Action}!delete\-Info@{delete\-Info}}
+\index{delete\-Info@{delete\-Info}!maudio::IAction@{maudio\-::\-I\-Action}}
+\subsubsection[{delete\-Info}]{\setlength{\rightskip}{0pt plus 5cm}virtual void maudio\-::\-I\-Action\-::delete\-Info (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Audio\-Info} $\ast$}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}}\label{classmaudio_1_1IAction_af02a219faa2361dd14759e1e92003d33}
+
+
+Implemented in \hyperlink{classmaudio_1_1BaseAction_ade1df46a9e5edc1931f3c061f3d51402}{maudio\-::\-Base\-Action}.
+
+\hypertarget{classmaudio_1_1IAction_ae4bdc7487e1229ded107ff8d42275bd3}{\index{maudio\-::\-I\-Action@{maudio\-::\-I\-Action}!delete\-Sample@{delete\-Sample}}
+\index{delete\-Sample@{delete\-Sample}!maudio::IAction@{maudio\-::\-I\-Action}}
+\subsubsection[{delete\-Sample}]{\setlength{\rightskip}{0pt plus 5cm}virtual void maudio\-::\-I\-Action\-::delete\-Sample (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Sample} $\ast$}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}}\label{classmaudio_1_1IAction_ae4bdc7487e1229ded107ff8d42275bd3}
+
+
+Implemented in \hyperlink{classmaudio_1_1BaseAction_a4c1f3d0c024bbdff115ac261bbf1a32c}{maudio\-::\-Base\-Action}.
+
+\hypertarget{classmaudio_1_1IAction_adcd159456456b1104af6d4f31336fe59}{\index{maudio\-::\-I\-Action@{maudio\-::\-I\-Action}!get@{get}}
+\index{get@{get}!maudio::IAction@{maudio\-::\-I\-Action}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf I\-Audio\-Buffer}$\ast$ maudio\-::\-I\-Action\-::get (
+\begin{DoxyParamCaption}
+\item[{unsigned long}]{pos, }
+\item[{unsigned int}]{length}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}}\label{classmaudio_1_1IAction_adcd159456456b1104af6d4f31336fe59}
+
+
+Implemented in \hyperlink{classmaudio_1_1SinusGenerator_a461fdc87ced846928ea651173122713a}{maudio\-::\-Sinus\-Generator}, \hyperlink{classmaudio_1_1TerminalPrinter_a27f779bcd81b68ffad732a6da669f8fe}{maudio\-::\-Terminal\-Printer}, and \hyperlink{classTestPlugin_af45a5a7d4f61db9503d96ecc1c590251}{Test\-Plugin}.
+
+\hypertarget{classmaudio_1_1IAction_a0103686135171d24dc7901a81ae77ace}{\index{maudio\-::\-I\-Action@{maudio\-::\-I\-Action}!get\-Control@{get\-Control}}
+\index{get\-Control@{get\-Control}!maudio::IAction@{maudio\-::\-I\-Action}}
+\subsubsection[{get\-Control}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf I\-Control}$\ast$ maudio\-::\-I\-Action\-::get\-Control (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1IAction_a0103686135171d24dc7901a81ae77ace}
+
+
+Implemented in \hyperlink{classmaudio_1_1BaseAction_a0ecc4f8e47f52d90b0ba7fe2757efe2c}{maudio\-::\-Base\-Action}, and \hyperlink{classmaudio_1_1TerminalPrinter_acef99a9118ebb6908166d8e97e7bb3e9}{maudio\-::\-Terminal\-Printer}.
+
+\hypertarget{classmaudio_1_1IAction_abf9d7d1a4d66fd1b48d946d672bfe7a0}{\index{maudio\-::\-I\-Action@{maudio\-::\-I\-Action}!get\-Info@{get\-Info}}
+\index{get\-Info@{get\-Info}!maudio::IAction@{maudio\-::\-I\-Action}}
+\subsubsection[{get\-Info}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf I\-Audio\-Info}$\ast$ maudio\-::\-I\-Action\-::get\-Info (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}, {\ttfamily [noexcept]}}}\label{classmaudio_1_1IAction_abf9d7d1a4d66fd1b48d946d672bfe7a0}
+
+
+Implemented in \hyperlink{classmaudio_1_1SinusGenerator_ab3ac1d0f6d84658262026bbebcbd808f}{maudio\-::\-Sinus\-Generator}, \hyperlink{classmaudio_1_1TerminalPrinter_ae0d8b73356c360bfdd10d32ec829af85}{maudio\-::\-Terminal\-Printer}, and \hyperlink{classTestPlugin_a07aa6acf3be682c3552c88282a97ceaa}{Test\-Plugin}.
+
+\hypertarget{classmaudio_1_1IAction_a59edeb0de77724d42bc51e9b7f7b6d41}{\index{maudio\-::\-I\-Action@{maudio\-::\-I\-Action}!get\-Properties@{get\-Properties}}
+\index{get\-Properties@{get\-Properties}!maudio::IAction@{maudio\-::\-I\-Action}}
+\subsubsection[{get\-Properties}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf I\-Property\-Manager}$\ast$ maudio\-::\-I\-Action\-::get\-Properties (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1IAction_a59edeb0de77724d42bc51e9b7f7b6d41}
+
+
+Implemented in \hyperlink{classmaudio_1_1BaseAction_ada21aa4734308191a32a9a2fe1dd4e3d}{maudio\-::\-Base\-Action}.
+
+\hypertarget{classmaudio_1_1IAction_a148ec76547dc1ac21e47b4b5d10c152a}{\index{maudio\-::\-I\-Action@{maudio\-::\-I\-Action}!Has\-Outputs@{Has\-Outputs}}
+\index{Has\-Outputs@{Has\-Outputs}!maudio::IAction@{maudio\-::\-I\-Action}}
+\subsubsection[{Has\-Outputs}]{\setlength{\rightskip}{0pt plus 5cm}virtual bool maudio\-::\-I\-Action\-::\-Has\-Outputs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1IAction_a148ec76547dc1ac21e47b4b5d10c152a}
+
+
+Implemented in \hyperlink{classTestPlugin_a2eb2cacb18c097fe26cc1a7640eebac3}{Test\-Plugin}, \hyperlink{classmaudio_1_1SinusGenerator_a0e39f15f11221f97fb034a42df608889}{maudio\-::\-Sinus\-Generator}, and \hyperlink{classmaudio_1_1TerminalPrinter_a3fdb9711d0d767e9acd0d01b3c7644da}{maudio\-::\-Terminal\-Printer}.
+
+\hypertarget{classmaudio_1_1IAction_a3c8825e7f38e0de769af7d81ccf6cf5e}{\index{maudio\-::\-I\-Action@{maudio\-::\-I\-Action}!Max\-Inputs@{Max\-Inputs}}
+\index{Max\-Inputs@{Max\-Inputs}!maudio::IAction@{maudio\-::\-I\-Action}}
+\subsubsection[{Max\-Inputs}]{\setlength{\rightskip}{0pt plus 5cm}virtual int maudio\-::\-I\-Action\-::\-Max\-Inputs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1IAction_a3c8825e7f38e0de769af7d81ccf6cf5e}
+
+
+Implemented in \hyperlink{classmaudio_1_1SinusGenerator_aee038f2dd2415a96ce1902be978f4ad4}{maudio\-::\-Sinus\-Generator}, \hyperlink{classTestPlugin_ad4faa8dad53c62e372e5837d8aa59ecb}{Test\-Plugin}, and \hyperlink{classmaudio_1_1TerminalPrinter_af895f464f3d51be9d44750e96dabf8f1}{maudio\-::\-Terminal\-Printer}.
+
+\hypertarget{classmaudio_1_1IAction_ad850f2f577a12e41c71994479773079f}{\index{maudio\-::\-I\-Action@{maudio\-::\-I\-Action}!Num\-Inputs@{Num\-Inputs}}
+\index{Num\-Inputs@{Num\-Inputs}!maudio::IAction@{maudio\-::\-I\-Action}}
+\subsubsection[{Num\-Inputs}]{\setlength{\rightskip}{0pt plus 5cm}virtual int maudio\-::\-I\-Action\-::\-Num\-Inputs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1IAction_ad850f2f577a12e41c71994479773079f}
+
+
+Implemented in \hyperlink{classmaudio_1_1BaseAction_a25f6c6801b1643bdc0a2bc9bb3534654}{maudio\-::\-Base\-Action}.
+
+\hypertarget{classmaudio_1_1IAction_a610804d37c46509f3eaa1aebceab7e35}{\index{maudio\-::\-I\-Action@{maudio\-::\-I\-Action}!read\-Config@{read\-Config}}
+\index{read\-Config@{read\-Config}!maudio::IAction@{maudio\-::\-I\-Action}}
+\subsubsection[{read\-Config}]{\setlength{\rightskip}{0pt plus 5cm}virtual void maudio\-::\-I\-Action\-::read\-Config (
+\begin{DoxyParamCaption}
+\item[{const {\bf I\-Key\-Value\-Store} \&}]{conf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1IAction_a610804d37c46509f3eaa1aebceab7e35}
+
+
+Implemented in \hyperlink{classTestPlugin_acd8d80abecd3967547e401cba0e1b660}{Test\-Plugin}, \hyperlink{classmaudio_1_1SinusGenerator_a9a901592dba8df35ac74ddd85cbb1482}{maudio\-::\-Sinus\-Generator}, and \hyperlink{classmaudio_1_1TerminalPrinter_a3888206cd622627b441ca00cca6d87e2}{maudio\-::\-Terminal\-Printer}.
+
+\hypertarget{classmaudio_1_1IAction_aa562ad351f4923aeef7d8a7c0450d74e}{\index{maudio\-::\-I\-Action@{maudio\-::\-I\-Action}!remove\-Socket@{remove\-Socket}}
+\index{remove\-Socket@{remove\-Socket}!maudio::IAction@{maudio\-::\-I\-Action}}
+\subsubsection[{remove\-Socket}]{\setlength{\rightskip}{0pt plus 5cm}virtual void maudio\-::\-I\-Action\-::remove\-Socket (
+\begin{DoxyParamCaption}
+\item[{int}]{slot}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1IAction_aa562ad351f4923aeef7d8a7c0450d74e}
+
+
+Implemented in \hyperlink{classmaudio_1_1BaseAction_aac97bab055f68c49941dbaae9a1ff497}{maudio\-::\-Base\-Action}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/mars/\-Projekte/maudio/src/plugins/include/core/node/\hyperlink{IAction_8hpp}{I\-Action.\-hpp}\end{DoxyCompactItemize}

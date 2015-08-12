@@ -1,0 +1,253 @@
+\hypertarget{classmaudio_1_1ISample}{\section{maudio\-:\-:I\-Sample Class Reference}
+\label{classmaudio_1_1ISample}\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}}
+}
+
+
+Holds a sample of audio.  
+
+
+
+
+{\ttfamily \#include $<$I\-Sample.\-hpp$>$}
+
+Inheritance diagram for maudio\-:\-:I\-Sample\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classmaudio_1_1ISample}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classmaudio_1_1ISample_ad4b8a6224f76943f9a10e6d5bb16a1fd}{$\sim$\-I\-Sample} ()
+\item 
+virtual const float \hyperlink{classmaudio_1_1ISample_ad90962cd3f480cbba7a891530371e405}{operator\mbox{[}$\,$\mbox{]}} (unsigned int pos) const =0
+\item 
+virtual float \hyperlink{classmaudio_1_1ISample_a2a1eef822e43d5807a7ff3e9798783c6}{get} (unsigned int pos) const =0
+\item 
+virtual void \hyperlink{classmaudio_1_1ISample_a0b65702ea137559932feee764cfc190e}{set} (float data, unsigned int pos)=0
+\item 
+virtual unsigned int \hyperlink{classmaudio_1_1ISample_a2c05b7da59cc625f695352a11a81351c}{get\-Channels} () const =0
+\item 
+virtual \hyperlink{classmaudio_1_1ISample}{I\-Sample} $\ast$ \hyperlink{classmaudio_1_1ISample_abd3ff392a72c89576b111dd4120eb2b0}{operator+} (const \hyperlink{classmaudio_1_1ISample}{I\-Sample} \&data)=0
+\item 
+virtual \hyperlink{classmaudio_1_1ISample}{I\-Sample} $\ast$ \hyperlink{classmaudio_1_1ISample_a654eb71ce13136f6f8a1299daab81a85}{operator-\/} (const \hyperlink{classmaudio_1_1ISample}{I\-Sample} \&data)=0
+\item 
+virtual \hyperlink{classmaudio_1_1ISample}{I\-Sample} $\ast$ \hyperlink{classmaudio_1_1ISample_aa7dcb9e5e605bb8b3bb18c0d64d0f98f}{operator$\ast$} (const \hyperlink{classmaudio_1_1ISample}{I\-Sample} \&data)=0
+\item 
+virtual \hyperlink{classmaudio_1_1ISample}{I\-Sample} $\ast$ \hyperlink{classmaudio_1_1ISample_a11fd4f5c355e90f67317881618289b4b}{operator/} (const \hyperlink{classmaudio_1_1ISample}{I\-Sample} \&data)=0
+\item 
+virtual \hyperlink{classmaudio_1_1ISample}{I\-Sample} $\ast$ \hyperlink{classmaudio_1_1ISample_ace42669d0bb902e6237c6aa491f3177d}{operator$\ast$} (float data)=0
+\item 
+virtual \hyperlink{classmaudio_1_1ISample}{I\-Sample} $\ast$ \hyperlink{classmaudio_1_1ISample_a48dfc510f76abb0981c8edb79f737c09}{operator/} (float data)=0
+\item 
+virtual void \hyperlink{classmaudio_1_1ISample_a3000493ce6c2d3fccc88565360170ff7}{operator+=} (const \hyperlink{classmaudio_1_1ISample}{I\-Sample} \&data)=0
+\item 
+virtual void \hyperlink{classmaudio_1_1ISample_ac635182905ed788cd498b21b025b6fb4}{operator-\/=} (const \hyperlink{classmaudio_1_1ISample}{I\-Sample} \&data)=0
+\item 
+virtual void \hyperlink{classmaudio_1_1ISample_abc3eeb3d0432fcdb0cf2105d703a1b01}{operator$\ast$=} (const \hyperlink{classmaudio_1_1ISample}{I\-Sample} \&data)=0
+\item 
+virtual void \hyperlink{classmaudio_1_1ISample_af9b70d20e42b6d8711e4a796c1ef260d}{operator/=} (const \hyperlink{classmaudio_1_1ISample}{I\-Sample} \&data)=0
+\item 
+virtual void \hyperlink{classmaudio_1_1ISample_ad3bd2552fb977ec53225cb37f09da3cd}{operator$\ast$=} (float data)=0
+\item 
+virtual void \hyperlink{classmaudio_1_1ISample_a1ade860d885977e6b1b333170ae5ec41}{operator/=} (float data)=0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Holds a sample of audio. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classmaudio_1_1ISample_ad4b8a6224f76943f9a10e6d5bb16a1fd}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!$\sim$\-I\-Sample@{$\sim$\-I\-Sample}}
+\index{$\sim$\-I\-Sample@{$\sim$\-I\-Sample}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{$\sim$\-I\-Sample}]{\setlength{\rightskip}{0pt plus 5cm}virtual maudio\-::\-I\-Sample\-::$\sim$\-I\-Sample (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classmaudio_1_1ISample_ad4b8a6224f76943f9a10e6d5bb16a1fd}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classmaudio_1_1ISample_a2a1eef822e43d5807a7ff3e9798783c6}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!get@{get}}
+\index{get@{get}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}virtual float maudio\-::\-I\-Sample\-::get (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{pos}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1ISample_a2a1eef822e43d5807a7ff3e9798783c6}
+
+
+Implemented in \hyperlink{classmaudio_1_1Sample_abc1d709a5c730747aa155109a11d99ce}{maudio\-::\-Sample}.
+
+\hypertarget{classmaudio_1_1ISample_a2c05b7da59cc625f695352a11a81351c}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!get\-Channels@{get\-Channels}}
+\index{get\-Channels@{get\-Channels}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{get\-Channels}]{\setlength{\rightskip}{0pt plus 5cm}virtual unsigned int maudio\-::\-I\-Sample\-::get\-Channels (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1ISample_a2c05b7da59cc625f695352a11a81351c}
+
+
+Implemented in \hyperlink{classmaudio_1_1Sample_a30b228a9490d8afa6dfdcf34d44553c3}{maudio\-::\-Sample}.
+
+\hypertarget{classmaudio_1_1ISample_aa7dcb9e5e605bb8b3bb18c0d64d0f98f}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf I\-Sample}$\ast$ maudio\-::\-I\-Sample\-::operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{const {\bf I\-Sample} \&}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1ISample_aa7dcb9e5e605bb8b3bb18c0d64d0f98f}
+
+
+Implemented in \hyperlink{classmaudio_1_1Sample_a1b7626f92fc63060bbbe718a57a801d8}{maudio\-::\-Sample}.
+
+\hypertarget{classmaudio_1_1ISample_ace42669d0bb902e6237c6aa491f3177d}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{operator$\ast$}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf I\-Sample}$\ast$ maudio\-::\-I\-Sample\-::operator$\ast$ (
+\begin{DoxyParamCaption}
+\item[{float}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1ISample_ace42669d0bb902e6237c6aa491f3177d}
+
+
+Implemented in \hyperlink{classmaudio_1_1Sample_a3acd28e07a7fd552a54f6a0755493056}{maudio\-::\-Sample}.
+
+\hypertarget{classmaudio_1_1ISample_abc3eeb3d0432fcdb0cf2105d703a1b01}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{operator$\ast$=}]{\setlength{\rightskip}{0pt plus 5cm}virtual void maudio\-::\-I\-Sample\-::operator$\ast$= (
+\begin{DoxyParamCaption}
+\item[{const {\bf I\-Sample} \&}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1ISample_abc3eeb3d0432fcdb0cf2105d703a1b01}
+
+
+Implemented in \hyperlink{classmaudio_1_1Sample_a48654599874e90747f0e2df36e8a5038}{maudio\-::\-Sample}.
+
+\hypertarget{classmaudio_1_1ISample_ad3bd2552fb977ec53225cb37f09da3cd}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!operator$\ast$=@{operator$\ast$=}}
+\index{operator$\ast$=@{operator$\ast$=}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{operator$\ast$=}]{\setlength{\rightskip}{0pt plus 5cm}virtual void maudio\-::\-I\-Sample\-::operator$\ast$= (
+\begin{DoxyParamCaption}
+\item[{float}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1ISample_ad3bd2552fb977ec53225cb37f09da3cd}
+
+
+Implemented in \hyperlink{classmaudio_1_1Sample_a3ae8257702e07cc7af3424bbc04feede}{maudio\-::\-Sample}.
+
+\hypertarget{classmaudio_1_1ISample_abd3ff392a72c89576b111dd4120eb2b0}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!operator+@{operator+}}
+\index{operator+@{operator+}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{operator+}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf I\-Sample}$\ast$ maudio\-::\-I\-Sample\-::operator+ (
+\begin{DoxyParamCaption}
+\item[{const {\bf I\-Sample} \&}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1ISample_abd3ff392a72c89576b111dd4120eb2b0}
+
+
+Implemented in \hyperlink{classmaudio_1_1Sample_a3784ec5b915e1a06f76af431cf2d51e3}{maudio\-::\-Sample}.
+
+\hypertarget{classmaudio_1_1ISample_a3000493ce6c2d3fccc88565360170ff7}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{operator+=}]{\setlength{\rightskip}{0pt plus 5cm}virtual void maudio\-::\-I\-Sample\-::operator+= (
+\begin{DoxyParamCaption}
+\item[{const {\bf I\-Sample} \&}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1ISample_a3000493ce6c2d3fccc88565360170ff7}
+
+
+Implemented in \hyperlink{classmaudio_1_1Sample_aaaa4dcbd04db90aa9bdcf3f63665a9c7}{maudio\-::\-Sample}.
+
+\hypertarget{classmaudio_1_1ISample_a654eb71ce13136f6f8a1299daab81a85}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{operator-\/}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf I\-Sample}$\ast$ maudio\-::\-I\-Sample\-::operator-\/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf I\-Sample} \&}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1ISample_a654eb71ce13136f6f8a1299daab81a85}
+
+
+Implemented in \hyperlink{classmaudio_1_1Sample_af6fab639be30873ff867c95be407ea6e}{maudio\-::\-Sample}.
+
+\hypertarget{classmaudio_1_1ISample_ac635182905ed788cd498b21b025b6fb4}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{operator-\/=}]{\setlength{\rightskip}{0pt plus 5cm}virtual void maudio\-::\-I\-Sample\-::operator-\/= (
+\begin{DoxyParamCaption}
+\item[{const {\bf I\-Sample} \&}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1ISample_ac635182905ed788cd498b21b025b6fb4}
+
+
+Implemented in \hyperlink{classmaudio_1_1Sample_a2cf98ca0a69364efb1f9b3a083bacff5}{maudio\-::\-Sample}.
+
+\hypertarget{classmaudio_1_1ISample_a11fd4f5c355e90f67317881618289b4b}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!operator/@{operator/}}
+\index{operator/@{operator/}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{operator/}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf I\-Sample}$\ast$ maudio\-::\-I\-Sample\-::operator/ (
+\begin{DoxyParamCaption}
+\item[{const {\bf I\-Sample} \&}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1ISample_a11fd4f5c355e90f67317881618289b4b}
+
+
+Implemented in \hyperlink{classmaudio_1_1Sample_aa0fc9649f0c195a614a57e5be2092b5c}{maudio\-::\-Sample}.
+
+\hypertarget{classmaudio_1_1ISample_a48dfc510f76abb0981c8edb79f737c09}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!operator/@{operator/}}
+\index{operator/@{operator/}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{operator/}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf I\-Sample}$\ast$ maudio\-::\-I\-Sample\-::operator/ (
+\begin{DoxyParamCaption}
+\item[{float}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1ISample_a48dfc510f76abb0981c8edb79f737c09}
+
+
+Implemented in \hyperlink{classmaudio_1_1Sample_ade7a0f4a21b0b78f082ee4c09c983d7c}{maudio\-::\-Sample}.
+
+\hypertarget{classmaudio_1_1ISample_af9b70d20e42b6d8711e4a796c1ef260d}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{operator/=}]{\setlength{\rightskip}{0pt plus 5cm}virtual void maudio\-::\-I\-Sample\-::operator/= (
+\begin{DoxyParamCaption}
+\item[{const {\bf I\-Sample} \&}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1ISample_af9b70d20e42b6d8711e4a796c1ef260d}
+
+
+Implemented in \hyperlink{classmaudio_1_1Sample_aecb80004ebd611674563fe1c0aadb860}{maudio\-::\-Sample}.
+
+\hypertarget{classmaudio_1_1ISample_a1ade860d885977e6b1b333170ae5ec41}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{operator/=}]{\setlength{\rightskip}{0pt plus 5cm}virtual void maudio\-::\-I\-Sample\-::operator/= (
+\begin{DoxyParamCaption}
+\item[{float}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1ISample_a1ade860d885977e6b1b333170ae5ec41}
+
+
+Implemented in \hyperlink{classmaudio_1_1Sample_ac7b187b92806613e71bf4fccebf65bff}{maudio\-::\-Sample}.
+
+\hypertarget{classmaudio_1_1ISample_ad90962cd3f480cbba7a891530371e405}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}virtual const float maudio\-::\-I\-Sample\-::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{pos}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1ISample_ad90962cd3f480cbba7a891530371e405}
+
+
+Implemented in \hyperlink{classmaudio_1_1Sample_afb3132c845a9254cab792c704f163e10}{maudio\-::\-Sample}.
+
+\hypertarget{classmaudio_1_1ISample_a0b65702ea137559932feee764cfc190e}{\index{maudio\-::\-I\-Sample@{maudio\-::\-I\-Sample}!set@{set}}
+\index{set@{set}!maudio::ISample@{maudio\-::\-I\-Sample}}
+\subsubsection[{set}]{\setlength{\rightskip}{0pt plus 5cm}virtual void maudio\-::\-I\-Sample\-::set (
+\begin{DoxyParamCaption}
+\item[{float}]{data, }
+\item[{unsigned int}]{pos}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1ISample_a0b65702ea137559932feee764cfc190e}
+
+
+Implemented in \hyperlink{classmaudio_1_1Sample_a3e934051125c16e499d04bdb974e9f44}{maudio\-::\-Sample}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/mars/\-Projekte/maudio/src/plugins/include/core/audiodata/\hyperlink{ISample_8hpp}{I\-Sample.\-hpp}\end{DoxyCompactItemize}

@@ -1,0 +1,123 @@
+\hypertarget{classmaudio_1_1IAudioBuffer}{\section{maudio\-:\-:I\-Audio\-Buffer Class Reference}
+\label{classmaudio_1_1IAudioBuffer}\index{maudio\-::\-I\-Audio\-Buffer@{maudio\-::\-I\-Audio\-Buffer}}
+}
+
+
+holds an audio stream in a vector of floats  
+
+
+
+
+{\ttfamily \#include $<$I\-Audio\-Buffer.\-hpp$>$}
+
+Inheritance diagram for maudio\-:\-:I\-Audio\-Buffer\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classmaudio_1_1IAudioBuffer}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classmaudio_1_1IAudioBuffer_aaec85fcb95eec6f7cf3913300131015c}{$\sim$\-I\-Audio\-Buffer} ()
+\item 
+virtual \hyperlink{classmaudio_1_1ISample}{I\-Sample} $\ast$ \hyperlink{classmaudio_1_1IAudioBuffer_a32a5742929553887a22e4d48be0e3763}{operator\mbox{[}$\,$\mbox{]}} (unsigned long pos) const =0
+\item 
+virtual \hyperlink{classmaudio_1_1ISample}{I\-Sample} $\ast$ \hyperlink{classmaudio_1_1IAudioBuffer_aaea60a9702071ae0b12e9e616e72defb}{get} (unsigned long pos) const =0
+\item 
+virtual void \hyperlink{classmaudio_1_1IAudioBuffer_ab8f8728745907781bc31508d5816ef60}{set} (const \hyperlink{classmaudio_1_1ISample}{I\-Sample} \&data, unsigned long pos)=0
+\item 
+virtual void \hyperlink{classmaudio_1_1IAudioBuffer_a50d44964ef18c7dfd483fd0e68294d6b}{resize} (unsigned long samples)=0
+\item 
+virtual const \hyperlink{classmaudio_1_1IAudioInfo}{I\-Audio\-Info} $\ast$ \hyperlink{classmaudio_1_1IAudioBuffer_afd0eb3d169bade19e4508a4eaa2a07b4}{get\-Info} () const =0
+\item 
+virtual const float $\ast$ \hyperlink{classmaudio_1_1IAudioBuffer_a60f486dc3d94b4c4f06df698e7848117}{get\-Raw} () const =0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+holds an audio stream in a vector of floats 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classmaudio_1_1IAudioBuffer_aaec85fcb95eec6f7cf3913300131015c}{\index{maudio\-::\-I\-Audio\-Buffer@{maudio\-::\-I\-Audio\-Buffer}!$\sim$\-I\-Audio\-Buffer@{$\sim$\-I\-Audio\-Buffer}}
+\index{$\sim$\-I\-Audio\-Buffer@{$\sim$\-I\-Audio\-Buffer}!maudio::IAudioBuffer@{maudio\-::\-I\-Audio\-Buffer}}
+\subsubsection[{$\sim$\-I\-Audio\-Buffer}]{\setlength{\rightskip}{0pt plus 5cm}virtual maudio\-::\-I\-Audio\-Buffer\-::$\sim$\-I\-Audio\-Buffer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}}\label{classmaudio_1_1IAudioBuffer_aaec85fcb95eec6f7cf3913300131015c}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classmaudio_1_1IAudioBuffer_aaea60a9702071ae0b12e9e616e72defb}{\index{maudio\-::\-I\-Audio\-Buffer@{maudio\-::\-I\-Audio\-Buffer}!get@{get}}
+\index{get@{get}!maudio::IAudioBuffer@{maudio\-::\-I\-Audio\-Buffer}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf I\-Sample}$\ast$ maudio\-::\-I\-Audio\-Buffer\-::get (
+\begin{DoxyParamCaption}
+\item[{unsigned long}]{pos}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1IAudioBuffer_aaea60a9702071ae0b12e9e616e72defb}
+
+
+Implemented in \hyperlink{classmaudio_1_1AudioBuffer_a93eeb4f2f16bf113e8bc77592d7c4664}{maudio\-::\-Audio\-Buffer}.
+
+\hypertarget{classmaudio_1_1IAudioBuffer_afd0eb3d169bade19e4508a4eaa2a07b4}{\index{maudio\-::\-I\-Audio\-Buffer@{maudio\-::\-I\-Audio\-Buffer}!get\-Info@{get\-Info}}
+\index{get\-Info@{get\-Info}!maudio::IAudioBuffer@{maudio\-::\-I\-Audio\-Buffer}}
+\subsubsection[{get\-Info}]{\setlength{\rightskip}{0pt plus 5cm}virtual const {\bf I\-Audio\-Info}$\ast$ maudio\-::\-I\-Audio\-Buffer\-::get\-Info (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1IAudioBuffer_afd0eb3d169bade19e4508a4eaa2a07b4}
+
+
+Implemented in \hyperlink{classmaudio_1_1AudioBuffer_aa5e0294c0de7b4bbcaed0afa9ae22728}{maudio\-::\-Audio\-Buffer}.
+
+\hypertarget{classmaudio_1_1IAudioBuffer_a60f486dc3d94b4c4f06df698e7848117}{\index{maudio\-::\-I\-Audio\-Buffer@{maudio\-::\-I\-Audio\-Buffer}!get\-Raw@{get\-Raw}}
+\index{get\-Raw@{get\-Raw}!maudio::IAudioBuffer@{maudio\-::\-I\-Audio\-Buffer}}
+\subsubsection[{get\-Raw}]{\setlength{\rightskip}{0pt plus 5cm}virtual const float$\ast$ maudio\-::\-I\-Audio\-Buffer\-::get\-Raw (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1IAudioBuffer_a60f486dc3d94b4c4f06df698e7848117}
+
+
+Implemented in \hyperlink{classmaudio_1_1AudioBuffer_a6ac54537437e8a3fc4236b9375dc0126}{maudio\-::\-Audio\-Buffer}.
+
+\hypertarget{classmaudio_1_1IAudioBuffer_a32a5742929553887a22e4d48be0e3763}{\index{maudio\-::\-I\-Audio\-Buffer@{maudio\-::\-I\-Audio\-Buffer}!operator\mbox{[}$\,$\mbox{]}@{operator[]}}
+\index{operator\mbox{[}$\,$\mbox{]}@{operator[]}!maudio::IAudioBuffer@{maudio\-::\-I\-Audio\-Buffer}}
+\subsubsection[{operator[]}]{\setlength{\rightskip}{0pt plus 5cm}virtual {\bf I\-Sample}$\ast$ maudio\-::\-I\-Audio\-Buffer\-::operator\mbox{[}$\,$\mbox{]} (
+\begin{DoxyParamCaption}
+\item[{unsigned long}]{pos}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1IAudioBuffer_a32a5742929553887a22e4d48be0e3763}
+
+
+Implemented in \hyperlink{classmaudio_1_1AudioBuffer_a6548ddb981ec41fa92d821a15aa06080}{maudio\-::\-Audio\-Buffer}.
+
+\hypertarget{classmaudio_1_1IAudioBuffer_a50d44964ef18c7dfd483fd0e68294d6b}{\index{maudio\-::\-I\-Audio\-Buffer@{maudio\-::\-I\-Audio\-Buffer}!resize@{resize}}
+\index{resize@{resize}!maudio::IAudioBuffer@{maudio\-::\-I\-Audio\-Buffer}}
+\subsubsection[{resize}]{\setlength{\rightskip}{0pt plus 5cm}virtual void maudio\-::\-I\-Audio\-Buffer\-::resize (
+\begin{DoxyParamCaption}
+\item[{unsigned long}]{samples}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1IAudioBuffer_a50d44964ef18c7dfd483fd0e68294d6b}
+
+
+Implemented in \hyperlink{classmaudio_1_1AudioBuffer_aeed134c3a1b7f5446594fa23c8857e8c}{maudio\-::\-Audio\-Buffer}.
+
+\hypertarget{classmaudio_1_1IAudioBuffer_ab8f8728745907781bc31508d5816ef60}{\index{maudio\-::\-I\-Audio\-Buffer@{maudio\-::\-I\-Audio\-Buffer}!set@{set}}
+\index{set@{set}!maudio::IAudioBuffer@{maudio\-::\-I\-Audio\-Buffer}}
+\subsubsection[{set}]{\setlength{\rightskip}{0pt plus 5cm}virtual void maudio\-::\-I\-Audio\-Buffer\-::set (
+\begin{DoxyParamCaption}
+\item[{const {\bf I\-Sample} \&}]{data, }
+\item[{unsigned long}]{pos}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}}\label{classmaudio_1_1IAudioBuffer_ab8f8728745907781bc31508d5816ef60}
+
+
+Implemented in \hyperlink{classmaudio_1_1AudioBuffer_a3f19c9611c89947bbf27af7f788b8347}{maudio\-::\-Audio\-Buffer}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+/home/mars/\-Projekte/maudio/src/plugins/include/core/audiodata/\hyperlink{IAudioBuffer_8hpp}{I\-Audio\-Buffer.\-hpp}\end{DoxyCompactItemize}

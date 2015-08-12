@@ -7,13 +7,16 @@
 #ifndef MAUDIO_PLUGINLOADER
 #define MAUDIO_PLUGINLOADER
 
+#include "core/util/String.hpp"
 #include "core/util/AudioException.hpp"
 #include <dlfcn.h>
+#include <string>
 
 namespace maudio{
 
 typedef void *create_t();
 typedef void destroy_t(void *data);
+typedef const char *getName_t();
 
 template<typename T>
 class PluginLoader{
@@ -26,10 +29,15 @@ public:
 
 	bool loaded();
 
+	std::string getName();
+	std::string getPath();
+
 	T *createInstance();
 	void deleteInstance(T *data);
 
 private:
+	std::string mName;
+	std::string mPath;
     void *mHandle = NULL;
     create_t *mCreateFunc = NULL;
     destroy_t *mDestroyFunc = NULL;
@@ -52,9 +60,10 @@ PluginLoader<T>::~PluginLoader(){
 
 template<typename T>
 void PluginLoader<T>::loadPlugin(const char *path){
+	dlerror();
 	mHandle = dlopen(path, RTLD_LAZY);
 	if(!mHandle){
-		throw MaudioException("cannot open plugin");
+		throw MaudioException(std::string("cannot open plugin: ").append(std::string(dlerror())));
 	}
 	dlerror();
 
@@ -69,6 +78,16 @@ void PluginLoader<T>::loadPlugin(const char *path){
 	if(dlsym_error){
 		throw MaudioException("cannot load create function");
 	}
+
+	getName_t *nameFunc = (getName_t *)dlsym(mHandle, "getName");
+	dlsym_error = dlerror();
+	if(dlsym_error){
+		throw MaudioException("cannot load getName function");
+	}
+
+	mPath = path;
+	String tmp(nameFunc());
+	mName = tmp.c_str();
 	return;
 }
 
@@ -87,6 +106,16 @@ template<typename T>
 bool PluginLoader<T>::loaded(){
 	if(mHandle) return true;
 	return false;
+}
+
+template<typename T>
+std::string PluginLoader<T>::getName(){
+	return mName;
+}
+
+template<typename T>
+std::string PluginLoader<T>::getPath(){
+	return mPath;
 }
 
 template<typename T>

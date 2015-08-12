@@ -1,0 +1,112 @@
+\hypertarget{classmaudio_1_1ActionNode_1_1Socket}{\section{maudio\-:\-:Action\-Node\-:\-:Socket Class Reference}
+\label{classmaudio_1_1ActionNode_1_1Socket}\index{maudio\-::\-Action\-Node\-::\-Socket@{maudio\-::\-Action\-Node\-::\-Socket}}
+}
+
+
+{\ttfamily \#include $<$Action\-Node.\-hpp$>$}
+
+Inheritance diagram for maudio\-:\-:Action\-Node\-:\-:Socket\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classmaudio_1_1ActionNode_1_1Socket}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmaudio_1_1ActionNode_1_1Socket_a3c1f70a4d60050e19cf3ecb441068653}{Socket} (std\-::shared\-\_\-ptr$<$ \hyperlink{classmaudio_1_1Node}{Node} $>$ input)
+\item 
+virtual \hyperlink{classmaudio_1_1ActionNode_1_1Socket_a184298687b5653972217b83afe6425d9}{$\sim$\-Socket} ()
+\item 
+virtual \hyperlink{classmaudio_1_1IAudioBuffer}{I\-Audio\-Buffer} $\ast$ \hyperlink{classmaudio_1_1ActionNode_1_1Socket_a3801dbf1ff87f6f4d417d2929ff3c107}{get} (unsigned long pos, unsigned int length) noexcept
+\item 
+virtual \hyperlink{classmaudio_1_1IAudioInfo}{I\-Audio\-Info} $\ast$ \hyperlink{classmaudio_1_1ActionNode_1_1Socket_adf54bb1504b5cf9d53fe6529e86e3653}{get\-Info} () noexcept
+\item 
+virtual void \hyperlink{classmaudio_1_1ActionNode_1_1Socket_a8a64ba64966caca18a70c711ff1e4b2d}{delete\-Buffer} (\hyperlink{classmaudio_1_1IAudioBuffer}{I\-Audio\-Buffer} $\ast$data) noexcept
+\item 
+virtual void \hyperlink{classmaudio_1_1ActionNode_1_1Socket_a3e25c1d6d28ecbfdfeecd6b6c846a1be}{delete\-Info} (\hyperlink{classmaudio_1_1IAudioInfo}{I\-Audio\-Info} $\ast$data) noexcept
+\item 
+virtual void \hyperlink{classmaudio_1_1ActionNode_1_1Socket_a8882eaaf8ea9d06ea006c6d977acdeb7}{delete\-Sample} (\hyperlink{classmaudio_1_1ISample}{I\-Sample} $\ast$data) noexcept
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classmaudio_1_1ActionNode_1_1Socket_a3c1f70a4d60050e19cf3ecb441068653}{\index{maudio\-::\-Action\-Node\-::\-Socket@{maudio\-::\-Action\-Node\-::\-Socket}!Socket@{Socket}}
+\index{Socket@{Socket}!maudio::ActionNode::Socket@{maudio\-::\-Action\-Node\-::\-Socket}}
+\subsubsection[{Socket}]{\setlength{\rightskip}{0pt plus 5cm}maudio\-::\-Action\-Node\-::\-Socket\-::\-Socket (
+\begin{DoxyParamCaption}
+\item[{std\-::shared\-\_\-ptr$<$ {\bf Node} $>$}]{input}
+\end{DoxyParamCaption}
+)}}\label{classmaudio_1_1ActionNode_1_1Socket_a3c1f70a4d60050e19cf3ecb441068653}
+\hypertarget{classmaudio_1_1ActionNode_1_1Socket_a184298687b5653972217b83afe6425d9}{\index{maudio\-::\-Action\-Node\-::\-Socket@{maudio\-::\-Action\-Node\-::\-Socket}!$\sim$\-Socket@{$\sim$\-Socket}}
+\index{$\sim$\-Socket@{$\sim$\-Socket}!maudio::ActionNode::Socket@{maudio\-::\-Action\-Node\-::\-Socket}}
+\subsubsection[{$\sim$\-Socket}]{\setlength{\rightskip}{0pt plus 5cm}maudio\-::\-Action\-Node\-::\-Socket\-::$\sim$\-Socket (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classmaudio_1_1ActionNode_1_1Socket_a184298687b5653972217b83afe6425d9}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classmaudio_1_1ActionNode_1_1Socket_a8a64ba64966caca18a70c711ff1e4b2d}{\index{maudio\-::\-Action\-Node\-::\-Socket@{maudio\-::\-Action\-Node\-::\-Socket}!delete\-Buffer@{delete\-Buffer}}
+\index{delete\-Buffer@{delete\-Buffer}!maudio::ActionNode::Socket@{maudio\-::\-Action\-Node\-::\-Socket}}
+\subsubsection[{delete\-Buffer}]{\setlength{\rightskip}{0pt plus 5cm}void maudio\-::\-Action\-Node\-::\-Socket\-::delete\-Buffer (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Audio\-Buffer} $\ast$}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}}\label{classmaudio_1_1ActionNode_1_1Socket_a8a64ba64966caca18a70c711ff1e4b2d}
+
+
+Implements \hyperlink{classmaudio_1_1ISocket_a8015c32967e28f35c6abdbe979e4f318}{maudio\-::\-I\-Socket}.
+
+\hypertarget{classmaudio_1_1ActionNode_1_1Socket_a3e25c1d6d28ecbfdfeecd6b6c846a1be}{\index{maudio\-::\-Action\-Node\-::\-Socket@{maudio\-::\-Action\-Node\-::\-Socket}!delete\-Info@{delete\-Info}}
+\index{delete\-Info@{delete\-Info}!maudio::ActionNode::Socket@{maudio\-::\-Action\-Node\-::\-Socket}}
+\subsubsection[{delete\-Info}]{\setlength{\rightskip}{0pt plus 5cm}void maudio\-::\-Action\-Node\-::\-Socket\-::delete\-Info (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Audio\-Info} $\ast$}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}}\label{classmaudio_1_1ActionNode_1_1Socket_a3e25c1d6d28ecbfdfeecd6b6c846a1be}
+
+
+Implements \hyperlink{classmaudio_1_1ISocket_a180a1cb55da56375612a5bdc53be61ee}{maudio\-::\-I\-Socket}.
+
+\hypertarget{classmaudio_1_1ActionNode_1_1Socket_a8882eaaf8ea9d06ea006c6d977acdeb7}{\index{maudio\-::\-Action\-Node\-::\-Socket@{maudio\-::\-Action\-Node\-::\-Socket}!delete\-Sample@{delete\-Sample}}
+\index{delete\-Sample@{delete\-Sample}!maudio::ActionNode::Socket@{maudio\-::\-Action\-Node\-::\-Socket}}
+\subsubsection[{delete\-Sample}]{\setlength{\rightskip}{0pt plus 5cm}void maudio\-::\-Action\-Node\-::\-Socket\-::delete\-Sample (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Sample} $\ast$}]{data}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}}\label{classmaudio_1_1ActionNode_1_1Socket_a8882eaaf8ea9d06ea006c6d977acdeb7}
+
+
+Implements \hyperlink{classmaudio_1_1ISocket_ae67025d3d0befc48cbfd11bd05da1386}{maudio\-::\-I\-Socket}.
+
+\hypertarget{classmaudio_1_1ActionNode_1_1Socket_a3801dbf1ff87f6f4d417d2929ff3c107}{\index{maudio\-::\-Action\-Node\-::\-Socket@{maudio\-::\-Action\-Node\-::\-Socket}!get@{get}}
+\index{get@{get}!maudio::ActionNode::Socket@{maudio\-::\-Action\-Node\-::\-Socket}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\-Audio\-Buffer} $\ast$ maudio\-::\-Action\-Node\-::\-Socket\-::get (
+\begin{DoxyParamCaption}
+\item[{unsigned long}]{pos, }
+\item[{unsigned int}]{length}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}}\label{classmaudio_1_1ActionNode_1_1Socket_a3801dbf1ff87f6f4d417d2929ff3c107}
+
+
+Implements \hyperlink{classmaudio_1_1ISocket_a6a2d1f172963b079563c015ae7338db1}{maudio\-::\-I\-Socket}.
+
+\hypertarget{classmaudio_1_1ActionNode_1_1Socket_adf54bb1504b5cf9d53fe6529e86e3653}{\index{maudio\-::\-Action\-Node\-::\-Socket@{maudio\-::\-Action\-Node\-::\-Socket}!get\-Info@{get\-Info}}
+\index{get\-Info@{get\-Info}!maudio::ActionNode::Socket@{maudio\-::\-Action\-Node\-::\-Socket}}
+\subsubsection[{get\-Info}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\-Audio\-Info} $\ast$ maudio\-::\-Action\-Node\-::\-Socket\-::get\-Info (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}}\label{classmaudio_1_1ActionNode_1_1Socket_adf54bb1504b5cf9d53fe6529e86e3653}
+
+
+Implements \hyperlink{classmaudio_1_1ISocket_a43b1b9ab16b93131ba7d11204cbe5558}{maudio\-::\-I\-Socket}.
+
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/mars/\-Projekte/maudio/src/plugins/include/core/node/\hyperlink{ActionNode_8hpp}{Action\-Node.\-hpp}\item 
+/home/mars/\-Projekte/maudio/src/core/node/\hyperlink{core_2node_2ActionNode_8cpp}{Action\-Node.\-cpp}\end{DoxyCompactItemize}

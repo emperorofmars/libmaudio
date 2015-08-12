@@ -1,0 +1,140 @@
+\hypertarget{classmaudio_1_1SinusGenerator}{\section{maudio\-:\-:Sinus\-Generator Class Reference}
+\label{classmaudio_1_1SinusGenerator}\index{maudio\-::\-Sinus\-Generator@{maudio\-::\-Sinus\-Generator}}
+}
+
+
+{\ttfamily \#include $<$Sinus\-Generator.\-hpp$>$}
+
+Inheritance diagram for maudio\-:\-:Sinus\-Generator\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classmaudio_1_1SinusGenerator}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classmaudio_1_1SinusGenerator_a2a6f8d9cbb43ae177e50ba5e64e53a3c}{Sinus\-Generator} ()
+\item 
+virtual \hyperlink{classmaudio_1_1SinusGenerator_aed11cbd52f1ee60ef9819478182b58e4}{$\sim$\-Sinus\-Generator} ()
+\item 
+virtual \hyperlink{classmaudio_1_1IAudioBuffer}{I\-Audio\-Buffer} $\ast$ \hyperlink{classmaudio_1_1SinusGenerator_a461fdc87ced846928ea651173122713a}{get} (unsigned long pos, unsigned int length) noexcept
+\item 
+virtual \hyperlink{classmaudio_1_1IAudioInfo}{I\-Audio\-Info} $\ast$ \hyperlink{classmaudio_1_1SinusGenerator_ab3ac1d0f6d84658262026bbebcbd808f}{get\-Info} () noexcept
+\item 
+virtual int \hyperlink{classmaudio_1_1SinusGenerator_aee038f2dd2415a96ce1902be978f4ad4}{Max\-Inputs} () const 
+\item 
+virtual bool \hyperlink{classmaudio_1_1SinusGenerator_a0e39f15f11221f97fb034a42df608889}{Has\-Outputs} () const 
+\item 
+virtual void \hyperlink{classmaudio_1_1SinusGenerator_a9a901592dba8df35ac74ddd85cbb1482}{read\-Config} (const \hyperlink{classmaudio_1_1IKeyValueStore}{I\-Key\-Value\-Store} \&conf)
+\item 
+virtual void \hyperlink{classmaudio_1_1SinusGenerator_a7957a8e22bbda999d99cb5dc954a6979}{set\-Frequency} (float freq)
+\item 
+virtual void \hyperlink{classmaudio_1_1SinusGenerator_a5b75c779c1a8f249e70a442d591e7b41}{set\-Samplerate} (unsigned int samplerate)
+\item 
+virtual void \hyperlink{classmaudio_1_1SinusGenerator_a13aa66a1d01fec78d92c9b05c1d111d7}{set\-Channels} (unsigned int channels)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classmaudio_1_1SinusGenerator_a2a6f8d9cbb43ae177e50ba5e64e53a3c}{\index{maudio\-::\-Sinus\-Generator@{maudio\-::\-Sinus\-Generator}!Sinus\-Generator@{Sinus\-Generator}}
+\index{Sinus\-Generator@{Sinus\-Generator}!maudio::SinusGenerator@{maudio\-::\-Sinus\-Generator}}
+\subsubsection[{Sinus\-Generator}]{\setlength{\rightskip}{0pt plus 5cm}maudio\-::\-Sinus\-Generator\-::\-Sinus\-Generator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{classmaudio_1_1SinusGenerator_a2a6f8d9cbb43ae177e50ba5e64e53a3c}
+\hypertarget{classmaudio_1_1SinusGenerator_aed11cbd52f1ee60ef9819478182b58e4}{\index{maudio\-::\-Sinus\-Generator@{maudio\-::\-Sinus\-Generator}!$\sim$\-Sinus\-Generator@{$\sim$\-Sinus\-Generator}}
+\index{$\sim$\-Sinus\-Generator@{$\sim$\-Sinus\-Generator}!maudio::SinusGenerator@{maudio\-::\-Sinus\-Generator}}
+\subsubsection[{$\sim$\-Sinus\-Generator}]{\setlength{\rightskip}{0pt plus 5cm}maudio\-::\-Sinus\-Generator\-::$\sim$\-Sinus\-Generator (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classmaudio_1_1SinusGenerator_aed11cbd52f1ee60ef9819478182b58e4}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classmaudio_1_1SinusGenerator_a461fdc87ced846928ea651173122713a}{\index{maudio\-::\-Sinus\-Generator@{maudio\-::\-Sinus\-Generator}!get@{get}}
+\index{get@{get}!maudio::SinusGenerator@{maudio\-::\-Sinus\-Generator}}
+\subsubsection[{get}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\-Audio\-Buffer} $\ast$ maudio\-::\-Sinus\-Generator\-::get (
+\begin{DoxyParamCaption}
+\item[{unsigned long}]{pos, }
+\item[{unsigned int}]{length}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}}\label{classmaudio_1_1SinusGenerator_a461fdc87ced846928ea651173122713a}
+
+
+Implements \hyperlink{classmaudio_1_1IAction_adcd159456456b1104af6d4f31336fe59}{maudio\-::\-I\-Action}.
+
+\hypertarget{classmaudio_1_1SinusGenerator_ab3ac1d0f6d84658262026bbebcbd808f}{\index{maudio\-::\-Sinus\-Generator@{maudio\-::\-Sinus\-Generator}!get\-Info@{get\-Info}}
+\index{get\-Info@{get\-Info}!maudio::SinusGenerator@{maudio\-::\-Sinus\-Generator}}
+\subsubsection[{get\-Info}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\-Audio\-Info} $\ast$ maudio\-::\-Sinus\-Generator\-::get\-Info (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [noexcept]}}}\label{classmaudio_1_1SinusGenerator_ab3ac1d0f6d84658262026bbebcbd808f}
+
+
+Implements \hyperlink{classmaudio_1_1IAction_abf9d7d1a4d66fd1b48d946d672bfe7a0}{maudio\-::\-I\-Action}.
+
+\hypertarget{classmaudio_1_1SinusGenerator_a0e39f15f11221f97fb034a42df608889}{\index{maudio\-::\-Sinus\-Generator@{maudio\-::\-Sinus\-Generator}!Has\-Outputs@{Has\-Outputs}}
+\index{Has\-Outputs@{Has\-Outputs}!maudio::SinusGenerator@{maudio\-::\-Sinus\-Generator}}
+\subsubsection[{Has\-Outputs}]{\setlength{\rightskip}{0pt plus 5cm}bool maudio\-::\-Sinus\-Generator\-::\-Has\-Outputs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classmaudio_1_1SinusGenerator_a0e39f15f11221f97fb034a42df608889}
+
+
+Implements \hyperlink{classmaudio_1_1IAction_a148ec76547dc1ac21e47b4b5d10c152a}{maudio\-::\-I\-Action}.
+
+\hypertarget{classmaudio_1_1SinusGenerator_aee038f2dd2415a96ce1902be978f4ad4}{\index{maudio\-::\-Sinus\-Generator@{maudio\-::\-Sinus\-Generator}!Max\-Inputs@{Max\-Inputs}}
+\index{Max\-Inputs@{Max\-Inputs}!maudio::SinusGenerator@{maudio\-::\-Sinus\-Generator}}
+\subsubsection[{Max\-Inputs}]{\setlength{\rightskip}{0pt plus 5cm}int maudio\-::\-Sinus\-Generator\-::\-Max\-Inputs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classmaudio_1_1SinusGenerator_aee038f2dd2415a96ce1902be978f4ad4}
+
+
+Implements \hyperlink{classmaudio_1_1IAction_a3c8825e7f38e0de769af7d81ccf6cf5e}{maudio\-::\-I\-Action}.
+
+\hypertarget{classmaudio_1_1SinusGenerator_a9a901592dba8df35ac74ddd85cbb1482}{\index{maudio\-::\-Sinus\-Generator@{maudio\-::\-Sinus\-Generator}!read\-Config@{read\-Config}}
+\index{read\-Config@{read\-Config}!maudio::SinusGenerator@{maudio\-::\-Sinus\-Generator}}
+\subsubsection[{read\-Config}]{\setlength{\rightskip}{0pt plus 5cm}void maudio\-::\-Sinus\-Generator\-::read\-Config (
+\begin{DoxyParamCaption}
+\item[{const {\bf I\-Key\-Value\-Store} \&}]{conf}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classmaudio_1_1SinusGenerator_a9a901592dba8df35ac74ddd85cbb1482}
+
+
+Implements \hyperlink{classmaudio_1_1IAction_a610804d37c46509f3eaa1aebceab7e35}{maudio\-::\-I\-Action}.
+
+\hypertarget{classmaudio_1_1SinusGenerator_a13aa66a1d01fec78d92c9b05c1d111d7}{\index{maudio\-::\-Sinus\-Generator@{maudio\-::\-Sinus\-Generator}!set\-Channels@{set\-Channels}}
+\index{set\-Channels@{set\-Channels}!maudio::SinusGenerator@{maudio\-::\-Sinus\-Generator}}
+\subsubsection[{set\-Channels}]{\setlength{\rightskip}{0pt plus 5cm}void maudio\-::\-Sinus\-Generator\-::set\-Channels (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{channels}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classmaudio_1_1SinusGenerator_a13aa66a1d01fec78d92c9b05c1d111d7}
+\hypertarget{classmaudio_1_1SinusGenerator_a7957a8e22bbda999d99cb5dc954a6979}{\index{maudio\-::\-Sinus\-Generator@{maudio\-::\-Sinus\-Generator}!set\-Frequency@{set\-Frequency}}
+\index{set\-Frequency@{set\-Frequency}!maudio::SinusGenerator@{maudio\-::\-Sinus\-Generator}}
+\subsubsection[{set\-Frequency}]{\setlength{\rightskip}{0pt plus 5cm}void maudio\-::\-Sinus\-Generator\-::set\-Frequency (
+\begin{DoxyParamCaption}
+\item[{float}]{freq}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classmaudio_1_1SinusGenerator_a7957a8e22bbda999d99cb5dc954a6979}
+\hypertarget{classmaudio_1_1SinusGenerator_a5b75c779c1a8f249e70a442d591e7b41}{\index{maudio\-::\-Sinus\-Generator@{maudio\-::\-Sinus\-Generator}!set\-Samplerate@{set\-Samplerate}}
+\index{set\-Samplerate@{set\-Samplerate}!maudio::SinusGenerator@{maudio\-::\-Sinus\-Generator}}
+\subsubsection[{set\-Samplerate}]{\setlength{\rightskip}{0pt plus 5cm}void maudio\-::\-Sinus\-Generator\-::set\-Samplerate (
+\begin{DoxyParamCaption}
+\item[{unsigned int}]{samplerate}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}}\label{classmaudio_1_1SinusGenerator_a5b75c779c1a8f249e70a442d591e7b41}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+/home/mars/\-Projekte/maudio/src/plugins/include/core/actions/\hyperlink{SinusGenerator_8hpp}{Sinus\-Generator.\-hpp}\item 
+/home/mars/\-Projekte/maudio/src/core/actions/\hyperlink{core_2actions_2SinusGenerator_8cpp}{Sinus\-Generator.\-cpp}\end{DoxyCompactItemize}

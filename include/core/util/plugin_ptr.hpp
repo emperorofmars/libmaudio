@@ -13,8 +13,9 @@
 namespace maudio{
 
 /**
-Takes ownership over a pointer, acts like a pointer,
-but deletes it when it goes out of scope.
+Takes ownership over a pointer to a plugin instance,
+acts like a pointer, but deletes it when it goes out of scope,
+unless there are other plugin_ptr instances assigned from it.
 Similar to stl smart pointers but has less overhead.
 Best way to handle returned raw pointers.
 Warning: its not thread save!
@@ -22,14 +23,12 @@ Warning: its not thread save!
 template<typename T>
 class plugin_ptr{
 public:
-	plugin_ptr();
-	plugin_ptr(T *data, PluginLoader<T> *deleter);
-	plugin_ptr(plugin_ptr<T> &data);
+	plugin_ptr(T *data = NULL, PluginLoader<T> *deleter = NULL);
+	plugin_ptr(const plugin_ptr<T> &data);
 	~plugin_ptr();
 
-	void reset();
-	void reset(T *data, PluginLoader<T> *deleter);
-	void reset(plugin_ptr<T> &data);
+	void reset(T *data = NULL, PluginLoader<T> *deleter = NULL);
+	void reset(const plugin_ptr<T> &data);
 	T *release();
 
 	T *get() const;
@@ -37,21 +36,21 @@ public:
 	T &operator*() const;
 
 	void operator=(T &data);
-	void operator=(plugin_ptr<T> &data);
-	bool operator==(plugin_ptr<T> &data) const;
+	void operator=(const plugin_ptr<T> &data);
+	bool operator==(const plugin_ptr<T> &data) const;
 	operator bool() const;
 	bool operator!() const;
 
 private:
+	struct RefCount{
+		int mRefs = 0;
+	};
+
 	T *mData = NULL;
 	PluginLoader<T> *mDeleter = NULL;
+	RefCount *mRefCount = NULL;
 };
 
-
-template<typename T>
-plugin_ptr<T>::plugin_ptr(){
-	return;
-}
 
 template<typename T>
 plugin_ptr<T>::plugin_ptr(T *data, PluginLoader<T> *deleter){
@@ -60,7 +59,7 @@ plugin_ptr<T>::plugin_ptr(T *data, PluginLoader<T> *deleter){
 }
 
 template<typename T>
-plugin_ptr<T>::plugin_ptr(plugin_ptr<T> &data){
+plugin_ptr<T>::plugin_ptr(const plugin_ptr<T> &data){
 	reset(data);
 	return;
 }
@@ -68,21 +67,6 @@ plugin_ptr<T>::plugin_ptr(plugin_ptr<T> &data){
 template<typename T>
 plugin_ptr<T>::~plugin_ptr(){
 	reset();
-	return;
-}
-
-template<typename T>
-void plugin_ptr<T>::reset(){
-	if(mData != NULL){
-		if(mDeleter != NULL){
-			mDeleter->deleteInstance(mData);
-		}
-		else{
-			delete mData;
-		}
-	}
-	mData = NULL;
-	mDeleter = NULL;
 	return;
 }
 
@@ -95,14 +79,24 @@ void plugin_ptr<T>::reset(T *data, PluginLoader<T> *deleter){
 		else{
 			delete mData;
 		}
+		if(mRefCount){
+			mRefCount->mRefs--;
+			if(mRefCount->mRefs == 0){
+				delete mRefCount;
+			}
+			mRefCount = NULL;
+		}
 	}
 	mData = data;
 	mDeleter = deleter;
+
+	mRefCount = new RefCount();
+	mRefCount->mRefs = 1;
 	return;
 }
 
 template<typename T>
-void plugin_ptr<T>::reset(plugin_ptr<T> &data){
+void plugin_ptr<T>::reset(const plugin_ptr<T> &data){
 	if(mData != NULL){
 		if(mDeleter != NULL){
 			mDeleter->deleteInstance(mData);
@@ -110,8 +104,18 @@ void plugin_ptr<T>::reset(plugin_ptr<T> &data){
 		else{
 			delete mData;
 		}
+		if(mRefCount){
+			mRefCount->mRefs--;
+			if(mRefCount->mRefs == 0){
+				delete mRefCount;
+			}
+			mRefCount = NULL;
+		}
 	}
-	mData = data.release();
+	mData = data.get();
+	mDeleter = data.mDeleter;
+	mRefCount = data.mRefCount;
+	mRefCount->mRefs++;
 	return;
 }
 
@@ -143,12 +147,12 @@ void plugin_ptr<T>::operator=(T &data){
 }
 
 template<typename T>
-void plugin_ptr<T>::operator=(plugin_ptr<T> &data){
+void plugin_ptr<T>::operator=(const plugin_ptr<T> &data){
 	return reset(data);
 }
 
 template<typename T>
-bool plugin_ptr<T>::operator==(plugin_ptr<T> &data) const{
+bool plugin_ptr<T>::operator==(const plugin_ptr<T> &data) const{
 	if(mData == data.mData) return true;
 	return false;
 }

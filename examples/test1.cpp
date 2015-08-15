@@ -61,34 +61,20 @@ int main(int argc, char *argv[]){
 	std::shared_ptr<ActionNode> tpr(new ActionNode(std::unique_ptr<TerminalPrinter>(new TerminalPrinter())));
 	tpr->addInput(sgen, 0);
 
+	std::cerr << "Sinusgen:" << std::endl;
 	simple_ptr<IControl> cntl(tpr->getControl());
 	if(cntl){
-		std::cerr << "Sinusgen:" << std::endl;
 		cntl->callFunction((unsigned int)0, "123123");
 		cntl->callFunction("print", "123124");
 	}
 
 	std::cerr << "Plugin:" << std::endl;
-/*
-	PluginLoader<IAction> pload("plugin.so");
-	IAction *plugin = pload.createInstance();
-	IAudioInfo *info = plugin->getInfo();
-	std::cerr << "Plugintest: " << info->getSamplerate() << std::endl;
-	plugin->deleteInfo(info);
-	pload.deleteInstance(plugin);
-	pload.unloadPlugin();
 
 	PluginManager::Instance()->addPlugin("plugin.so");
-	plugin_ptr<IAction> plug();
-	PluginManager::Instance()->createInstance("TestPlugin");
-	IAudioInfo *info = plug.get()->getInfo();
-	//IAudioInfo *info = plug->getInfo();
+	plugin_ptr<IAction> plug = PluginManager::Instance()->createInstance("TestPlugin");
+	IAudioInfo *info = plug->getInfo();
 	std::cerr << "Plugintest: " << info->getSamplerate() << std::endl;
 	plug->deleteInfo(info);
-*/
-
-	plugin_ptr<Sample> test(new Sample(1));
-	test->getChannels();
 
 	std::cerr << "closing main" << std::endl;
 	return 0;

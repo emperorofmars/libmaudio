@@ -74,6 +74,8 @@
 		<Unit filename="../../include/core/store/IKeyValueStore.hpp" />
 		<Unit filename="../../include/core/store/KeyValueStore.hpp" />
 		<Unit filename="../../include/core/util/AudioException.hpp" />
+		<Unit filename="../../include/core/util/IObservable.hpp" />
+		<Unit filename="../../include/core/util/IObserver.hpp" />
 		<Unit filename="../../include/core/util/String.hpp" />
 		<Unit filename="../../include/core/util/UniqueID.hpp" />
 		<Unit filename="../../include/core/util/Util.hpp" />

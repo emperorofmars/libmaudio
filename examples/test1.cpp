@@ -24,7 +24,8 @@
 #include "core/store/ConfigManager.hpp"
 #include "core/util/String.hpp"
 #include "core/util/simple_ptr.hpp"
-#include "core/pluginmanager/PluginLoader.hpp"
+#include "core/util/plugin_ptr.hpp"
+#include "core/pluginmanager/PluginManager.hpp"
 
 using namespace maudio;
 
@@ -68,7 +69,7 @@ int main(int argc, char *argv[]){
 	}
 
 	std::cerr << "Plugin:" << std::endl;
-
+/*
 	PluginLoader<IAction> pload("plugin.so");
 	IAction *plugin = pload.createInstance();
 	IAudioInfo *info = plugin->getInfo();
@@ -76,6 +77,18 @@ int main(int argc, char *argv[]){
 	plugin->deleteInfo(info);
 	pload.deleteInstance(plugin);
 	pload.unloadPlugin();
+
+	PluginManager::Instance()->addPlugin("plugin.so");
+	plugin_ptr<IAction> plug();
+	PluginManager::Instance()->createInstance("TestPlugin");
+	IAudioInfo *info = plug.get()->getInfo();
+	//IAudioInfo *info = plug->getInfo();
+	std::cerr << "Plugintest: " << info->getSamplerate() << std::endl;
+	plug->deleteInfo(info);
+*/
+
+	plugin_ptr<Sample> test(new Sample(1));
+	test->getChannels();
 
 	std::cerr << "closing main" << std::endl;
 	return 0;

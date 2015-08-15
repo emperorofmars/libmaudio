@@ -7,6 +7,7 @@
 #ifndef MAUDIO_NODE
 #define MAUDIO_NODE
 
+#include "core/node/IAudioGetter.hpp"
 #include "core/util/UniqueID.hpp"
 #include "core/audiodata/IAudioBuffer.hpp"
 #include "core/audiodata/IAudioInfo.hpp"
@@ -21,16 +22,9 @@
 
 namespace maudio{
 
-class Node : public std::enable_shared_from_this<Node>, public UniqueID{
+class Node : public IAudioGetter, public std::enable_shared_from_this<Node>, public UniqueID{
 public:
 	virtual ~Node();
-
-	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept = 0;
-	virtual IAudioInfo *getInfo() noexcept = 0;
-
-	virtual void deleteBuffer(IAudioBuffer *data) noexcept = 0;
-	virtual void deleteInfo(IAudioInfo *data) noexcept = 0;
-	virtual void deleteSample(ISample *data) noexcept = 0;
 
 	void addInput(std::shared_ptr<Node> node, int slot = -1);
 	void removeInput(std::shared_ptr<Node> node);
@@ -45,7 +39,7 @@ public:
 	virtual int MaxInputs() const = 0;
 	virtual bool HasOutputs() const = 0;
 
-	virtual void readConfig(const Config &conf) = 0;
+	virtual void readConfig(const IKeyValueStore &conf) = 0;
 
 	virtual IPropertyManager *getProperties() = 0;
 
@@ -53,10 +47,10 @@ public:
 
 	std::string getName() const;
 	void setName(const std::string &name);
-
+/*
 	virtual IKeyValueStore *serialize() const = 0;
 	virtual void deserialize(const IKeyValueStore *data) = 0;
-
+*/
 protected:
 	virtual void onAdd(unsigned int slot) = 0;
 	virtual void onRemove(unsigned int slot) = 0;

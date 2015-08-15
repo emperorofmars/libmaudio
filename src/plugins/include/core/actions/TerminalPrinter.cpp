@@ -99,6 +99,10 @@ unsigned int TerminalPrinter::Control::callFunction(const char *name, const char
 	return -1;
 }
 
+void TerminalPrinter::Control::stop(){
+	return;
+}
+
 } // maudio
 
 

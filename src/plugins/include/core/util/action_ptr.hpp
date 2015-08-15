@@ -8,7 +8,7 @@
 #define MAUDIO_ACTIONPTR
 
 #include <cstddef>
-#include "core/node/ISocket.hpp"
+#include "core/node/IAudioGetter.hpp"
 
 namespace maudio{
 
@@ -22,31 +22,32 @@ Warning: its not thread save!
 template<typename T>
 class action_ptr{
 public:
-	action_ptr(T *data = NULL, ISocket *deleter = NULL);
+	action_ptr(T *data = NULL, IAudioGetter *deleter = NULL);
 	action_ptr(action_ptr<T> &data);
 	~action_ptr();
 
-	void reset(T *data = NULL, ISocket *deleter = NULL);
+	void reset(T *data = NULL, IAudioGetter *deleter = NULL);
 	void reset(action_ptr<T> &data);
 	T *release();
 
-	T *get();
-	T *operator->();
-	T &operator*();
+	T *get() const;
+	T *operator->() const;
+	T &operator*() const;
 
 	void operator=(T &data);
 	void operator=(action_ptr<T> &data);
-	bool operator==(action_ptr<T> &data);
-	operator bool();
+	bool operator==(action_ptr<T> &data) const;
+	operator bool() const;
+	bool operator!() const;
 
 private:
 	T *mData = NULL;
-	ISocket *mDeleter = NULL;
+	IAudioGetter *mDeleter = NULL;
 };
 
 
 template<typename T>
-action_ptr<T>::action_ptr(T *data, ISocket *deleter){
+action_ptr<T>::action_ptr(T *data, IAudioGetter *deleter){
 	reset(data);
 	return;
 }
@@ -64,7 +65,7 @@ action_ptr<T>::~action_ptr(){
 }
 
 template<typename T>
-void action_ptr<T>::reset(T *data, ISocket *deleter){
+void action_ptr<T>::reset(T *data, IAudioGetter *deleter){
 	if(mData != NULL){
 		delete mData;
 	}
@@ -74,7 +75,7 @@ void action_ptr<T>::reset(T *data, ISocket *deleter){
 }
 
 template<>
-void action_ptr<IAudioBuffer>::reset(IAudioBuffer *data, ISocket *deleter){
+void action_ptr<IAudioBuffer>::reset(IAudioBuffer *data, IAudioGetter *deleter){
 	if(mData != NULL){
 		if(mDeleter) mDeleter->deleteBuffer(mData);
 		else delete mData;
@@ -85,7 +86,7 @@ void action_ptr<IAudioBuffer>::reset(IAudioBuffer *data, ISocket *deleter){
 }
 
 template<>
-void action_ptr<IAudioInfo>::reset(IAudioInfo *data, ISocket *deleter){
+void action_ptr<IAudioInfo>::reset(IAudioInfo *data, IAudioGetter *deleter){
 	if(mData != NULL){
 		if(mDeleter) mDeleter->deleteInfo(mData);
 		else delete mData;
@@ -96,7 +97,7 @@ void action_ptr<IAudioInfo>::reset(IAudioInfo *data, ISocket *deleter){
 }
 
 template<>
-void action_ptr<ISample>::reset(ISample *data, ISocket *deleter){
+void action_ptr<ISample>::reset(ISample *data, IAudioGetter *deleter){
 	if(mData != NULL){
 		if(mDeleter) mDeleter->deleteSample(mData);
 		else delete mData;
@@ -123,17 +124,17 @@ T *action_ptr<T>::release(){
 }
 
 template<typename T>
-T *action_ptr<T>::get(){
+T *action_ptr<T>::get() const{
 	return mData;
 }
 
 template<typename T>
-T *action_ptr<T>::operator->(){
+T *action_ptr<T>::operator->() const{
 	return mData;
 }
 
 template<typename T>
-T &action_ptr<T>::operator*(){
+T &action_ptr<T>::operator*() const{
 	return *mData;
 }
 
@@ -148,13 +149,19 @@ void action_ptr<T>::operator=(action_ptr<T> &data){
 }
 
 template<typename T>
-bool action_ptr<T>::operator==(action_ptr<T> &data){
+bool action_ptr<T>::operator==(action_ptr<T> &data) const{
 	if(mData == data.mData) return true;
 	return false;
 }
 
 template<typename T>
-action_ptr<T>::operator bool(){
+action_ptr<T>::operator bool() const{
+	if(mData) return true;
+	return false;
+}
+
+template<typename T>
+bool action_ptr<T>::operator!() const{
 	if(mData) return true;
 	return false;
 }

@@ -49,12 +49,21 @@ void TerminalPrinter::print(unsigned long pos){
 		return;
 	}
 	action_ptr<IAudioInfo> tmpInfo(mInputs[0]->getInfo(), mInputs[0]);
-	if(!tmpInfo) return;
+	if(!tmpInfo){
+		std::cout << "failed retrieving info" << std::endl;
+		return;
+	}
 	for(unsigned int i = 0; i < tmpInfo->getChannels(); i++){
 		action_ptr<IAudioBuffer> tmpBuf(mInputs[0]->get(pos, 1), mInputs[0]);
-		if(!tmpBuf) return;
+		if(!tmpBuf){
+			std::cout << "failed retrieving buffer" << std::endl;
+			return;
+		}
 		action_ptr<ISample> tmpSmp(tmpBuf->get(0), mInputs[0]);
-		if(!tmpSmp) return;
+		if(!tmpSmp){
+			std::cout << "failed retrieving sample" << std::endl;
+			return;
+		}
 		std::cout << tmpSmp->get(i) << " ";
 	}
 	std::cout << std::endl;

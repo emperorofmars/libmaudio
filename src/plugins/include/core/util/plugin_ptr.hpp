@@ -161,8 +161,8 @@ plugin_ptr<T>::operator bool() const{
 
 template<typename T>
 bool plugin_ptr<T>::operator!() const{
-	if(mData) return false;
-	return true;
+	if(mData) return true;
+	return false;
 }
 
 } // maudio

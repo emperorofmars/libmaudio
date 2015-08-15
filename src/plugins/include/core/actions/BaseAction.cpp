@@ -30,7 +30,7 @@ void BaseAction::deleteSample(ISample *data) noexcept{
 	return;
 }
 
-void BaseAction::addSocket(ISocket *socket, int slot){
+void BaseAction::addSocket(IAudioGetter *socket, int slot){
 	if(slot < 0 && MaxInputs() < 0){
 		mInputs.push_back(socket);
 	}

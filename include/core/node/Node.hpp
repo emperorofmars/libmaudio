@@ -47,10 +47,10 @@ public:
 
 	std::string getName() const;
 	void setName(const std::string &name);
-
+/*
 	virtual IKeyValueStore *serialize() const = 0;
 	virtual void deserialize(const IKeyValueStore *data) = 0;
-
+*/
 protected:
 	virtual void onAdd(unsigned int slot) = 0;
 	virtual void onRemove(unsigned int slot) = 0;

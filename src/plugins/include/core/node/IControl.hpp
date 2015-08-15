@@ -20,6 +20,7 @@ public:
 	virtual const char *getFunctionParam(unsigned int num) = 0;
 	virtual unsigned int callFunction(unsigned int num, const char *param = NULL) = 0;
 	virtual unsigned int callFunction(const char *name, const char *param = NULL) = 0;
+	virtual void stop() = 0;
 };
 
 } // maudio

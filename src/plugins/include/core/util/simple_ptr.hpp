@@ -29,14 +29,15 @@ public:
 	void reset(simple_ptr<T> &data);
 	T *release();
 
-	T *get();
-	T *operator->();
-	T &operator*();
+	T *get() const;
+	T *operator->() const;
+	T &operator*() const;
 
 	void operator=(T &data);
 	void operator=(simple_ptr<T> &data);
-	bool operator==(simple_ptr<T> &data);
-	operator bool();
+	bool operator==(simple_ptr<T> &data) const;
+	operator bool() const;
+	bool operator!() const;
 
 private:
 	T *mData = NULL;
@@ -87,17 +88,17 @@ T *simple_ptr<T>::release(){
 }
 
 template<typename T>
-T *simple_ptr<T>::get(){
+T *simple_ptr<T>::get() const{
 	return mData;
 }
 
 template<typename T>
-T *simple_ptr<T>::operator->(){
+T *simple_ptr<T>::operator->() const{
 	return mData;
 }
 
 template<typename T>
-T &simple_ptr<T>::operator*(){
+T &simple_ptr<T>::operator*() const{
 	return *mData;
 }
 
@@ -112,13 +113,19 @@ void simple_ptr<T>::operator=(simple_ptr<T> &data){
 }
 
 template<typename T>
-bool simple_ptr<T>::operator==(simple_ptr<T> &data){
+bool simple_ptr<T>::operator==(simple_ptr<T> &data) const{
 	if(mData == data.mData) return true;
 	return false;
 }
 
 template<typename T>
-simple_ptr<T>::operator bool(){
+simple_ptr<T>::operator bool() const{
+	if(mData) return true;
+	return false;
+}
+
+template<typename T>
+bool simple_ptr<T>::operator!() const{
 	if(mData) return true;
 	return false;
 }

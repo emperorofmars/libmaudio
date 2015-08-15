@@ -9,7 +9,7 @@
 
 #include "core/node/Node.hpp"
 #include "core/node/IAction.hpp"
-#include "core/node/ISocket.hpp"
+#include "core/node/IAudioGetter.hpp"
 
 namespace maudio{
 
@@ -29,35 +29,18 @@ public:
 	virtual int MaxInputs() const;
 	virtual bool HasOutputs() const;
 
-	virtual void readConfig(const Config &conf);
+	virtual void readConfig(const IKeyValueStore &conf);
 
 	virtual IPropertyManager *getProperties();
 
 	virtual IControl *getControl();
-
+/*
 	virtual IKeyValueStore *serialize() const;
 	virtual void deserialize(const IKeyValueStore *data);
-
+*/
 protected:
-
 	virtual void onAdd(unsigned int slot);
 	virtual void onRemove(unsigned int slot);
-
-	class Socket : public ISocket{
-		public:
-			Socket(std::shared_ptr<Node> input);
-			virtual ~Socket();
-
-			virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept;
-			virtual IAudioInfo *getInfo() noexcept;
-
-			virtual void deleteBuffer(IAudioBuffer *data) noexcept;
-			virtual void deleteInfo(IAudioInfo *data) noexcept;
-			virtual void deleteSample(ISample *data) noexcept;
-
-		private:
-			std::shared_ptr<Node> mInput;
-	};
 
 	std::unique_ptr<IAction> mAction;
 };

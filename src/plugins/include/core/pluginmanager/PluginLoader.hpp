@@ -86,7 +86,8 @@ void PluginLoader<T>::loadPlugin(const char *path){
 	}
 
 	mPath = path;
-	mName = nameFunc();
+	String tmp(nameFunc());
+	mName = tmp.c_str();
 	return;
 }
 

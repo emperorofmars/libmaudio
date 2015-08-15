@@ -57,7 +57,7 @@ bool ActionNode::HasOutputs() const{
 	return mAction->HasOutputs();
 }
 
-void ActionNode::readConfig(const Config &conf){
+void ActionNode::readConfig(const IKeyValueStore &conf){
 	if(!mAction) return;
 	mAction->readConfig(conf);
 	return;
@@ -75,54 +75,13 @@ IControl *ActionNode::getControl(){
 
 void ActionNode::onAdd(unsigned int slot){
 	if(!mAction) return;
-	mAction->addSocket(new Socket(mInputs[slot]), slot);
+	mAction->addSocket(mInputs[slot].get(), slot);
 	return;
 }
 
 void ActionNode::onRemove(unsigned int slot){
 	if(!mAction) return;
 	mAction->removeSocket(slot);
-	return;
-}
-
-
-ActionNode::Socket::Socket(std::shared_ptr<Node> input){
-	mInput = input;
-}
-
-ActionNode::Socket::~Socket(){
-}
-
-IAudioBuffer *ActionNode::Socket::get(unsigned long pos, unsigned int length) noexcept{
-	if(!mInput) return NULL;
-	return mInput->get(pos, length);
-}
-
-IAudioInfo *ActionNode::Socket::getInfo() noexcept{
-	if(!mInput) return NULL;
-	return mInput->getInfo();
-}
-
-void ActionNode::Socket::deleteBuffer(IAudioBuffer *data) noexcept{
-	if(mInput) mInput->deleteBuffer(data);
-	return;
-}
-
-void ActionNode::Socket::deleteInfo(IAudioInfo *data) noexcept{
-	if(mInput) mInput->deleteInfo(data);
-	return;
-}
-
-void ActionNode::Socket::deleteSample(ISample *data) noexcept{
-	if(mInput) mInput->deleteSample(data);
-	return;
-}
-
-IKeyValueStore *ActionNode::serialize() const{
-	return NULL;
-}
-
-void ActionNode::deserialize(const IKeyValueStore *data){
 	return;
 }
 

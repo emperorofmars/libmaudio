@@ -4,20 +4,20 @@
  * See LICENSE.txt for the full license
  */
 
-#ifndef MAUDIO_ACTIONNODE
-#define MAUDIO_ACTIONNODE
+#ifndef MAUDIO_PLUGINNODE
+#define MAUDIO_PLUGINNODE
 
 #include "core/node/Node.hpp"
 #include "core/node/IAction.hpp"
 #include "core/node/IAudioGetter.hpp"
+#include "core/util/plugin_ptr.hpp"
 
 namespace maudio{
 
-class ActionNode : public Node{
+class PluginNode : public Node{
 public:
-	ActionNode(IAction *action);
-	ActionNode(std::unique_ptr<IAction> action);
-	virtual ~ActionNode();
+	PluginNode(plugin_ptr<IAction> action);
+	virtual ~PluginNode();
 
 	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept;
 	virtual IAudioInfo *getInfo() noexcept;
@@ -42,12 +42,12 @@ protected:
 	virtual void onAdd(unsigned int slot);
 	virtual void onRemove(unsigned int slot);
 
-	std::unique_ptr<IAction> mAction;
+	plugin_ptr<IAction> mAction;
 };
 
 } // maudio
 
-#endif // MAUDIO_ACTIONNODE
+#endif // MAUDIO_PLUGINNODE
 
 
 

@@ -62,12 +62,14 @@ int main(int argc, char *argv[]){
 
 	simple_ptr<IControl> cntl(tpr->getControl());
 	if(cntl){
-		std::cerr << "Sinusgen: " << std::endl;
+		std::cerr << "Sinusgen:" << std::endl;
 		cntl->callFunction((unsigned int)0, "123123");
 		cntl->callFunction("print", "123124");
 	}
 
-	PluginLoader<IAction> pload("testplugin.so");
+	std::cerr << "Plugin:" << std::endl;
+
+	PluginLoader<IAction> pload("plugin.so");
 	IAction *plugin = pload.createInstance();
 	IAudioInfo *info = plugin->getInfo();
 	std::cerr << "Plugintest: " << info->getSamplerate() << std::endl;

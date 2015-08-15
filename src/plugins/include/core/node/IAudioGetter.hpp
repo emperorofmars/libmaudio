@@ -4,17 +4,17 @@
  * See LICENSE.txt for the full license
  */
 
-#ifndef MAUDIO_ISOCKET
-#define MAUDIO_ISOCKET
+#ifndef MAUDIO_IAUDIOGETTER
+#define MAUDIO_IAUDIOGETTER
 
 #include "core/audiodata/IAudioBuffer.hpp"
 #include "core/audiodata/IAudioInfo.hpp"
 
 namespace maudio{
 
-class ISocket{
+class IAudioGetter{
 public:
-	virtual ~ISocket(){};
+	virtual ~IAudioGetter(){};
 
 	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept = 0;
 	virtual IAudioInfo *getInfo() noexcept = 0;
@@ -26,7 +26,7 @@ public:
 
 } // maudio
 
-#endif // MAUDIO_HEADER
+#endif // MAUDIO_IAUDIOGETTER
 
 
 

@@ -46,10 +46,7 @@ void BaseAction::addSocket(IAudioGetter *socket, int slot){
 
 void BaseAction::removeSocket(int slot){
 	if((unsigned int)slot >= mInputs.size()) return;
-	if(mInputs[slot] != NULL){
-		delete mInputs[slot];
-		mInputs[slot] = NULL;
-	}
+	mInputs[slot] = NULL;
 	return;
 }
 

@@ -1,8 +1,8 @@
 /*
- * Project Maudio
- * Copyright (C) 2015 Martin Schwarz
- * See LICENSE.txt for the full license
- */
+* Project Maudio
+* Copyright (C) 2015 Martin Schwarz
+* See LICENSE.txt for the full license
+*/
 
 #include "maudio.hpp"
 
@@ -39,12 +39,20 @@ public:
 };
 
 extern "C" void* create(){
-    return new TestPlugin();
+	return new TestPlugin();
 }
 
 extern "C" void destroy(void *data){
-    delete (TestPlugin *)data;
+	delete (TestPlugin *)data;
 }
+
+extern "C" const char *getName(){
+	static const char *ret = "TestPlugin";
+	return ret;
+}
+
+
+
 
 
 

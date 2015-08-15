@@ -30,14 +30,15 @@ public:
 	void reset(action_ptr<T> &data);
 	T *release();
 
-	T *get();
-	T *operator->();
-	T &operator*();
+	T *get() const;
+	T *operator->() const;
+	T &operator*() const;
 
 	void operator=(T &data);
 	void operator=(action_ptr<T> &data);
-	bool operator==(action_ptr<T> &data);
-	operator bool();
+	bool operator==(action_ptr<T> &data) const;
+	operator bool() const;
+	bool operator!() const;
 
 private:
 	T *mData = NULL;
@@ -123,17 +124,17 @@ T *action_ptr<T>::release(){
 }
 
 template<typename T>
-T *action_ptr<T>::get(){
+T *action_ptr<T>::get() const{
 	return mData;
 }
 
 template<typename T>
-T *action_ptr<T>::operator->(){
+T *action_ptr<T>::operator->() const{
 	return mData;
 }
 
 template<typename T>
-T &action_ptr<T>::operator*(){
+T &action_ptr<T>::operator*() const{
 	return *mData;
 }
 
@@ -148,15 +149,21 @@ void action_ptr<T>::operator=(action_ptr<T> &data){
 }
 
 template<typename T>
-bool action_ptr<T>::operator==(action_ptr<T> &data){
+bool action_ptr<T>::operator==(action_ptr<T> &data) const{
 	if(mData == data.mData) return true;
 	return false;
 }
 
 template<typename T>
-action_ptr<T>::operator bool(){
+action_ptr<T>::operator bool() const{
 	if(mData) return true;
 	return false;
+}
+
+template<typename T>
+bool action_ptr<T>::operator!() const{
+	if(mData) return false;
+	return true;
 }
 
 } // maudio

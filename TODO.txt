@@ -29,8 +29,7 @@ Todo:
 - ////implement plugin apis for c++
 - ////create IDeleter
 - ////add stop function to IControl
-- create PluginNode node to hold plugin
-- create interface for AudioQueue
+- ////create PluginNode node to hold plugin
 - create Observer and Observable
 - make properties, propertymanager and PluginLoader observable
 - implement SerializerStore

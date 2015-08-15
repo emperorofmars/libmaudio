@@ -56,6 +56,7 @@
 		<Unit filename="../../include/core/node/IAudioGetter.hpp" />
 		<Unit filename="../../include/core/node/IControl.hpp" />
 		<Unit filename="../../include/core/node/Node.hpp" />
+		<Unit filename="../../include/core/node/PluginNode.hpp" />
 		<Unit filename="../../include/core/node/Scene.hpp" />
 		<Unit filename="../../include/core/pluginmanager/PluginLoader.hpp" />
 		<Unit filename="../../include/core/pluginmanager/PluginManager.hpp" />
@@ -87,6 +88,7 @@
 		<Unit filename="../../src/core/audiodata/Sample.cpp" />
 		<Unit filename="../../src/core/node/ActionNode.cpp" />
 		<Unit filename="../../src/core/node/Node.cpp" />
+		<Unit filename="../../src/core/node/PluginNode.cpp" />
 		<Unit filename="../../src/core/node/Scene.cpp" />
 		<Unit filename="../../src/core/pluginmanager/PluginManager.cpp" />
 		<Unit filename="../../src/core/property/PropertyManager.cpp" />

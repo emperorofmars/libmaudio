@@ -9,6 +9,7 @@
 
 #include "core/util/IObservable.hpp"
 #include <vector>
+#include <mutex>
 
 namespace maudio{
 
@@ -22,6 +23,7 @@ public:
 
 private:
 	std::vector<IObserver *> mObservers;
+	std::mutex mMutex;
 };
 
 } // maudio

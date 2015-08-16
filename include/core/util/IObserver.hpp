@@ -20,7 +20,14 @@ class IObserver{
 public:
 	virtual ~IObserver(){};
 
-	virtual void notify(const IObservable *Origin, NoticeType type, const char *message) = 0;
+	virtual void notify(const IObservable *origin, NoticeType type, const char *message) = 0;
+
+protected:
+	virtual void onAdd(IObservable *origin) = 0;
+	virtual void onRemove(IObservable *origin) = 0;
+
+	friend class IObservable;
+	friend class BaseObservable;
 };
 
 } // maudio

@@ -74,6 +74,7 @@
 		<Unit filename="../../include/core/store/IKeyValueStore.hpp" />
 		<Unit filename="../../include/core/store/KeyValueStore.hpp" />
 		<Unit filename="../../include/core/util/AudioException.hpp" />
+		<Unit filename="../../include/core/util/BaseObservable.hpp" />
 		<Unit filename="../../include/core/util/IObservable.hpp" />
 		<Unit filename="../../include/core/util/IObserver.hpp" />
 		<Unit filename="../../include/core/util/String.hpp" />
@@ -101,6 +102,7 @@
 		<Unit filename="../../src/core/store/Config.cpp" />
 		<Unit filename="../../src/core/store/ConfigManager.cpp" />
 		<Unit filename="../../src/core/store/KeyValueStore.cpp" />
+		<Unit filename="../../src/core/util/BaseObservable.cpp" />
 		<Unit filename="../../src/core/util/String.cpp" />
 		<Unit filename="../../src/core/util/UniqueID.cpp" />
 		<Unit filename="../../src/core/util/Util.cpp" />

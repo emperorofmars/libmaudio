@@ -8,16 +8,17 @@
 #define MAUDIO_IOBSERVABLE
 
 #include "core/util/IObserver.hpp"
+#include <cstddef>
 
 namespace maudio{
 
 class IObservable{
 public:
-	virtual ~IObservable(){onChange(ON_DELETE);};
+	virtual ~IObservable(){};
 
-	virtual addObserver(IObserver *mObserver) = 0;
-	virtual removeObserver(IObserver *mObserver) = 0;
-	virtual notifyObservers(NoticeType type, const char *message = NULL) = 0;
+	virtual void addObserver(IObserver *observer) = 0;
+	virtual void removeObserver(IObserver *observer) = 0;
+	virtual void notifyObservers(NoticeType type, const char *message = NULL) = 0;
 };
 
 } // maudio

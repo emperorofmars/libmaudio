@@ -14,11 +14,13 @@ enum NoticeType{
 	ON_DELETE
 };
 
+class IObservable;
+
 class IObserver{
 public:
 	virtual ~IObserver(){};
 
-	virtual notify(IObservable *Origin, NoticeType type, const char *message = NULL) = 0;
+	virtual void notify(const IObservable *Origin, NoticeType type, const char *message) = 0;
 };
 
 } // maudio

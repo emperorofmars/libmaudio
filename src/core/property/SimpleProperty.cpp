@@ -21,6 +21,7 @@ const char *SimpleProperty<bool>::getString() const{
 template<>
 void SimpleProperty<std::string>::set(std::string value){
 	mValue = value;
+	notifyObservers(ON_CHANGE);
 	return;
 }
 

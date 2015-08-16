@@ -7,9 +7,11 @@
 #ifndef MAUDIO_IPROPERTY
 #define MAUDIO_IPROPERTY
 
+#include "core/util/BaseObservable.hpp"
+
 namespace maudio{
 
-class IProperty{
+class IProperty : public BaseObservable{
 public:
     virtual ~IProperty(){};
 

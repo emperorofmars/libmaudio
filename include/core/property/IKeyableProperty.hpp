@@ -7,9 +7,11 @@
 #ifndef MAUDIO_IKEYABLEPROPERTY
 #define MAUDIO_IKEYABLEPROPERTY
 
+#include "core/util/BaseObservable.hpp"
+
 namespace maudio{
 
-class IKeyableProperty{
+class IKeyableProperty : public BaseObservable{
 public:
 	virtual ~IKeyableProperty(){};
 

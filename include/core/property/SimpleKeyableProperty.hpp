@@ -166,6 +166,7 @@ void SimpleKeyableProperty<T>::setKey(T value, unsigned int keynum){
 		keynum--;
 	}
 	iter->second = value;
+	notifyObservers(ON_CHANGE);
 	return;
 }
 
@@ -186,6 +187,7 @@ void SimpleKeyableProperty<T>::removeKey(unsigned int keynum){
 		keynum--;
 	}
 	mValues.erase(iter);
+	notifyObservers(ON_CHANGE);
 	return;
 }
 
@@ -194,6 +196,7 @@ void SimpleKeyableProperty<T>::setBounds(T bottom, T upper){
 	if(bottom >= upper) return;
 	mBottomBound = bottom;
 	mUpperBound = upper;
+	notifyObservers(ON_CHANGE);
 	return;
 }
 

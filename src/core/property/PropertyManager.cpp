@@ -19,6 +19,7 @@ void PropertyManager::add(IProperty *prop){
 	if(!prop) return;
 	if(PropertyExists(prop->getName())) return;
 	mProperties.push_back(prop);
+	notifyObservers(ON_CHANGE, "add");
 	return;
 }
 
@@ -26,6 +27,7 @@ void PropertyManager::add(IKeyableProperty *prop){
 	if(!prop) return;
 	if(KeyablePropertyExists(prop->getName())) return;
 	mKeyableProperties.push_back(prop);
+	notifyObservers(ON_CHANGE, "add");
 	return;
 }
 
@@ -70,6 +72,7 @@ IKeyableProperty *PropertyManager::getKeyableProperty(const char *name){
 void PropertyManager::removeProperty(unsigned int i){
 	if(i >= mProperties.size()) return;
 	mProperties.erase(mProperties.begin() + i);
+	notifyObservers(ON_CHANGE, "remove");
 	return;
 }
 
@@ -77,12 +80,14 @@ void PropertyManager::removeProperty(const char *name){
 	for(unsigned int i = 0; i < mProperties.size(); i++){
 		if(mProperties[i]->getName() == name) mProperties.erase(mProperties.begin() + i);
 	}
+	notifyObservers(ON_CHANGE, "remove");
 	return;
 }
 
 void PropertyManager::removeKeyableProperty(unsigned int i){
 	if(i >= mKeyableProperties.size()) return;
 	mKeyableProperties.erase(mKeyableProperties.begin() + i);
+	notifyObservers(ON_CHANGE, "remove");
 	return;
 }
 
@@ -90,6 +95,7 @@ void PropertyManager::removeKeyableProperty(const char *name){
 	for(unsigned int i = 0; i < mKeyableProperties.size(); i++){
 		if(mKeyableProperties[i]->getName() == name) mKeyableProperties.erase(mKeyableProperties.begin() + i);
 	}
+	notifyObservers(ON_CHANGE, "remove");
 	return;
 }
 

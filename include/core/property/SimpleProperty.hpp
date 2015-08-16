@@ -97,6 +97,7 @@ void SimpleProperty<T>::set(T value){
 	if(value < mBottomBound) mValue = mBottomBound;
 	else if(value > mUpperBound) mValue = mUpperBound;
 	else mValue = value;
+	notifyObservers(ON_CHANGE);
 	return;
 }
 
@@ -105,6 +106,7 @@ void SimpleProperty<T>::setBounds(T bottom, T upper){
 	if(bottom >= upper) return;
 	mBottomBound = bottom;
 	mUpperBound = upper;
+	notifyObservers(ON_CHANGE);
 	return;
 }
 

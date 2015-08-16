@@ -32,8 +32,9 @@ Todo:
 - ////create PluginNode node to hold plugin
 - ////create Observer and Observable
 - ////do something about observer deletion and multithreading
-- make properties, propertymanager and PluginLoader observable
+- ////make IControl, properties, propertymanager and PluginLoader observable
 - update player, mixer and resampler
+- properties: set bounds should retroactively check all values
 - implement SerializerStore
 - create serializable interface and inherit it to Node, IAction and Properties
 - property and keyableproperty: serialize and unserialize

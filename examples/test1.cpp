@@ -26,8 +26,21 @@
 #include "core/util/simple_ptr.hpp"
 #include "core/util/plugin_ptr.hpp"
 #include "core/pluginmanager/PluginManager.hpp"
+#include "core/util/BaseObserver.hpp"
 
 using namespace maudio;
+
+class ObserverTest : public BaseObserver{
+public:
+	ObserverTest(){};
+	virtual ~ObserverTest(){};
+
+	virtual void notify(const IObservable *origin, NoticeType type, const char *message){
+		std::cerr << "notified: " << type << " : ";
+		if(message) std::cerr << message << " :";
+		std::cerr << std::endl;
+	};
+};
 
 int main(int argc, char *argv[]){
 	std::cerr << "test" << std::endl;
@@ -75,6 +88,16 @@ int main(int argc, char *argv[]){
 	IAudioInfo *info = plug->getInfo();
 	std::cerr << "Plugintest: " << info->getSamplerate() << std::endl;
 	plug->deleteInfo(info);
+
+	std::cerr << "Observer:" << std::endl;
+
+	ObserverTest *obst = new ObserverTest();
+	prop2->addObserver(obst);
+	prop2->setKey("666", 1);
+	prop2->setKey("665", 1);
+	delete obst;
+	prop2.reset();
+
 
 	std::cerr << "closing main" << std::endl;
 	return 0;

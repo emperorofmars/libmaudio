@@ -9,10 +9,11 @@
 
 #include "core/property/IProperty.hpp"
 #include "core/property/IKeyableProperty.hpp"
+#include "core/util/BaseObservable.hpp"
 
 namespace maudio{
 
-class IPropertyManager{
+class IPropertyManager : public BaseObservable{
 public:
 	virtual ~IPropertyManager(){};
 

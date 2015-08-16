@@ -95,7 +95,7 @@ void AudioDevice::play(std::shared_ptr<AudioQueue> data){
 	params.sampleFormat = paFloat32;
 	params.suggestedLatency = 0;
 
-	err = Pa_OpenStream(&mStream, NULL, &params, data->getAudioInfo().Samplerate, 512, paNoFlag, &AudioCallback, data.get());
+	err = Pa_OpenStream(&mStream, NULL, &params, data->getAudioInfo().getSamplerate(), 512, paNoFlag, &AudioCallback, data.get());
 	if(err != paNoError){
 		if(mStream){
 			try{stop();}

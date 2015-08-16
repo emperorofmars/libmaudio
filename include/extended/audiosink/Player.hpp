@@ -7,14 +7,14 @@
 #ifndef MAUDIO_PLAYER
 #define MAUDIO_PLAYER
 
-#include "core/audiosink/BaseAudioSink.hpp"
+#include "core/actions/BaseAction.hpp"
 #include "extended/util/AudioDevice.hpp"
 #include "core/audiodata/AudioQueue.hpp"
 #include <thread>
 
 namespace maudio{
 
-class Player : public BaseAudioSink{
+class Player : public BaseAction{
 public:
 	Player();
 	Player(int device);
@@ -42,13 +42,37 @@ public:
 	bool getOpened();
 	bool playing();
 
-	virtual void readConfig(const Config &conf);
+	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept;
+	virtual IAudioInfo *getInfo() noexcept;
+
+	virtual int MaxInputs() const;
+	virtual bool HasOutputs() const;
+
+	virtual void readConfig(const IKeyValueStore &conf);
+
+	virtual IControl *getControl();
 
 private:
 	void feed();
 	void startFeed();
 	void stopFeed();
 	static void asyncFeed(Player *player);
+
+	class Control : public IControl{
+	public:
+		Control(Player *data);
+		virtual ~Control();
+
+		virtual unsigned int getNumFunctions();
+		virtual const char *getFunctionName(unsigned int num);
+		virtual const char *getFunctionParam(unsigned int num);
+		virtual unsigned int callFunction(unsigned int num, const char *param = NULL);
+		virtual unsigned int callFunction(const char *name, const char *param = NULL);
+		virtual void stop();
+
+	private:
+		Player *mData;
+	};
 
 	AudioDevice *mDevice;
 	std::shared_ptr<AudioQueue> mQueue;

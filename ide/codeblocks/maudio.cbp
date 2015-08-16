@@ -84,6 +84,7 @@
 		<Unit filename="../../include/core/util/action_ptr.hpp" />
 		<Unit filename="../../include/core/util/plugin_ptr.hpp" />
 		<Unit filename="../../include/core/util/simple_ptr.hpp" />
+		<Unit filename="../../include/extended/audiosink/Player.hpp" />
 		<Unit filename="../../src/core/actions/BaseAction.cpp" />
 		<Unit filename="../../src/core/actions/SinusGenerator.cpp" />
 		<Unit filename="../../src/core/actions/TerminalPrinter.cpp" />
@@ -108,6 +109,8 @@
 		<Unit filename="../../src/core/util/String.cpp" />
 		<Unit filename="../../src/core/util/UniqueID.cpp" />
 		<Unit filename="../../src/core/util/Util.cpp" />
+		<Unit filename="../../src/extended/audiosink/Player.cpp" />
+		<Unit filename="../../src/extended/util/AudioDevice.cpp" />
 		<Unit filename="../../src/extended/util/AudioDevice.hpp" />
 		<Extensions>
 			<envvars />

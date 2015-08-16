@@ -57,8 +57,7 @@ std::vector<std::string> Player::listDevices(){
 
 void Player::play(){
 	if(!mDevice) throw InvalidAudioDeviceException();
-	if(!checkInput(0)) throw MaudioException("invalid input");
-	mQueue.reset(new AudioQueue(getInfoFromSlot(0)));
+	//mQueue.reset(new AudioQueue(getInfoFromSlot(0)));
 	feed();
 	startFeed();
 	mDevice->play(mQueue);
@@ -97,14 +96,14 @@ unsigned long Player::getPosition(){
 
 void Player::setPosition(float seconds){
 	if(NumInputs() > 0){
-		mPosition =  seconds * (float)getInfo().Samplerate;
+		//mPosition =  seconds * (float)getInfo().Samplerate;
 	}
 	return;
 }
 
 float Player::getPosition_sek(){
 	if(NumInputs() > 0){
-		return (float)mPosition / (float)getInfo().Samplerate;
+		//return (float)mPosition / (float)getInfo().Samplerate;
 	}
 	return 0;
 }
@@ -128,22 +127,42 @@ bool Player::playing(){
 	return false;
 }
 
-void Player::readConfig(const Config &conf){
+IAudioBuffer *Player::get(unsigned long pos, unsigned int length) noexcept{
+	return NULL;
+}
+
+IAudioInfo *Player::getInfo() noexcept{
+	return NULL;
+}
+
+int Player::MaxInputs() const{
+	return 1;
+}
+
+bool Player::HasOutputs() const{
+	return false;
+}
+
+void Player::readConfig(const IKeyValueStore &conf){
 	try{
-	unsigned int tmpQueueSize = conf.get<unsigned int>("PlayerQueueSize");
-	if(tmpQueueSize >= 1024 && tmpQueueSize <= 1024 * 16)
-		mQueueSize = tmpQueueSize;
+	//unsigned int tmpQueueSize = conf.get<unsigned int>("PlayerQueueSize");
+	//if(tmpQueueSize >= 1024 && tmpQueueSize <= 1024 * 16)
+	//	mQueueSize = tmpQueueSize;
 	}
 	catch(std::exception &e){
 	}
     return;
 }
 
+IControl *Player::getControl(){
+	return NULL;
+}
+
 void Player::feed(){
 	if(!mQueue) return;
 	if(NumInputs() == 0) return;
 	if(mQueueSize <= mQueue->size()) return;
-
+/*
 	for(unsigned int i = 0; i < mQueueSize - mQueue->size(); i++){
 		AudioBuffer tmp = getFromSlot(mPosition, mQueueSize - mQueue->size(), 0);
 		for(unsigned int j = 0; j < tmp.getInfo().Samples; j++){
@@ -151,6 +170,7 @@ void Player::feed(){
 		}
 		mPosition += tmp.getInfo().Samples;
 	}
+*/
 	return;
 }
 

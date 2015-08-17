@@ -59,9 +59,8 @@ std::vector<std::string> Player::listDevices(){
 void Player::play(){
 	if(!mDevice) throw InvalidAudioDeviceException();
 	if(mInputs.size() < 1 || !mInputs[0]) throw MaudioException("no or invalid input");
-	std::cerr << "PLAY 01" << std::endl;
+
 	mQueue.reset(new AudioQueue(*getInfoFromSlot(0)));
-	std::cerr << "PLAY 02" << std::endl;
 	feed();
 	startFeed();
 	mDevice->play(mQueue);

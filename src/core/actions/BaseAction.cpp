@@ -63,14 +63,14 @@ IControl *BaseAction::getControl(){
 }
 
 action_ptr<IAudioBuffer> BaseAction::getFromSlot(unsigned int slot, unsigned long pos, unsigned int length){
-	if(mInputs.size() < slot && !mInputs[slot]){
+	if(mInputs.size() < slot || !mInputs[slot]){
 		return NULL;
 	}
 	return action_ptr<IAudioBuffer>(mInputs[slot]->get(pos, length), mInputs[slot]);
 }
 
 action_ptr<IAudioInfo> BaseAction::getInfoFromSlot(unsigned int slot){
-	if(mInputs.size() < slot && !mInputs[slot]){
+	if(mInputs.size() < slot || !mInputs[slot]){
 		return NULL;
 	}
 	return action_ptr<IAudioInfo>(mInputs[slot]->getInfo(), mInputs[slot]);

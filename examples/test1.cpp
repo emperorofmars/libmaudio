@@ -101,7 +101,7 @@ int main(int argc, char *argv[]){
 
 	Player *realplayer = new Player();
 	std::shared_ptr<ActionNode> player(new ActionNode(std::unique_ptr<Player>(realplayer)));
-	tpr->addInput(sgen, 0);
+	player->addInput(sgen, 0);
 
 	realplayer->play();
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));

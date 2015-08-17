@@ -74,7 +74,7 @@ private:
 		Player *mData;
 	};
 
-	AudioDevice *mDevice;
+	AudioDevice *mDevice = NULL;
 	std::shared_ptr<AudioQueue> mQueue;
 	std::shared_ptr<std::thread> mThread;
 	bool mFeederRun = false;

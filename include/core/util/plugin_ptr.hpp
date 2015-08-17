@@ -73,18 +73,28 @@ plugin_ptr<T>::~plugin_ptr(){
 template<typename T>
 void plugin_ptr<T>::reset(T *data, PluginLoader<T> *deleter){
 	if(mData != NULL){
-		if(mDeleter != NULL){
-			mDeleter->deleteInstance(mData);
-		}
-		else{
-			delete mData;
-		}
 		if(mRefCount){
 			mRefCount->mRefs--;
+			if(mRefCount->mRefs == 0){
+				if(mDeleter != NULL){
+					mDeleter->deleteInstance(mData);
+				}
+				else{
+					delete mData;
+				}
+			}
 			if(mRefCount->mRefs == 0){
 				delete mRefCount;
 			}
 			mRefCount = NULL;
+		}
+		else{
+			if(mDeleter != NULL){
+				mDeleter->deleteInstance(mData);
+			}
+			else{
+				delete mData;
+			}
 		}
 	}
 	mData = data;
@@ -98,18 +108,28 @@ void plugin_ptr<T>::reset(T *data, PluginLoader<T> *deleter){
 template<typename T>
 void plugin_ptr<T>::reset(const plugin_ptr<T> &data){
 	if(mData != NULL){
-		if(mDeleter != NULL){
-			mDeleter->deleteInstance(mData);
-		}
-		else{
-			delete mData;
-		}
 		if(mRefCount){
 			mRefCount->mRefs--;
+			if(mRefCount->mRefs == 0){
+				if(mDeleter != NULL){
+					mDeleter->deleteInstance(mData);
+				}
+				else{
+					delete mData;
+				}
+			}
 			if(mRefCount->mRefs == 0){
 				delete mRefCount;
 			}
 			mRefCount = NULL;
+		}
+		else{
+			if(mDeleter != NULL){
+				mDeleter->deleteInstance(mData);
+			}
+			else{
+				delete mData;
+			}
 		}
 	}
 	mData = data.get();

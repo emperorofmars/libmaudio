@@ -109,6 +109,7 @@
 		<Unit filename="../../src/core/util/String.cpp" />
 		<Unit filename="../../src/core/util/UniqueID.cpp" />
 		<Unit filename="../../src/core/util/Util.cpp" />
+		<Unit filename="../../src/core/util/action_ptr.cpp" />
 		<Unit filename="../../src/extended/audiosink/Player.cpp" />
 		<Unit filename="../../src/extended/util/AudioDevice.cpp" />
 		<Unit filename="../../src/extended/util/AudioDevice.hpp" />

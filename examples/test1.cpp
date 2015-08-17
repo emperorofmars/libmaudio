@@ -82,7 +82,7 @@ int main(int argc, char *argv[]){
 	}
 
 	std::cerr << "Plugin:" << std::endl;
-
+/*
 	PluginManager::Instance()->addPlugin("plugin.so");
 	plugin_ptr<IAction> plug = PluginManager::Instance()->createInstance("TestPlugin");
 	IAudioInfo *info = plug->getInfo();
@@ -98,7 +98,7 @@ int main(int argc, char *argv[]){
 	delete obst;
 	prop2.reset();
 
-
+*/
 	std::cerr << "closing main" << std::endl;
 	return 0;
 }

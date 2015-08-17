@@ -5,6 +5,7 @@
  */
 
 #include "extended/audiosink/Player.hpp"
+#include "core/util/action_ptr.hpp"
 #include "core/util/AudioException.hpp"
 #include <iostream>
 

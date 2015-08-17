@@ -4,7 +4,6 @@
  * See LICENSE.txt for the full license
  */
 
-
 #ifndef MAUDIO_AUDIODEVICE
 #define MAUDIO_AUDIODEVICE
 

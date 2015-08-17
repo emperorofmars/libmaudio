@@ -16,7 +16,7 @@ namespace maudio{
 
 class AudioQueue{
 public:
-	AudioQueue(AudioInfo info);
+	AudioQueue(IAudioInfo &info);
 
 	void push(Sample data);
 	Sample pop();
@@ -27,7 +27,7 @@ public:
 	unsigned int size();
 
 	AudioInfo getAudioInfo();
-	void setAudioInfo(AudioInfo info);
+	void setAudioInfo(IAudioInfo &info);
 
 private:
 	AudioInfo mAudioInfo;

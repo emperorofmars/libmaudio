@@ -10,7 +10,7 @@
 
 namespace maudio{
 
-AudioQueue::AudioQueue(AudioInfo info){
+AudioQueue::AudioQueue(IAudioInfo &info){
 	mAudioInfo = info;
 }
 
@@ -60,7 +60,7 @@ AudioInfo AudioQueue::getAudioInfo(){
 	return mAudioInfo;
 }
 
-void AudioQueue::setAudioInfo(AudioInfo info){
+void AudioQueue::setAudioInfo(IAudioInfo &info){
 	mAudioInfo = info;
 	return;
 }

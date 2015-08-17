@@ -5,7 +5,7 @@
  */
 
 #include "extended/audiosink/Player.hpp"
-#include "core/util/action_ptr.hpp"
+#include "core/util/simple_ptr.hpp"
 #include "core/util/AudioException.hpp"
 #include <iostream>
 
@@ -58,7 +58,10 @@ std::vector<std::string> Player::listDevices(){
 
 void Player::play(){
 	if(!mDevice) throw InvalidAudioDeviceException();
-	//mQueue.reset(new AudioQueue(getInfoFromSlot(0)));
+	if(mInputs.size() < 1 || !mInputs[0]) throw MaudioException("no or invalid input");
+	std::cerr << "PLAY 01" << std::endl;
+	mQueue.reset(new AudioQueue(*getInfoFromSlot(0)));
+	std::cerr << "PLAY 02" << std::endl;
 	feed();
 	startFeed();
 	mDevice->play(mQueue);
@@ -97,14 +100,16 @@ unsigned long Player::getPosition(){
 
 void Player::setPosition(float seconds){
 	if(NumInputs() > 0){
-		//mPosition =  seconds * (float)getInfo().Samplerate;
+		simple_ptr<IAudioInfo> info(getInfo());
+		mPosition =  seconds * (float)info->getSamplerate();
 	}
 	return;
 }
 
 float Player::getPosition_sek(){
 	if(NumInputs() > 0){
-		//return (float)mPosition / (float)getInfo().Samplerate;
+		simple_ptr<IAudioInfo> info(getInfo());
+		return (float)mPosition / (float)info->getSamplerate();
 	}
 	return 0;
 }
@@ -163,15 +168,17 @@ void Player::feed(){
 	if(!mQueue) return;
 	if(NumInputs() == 0) return;
 	if(mQueueSize <= mQueue->size()) return;
-/*
+
 	for(unsigned int i = 0; i < mQueueSize - mQueue->size(); i++){
-		AudioBuffer tmp = getFromSlot(mPosition, mQueueSize - mQueue->size(), 0);
-		for(unsigned int j = 0; j < tmp.getInfo().Samples; j++){
-			mQueue->push(tmp.get(j));
+		auto tmp = getFromSlot(0, mPosition, mQueueSize - mQueue->size());
+		for(unsigned int j = 0; j < tmp->getInfo()->getSamples(); j++){
+			ISample *tmpSample = tmp->get(j);
+			mQueue->push(*tmpSample);
+			delete tmpSample;
 		}
-		mPosition += tmp.getInfo().Samples;
+		mPosition += tmp->getInfo()->getSamples();
 	}
-*/
+
 	return;
 }
 

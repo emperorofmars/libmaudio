@@ -35,7 +35,7 @@ public:
 
 protected:
 	virtual action_ptr<IAudioBuffer> getFromSlot(unsigned int slot, unsigned long pos, unsigned int length);
-	virtual action_ptr<IAudioBuffer> getInfoFromSlot(unsigned int slot);
+	virtual action_ptr<IAudioInfo> getInfoFromSlot(unsigned int slot);
 
 	PropertyManager mProperties;
 	std::vector<IAudioGetter *> mInputs;

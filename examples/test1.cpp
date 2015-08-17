@@ -12,8 +12,8 @@
 #include "core/audiodata/AudioBuffer.hpp"
 #include "core/actions/SinusGenerator.hpp"
 #include "core/actions/TerminalPrinter.hpp"
-/*
 #include "extended/audiosink/Player.hpp"
+/*
 #include "core/manipulator/Mixer.hpp"
 #include "core/manipulator/Resampler.hpp"
 #include "core/audiosink/Performance.hpp"
@@ -24,7 +24,6 @@
 #include "core/store/ConfigManager.hpp"
 #include "core/util/String.hpp"
 #include "core/util/simple_ptr.hpp"
-#include "core/util/plugin_ptr.hpp"
 #include "core/pluginmanager/PluginManager.hpp"
 #include "core/util/BaseObserver.hpp"
 
@@ -82,7 +81,7 @@ int main(int argc, char *argv[]){
 	}
 
 	std::cerr << "Plugin:" << std::endl;
-/*
+
 	PluginManager::Instance()->addPlugin("plugin.so");
 	plugin_ptr<IAction> plug = PluginManager::Instance()->createInstance("TestPlugin");
 	IAudioInfo *info = plug->getInfo();
@@ -98,7 +97,16 @@ int main(int argc, char *argv[]){
 	delete obst;
 	prop2.reset();
 
-*/
+	std::cerr << "Player:" << std::endl;
+
+	Player *realplayer = new Player();
+	std::shared_ptr<ActionNode> player(new ActionNode(std::unique_ptr<Player>(realplayer)));
+	tpr->addInput(sgen, 0);
+
+	realplayer->play();
+	std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	realplayer->stop();
+
 	std::cerr << "closing main" << std::endl;
 	return 0;
 }

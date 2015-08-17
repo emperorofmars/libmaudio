@@ -4,8 +4,8 @@
  * See LICENSE.txt for the full license
  */
 
-#ifndef MAUDIO_ACTIONPTR
-#define MAUDIO_ACTIONPTR
+#ifndef MAUDIO_PLUGINPTR
+#define MAUDIO_PLUGINPTR
 
 #include <cstddef>
 #include "core/pluginmanager/PluginLoader.hpp"
@@ -191,7 +191,7 @@ bool plugin_ptr<T>::operator!() const{
 
 } // maudio
 
-#endif // MAUDIO_ACTIONPTR
+#endif // MAUDIO_PLUGINPTR
 
 
 

@@ -40,7 +40,7 @@ void TerminalPrinter::readConfig(const IKeyValueStore &conf){
 }
 
 IControl *TerminalPrinter::getControl(){
-	return new Control(this);
+	return mControl;
 }
 
 void TerminalPrinter::print(unsigned long pos){

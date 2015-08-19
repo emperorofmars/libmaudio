@@ -99,13 +99,13 @@ int main(int argc, char *argv[]){
 
 	std::cerr << "Player:" << std::endl;
 
-	Player *realplayer = new Player();
-	std::shared_ptr<ActionNode> player(new ActionNode(std::unique_ptr<Player>(realplayer)));
+	std::shared_ptr<ActionNode> player(new ActionNode(std::unique_ptr<Player>(new Player())));
 	player->addInput(sgen, 0);
+	IControl *playerCntl = player->getControl();
 
-	realplayer->play();
+	playerCntl->callFunction("play");
 	std::this_thread::sleep_for(std::chrono::milliseconds(500));
-	realplayer->stop();
+	playerCntl->callFunction("stop");
 
 	std::cerr << "closing main" << std::endl;
 	return 0;

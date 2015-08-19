@@ -33,7 +33,7 @@ Todo:
 - ////create Observer and Observable
 - ////do something about observer deletion and multithreading
 - ////make IControl, properties, propertymanager and PluginLoader observable
-- update player
+- ////update player
 - IAudioGetter: add checkCompatible
 - properties: set bounds should retroactively check all values
 - implement SerializerStore

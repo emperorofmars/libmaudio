@@ -42,8 +42,9 @@ private:
 		virtual void stop();
 
 	private:
-		TerminalPrinter *mData;
+		TerminalPrinter *mData = NULL;
 	};
+	Control *mControl = new Control(this);
 };
 
 } // maudio

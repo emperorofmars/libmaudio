@@ -160,7 +160,7 @@ void Player::readConfig(const IKeyValueStore &conf){
 }
 
 IControl *Player::getControl(){
-	return NULL;
+	return mControl;
 }
 
 void Player::feed(){
@@ -201,6 +201,59 @@ void Player::asyncFeed(Player *player){
 		player->feed();
 		std::this_thread::sleep_for(std::chrono::milliseconds((player->mQueueSize / 2 * 44100) / 4000000));
 	}
+	return;
+}
+
+
+Player::Control::Control(Player *data){
+	mData = data;
+}
+
+Player::Control::~Control(){
+}
+
+unsigned int Player::Control::getNumFunctions(){
+	return 2;
+}
+
+const char *Player::Control::getFunctionName(unsigned int num){
+	if(num == 0) return "play";
+	if(num == 1) return "stop";
+	return NULL;
+}
+
+const char *Player::Control::getFunctionParam(unsigned int num){
+	if(num == 0) return "void";
+	if(num == 1) return "void";
+	return NULL;
+}
+
+unsigned int Player::Control::callFunction(unsigned int num, const char *param){
+	if(num == 0){
+		mData->play();
+		return 0;
+	}
+	if(num == 1){
+		mData->stop();
+		return 0;
+	}
+	return -1;
+}
+
+unsigned int Player::Control::callFunction(const char *name, const char *param){
+	if(std::string("play") == std::string(name)){
+		mData->play();
+		return 0;
+	}
+	if(std::string("stop") == std::string(name)){
+		mData->stop();
+		return 0;
+	}
+	return -1;
+}
+
+void Player::Control::stop(){
+	mData->stop();
 	return;
 }
 

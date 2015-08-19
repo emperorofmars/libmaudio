@@ -73,6 +73,7 @@ private:
 	private:
 		Player *mData;
 	};
+	Control *mControl = new Control(this);
 
 	AudioDevice *mDevice = NULL;
 	std::shared_ptr<AudioQueue> mQueue;

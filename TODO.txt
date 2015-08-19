@@ -35,8 +35,8 @@ Todo:
 - ////make IControl, properties, propertymanager and PluginLoader observable
 - ////update player
 - ////IAudioGetter: add checkCompatible
-- properties: set bounds should retroactively check all values
-- implement SerializerStore
+- ////properties: set bounds should retroactively check all values
+- implement SerializerStore (MultiStore)
 - create serializable interface and inherit it to Node, IAction and Properties
 - property and keyableproperty: serialize and unserialize
 - node: serialize and unserialize

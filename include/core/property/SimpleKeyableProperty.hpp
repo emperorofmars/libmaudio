@@ -196,6 +196,10 @@ void SimpleKeyableProperty<T>::setBounds(T bottom, T upper){
 	if(bottom >= upper) return;
 	mBottomBound = bottom;
 	mUpperBound = upper;
+	for(auto iter = mValues.begin(); iter != mValues.end(); iter++){
+		if(iter->second < mBottomBound) iter->second = mBottomBound;
+		else if(iter->second > mUpperBound) iter->second = mUpperBound;
+	}
 	notifyObservers(ON_CHANGE);
 	return;
 }

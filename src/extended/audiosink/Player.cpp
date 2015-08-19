@@ -160,7 +160,11 @@ void Player::readConfig(const IKeyValueStore &conf){
 }
 
 IControl *Player::getControl(){
-	return mControl;
+	return mControl.get();
+}
+
+bool Player::checkCompatible(IAudioInfo *info){
+	return false;
 }
 
 void Player::feed(){

@@ -22,6 +22,8 @@ public:
 	virtual void deleteBuffer(IAudioBuffer *data) noexcept = 0;
 	virtual void deleteInfo(IAudioInfo *data) noexcept = 0;
 	virtual void deleteSample(ISample *data) noexcept = 0;
+
+	virtual bool checkCompatible(IAudioInfo *info) = 0;
 };
 
 } // maudio

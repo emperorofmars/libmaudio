@@ -52,6 +52,8 @@ public:
 
 	virtual IControl *getControl();
 
+	virtual bool checkCompatible(IAudioInfo *info);
+
 private:
 	void feed();
 	void startFeed();
@@ -73,7 +75,7 @@ private:
 	private:
 		Player *mData;
 	};
-	Control *mControl = new Control(this);
+	std::shared_ptr<Control> mControl = std::make_shared<Control>(this);
 
 	AudioDevice *mDevice = NULL;
 	std::shared_ptr<AudioQueue> mQueue;

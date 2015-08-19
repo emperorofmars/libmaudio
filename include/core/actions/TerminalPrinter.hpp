@@ -8,6 +8,7 @@
 #define MAUDIO_TERMINALPRINTER
 
 #include "core/actions/BaseAction.hpp"
+#include <memory>
 
 namespace maudio{
 
@@ -25,6 +26,8 @@ public:
 	virtual void readConfig(const IKeyValueStore &conf);
 
 	virtual IControl *getControl();
+
+	virtual bool checkCompatible(IAudioInfo *info);
 
 	void print(unsigned long pos);
 
@@ -44,7 +47,7 @@ private:
 	private:
 		TerminalPrinter *mData = NULL;
 	};
-	Control *mControl = new Control(this);
+	std::shared_ptr<Control> mControl = std::make_shared<Control>(this);
 };
 
 } // maudio

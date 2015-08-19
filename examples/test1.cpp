@@ -74,7 +74,7 @@ int main(int argc, char *argv[]){
 	tpr->addInput(sgen, 0);
 
 	std::cerr << "Sinusgen:" << std::endl;
-	simple_ptr<IControl> cntl(tpr->getControl());
+	IControl *cntl = tpr->getControl();
 	if(cntl){
 		cntl->callFunction((unsigned int)0, "123123");
 		cntl->callFunction("print", "123124");

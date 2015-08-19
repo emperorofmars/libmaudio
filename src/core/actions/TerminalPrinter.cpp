@@ -40,7 +40,11 @@ void TerminalPrinter::readConfig(const IKeyValueStore &conf){
 }
 
 IControl *TerminalPrinter::getControl(){
-	return mControl;
+	return mControl.get();
+}
+
+bool TerminalPrinter::checkCompatible(IAudioInfo *info){
+	return false;
 }
 
 void TerminalPrinter::print(unsigned long pos){
@@ -54,7 +58,7 @@ void TerminalPrinter::print(unsigned long pos){
 		return;
 	}
 	for(unsigned int i = 0; i < tmpInfo->getChannels(); i++){
-		action_ptr<IAudioBuffer> tmpBuf(mInputs[0]->get(pos, 1), mInputs[0]);
+		auto tmpBuf = getFromSlot(0, pos, 1);
 		if(!tmpBuf){
 			std::cout << "failed retrieving buffer" << std::endl;
 			return;

@@ -62,6 +62,11 @@ IControl *BaseAction::getControl(){
 	return NULL;
 }
 
+bool BaseAction::checkCompatible(IAudioInfo *info){
+	if(!info) return false;
+	return true;
+}
+
 action_ptr<IAudioBuffer> BaseAction::getFromSlot(unsigned int slot, unsigned long pos, unsigned int length){
 	if(mInputs.size() < slot || !mInputs[slot]){
 		return NULL;

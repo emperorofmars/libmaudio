@@ -89,6 +89,10 @@ void ActionNode::onRemove(unsigned int slot){
 	return;
 }
 
+bool ActionNode::checkCompatible(IAudioInfo *info){
+	return mAction->checkCompatible(info);
+}
+
 } // maudio
 
 

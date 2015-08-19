@@ -33,6 +33,8 @@ public:
 
 	virtual IControl *getControl();
 
+	virtual bool checkCompatible(IAudioInfo *info);
+
 protected:
 	virtual action_ptr<IAudioBuffer> getFromSlot(unsigned int slot, unsigned long pos, unsigned int length);
 	virtual action_ptr<IAudioInfo> getInfoFromSlot(unsigned int slot);

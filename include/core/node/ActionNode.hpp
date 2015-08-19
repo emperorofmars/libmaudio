@@ -34,6 +34,8 @@ public:
 	virtual IPropertyManager *getProperties();
 
 	virtual IControl *getControl();
+
+	virtual bool checkCompatible(IAudioInfo *info);
 /*
 	virtual IKeyValueStore *serialize() const;
 	virtual void deserialize(const IKeyValueStore *data);

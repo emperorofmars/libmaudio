@@ -69,6 +69,10 @@ IControl *PluginNode::getControl(){
 	return mAction->getControl();
 }
 
+bool PluginNode::checkCompatible(IAudioInfo *info){
+	return mAction->checkCompatible(info);
+}
+
 void PluginNode::onAdd(unsigned int slot){
 	if(!mAction) return;
 	mAction->addSocket(mInputs[slot].get(), slot);

@@ -29,44 +29,8 @@
 
 using namespace maudio;
 
-class ObserverTest : public BaseObserver{
-public:
-	ObserverTest(){};
-	virtual ~ObserverTest(){};
-
-	virtual void notify(const IObservable *origin, NoticeType type, const char *message){
-		std::cerr << "notified: " << type << " : ";
-		if(message) std::cerr << message << " :";
-		std::cerr << std::endl;
-	};
-};
-
 int main(int argc, char *argv[]){
 	std::cerr << "test" << std::endl;
-
-	simple_ptr<IKeyValueStore> store1(new KeyValueStore());
-	store1->set("stuff", "value1");
-	store1->set("bla", "value2");
-	store1->set("aaa", "value3");
-	std::cerr << store1->get("stuff") << std::endl;
-	std::cerr << store1->get("aaa") << std::endl;
-	std::cerr << store1->get("bla") << std::endl;
-	std::cerr << store1->get((unsigned int)0) << std::endl;
-
-	simple_ptr<IProperty> prop1(new IntProperty("prop1", 678));
-	prop1->set("432.567");
-	String str(prop1->getString());
-	std::cerr << prop1->getName() << " " << prop1->getString() << std::endl;
-
-	std::cerr << "TEST: " << str << std::endl;
-
-	simple_ptr<IKeyableProperty> prop2(new KeyableDoubleProperty("prop2", 1.5));
-	prop2->addKey("3", 1);
-	std::cerr << prop2->getName() << " " << prop2->getString(0) << std::endl;
-	std::cerr << prop2->getName() << " " << prop2->getString(0.1) << std::endl;
-	std::cerr << prop2->getName() << " " << prop2->getString(0.5) << std::endl;
-	std::cerr << prop2->getName() << " " << prop2->getString(0.75) << std::endl;
-	std::cerr << prop2->getName() << " " << prop2->getString(1) << std::endl;
 
 	std::shared_ptr<ActionNode> sgen(new ActionNode(std::unique_ptr<SinusGenerator>(new SinusGenerator())));
 
@@ -79,6 +43,33 @@ int main(int argc, char *argv[]){
 		cntl->callFunction((unsigned int)0, "123123");
 		cntl->callFunction("print", "123124");
 	}
+	IPropertyManager *sinprop = sgen->getProperties();
+	if(sinprop){
+		IKeyableProperty *freqprop = sinprop->getKeyableProperty("Frequency");
+		if(freqprop){
+			double mul = 2;
+
+			freqprop->addKey("500", 0 *mul);
+			freqprop->addKey("700", 0.5 *mul);
+			freqprop->addKey("500", 1 *mul);
+			freqprop->addKey("700", 1.5 *mul);
+			freqprop->addKey("500", 2 *mul);
+
+			std::cerr << "freqprop: " << std::endl;
+			std::cerr << "0: \t" << freqprop->getString(0 *mul) << std::endl;
+			std::cerr << "0.25: \t" << freqprop->getString(0.25 *mul) << std::endl;
+			std::cerr << "0.5: \t" << freqprop->getString(0.5 *mul) << std::endl;
+			std::cerr << "0.75: \t" << freqprop->getString(0.75 *mul) << std::endl;
+			std::cerr << "1: \t" << freqprop->getString(1 *mul) << std::endl;
+			std::cerr << "1.25: \t" << freqprop->getString(1.25 *mul) << std::endl;
+			std::cerr << "1.5: \t" << freqprop->getString(1.5 *mul) << std::endl;
+			std::cerr << "1.75: \t" << freqprop->getString(1.75 *mul) << std::endl;
+			std::cerr << "2: \t" << freqprop->getString(2 *mul) << std::endl;
+			std::cerr << "2.25: \t" << freqprop->getString(2.25 *mul) << std::endl;
+
+
+		}
+	}
 
 	std::cerr << "Plugin:" << std::endl;
 
@@ -88,15 +79,6 @@ int main(int argc, char *argv[]){
 	std::cerr << "Plugintest: " << info->getSamplerate() << std::endl;
 	plug->deleteInfo(info);
 
-	std::cerr << "Observer:" << std::endl;
-
-	ObserverTest *obst = new ObserverTest();
-	prop2->addObserver(obst);
-	prop2->setKey("666", 1);
-	prop2->setKey("665", 1);
-	delete obst;
-	prop2.reset();
-
 	std::cerr << "Player:" << std::endl;
 
 	std::shared_ptr<ActionNode> player(new ActionNode(std::unique_ptr<Player>(new Player())));
@@ -104,7 +86,7 @@ int main(int argc, char *argv[]){
 	IControl *playerCntl = player->getControl();
 
 	playerCntl->callFunction("play");
-	std::this_thread::sleep_for(std::chrono::milliseconds(500));
+	std::this_thread::sleep_for(std::chrono::milliseconds(6000));
 	playerCntl->callFunction("stop");
 
 	std::cerr << "closing main" << std::endl;

@@ -29,7 +29,6 @@ SinusGenerator::SinusGenerator(){
 SinusGenerator::~SinusGenerator(){
 }
 
-
 IAudioBuffer *SinusGenerator::get(unsigned long pos, unsigned int length) noexcept{
 	mAudioInfo.setChannels(mChannels->get());
 	mAudioInfo.setSamplerate(mSamplerate->get());
@@ -38,7 +37,7 @@ IAudioBuffer *SinusGenerator::get(unsigned long pos, unsigned int length) noexce
 		Sample tmp(mAudioInfo.getChannels());
 		float index = pos + i;
 		for(unsigned int j = 0; j < mAudioInfo.getChannels(); j++){
-            tmp.set(sin(mFreq->get(PositionToSeconds((pos + i), mAudioInfo.getSamplerate()))
+            tmp.set(sin(mFreq->get(PositionToSeconds(index, mAudioInfo.getSamplerate()))
 						* index * (2 * M_PI) / mAudioInfo.getSamplerate()), j);
 		}
 		ret->set(tmp, i);

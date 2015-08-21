@@ -9,6 +9,7 @@
 #include "core/util/AudioException.hpp"
 #include "core/util/Util.hpp"
 #include <cmath>
+#include <iostream>
 
 namespace maudio{
 
@@ -33,6 +34,7 @@ IAudioBuffer *SinusGenerator::get(unsigned long pos, unsigned int length) noexce
 	mAudioInfo.setChannels(mChannels->get());
 	mAudioInfo.setSamplerate(mSamplerate->get());
 	AudioBuffer *ret = new AudioBuffer(mAudioInfo.getChannels(), length, pos, mAudioInfo.getSamplerate());
+	pos = pos % 36000; // to resist float precision errors
 	for(unsigned int i = 0; i < length; i++){
 		Sample tmp(mAudioInfo.getChannels());
 		float index = pos + i;

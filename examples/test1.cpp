@@ -47,13 +47,15 @@ int main(int argc, char *argv[]){
 	if(sinprop){
 		IKeyableProperty *freqprop = sinprop->getKeyableProperty("Frequency");
 		if(freqprop){
-			double mul = 2;
+			double mul = 1;
 
 			freqprop->addKey("500", 0 *mul);
 			freqprop->addKey("700", 0.5 *mul);
 			freqprop->addKey("500", 1 *mul);
 			freqprop->addKey("700", 1.5 *mul);
 			freqprop->addKey("500", 2 *mul);
+			freqprop->addKey("700", 2.5 *mul);
+			freqprop->addKey("500", 3 *mul);
 
 			std::cerr << "freqprop: " << std::endl;
 			std::cerr << "0: \t" << freqprop->getString(0 *mul) << std::endl;
@@ -86,7 +88,7 @@ int main(int argc, char *argv[]){
 	IControl *playerCntl = player->getControl();
 
 	playerCntl->callFunction("play");
-	std::this_thread::sleep_for(std::chrono::milliseconds(6000));
+	std::this_thread::sleep_for(std::chrono::milliseconds(3200));
 	playerCntl->callFunction("stop");
 
 	std::cerr << "closing main" << std::endl;

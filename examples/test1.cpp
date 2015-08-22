@@ -47,15 +47,16 @@ int main(int argc, char *argv[]){
 	if(sinprop){
 		IKeyableProperty *freqprop = sinprop->getKeyableProperty("Frequency");
 		if(freqprop){
-			double mul = 1;
+			double mul = 0.83;
+			double shift = 0.11;
 
-			freqprop->addKey("600", 0 *mul);
-			freqprop->addKey("700", 0.5 *mul);
-			freqprop->addKey("600", 1 *mul);
-			freqprop->addKey("700", 1.5 *mul);
-			freqprop->addKey("600", 2 *mul);
-			freqprop->addKey("700", 2.5 *mul);
-			freqprop->addKey("600", 3 *mul);
+			freqprop->setKey("600", 0);
+			freqprop->addKey("600", 0 *mul+shift);
+			freqprop->addKey("700", 1 *mul+shift);
+			freqprop->addKey("600", 2 *mul+shift);
+			freqprop->addKey("700", 2.5 *mul+shift);
+			freqprop->addKey("600", 3 *mul+shift);
+			freqprop->addKey("700", 3.5 *mul+shift);
 
 			std::cerr << "freqprop: " << std::endl;
 			std::cerr << "0: \t" << freqprop->getString(0 *mul) << std::endl;

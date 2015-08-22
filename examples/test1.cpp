@@ -49,13 +49,13 @@ int main(int argc, char *argv[]){
 		if(freqprop){
 			double mul = 1;
 
-			freqprop->addKey("500", 0 *mul);
+			freqprop->addKey("600", 0 *mul);
 			freqprop->addKey("700", 0.5 *mul);
-			freqprop->addKey("500", 1 *mul);
+			freqprop->addKey("600", 1 *mul);
 			freqprop->addKey("700", 1.5 *mul);
-			freqprop->addKey("500", 2 *mul);
+			freqprop->addKey("600", 2 *mul);
 			freqprop->addKey("700", 2.5 *mul);
-			freqprop->addKey("500", 3 *mul);
+			freqprop->addKey("600", 3 *mul);
 
 			std::cerr << "freqprop: " << std::endl;
 			std::cerr << "0: \t" << freqprop->getString(0 *mul) << std::endl;
@@ -68,8 +68,6 @@ int main(int argc, char *argv[]){
 			std::cerr << "1.75: \t" << freqprop->getString(1.75 *mul) << std::endl;
 			std::cerr << "2: \t" << freqprop->getString(2 *mul) << std::endl;
 			std::cerr << "2.25: \t" << freqprop->getString(2.25 *mul) << std::endl;
-
-
 		}
 	}
 
@@ -77,9 +75,9 @@ int main(int argc, char *argv[]){
 
 	PluginManager::Instance()->addPlugin("plugin.so");
 	plugin_ptr<IAction> plug = PluginManager::Instance()->createInstance("TestPlugin");
-	IAudioInfo *info = plug->getInfo();
+	action_ptr<IAudioInfo> info(plug->getInfo(), plug.get());
 	std::cerr << "Plugintest: " << info->getSamplerate() << std::endl;
-	plug->deleteInfo(info);
+	//plug->deleteInfo(info);
 
 	std::cerr << "Player:" << std::endl;
 
@@ -88,7 +86,7 @@ int main(int argc, char *argv[]){
 	IControl *playerCntl = player->getControl();
 
 	playerCntl->callFunction("play");
-	std::this_thread::sleep_for(std::chrono::milliseconds(3200));
+	std::this_thread::sleep_for(std::chrono::milliseconds(6000));
 	playerCntl->callFunction("stop");
 
 	std::cerr << "closing main" << std::endl;

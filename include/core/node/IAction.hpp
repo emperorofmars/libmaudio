@@ -15,6 +15,7 @@
 #include "core/property/IKeyableProperty.hpp"
 #include "core/property/IPropertyManager.hpp"
 #include "core/store/IKeyValueStore.hpp"
+#include "core/store/IMultiLevelStore.hpp"
 
 namespace maudio{
 
@@ -35,8 +36,8 @@ public:
 
 	virtual IControl *getControl() = 0;
 /*
-	virtual IKeyValueStore *serialize() const = 0;
-	virtual void deserialize(const IKeyValueStore *data) = 0;
+	virtual IMultiLevelStore *serialize() const = 0;
+	virtual void deserialize(const IMultiLevelStore *data) = 0;
 */
 };
 

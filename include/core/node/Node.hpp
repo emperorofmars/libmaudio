@@ -15,7 +15,7 @@
 #include "core/property/IKeyableProperty.hpp"
 #include "core/property/IPropertyManager.hpp"
 #include "core/store/Config.hpp"
-#include "core/serializer/SerializerStore.hpp"
+#include "core/store/IMultiLevelStore.hpp"
 #include "core/node/IControl.hpp"
 #include <vector>
 #include <memory>
@@ -48,8 +48,8 @@ public:
 	std::string getName() const;
 	void setName(const std::string &name);
 /*
-	virtual IKeyValueStore *serialize() const = 0;
-	virtual void deserialize(const IKeyValueStore *data) = 0;
+	virtual IMultiLevelStore *serialize() const = 0;
+	virtual void deserialize(const IMultiLevelStore *data) = 0;
 */
 protected:
 	virtual void onAdd(unsigned int slot) = 0;

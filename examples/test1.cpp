@@ -22,6 +22,8 @@
 #include "core/property/SimpleKeyableProperty.hpp"
 #include "core/store/Config.hpp"
 #include "core/store/ConfigManager.hpp"
+#include "core/store/MultiStore.hpp"
+#include "core/store/MultiLevelStore.hpp"
 #include "core/util/String.hpp"
 #include "core/util/simple_ptr.hpp"
 #include "core/pluginmanager/PluginManager.hpp"
@@ -92,6 +94,28 @@ int main(int argc, char *argv[]){
 			std::cerr << "2: \t" << freqprop->getString(2 *mul) << std::endl;
 			std::cerr << "2.25: \t" << freqprop->getString(2.25 *mul) << std::endl;
 		}
+	}
+	std::cerr << "MultiMap:" << std::endl;
+
+	try{
+		MultiLevelStore mstore;
+		mstore.add("plugin", "foo");
+		mstore.add("plugin", "bar");
+		mstore.add("plugin", "blah");
+		mstore.add("info", 234);
+		std::cerr << mstore.get("plugin", 0) << std::endl;
+		std::cerr << mstore.get("plugin", 2) << std::endl;
+		std::cerr << mstore.get("plugin", 1) << std::endl;
+		std::cerr << mstore.get((unsigned int)0, 0) << std::endl;
+		mstore.addLevel("bla");
+		auto storelevel = mstore.getLevel("bla");
+		storelevel->add("bla", "123");
+		storelevel->add("bla", "654654654");
+		std::cerr << storelevel->get("bla") << std::endl;
+		std::cerr << storelevel->get("bla", 1) << std::endl;
+	}
+	catch(std::exception &e){
+		std::cerr << e.what() << std::endl;
 	}
 
 	std::cerr << "Plugin:" << std::endl;

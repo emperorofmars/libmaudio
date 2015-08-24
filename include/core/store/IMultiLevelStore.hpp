@@ -4,26 +4,32 @@
  * See LICENSE.txt for the full license
  */
 
-#ifndef MAUDIO_IMULTISTORE
-#define MAUDIO_IMULTISTORE
+#ifndef MAUDIO_IMULTILEVELSTORE
+#define MAUDIO_IMULTILEVELSTORE
+
+#include "core/store/IMultiStore.hpp"
 
 namespace maudio{
 
-class IMultiStore{
+class IMultiLevelStore : public IMultiStore{
 public:
-	virtual ~IMultiStore(){};
+	virtual ~IMultiLevelStore(){};
 
 	virtual const char *get(const char *key, unsigned int numElm = 0) const = 0;
 	virtual const char *get(unsigned int numKey, unsigned int numElm = 0) const = 0;
+	virtual IMultiLevelStore *getLevel(const char *key) const = 0;
+	virtual IMultiLevelStore *getLevel(unsigned int numKey) const = 0;
 	virtual unsigned int getSize() const = 0;
 	virtual unsigned int getSize(const char *key) const = 0;
 	virtual unsigned int getSize(unsigned int numKey) const = 0;
+	virtual unsigned int getNumLevels() const = 0;
 	virtual void add(const char *key, const char *value) = 0;
+	virtual void addLevel(const char *key) = 0;
 };
 
 } // maudio
 
-#endif // MAUDIO_IMULTISTORE
+#endif // MAUDIO_IMULTILEVELSTORE
 
 
 

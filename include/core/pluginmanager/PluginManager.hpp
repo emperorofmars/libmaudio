@@ -10,7 +10,7 @@
 #include "core/pluginmanager/PluginLoader.hpp"
 #include "core/node/IAction.hpp"
 #include "core/util/plugin_ptr.hpp"
-#include "core/store/IKeyValueStore.hpp"
+#include "core/store/IMultiStore.hpp"
 #include "core/util/AudioException.hpp"
 #include <vector>
 #include <memory>
@@ -22,7 +22,7 @@ class PluginManager{
 public:
 	static PluginManager *Instance();
 
-	void readConfig(const IKeyValueStore &conf);
+	void readConfig(const IMultiStore &conf);
 
 	void addPlugin(const char *path);
 	std::vector<std::string> listPlugins();

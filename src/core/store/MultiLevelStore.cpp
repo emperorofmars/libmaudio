@@ -4,19 +4,19 @@
  * See LICENSE.txt for the full license
  */
 
-#include "core/store/MultiStore.hpp"
+#include "core/store/MultiLevelStore.hpp"
 
 #include <iostream>
 
 namespace maudio{
 
-MultiStore::MultiStore(){
+MultiLevelStore::MultiLevelStore(){
 }
 
-MultiStore::~MultiStore(){
+MultiLevelStore::~MultiLevelStore(){
 }
 
-const char *MultiStore::get(const char *key, unsigned int numElm) const{
+const char *MultiLevelStore::get(const char *key, unsigned int numElm) const{
 	if(!key) throw MaudioException("key doesn't exist");
 	std::string tmpKey(key);
 	if(mData.find(tmpKey) == mData.end()) throw MaudioException("key doesn't exist");
@@ -30,7 +30,7 @@ const char *MultiStore::get(const char *key, unsigned int numElm) const{
 	return iter->second.c_str();
 }
 
-const char *MultiStore::get(unsigned int numKey, unsigned int numElm) const{
+const char *MultiLevelStore::get(unsigned int numKey, unsigned int numElm) const{
 	if(numKey >= mData.size()) throw MaudioException("numKey out of range");
 	auto iter = mData.begin();
 	while(iter != mData.end() && numKey != 0){
@@ -46,15 +46,29 @@ const char *MultiStore::get(unsigned int numKey, unsigned int numElm) const{
 	return iter->second.c_str();
 }
 
-unsigned int MultiStore::getSize() const{
+IMultiLevelStore *MultiLevelStore::getLevel(const char *key) const{
+	return mLevels.at(key).get();
+}
+
+IMultiLevelStore *MultiLevelStore::getLevel(unsigned int numKey) const{
+	if(numKey >= mLevels.size()) throw MaudioException("numKey out of range");
+	auto iter = mLevels.begin();
+	while(iter != mLevels.end() && numKey != 0){
+		iter++;
+		numKey--;
+	}
+	return iter->second.get();
+}
+
+unsigned int MultiLevelStore::getSize() const{
 	return mData.size();
 }
 
-unsigned int MultiStore::getSize(const char *key) const{
+unsigned int MultiLevelStore::getSize(const char *key) const{
 	return mData.count(std::string(key));
 }
 
-unsigned int MultiStore::getSize(unsigned int numKey) const{
+unsigned int MultiLevelStore::getSize(unsigned int numKey) const{
 	if(numKey >= mData.size()) return 0;
 	auto iter = mData.begin();
 	while(iter != mData.end() && numKey != 0){
@@ -64,14 +78,24 @@ unsigned int MultiStore::getSize(unsigned int numKey) const{
 	return mData.count(iter->first);
 }
 
-void MultiStore::add(const char *key, const char *value){
+unsigned int MultiLevelStore::getNumLevels() const{
+	return mLevels.size();
+}
+
+void MultiLevelStore::add(const char *key, const char *value){
 	std::string tmpKey(key);
 	if(!checkKey(tmpKey)) return;
 	mData.insert(std::make_pair(tmpKey, std::string(value)));
 	return;
 }
 
-bool MultiStore::checkKey(const std::string &key) const{
+void MultiLevelStore::addLevel(const char *key){
+	std::string tmpKey(key);
+	mLevels[tmpKey] = std::unique_ptr<MultiLevelStore>(new MultiLevelStore());
+	return;
+}
+
+bool MultiLevelStore::checkKey(const std::string &key) const{
 	for(unsigned int i = 0; i < key.size(); i++){
 		if(key[i] == ' ' || key[i] == '\t') return false;
 	}

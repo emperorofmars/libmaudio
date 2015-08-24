@@ -4,21 +4,22 @@
  * See LICENSE.txt for the full license
  */
 
-#ifndef MAUDIO_MULTISTORE
-#define MAUDIO_MULTISTORE
+#ifndef MAUDIO_MULTLEVELISTORE
+#define MAUDIO_MULTLEVELISTORE
 
-#include "core/store/IMultiStore.hpp"
+#include "core/store/IMultiLevelStore.hpp"
 #include "core/util/Util.hpp"
 #include "core/util/AudioException.hpp"
 #include <map>
 #include <string>
+#include <memory>
 
 namespace maudio{
 
-class MultiStore : public IMultiStore{
+class MultiLevelStore : public IMultiLevelStore{
 public:
-	MultiStore();
-	virtual ~MultiStore();
+	MultiLevelStore();
+	virtual ~MultiLevelStore();
 
 	virtual const char *get(const char *key, unsigned int numElm = 0) const;
 	template<typename T>
@@ -26,21 +27,28 @@ public:
 	virtual const char *get(unsigned int numKey, unsigned int numElm = 0) const;
 	template<typename T>
 	T get(unsigned int numKey, unsigned int numElm = 0) const;
+	virtual IMultiLevelStore *getLevel(const char *key) const;
+	virtual IMultiLevelStore *getLevel(unsigned int numKey) const;
+
 	virtual unsigned int getSize() const;
 	virtual unsigned int getSize(const char *key) const;
 	virtual unsigned int getSize(unsigned int numKey) const;
+	virtual unsigned int getNumLevels() const;
+
 	virtual void add(const char *key, const char *value);
 	template<typename T>
 	void add(const char *key, T value);
+	virtual void addLevel(const char *key);
 
 private:
 	bool checkKey(const std::string &key) const;
 
 	std::multimap<std::string, std::string> mData;
+	std::map<std::string, std::unique_ptr<MultiLevelStore>> mLevels;
 };
 
 template<typename T>
-T MultiStore::get(const char *key, unsigned int numElm) const{
+T MultiLevelStore::get(const char *key, unsigned int numElm) const{
 	if(!key) throw MaudioException("key doesn't exist");
 	std::string tmpKey(key);
 	if(mData.find(tmpKey) == mData.end()) throw MaudioException("key doesn't exist");
@@ -55,7 +63,7 @@ T MultiStore::get(const char *key, unsigned int numElm) const{
 }
 
 template<typename T>
-T MultiStore::get(unsigned int numKey, unsigned int numElm) const{
+T MultiLevelStore::get(unsigned int numKey, unsigned int numElm) const{
 	if(numKey >= mData.size()) throw MaudioException("numKey out of range");
 	auto iter = mData.begin();
 	while(iter != mData.end() && numKey != 0){
@@ -72,7 +80,7 @@ T MultiStore::get(unsigned int numKey, unsigned int numElm) const{
 }
 
 template<typename T>
-void MultiStore::add(const char *key, T value){
+void MultiLevelStore::add(const char *key, T value){
 	std::string tmpKey(key);
 	if(!checkKey(tmpKey)) return;
 	mData.insert(std::make_pair(tmpKey, std::to_string(value)));
@@ -81,7 +89,7 @@ void MultiStore::add(const char *key, T value){
 
 } // maudio
 
-#endif // MAUDIO_MULTISTORE
+#endif // MAUDIO_MULTLEVELISTORE
 
 
 

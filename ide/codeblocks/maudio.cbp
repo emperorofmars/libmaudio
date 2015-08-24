@@ -72,8 +72,10 @@
 		<Unit filename="../../include/core/store/Config.hpp" />
 		<Unit filename="../../include/core/store/ConfigManager.hpp" />
 		<Unit filename="../../include/core/store/IKeyValueStore.hpp" />
+		<Unit filename="../../include/core/store/IMultiLevelStore.hpp" />
 		<Unit filename="../../include/core/store/IMultiStore.hpp" />
 		<Unit filename="../../include/core/store/KeyValueStore.hpp" />
+		<Unit filename="../../include/core/store/MultiLevelStore.hpp" />
 		<Unit filename="../../include/core/store/MultiStore.hpp" />
 		<Unit filename="../../include/core/util/AudioException.hpp" />
 		<Unit filename="../../include/core/util/BaseObservable.hpp" />
@@ -106,6 +108,7 @@
 		<Unit filename="../../src/core/store/Config.cpp" />
 		<Unit filename="../../src/core/store/ConfigManager.cpp" />
 		<Unit filename="../../src/core/store/KeyValueStore.cpp" />
+		<Unit filename="../../src/core/store/MultiLevelStore.cpp" />
 		<Unit filename="../../src/core/store/MultiStore.cpp" />
 		<Unit filename="../../src/core/util/BaseObservable.cpp" />
 		<Unit filename="../../src/core/util/BaseObserver.cpp" />

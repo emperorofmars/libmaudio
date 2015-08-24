@@ -49,15 +49,37 @@ int main(int argc, char *argv[]){
 		if(freqprop){
 			double mul = 0.83;
 			double shift = 0.11;
-
+/*
 			freqprop->setKey("600", 0);
 			freqprop->addKey("600", 0 *mul+shift);
 			freqprop->addKey("700", 1 *mul+shift);
 			freqprop->addKey("600", 2 *mul+shift);
-			freqprop->addKey("700", 2.5 *mul+shift);
 			freqprop->addKey("600", 3 *mul+shift);
 			freqprop->addKey("700", 3.5 *mul+shift);
+			freqprop->addKey("600", 4 *mul+shift);
+			freqprop->addKey("700", 4.5 *mul+shift);
+*/
 
+			freqprop->setKey("600", 0);
+			freqprop->addKey("600", 0 *mul+shift);
+			freqprop->addKey("900", 0.000000001 *mul+shift);
+			freqprop->addKey("900", 1 *mul+shift);
+			freqprop->addKey("600", 1.000000001 *mul+shift);
+			freqprop->addKey("600", 2 *mul+shift);
+			freqprop->addKey("900", 2.000000001 *mul+shift);
+			freqprop->addKey("900", 3 *mul+shift);
+			freqprop->addKey("600", 3.000000001 *mul+shift);
+			freqprop->addKey("600", 4 *mul+shift);
+			freqprop->addKey("900", 4.000000001 *mul+shift);
+			freqprop->addKey("900", 5 *mul+shift);
+			freqprop->addKey("600", 5.000000001 *mul+shift);
+
+/*
+			freqprop->setKey("600", 0);
+			freqprop->addKey("1000", 1);
+			freqprop->addKey("1400", 1.001);
+			freqprop->addKey("1400", 2);
+*/
 			std::cerr << "freqprop: " << std::endl;
 			std::cerr << "0: \t" << freqprop->getString(0 *mul) << std::endl;
 			std::cerr << "0.25: \t" << freqprop->getString(0.25 *mul) << std::endl;

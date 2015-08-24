@@ -48,11 +48,11 @@ Todo:
 - write cmakelists
 - write tests
 - try meson build
+- create file reader
+- create file writer
+- qt gui
 - create channel converter
 - player: make multiple players work on the same device
 - create renderer
-- create file reader
-- create file writer
 - lua plugins
 - python plugins
-- qt gui

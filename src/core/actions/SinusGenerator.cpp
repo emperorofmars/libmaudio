@@ -37,11 +37,10 @@ IAudioBuffer *SinusGenerator::get(unsigned long pos, unsigned int length) noexce
 
 	for(unsigned int i = 0; i < length; i++){
 		Sample tmp(mAudioInfo.getChannels());
-
 		//std::cerr << pos + i << " " << mFreq->get(PositionToSeconds(pos + i, mAudioInfo.getSamplerate())) << std::endl;
 		double value = sin(mFreq->get(PositionToSeconds(pos + i, mAudioInfo.getSamplerate()))
-					* ((pos + i) % mAudioInfo.getSamplerate())
-					//* (pos + i)
+					//* ((pos + i) % mAudioInfo.getSamplerate())
+					* (pos + i)
 					* (2 * M_PI) / mAudioInfo.getSamplerate());
 		for(unsigned int j = 0; j < mAudioInfo.getChannels(); j++){
             tmp.set(value, j);

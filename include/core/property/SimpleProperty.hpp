@@ -137,11 +137,26 @@ std::vector<T> SimpleProperty<T>::getBounds() const{
 
 template<typename T>
 void SimpleProperty<T>::serialize(IMultiLevelStore *data) const{
+	if(!data) return;
+	data->add("name", mName.c_str());
+	data->add("value", std::to_string(mValue).c_str());
+	data->add("bottombound", std::to_string(mBottomBound).c_str());
+	data->add("upperbound", std::to_string(mUpperBound).c_str());
 	return;
 }
 
 template<typename T>
 void SimpleProperty<T>::deserialize(const IMultiLevelStore *data){
+	if(!data) return;
+	try{
+		mName = data->get("name");
+		mValue = string_to<T>(std::string(data->get("value")));
+		mBottomBound = string_to<T>(std::string(data->get("bottombound")));
+		mUpperBound = string_to<T>(std::string(data->get("upperbound")));
+	}
+	catch(std::exception &e){
+		throw e;
+	}
 	return;
 }
 

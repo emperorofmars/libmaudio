@@ -94,6 +94,16 @@ int main(int argc, char *argv[]){
 			std::cerr << "2: \t" << freqprop->getString(2 *mul) << std::endl;
 			std::cerr << "2.25: \t" << freqprop->getString(2.25 *mul) << std::endl;
 		}
+
+		MultiLevelStore serializerStore;
+		IProperty *sinsmpprop = sinprop->getProperty("Samplerate");
+		if(sinsmpprop){
+			sinsmpprop->serialize(&serializerStore);
+
+			SimpleProperty<unsigned int> smpprop("asdas", 1);
+			smpprop.deserialize(&serializerStore);
+			std::cerr << "Deserialize: " << smpprop.getName() << " " << smpprop.get() << std::endl;
+		}
 	}
 	std::cerr << "MultiMap:" << std::endl;
 

@@ -93,6 +93,7 @@
 		<Unit filename="../../src/core/actions/SinusGenerator.cpp" />
 		<Unit filename="../../src/core/actions/TerminalPrinter.cpp" />
 		<Unit filename="../../src/core/audiodata/AudioBuffer.cpp" />
+		<Unit filename="../../src/core/audiodata/AudioInfo.cpp" />
 		<Unit filename="../../src/core/audiodata/AudioQueue.cpp" />
 		<Unit filename="../../src/core/audiodata/Sample.cpp" />
 		<Unit filename="../../src/core/node/ActionNode.cpp" />

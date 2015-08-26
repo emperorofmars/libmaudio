@@ -27,12 +27,10 @@ public:
 	virtual void setSamplerate(unsigned int samplerate){mSamplerate = samplerate;};
 	virtual void setChannels(unsigned int channels){mChannels = channels;};
 
-	virtual void operator=(const IAudioInfo &info){
-		setSamples(info.getSamples());
-		setOffset(info.getOffset());
-		setSamplerate(info.getSamplerate());
-		setChannels(info.getChannels());
-	}
+	virtual void operator=(const IAudioInfo &info);
+
+	virtual void serialize(IMultiLevelStore *data) const;
+	virtual void deserialize(const IMultiLevelStore *data);
 
 private:
 	unsigned long mSamples;

@@ -7,9 +7,11 @@
 #ifndef MAUDIO_IAUDIOINFO
 #define MAUDIO_IAUDIOINFO
 
+#include "core/serializer/ISerializable.hpp"
+
 namespace maudio{
 
-class IAudioInfo{
+class IAudioInfo : public ISerializable{
 public:
 	virtual ~IAudioInfo(){};
 

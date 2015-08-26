@@ -9,10 +9,11 @@
 
 #include "core/util/BaseObservable.hpp"
 #include "core/store/IMultiLevelStore.hpp"
+#include "core/serializer/ISerializable.hpp"
 
 namespace maudio{
 
-class IKeyableProperty : public BaseObservable{
+class IKeyableProperty : public BaseObservable, public ISerializable{
 public:
 	virtual ~IKeyableProperty(){};
 
@@ -28,10 +29,6 @@ public:
 
 	virtual const char *getBottomBoundsString() const = 0;
 	virtual const char *getUpperBoundsString() const = 0;
-/*
-	virtual IMultiLevelStore *serialize() const = 0;
-	virtual void deserialize(const IMultiLevelStore *data) = 0;
-*/
 };
 
 } // maudio

@@ -167,6 +167,14 @@ bool Player::checkCompatible(IAudioInfo *info){
 	return false;
 }
 
+void Player::serialize(IMultiLevelStore *data) const{
+	return;
+}
+
+void Player::deserialize(const IMultiLevelStore *data){
+	return;
+}
+
 void Player::feed(){
 	if(!mQueue) return;
 	if(NumInputs() == 0) return;

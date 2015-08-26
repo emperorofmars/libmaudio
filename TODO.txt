@@ -37,10 +37,10 @@ Todo:
 - ////IAudioGetter: add checkCompatible
 - ////properties: set bounds should retroactively check all values
 - ////implement MultiStore
-- implement MultiLevelStore
-- create serializable interface and inherit it to Node, IAction and Properties
+- ////implement MultiLevelStore
+- create ISerializable interface and inherit it to Node, IAction and Properties
 - property and keyableproperty: serialize and unserialize
-- node: serialize and unserialize
+- node and iaction: serialize and unserialize
 - create serializer
 - implement scene
 - save and reload scene

@@ -47,6 +47,14 @@ bool TerminalPrinter::checkCompatible(IAudioInfo *info){
 	return false;
 }
 
+void TerminalPrinter::serialize(IMultiLevelStore *data) const{
+	return;
+}
+
+void TerminalPrinter::deserialize(const IMultiLevelStore *data){
+	return;
+}
+
 void TerminalPrinter::print(unsigned long pos){
 	if(NumInputs() == 0){
 		std::cout << "invalid or no Input" << std::endl;

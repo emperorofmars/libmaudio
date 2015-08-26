@@ -16,10 +16,11 @@
 #include "core/property/IPropertyManager.hpp"
 #include "core/store/IKeyValueStore.hpp"
 #include "core/store/IMultiLevelStore.hpp"
+#include "core/serializer/ISerializable.hpp"
 
 namespace maudio{
 
-class IAction : public IAudioGetter{
+class IAction : public IAudioGetter, public ISerializable{
 public:
 	virtual ~IAction(){};
 
@@ -35,10 +36,6 @@ public:
 	virtual IPropertyManager *getProperties() = 0;
 
 	virtual IControl *getControl() = 0;
-/*
-	virtual IMultiLevelStore *serialize() const = 0;
-	virtual void deserialize(const IMultiLevelStore *data) = 0;
-*/
 };
 
 } // maudio

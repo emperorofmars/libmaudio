@@ -82,6 +82,14 @@ void SinusGenerator::setChannels(unsigned int channels){
 	mChannels->set(channels);
 }
 
+void SinusGenerator::serialize(IMultiLevelStore *data) const{
+	return;
+}
+
+void SinusGenerator::deserialize(const IMultiLevelStore *data){
+	return;
+}
+
 } // maudio
 
 

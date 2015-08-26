@@ -46,6 +46,9 @@ public:
 	virtual std::vector<std::string> getBoundsString() const;
 	virtual std::vector<T> getBounds() const;
 
+	virtual void serialize(IMultiLevelStore *data) const;
+	virtual void deserialize(const IMultiLevelStore *data);
+
 private:
 	T getElement(unsigned int pos) const;
 	T interpolate(long double pos) const;
@@ -255,6 +258,16 @@ T SimpleKeyableProperty<T>::interpolate(long double pos) const{
 		}
 	}
 	return best;
+}
+
+template<typename T>
+void SimpleKeyableProperty<T>::serialize(IMultiLevelStore *data) const{
+	return;
+}
+
+template<typename T>
+void SimpleKeyableProperty<T>::deserialize(const IMultiLevelStore *data){
+	return;
 }
 
 } // maudio

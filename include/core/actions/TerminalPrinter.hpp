@@ -29,6 +29,9 @@ public:
 
 	virtual bool checkCompatible(IAudioInfo *info);
 
+	virtual void serialize(IMultiLevelStore *data) const;
+	virtual void deserialize(const IMultiLevelStore *data);
+
 	void print(unsigned long pos);
 
 private:

@@ -34,6 +34,9 @@ public:
 	virtual std::vector<std::string> getBoundsString() const;
 	virtual std::vector<T> getBounds() const;
 
+	virtual void serialize(IMultiLevelStore *data) const;
+	virtual void deserialize(const IMultiLevelStore *data);
+
 private:
 	std::string mName;
 	T mValue;
@@ -130,6 +133,16 @@ std::vector<std::string> SimpleProperty<T>::getBoundsString() const{
 template<typename T>
 std::vector<T> SimpleProperty<T>::getBounds() const{
 	return std::vector<T>{mBottomBound, mUpperBound};
+}
+
+template<typename T>
+void SimpleProperty<T>::serialize(IMultiLevelStore *data) const{
+	return;
+}
+
+template<typename T>
+void SimpleProperty<T>::deserialize(const IMultiLevelStore *data){
+	return;
 }
 
 } // maudio

@@ -93,7 +93,20 @@ bool ActionNode::checkCompatible(IAudioInfo *info){
 	return mAction->checkCompatible(info);
 }
 
+void ActionNode::serialize(IMultiLevelStore *data) const{
+	return;
+}
+
+void ActionNode::deserialize(const IMultiLevelStore *data){
+	return;
+}
+
 } // maudio
+
+
+
+
+
 
 
 

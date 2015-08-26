@@ -85,6 +85,14 @@ void PluginNode::onRemove(unsigned int slot){
 	return;
 }
 
+void PluginNode::serialize(IMultiLevelStore *data) const{
+	return;
+}
+
+void PluginNode::deserialize(const IMultiLevelStore *data){
+	return;
+}
+
 } // maudio
 
 

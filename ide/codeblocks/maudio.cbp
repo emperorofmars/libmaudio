@@ -103,7 +103,6 @@
 		<Unit filename="../../src/core/property/PropertyManager.cpp" />
 		<Unit filename="../../src/core/property/SimpleKeyableProperty.cpp" />
 		<Unit filename="../../src/core/property/SimpleProperty.cpp" />
-		<Unit filename="../../src/core/serializer/SerializerStore.cpp" />
 		<Unit filename="../../src/core/serializer/TXTSerializer.cpp" />
 		<Unit filename="../../src/core/store/Config.cpp" />
 		<Unit filename="../../src/core/store/ConfigManager.cpp" />

@@ -24,7 +24,7 @@ public:
 	virtual unsigned int getSize(unsigned int numKey) const = 0;
 	virtual unsigned int getNumLevels() const = 0;
 	virtual void add(const char *key, const char *value) = 0;
-	virtual void addLevel(const char *key) = 0;
+	virtual IMultiLevelStore *addLevel(const char *key) = 0;
 };
 
 } // maudio

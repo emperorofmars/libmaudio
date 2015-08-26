@@ -89,10 +89,10 @@ void MultiLevelStore::add(const char *key, const char *value){
 	return;
 }
 
-void MultiLevelStore::addLevel(const char *key){
+IMultiLevelStore *MultiLevelStore::addLevel(const char *key){
 	std::string tmpKey(key);
 	mLevels[tmpKey] = std::unique_ptr<MultiLevelStore>(new MultiLevelStore());
-	return;
+	return mLevels[tmpKey].get();
 }
 
 bool MultiLevelStore::checkKey(const std::string &key) const{

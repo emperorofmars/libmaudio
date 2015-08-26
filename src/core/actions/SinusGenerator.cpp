@@ -83,10 +83,28 @@ void SinusGenerator::setChannels(unsigned int channels){
 }
 
 void SinusGenerator::serialize(IMultiLevelStore *data) const{
+	if(!data) return;
+	mFreq->serialize(data->addLevel("Frequency"));
+	mSamplerate->serialize(data->addLevel("Samplerate"));
+	mChannels->serialize(data->addLevel("Channels"));
 	return;
 }
 
 void SinusGenerator::deserialize(const IMultiLevelStore *data){
+	if(!data) return;
+	try{
+		mFreq->deserialize(data->getLevel("Frequency"));
+		mSamplerate->deserialize(data->getLevel("Samplerate"));
+		mChannels->deserialize(data->getLevel("Channels"));
+
+		mAudioInfo.setChannels(mChannels->get());
+		mAudioInfo.setOffset(0);
+		mAudioInfo.setSamplerate(mSamplerate->get());
+		mAudioInfo.setSamples(-1);
+	}
+	catch(std::exception &e){
+		throw e;
+	}
 	return;
 }
 

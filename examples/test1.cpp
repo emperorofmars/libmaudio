@@ -64,17 +64,17 @@ int main(int argc, char *argv[]){
 
 			freqprop->setKey("600", 0);
 			freqprop->addKey("600", 0 *mul+shift);
-			freqprop->addKey("900", 0.000000001 *mul+shift);
+			freqprop->addKey("900", 0.000001 *mul+shift);
 			freqprop->addKey("900", 1 *mul+shift);
-			freqprop->addKey("600", 1.000000001 *mul+shift);
+			freqprop->addKey("600", 1.000001 *mul+shift);
 			freqprop->addKey("600", 2 *mul+shift);
-			freqprop->addKey("900", 2.000000001 *mul+shift);
+			freqprop->addKey("900", 2.000001 *mul+shift);
 			freqprop->addKey("900", 3 *mul+shift);
-			freqprop->addKey("600", 3.000000001 *mul+shift);
+			freqprop->addKey("600", 3.000001 *mul+shift);
 			freqprop->addKey("600", 4 *mul+shift);
-			freqprop->addKey("900", 4.000000001 *mul+shift);
+			freqprop->addKey("900", 4.000001 *mul+shift);
 			freqprop->addKey("900", 5 *mul+shift);
-			freqprop->addKey("600", 5.000000001 *mul+shift);
+			freqprop->addKey("600", 5.000001 *mul+shift);
 
 /*
 			freqprop->setKey("600", 0);
@@ -95,14 +95,27 @@ int main(int argc, char *argv[]){
 			std::cerr << "2.25: \t" << freqprop->getString(2.25 *mul) << std::endl;
 		}
 
-		MultiLevelStore serializerStore;
+		MultiLevelStore serializerStore1;
+		MultiLevelStore serializerStore2;
 		IProperty *sinsmpprop = sinprop->getProperty("Samplerate");
 		if(sinsmpprop){
-			sinsmpprop->serialize(&serializerStore);
+			sinsmpprop->serialize(&serializerStore1);
 
 			SimpleProperty<unsigned int> smpprop("asdas", 1);
-			smpprop.deserialize(&serializerStore);
+			smpprop.deserialize(&serializerStore1);
 			std::cerr << "Deserialize: " << smpprop.getName() << " " << smpprop.get() << std::endl;
+		}
+		if(freqprop){
+			freqprop->serialize(&serializerStore2);
+			std::cerr << "freqprop: " << serializerStore2.get("value", 0) << std::endl;
+			std::cerr << "freqprop: " << serializerStore2.get("value", 1) << std::endl;
+			std::cerr << "freqprop: " << serializerStore2.get("value", 2) << std::endl;
+			std::cerr << "freqprop: " << serializerStore2.get("value", 3) << std::endl;
+
+			KeyableFloatProperty desfreq("fuu", 0);
+			desfreq.deserialize(&serializerStore2);
+			std::cerr << "Deserialize: " << desfreq.getName() << " " << desfreq.get(2.3) << std::endl;
+
 		}
 	}
 	std::cerr << "MultiMap:" << std::endl;

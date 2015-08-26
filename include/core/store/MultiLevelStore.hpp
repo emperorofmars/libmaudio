@@ -38,7 +38,7 @@ public:
 	virtual void add(const char *key, const char *value);
 	template<typename T>
 	void add(const char *key, T value);
-	virtual void addLevel(const char *key);
+	virtual IMultiLevelStore *addLevel(const char *key);
 
 private:
 	bool checkKey(const std::string &key) const;

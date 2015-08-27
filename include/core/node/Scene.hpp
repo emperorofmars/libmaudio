@@ -7,6 +7,8 @@
 #ifndef MAUDIO_SCENE
 #define MAUDIO_SCENE
 
+#include "core/node/Node.hpp"
+
 namespace maudio{
 
 class Scene{

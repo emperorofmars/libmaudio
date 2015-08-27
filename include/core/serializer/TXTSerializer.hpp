@@ -7,11 +7,11 @@
 #ifndef MAUDIO_TXTSERIALIZER
 #define MAUDIO_TXTSERIALIZER
 
-#include "core/serializer/Serializer.hpp"
+#include "core/serializer/ISerializer.hpp"
 
 namespace maudio{
 
-class TXTSerializer : public Serializer{
+class TXTSerializer : public ISerializer{
 public:
 	TXTSerializer();
 	~TXTSerializer();

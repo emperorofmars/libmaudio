@@ -81,6 +81,7 @@ private:
 	std::shared_ptr<Control> mControl = std::make_shared<Control>(this);
 
 	AudioDevice *mDevice = NULL;
+	std::string mDeviceName;
 	std::shared_ptr<AudioQueue> mQueue;
 	std::shared_ptr<std::thread> mThread;
 	bool mFeederRun = false;

@@ -39,8 +39,8 @@ Todo:
 - ////implement MultiStore
 - ////implement MultiLevelStore
 - ////create ISerializable interface and inherit it to Node, IAction, IAudioInfo and Properties
-- ////property and keyableproperty: serialize and unserialize
-- IAudioInfo, node and iaction: serialize and unserialize
+- ////IAudioInfo, property and keyableproperty: serialize and unserialize
+- node and iaction: serialize and unserialize
 - create serializer
 - implement scene
 - save and reload scene

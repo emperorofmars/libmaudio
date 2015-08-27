@@ -7,6 +7,7 @@
 #include "extended/audiosink/Player.hpp"
 #include "core/util/simple_ptr.hpp"
 #include "core/util/AudioException.hpp"
+#include "core/util/Util.hpp"
 #include <iostream>
 
 namespace maudio{
@@ -168,10 +169,23 @@ bool Player::checkCompatible(IAudioInfo *info){
 }
 
 void Player::serialize(IMultiLevelStore *data) const{
+	if(!data) return;
+	data->add("queuesize", std::to_string(mQueueSize).c_str());
+	data->add("position", std::to_string(mPosition).c_str());
+	data->add("devicename", mDeviceName.c_str());
 	return;
 }
 
 void Player::deserialize(const IMultiLevelStore *data){
+	if(!data) return;
+	try{
+		mQueueSize = string_to<unsigned int>(std::string(data->get("queuesize")));
+		mPosition = string_to<unsigned long>(std::string(data->get("position")));
+		mDeviceName = data->get("devicename");
+	}
+	catch(std::exception &e){
+		throw e;
+	}
 	return;
 }
 

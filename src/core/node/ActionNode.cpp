@@ -94,10 +94,26 @@ bool ActionNode::checkCompatible(IAudioInfo *info){
 }
 
 void ActionNode::serialize(IMultiLevelStore *data) const{
+	if(!data) return;
+	data->add("name", mName.c_str());
+	data->add("id", getIDStr().c_str());
+	if(mAction){
+		mAction->serialize(data->addLevel("action"));
+	}
 	return;
 }
 
 void ActionNode::deserialize(const IMultiLevelStore *data){
+	if(!data) return;
+	try{
+		mName = data->get("name");
+		if(mAction){
+			mAction->deserialize(data->getLevel("action"));
+		}
+	}
+	catch(std::exception &e){
+		throw e;
+	}
 	return;
 }
 

@@ -53,6 +53,8 @@ protected:
 	virtual void onAdd(unsigned int slot) = 0;
 	virtual void onRemove(unsigned int slot) = 0;
 
+	std::string mName;
+
 	std::vector<std::shared_ptr<Node>> mInputs;
 	std::vector<std::weak_ptr<Node>> mOutputs;
 
@@ -62,8 +64,6 @@ private:
 
 	bool checkCycles(std::shared_ptr<Node> node);
 	bool checkCyclesDeep(std::vector<std::shared_ptr<Node>> nodes);
-
-	std::string mName;
 };
 
 } // maudio

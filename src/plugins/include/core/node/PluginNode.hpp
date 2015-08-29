@@ -34,10 +34,12 @@ public:
 	virtual IPropertyManager *getProperties();
 
 	virtual IControl *getControl();
-/*
-	virtual IKeyValueStore *serialize() const;
-	virtual void deserialize(const IKeyValueStore *data);
-*/
+
+	virtual bool checkCompatible(IAudioInfo *info);
+
+	virtual void serialize(IMultiLevelStore *data) const;
+	virtual void deserialize(const IMultiLevelStore *data);
+
 protected:
 	virtual void onAdd(unsigned int slot);
 	virtual void onRemove(unsigned int slot);

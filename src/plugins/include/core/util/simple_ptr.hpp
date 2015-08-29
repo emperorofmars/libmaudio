@@ -126,8 +126,8 @@ simple_ptr<T>::operator bool() const{
 
 template<typename T>
 bool simple_ptr<T>::operator!() const{
-	if(mData) return true;
-	return false;
+	if(mData) return false;
+	return true;
 }
 
 } // maudio

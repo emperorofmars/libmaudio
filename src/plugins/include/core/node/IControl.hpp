@@ -7,11 +7,12 @@
 #ifndef MAUDIO_ICONTROL
 #define MAUDIO_ICONTROL
 
+#include "core/util/BaseObservable.hpp"
 #include <cstddef>
 
 namespace maudio{
 
-class IControl{
+class IControl : public BaseObservable{
 public:
 	virtual ~IControl(){};
 

@@ -7,9 +7,13 @@
 #ifndef MAUDIO_IKEYABLEPROPERTY
 #define MAUDIO_IKEYABLEPROPERTY
 
+#include "core/util/BaseObservable.hpp"
+#include "core/store/IMultiLevelStore.hpp"
+#include "core/serializer/ISerializable.hpp"
+
 namespace maudio{
 
-class IKeyableProperty{
+class IKeyableProperty : public BaseObservable, public ISerializable{
 public:
 	virtual ~IKeyableProperty(){};
 
@@ -25,9 +29,6 @@ public:
 
 	virtual const char *getBottomBoundsString() const = 0;
 	virtual const char *getUpperBoundsString() const = 0;
-
-	//virtual std::string serialize() const;
-	//virtual void unserialize(const std::string &data);
 };
 
 } // maudio

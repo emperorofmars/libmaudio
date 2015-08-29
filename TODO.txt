@@ -41,6 +41,7 @@ Todo:
 - ////create ISerializable interface and inherit it to Node, IAction, IAudioInfo and Properties
 - ////IAudioInfo, property and keyableproperty: serialize and unserialize
 - ////node and iaction: serialize and unserialize
+- ////create Mixer as plugin
 - implement scene
 - implement serializer
 - save and reload scene

@@ -7,6 +7,10 @@
 #include "core/node/ActionNode.hpp"
 #include "core/util/AudioException.hpp"
 
+#include <iostream>
+#include <string>
+#include <cstring>
+
 namespace maudio{
 
 ActionNode::ActionNode(IAction *action){
@@ -85,7 +89,40 @@ void ActionNode::onRemove(unsigned int slot){
 	return;
 }
 
+bool ActionNode::checkCompatible(IAudioInfo *info){
+	return mAction->checkCompatible(info);
+}
+
+void ActionNode::serialize(IMultiLevelStore *data) const{
+	if(!data) return;
+	data->add("name", mName.c_str());
+	data->add("id", getIDStr().c_str());
+	if(mAction){
+		mAction->serialize(data->addLevel("action"));
+	}
+	return;
+}
+
+void ActionNode::deserialize(const IMultiLevelStore *data){
+	if(!data) return;
+	try{
+		mName = data->get("name");
+		if(mAction){
+			mAction->deserialize(data->getLevel("action"));
+		}
+	}
+	catch(std::exception &e){
+		throw e;
+	}
+	return;
+}
+
 } // maudio
+
+
+
+
+
 
 
 

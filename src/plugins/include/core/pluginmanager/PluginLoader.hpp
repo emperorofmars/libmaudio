@@ -8,6 +8,7 @@
 #define MAUDIO_PLUGINLOADER
 
 #include "core/util/String.hpp"
+#include "core/util/BaseObservable.hpp"
 #include "core/util/AudioException.hpp"
 #include <dlfcn.h>
 #include <string>
@@ -19,7 +20,7 @@ typedef void destroy_t(void *data);
 typedef const char *getName_t();
 
 template<typename T>
-class PluginLoader{
+class PluginLoader : public BaseObservable{
 public:
 	PluginLoader(const char *path = NULL);
 	~PluginLoader();
@@ -86,8 +87,7 @@ void PluginLoader<T>::loadPlugin(const char *path){
 	}
 
 	mPath = path;
-	String tmp(nameFunc());
-	mName = tmp.c_str();
+	mName = nameFunc();
 	return;
 }
 

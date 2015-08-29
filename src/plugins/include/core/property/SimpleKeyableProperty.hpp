@@ -46,6 +46,9 @@ public:
 	virtual std::vector<std::string> getBoundsString() const;
 	virtual std::vector<T> getBounds() const;
 
+	virtual void serialize(IMultiLevelStore *data) const;
+	virtual void deserialize(const IMultiLevelStore *data);
+
 private:
 	T getElement(unsigned int pos) const;
 	T interpolate(long double pos) const;
@@ -166,6 +169,7 @@ void SimpleKeyableProperty<T>::setKey(T value, unsigned int keynum){
 		keynum--;
 	}
 	iter->second = value;
+	notifyObservers(ON_CHANGE);
 	return;
 }
 
@@ -186,6 +190,7 @@ void SimpleKeyableProperty<T>::removeKey(unsigned int keynum){
 		keynum--;
 	}
 	mValues.erase(iter);
+	notifyObservers(ON_CHANGE);
 	return;
 }
 
@@ -194,6 +199,11 @@ void SimpleKeyableProperty<T>::setBounds(T bottom, T upper){
 	if(bottom >= upper) return;
 	mBottomBound = bottom;
 	mUpperBound = upper;
+	for(auto iter = mValues.begin(); iter != mValues.end(); iter++){
+		if(iter->second < mBottomBound) iter->second = mBottomBound;
+		else if(iter->second > mUpperBound) iter->second = mUpperBound;
+	}
+	notifyObservers(ON_CHANGE);
 	return;
 }
 
@@ -248,6 +258,39 @@ T SimpleKeyableProperty<T>::interpolate(long double pos) const{
 		}
 	}
 	return best;
+}
+
+template<typename T>
+void SimpleKeyableProperty<T>::serialize(IMultiLevelStore *data) const{
+	if(!data) return;
+	data->add("name", mName.c_str());
+	for(auto iter = mValues.begin(); iter != mValues.end(); iter++){
+		data->add("value", std::to_string(iter->second).append(" ").append(std::to_string(iter->first)).c_str());
+	}
+	data->add("bottombound", std::to_string(mBottomBound).c_str());
+	data->add("upperbound", std::to_string(mUpperBound).c_str());
+	return;
+}
+
+template<typename T>
+void SimpleKeyableProperty<T>::deserialize(const IMultiLevelStore *data){
+	if(!data) return;
+	try{
+		mName = data->get("name");
+		mValues.clear();
+		for(unsigned int i = 0; i < data->getSize("value"); i++){
+			std::string tmp(data->get("value", i));
+			std::string value = tmp.substr(0, tmp.find_first_of(' '));
+			long double pos = string_to<long double>(tmp.substr(tmp.find_first_of(' ') + 1, tmp.size()));
+			addKey(value.c_str(), pos);
+		}
+		mBottomBound = string_to<T>(std::string(data->get("bottombound")));
+		mUpperBound = string_to<T>(std::string(data->get("upperbound")));
+	}
+	catch(std::exception &e){
+		throw e;
+	}
+	return;
 }
 
 } // maudio

@@ -9,6 +9,7 @@
 #include "core/util/AudioException.hpp"
 #include "core/util/Util.hpp"
 #include <cmath>
+#include <iostream>
 
 namespace maudio{
 
@@ -29,17 +30,20 @@ SinusGenerator::SinusGenerator(){
 SinusGenerator::~SinusGenerator(){
 }
 
-
 IAudioBuffer *SinusGenerator::get(unsigned long pos, unsigned int length) noexcept{
 	mAudioInfo.setChannels(mChannels->get());
 	mAudioInfo.setSamplerate(mSamplerate->get());
 	AudioBuffer *ret = new AudioBuffer(mAudioInfo.getChannels(), length, pos, mAudioInfo.getSamplerate());
+
 	for(unsigned int i = 0; i < length; i++){
 		Sample tmp(mAudioInfo.getChannels());
-		float index = pos + i;
+		//std::cerr << pos + i << " " << mFreq->get(PositionToSeconds(pos + i, mAudioInfo.getSamplerate())) << std::endl;
+		double value = sin(mFreq->get(PositionToSeconds(pos + i, mAudioInfo.getSamplerate()))
+					//* ((pos + i) % mAudioInfo.getSamplerate())
+					* (pos + i)
+					* (2 * M_PI) / mAudioInfo.getSamplerate());
 		for(unsigned int j = 0; j < mAudioInfo.getChannels(); j++){
-            tmp.set(sin(mFreq->get(PositionToSeconds((pos + i), mAudioInfo.getSamplerate()))
-						* index * (2 * M_PI) / mAudioInfo.getSamplerate()), j);
+            tmp.set(value, j);
 		}
 		ret->set(tmp, i);
 	}
@@ -76,6 +80,32 @@ void SinusGenerator::setSamplerate(unsigned int samplerate){
 
 void SinusGenerator::setChannels(unsigned int channels){
 	mChannels->set(channels);
+}
+
+void SinusGenerator::serialize(IMultiLevelStore *data) const{
+	if(!data) return;
+	mFreq->serialize(data->addLevel("Frequency"));
+	mSamplerate->serialize(data->addLevel("Samplerate"));
+	mChannels->serialize(data->addLevel("Channels"));
+	return;
+}
+
+void SinusGenerator::deserialize(const IMultiLevelStore *data){
+	if(!data) return;
+	try{
+		mFreq->deserialize(data->getLevel("Frequency"));
+		mSamplerate->deserialize(data->getLevel("Samplerate"));
+		mChannels->deserialize(data->getLevel("Channels"));
+
+		mAudioInfo.setChannels(mChannels->get());
+		mAudioInfo.setOffset(0);
+		mAudioInfo.setSamplerate(mSamplerate->get());
+		mAudioInfo.setSamples(-1);
+	}
+	catch(std::exception &e){
+		throw e;
+	}
+	return;
 }
 
 } // maudio

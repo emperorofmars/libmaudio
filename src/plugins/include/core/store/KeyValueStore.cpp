@@ -78,7 +78,7 @@ void KeyValueStore::set(const std::string &key, std::string value){
 
 bool KeyValueStore::checkKey(const std::string &key) const{
 	for(unsigned int i = 0; i < key.size(); i++){
-		if(key[i] == ' ') return false;
+		if(key[i] == ' ' || key[i] == '\t') return false;
 	}
 	return true;
 }

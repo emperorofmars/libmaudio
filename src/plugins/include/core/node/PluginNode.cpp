@@ -69,6 +69,10 @@ IControl *PluginNode::getControl(){
 	return mAction->getControl();
 }
 
+bool PluginNode::checkCompatible(IAudioInfo *info){
+	return mAction->checkCompatible(info);
+}
+
 void PluginNode::onAdd(unsigned int slot){
 	if(!mAction) return;
 	mAction->addSocket(mInputs[slot].get(), slot);
@@ -78,6 +82,30 @@ void PluginNode::onAdd(unsigned int slot){
 void PluginNode::onRemove(unsigned int slot){
 	if(!mAction) return;
 	mAction->removeSocket(slot);
+	return;
+}
+
+void PluginNode::serialize(IMultiLevelStore *data) const{
+	if(!data) return;
+	data->add("name", mName.c_str());
+	data->add("id", getIDStr().c_str());
+	if(mAction){
+		mAction->serialize(data->addLevel("action"));
+	}
+	return;
+}
+
+void PluginNode::deserialize(const IMultiLevelStore *data){
+	if(!data) return;
+	try{
+		mName = data->get("name");
+		if(mAction){
+			mAction->deserialize(data->getLevel("action"));
+		}
+	}
+	catch(std::exception &e){
+		throw e;
+	}
 	return;
 }
 

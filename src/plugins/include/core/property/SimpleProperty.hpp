@@ -34,6 +34,9 @@ public:
 	virtual std::vector<std::string> getBoundsString() const;
 	virtual std::vector<T> getBounds() const;
 
+	virtual void serialize(IMultiLevelStore *data) const;
+	virtual void deserialize(const IMultiLevelStore *data);
+
 private:
 	std::string mName;
 	T mValue;
@@ -97,6 +100,7 @@ void SimpleProperty<T>::set(T value){
 	if(value < mBottomBound) mValue = mBottomBound;
 	else if(value > mUpperBound) mValue = mUpperBound;
 	else mValue = value;
+	notifyObservers(ON_CHANGE);
 	return;
 }
 
@@ -105,6 +109,9 @@ void SimpleProperty<T>::setBounds(T bottom, T upper){
 	if(bottom >= upper) return;
 	mBottomBound = bottom;
 	mUpperBound = upper;
+	if(mValue < mBottomBound) mValue = mBottomBound;
+	else if(mValue > mUpperBound) mValue = mUpperBound;
+	notifyObservers(ON_CHANGE);
 	return;
 }
 
@@ -126,6 +133,31 @@ std::vector<std::string> SimpleProperty<T>::getBoundsString() const{
 template<typename T>
 std::vector<T> SimpleProperty<T>::getBounds() const{
 	return std::vector<T>{mBottomBound, mUpperBound};
+}
+
+template<typename T>
+void SimpleProperty<T>::serialize(IMultiLevelStore *data) const{
+	if(!data) return;
+	data->add("name", mName.c_str());
+	data->add("value", std::to_string(mValue).c_str());
+	data->add("bottombound", std::to_string(mBottomBound).c_str());
+	data->add("upperbound", std::to_string(mUpperBound).c_str());
+	return;
+}
+
+template<typename T>
+void SimpleProperty<T>::deserialize(const IMultiLevelStore *data){
+	if(!data) return;
+	try{
+		mName = data->get("name");
+		mValue = string_to<T>(std::string(data->get("value")));
+		mBottomBound = string_to<T>(std::string(data->get("bottombound")));
+		mUpperBound = string_to<T>(std::string(data->get("upperbound")));
+	}
+	catch(std::exception &e){
+		throw e;
+	}
+	return;
 }
 
 } // maudio

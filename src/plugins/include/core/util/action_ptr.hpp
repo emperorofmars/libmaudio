@@ -23,11 +23,11 @@ template<typename T>
 class action_ptr{
 public:
 	action_ptr(T *data = NULL, IAudioGetter *deleter = NULL);
-	action_ptr(action_ptr<T> &data);
+	action_ptr(const action_ptr<T> &data);
 	~action_ptr();
 
 	void reset(T *data = NULL, IAudioGetter *deleter = NULL);
-	void reset(action_ptr<T> &data);
+	void reset(const action_ptr<T> &data);
 	T *release();
 
 	T *get() const;
@@ -35,14 +35,19 @@ public:
 	T &operator*() const;
 
 	void operator=(T &data);
-	void operator=(action_ptr<T> &data);
-	bool operator==(action_ptr<T> &data) const;
+	void operator=(const action_ptr<T> &data);
+	bool operator==(const action_ptr<T> &data) const;
 	operator bool() const;
 	bool operator!() const;
 
 private:
+	struct RefCount{
+		int mRefs = 0;
+	};
+
 	T *mData = NULL;
 	IAudioGetter *mDeleter = NULL;
+	RefCount *mRefCount = NULL;
 };
 
 
@@ -53,7 +58,7 @@ action_ptr<T>::action_ptr(T *data, IAudioGetter *deleter){
 }
 
 template<typename T>
-action_ptr<T>::action_ptr(action_ptr<T> &data){
+action_ptr<T>::action_ptr(const action_ptr<T> &data){
 	reset(data);
 	return;
 }
@@ -67,52 +72,48 @@ action_ptr<T>::~action_ptr(){
 template<typename T>
 void action_ptr<T>::reset(T *data, IAudioGetter *deleter){
 	if(mData != NULL){
-		delete mData;
+		if(mRefCount){
+			mRefCount->mRefs--;
+			if(mRefCount->mRefs == 0){
+				delete mData;
+			}
+			if(mRefCount->mRefs == 0){
+				delete mRefCount;
+			}
+			mRefCount = NULL;
+		}
+		else{
+			delete mData;
+		}
 	}
 	mData = data;
 	mDeleter = deleter;
-	return;
-}
 
-template<>
-void action_ptr<IAudioBuffer>::reset(IAudioBuffer *data, IAudioGetter *deleter){
-	if(mData != NULL){
-		if(mDeleter) mDeleter->deleteBuffer(mData);
-		else delete mData;
-	}
-	mData = data;
-	mDeleter = deleter;
-	return;
-}
-
-template<>
-void action_ptr<IAudioInfo>::reset(IAudioInfo *data, IAudioGetter *deleter){
-	if(mData != NULL){
-		if(mDeleter) mDeleter->deleteInfo(mData);
-		else delete mData;
-	}
-	mData = data;
-	mDeleter = deleter;
-	return;
-}
-
-template<>
-void action_ptr<ISample>::reset(ISample *data, IAudioGetter *deleter){
-	if(mData != NULL){
-		if(mDeleter) mDeleter->deleteSample(mData);
-		else delete mData;
-	}
-	mData = data;
-	mDeleter = deleter;
+	mRefCount = new RefCount();
+	mRefCount->mRefs = 1;
 	return;
 }
 
 template<typename T>
-void action_ptr<T>::reset(action_ptr<T> &data){
+void action_ptr<T>::reset(const action_ptr<T> &data){
 	if(mData != NULL){
-		delete mData;
+		if(mRefCount){
+			mRefCount->mRefs--;
+			if(mRefCount->mRefs == 0){
+				delete mData;
+			}
+			if(mRefCount->mRefs == 0){
+				delete mRefCount;
+			}
+			mRefCount = NULL;
+		}
+		else{
+			delete mData;
+		}
 	}
-	mData = data.release();
+	mData = data.get();
+	mRefCount = data.mRefCount;
+	mRefCount->mRefs++;
 	return;
 }
 
@@ -144,12 +145,12 @@ void action_ptr<T>::operator=(T &data){
 }
 
 template<typename T>
-void action_ptr<T>::operator=(action_ptr<T> &data){
+void action_ptr<T>::operator=(const action_ptr<T> &data){
 	return reset(data);
 }
 
 template<typename T>
-bool action_ptr<T>::operator==(action_ptr<T> &data) const{
+bool action_ptr<T>::operator==(const action_ptr<T> &data) const{
 	if(mData == data.mData) return true;
 	return false;
 }
@@ -162,8 +163,8 @@ action_ptr<T>::operator bool() const{
 
 template<typename T>
 bool action_ptr<T>::operator!() const{
-	if(mData) return true;
-	return false;
+	if(mData) return false;
+	return true;
 }
 
 } // maudio

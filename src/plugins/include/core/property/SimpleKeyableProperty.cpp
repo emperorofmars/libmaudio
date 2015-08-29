@@ -69,12 +69,14 @@ std::string SimpleKeyableProperty<std::string>::getKey(unsigned int keynum) cons
 template<>
 void SimpleKeyableProperty<std::string>::addKey(const std::string &value, long double pos){
 	mValues[pos] = value;
+	notifyObservers(ON_CHANGE);
 	return;
 }
 
 template<>
 void SimpleKeyableProperty<std::string>::addKey(std::string value, long double pos){
 	mValues[pos] = value;
+	notifyObservers(ON_CHANGE);
 	return;
 }
 
@@ -88,6 +90,7 @@ void SimpleKeyableProperty<std::string>::setKey(const std::string &value, unsign
 		keynum--;
 	}
 	iter->second = value;
+	notifyObservers(ON_CHANGE);
 	return;
 }
 
@@ -101,6 +104,7 @@ void SimpleKeyableProperty<std::string>::setKey(std::string value, unsigned int 
 		keynum--;
 	}
 	iter->second = value;
+	notifyObservers(ON_CHANGE);
 	return;
 }
 

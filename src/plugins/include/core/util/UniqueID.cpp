@@ -13,11 +13,11 @@ UniqueID::UniqueID(){
 	mID = mGlobalID;
 }
 
-const unsigned int UniqueID::getID(){
+unsigned int UniqueID::getID() const{
 	return mID;
 }
 
-const std::string UniqueID::getIDStr(){
+std::string UniqueID::getIDStr() const{
 	return std::to_string(mID);
 }
 

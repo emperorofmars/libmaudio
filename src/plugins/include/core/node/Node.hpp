@@ -15,14 +15,15 @@
 #include "core/property/IKeyableProperty.hpp"
 #include "core/property/IPropertyManager.hpp"
 #include "core/store/Config.hpp"
-#include "core/serializer/SerializerStore.hpp"
+#include "core/store/IMultiLevelStore.hpp"
 #include "core/node/IControl.hpp"
+#include "core/serializer/ISerializable.hpp"
 #include <vector>
 #include <memory>
 
 namespace maudio{
 
-class Node : public IAudioGetter, public std::enable_shared_from_this<Node>, public UniqueID{
+class Node : public IAudioGetter, public std::enable_shared_from_this<Node>, public UniqueID, public ISerializable{
 public:
 	virtual ~Node();
 
@@ -47,13 +48,12 @@ public:
 
 	std::string getName() const;
 	void setName(const std::string &name);
-/*
-	virtual IKeyValueStore *serialize() const = 0;
-	virtual void deserialize(const IKeyValueStore *data) = 0;
-*/
+
 protected:
 	virtual void onAdd(unsigned int slot) = 0;
 	virtual void onRemove(unsigned int slot) = 0;
+
+	std::string mName;
 
 	std::vector<std::shared_ptr<Node>> mInputs;
 	std::vector<std::weak_ptr<Node>> mOutputs;
@@ -64,8 +64,6 @@ private:
 
 	bool checkCycles(std::shared_ptr<Node> node);
 	bool checkCyclesDeep(std::vector<std::shared_ptr<Node>> nodes);
-
-	std::string mName;
 };
 
 } // maudio

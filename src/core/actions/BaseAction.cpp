@@ -31,10 +31,10 @@ void BaseAction::deleteSample(ISample *data) noexcept{
 }
 
 void BaseAction::addSocket(IAudioGetter *socket, int slot){
-	if(slot < 0 && MaxInputs() < 0){
+	if(slot < 0 && (MaxInputs() < 0 || NumInputs() < MaxInputs())){
 		mInputs.push_back(socket);
 	}
-	else if(slot < MaxInputs()){
+	else if(slot < MaxInputs() || MaxInputs() < 0){
 		if((unsigned int)slot  >= mInputs.size()){
 			mInputs.resize(slot + 1);
 		}

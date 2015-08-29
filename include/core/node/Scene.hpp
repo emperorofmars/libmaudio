@@ -8,6 +8,8 @@
 #define MAUDIO_SCENE
 
 #include "core/node/Node.hpp"
+#include <memory>
+#include <string>
 
 namespace maudio{
 
@@ -16,7 +18,18 @@ public:
 	Scene();
 	~Scene();
 
-	//manage nodes
+	void addNode(std::shared_ptr<Node> node);
+	void removeNode(unsigned long id);
+	std::shared_ptr<Node> getEnd(unsigned int num);
+	std::shared_ptr<Node> getNode(unsigned long id);
+
+	void connect(unsigned long source, unsigned long sink);
+	void disconnect(unsigned long source, unsigned long sink);
+
+private:
+	std::string mName;
+
+	std::vector<std::shared_ptr<Node>> mEnds;
 };
 
 } // maudio

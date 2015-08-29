@@ -19,6 +19,7 @@ void PropertyManager::add(IProperty *prop){
 	if(!prop) return;
 	if(PropertyExists(prop->getName())) return;
 	mProperties.push_back(prop);
+	notifyObservers(ON_CHANGE, "add");
 	return;
 }
 
@@ -26,19 +27,20 @@ void PropertyManager::add(IKeyableProperty *prop){
 	if(!prop) return;
 	if(KeyablePropertyExists(prop->getName())) return;
 	mKeyableProperties.push_back(prop);
+	notifyObservers(ON_CHANGE, "add");
 	return;
 }
 
 bool PropertyManager::PropertyExists(const char *name){
 	for(unsigned int i = 0; i < mProperties.size(); i++){
-		if(mProperties[i]->getName() == name) return true;
+		if(std::string(mProperties[i]->getName()) == std::string(name)) return true;
 	}
 	return false;
 }
 
 bool PropertyManager::KeyablePropertyExists(const char *name){
 	for(unsigned int i = 0; i < mKeyableProperties.size(); i++){
-		if(mKeyableProperties[i]->getName() == name) return true;
+		if(std::string(mKeyableProperties[i]->getName()) == std::string(name)) return true;
 	}
 	return false;
 }
@@ -50,7 +52,7 @@ IProperty *PropertyManager::getProperty(unsigned int i){
 
 IProperty *PropertyManager::getProperty(const char *name){
 	for(unsigned int i = 0; i < mProperties.size(); i++){
-		if(mProperties[i]->getName() == name) return mProperties[i];
+		if(std::string(mProperties[i]->getName()) == std::string(name)) return mProperties[i];
 	}
 	return NULL;
 }
@@ -62,7 +64,7 @@ IKeyableProperty *PropertyManager::getKeyableProperty(unsigned int i){
 
 IKeyableProperty *PropertyManager::getKeyableProperty(const char *name){
 	for(unsigned int i = 0; i < mKeyableProperties.size(); i++){
-		if(mKeyableProperties[i]->getName() == name) return mKeyableProperties[i];
+		if(std::string(mKeyableProperties[i]->getName()) == std::string(name)) return mKeyableProperties[i];
 	}
 	return NULL;
 }
@@ -70,26 +72,30 @@ IKeyableProperty *PropertyManager::getKeyableProperty(const char *name){
 void PropertyManager::removeProperty(unsigned int i){
 	if(i >= mProperties.size()) return;
 	mProperties.erase(mProperties.begin() + i);
+	notifyObservers(ON_CHANGE, "remove");
 	return;
 }
 
 void PropertyManager::removeProperty(const char *name){
 	for(unsigned int i = 0; i < mProperties.size(); i++){
-		if(mProperties[i]->getName() == name) mProperties.erase(mProperties.begin() + i);
+		if(std::string(mProperties[i]->getName()) == std::string(name)) mProperties.erase(mProperties.begin() + i);
 	}
+	notifyObservers(ON_CHANGE, "remove");
 	return;
 }
 
 void PropertyManager::removeKeyableProperty(unsigned int i){
 	if(i >= mKeyableProperties.size()) return;
 	mKeyableProperties.erase(mKeyableProperties.begin() + i);
+	notifyObservers(ON_CHANGE, "remove");
 	return;
 }
 
 void PropertyManager::removeKeyableProperty(const char *name){
 	for(unsigned int i = 0; i < mKeyableProperties.size(); i++){
-		if(mKeyableProperties[i]->getName() == name) mKeyableProperties.erase(mKeyableProperties.begin() + i);
+		if(std::string(mKeyableProperties[i]->getName()) == std::string(name)) mKeyableProperties.erase(mKeyableProperties.begin() + i);
 	}
+	notifyObservers(ON_CHANGE, "remove");
 	return;
 }
 

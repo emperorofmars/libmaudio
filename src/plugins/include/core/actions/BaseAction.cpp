@@ -31,10 +31,10 @@ void BaseAction::deleteSample(ISample *data) noexcept{
 }
 
 void BaseAction::addSocket(IAudioGetter *socket, int slot){
-	if(slot < 0 && MaxInputs() < 0){
+	if(slot < 0 && (MaxInputs() < 0 || NumInputs() < MaxInputs())){
 		mInputs.push_back(socket);
 	}
-	else if(slot < MaxInputs()){
+	else if(slot < MaxInputs() || MaxInputs() < 0){
 		if((unsigned int)slot  >= mInputs.size()){
 			mInputs.resize(slot + 1);
 		}
@@ -46,10 +46,7 @@ void BaseAction::addSocket(IAudioGetter *socket, int slot){
 
 void BaseAction::removeSocket(int slot){
 	if((unsigned int)slot >= mInputs.size()) return;
-	if(mInputs[slot] != NULL){
-		delete mInputs[slot];
-		mInputs[slot] = NULL;
-	}
+	mInputs[slot] = NULL;
 	return;
 }
 
@@ -63,6 +60,25 @@ IPropertyManager *BaseAction::getProperties(){
 
 IControl *BaseAction::getControl(){
 	return NULL;
+}
+
+bool BaseAction::checkCompatible(IAudioInfo *info){
+	if(!info) return false;
+	return true;
+}
+
+action_ptr<IAudioBuffer> BaseAction::getFromSlot(unsigned int slot, unsigned long pos, unsigned int length){
+	if(mInputs.size() < slot || !mInputs[slot]){
+		return NULL;
+	}
+	return action_ptr<IAudioBuffer>(mInputs[slot]->get(pos, length), mInputs[slot]);
+}
+
+action_ptr<IAudioInfo> BaseAction::getInfoFromSlot(unsigned int slot){
+	if(mInputs.size() < slot || !mInputs[slot]){
+		return NULL;
+	}
+	return action_ptr<IAudioInfo>(mInputs[slot]->getInfo(), mInputs[slot]);
 }
 
 } // maudio

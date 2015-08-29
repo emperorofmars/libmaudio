@@ -21,7 +21,7 @@ PluginManager *PluginManager::Instance(){
 	return &mPluginManager;
 }
 
-void PluginManager::readConfig(const IKeyValueStore &conf){
+void PluginManager::readConfig(const IMultiStore &conf){
 	return;
 }
 

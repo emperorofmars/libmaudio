@@ -15,8 +15,8 @@ namespace maudio{
 class UniqueID{
 public:
 	UniqueID();
-	const unsigned int getID();
-	const std::string getIDStr();
+	unsigned int getID() const;
+	std::string getIDStr() const;
 
 private:
 	unsigned int mID;

@@ -11,6 +11,7 @@
 #include "core/property/PropertyManager.hpp"
 #include "core/audiodata/AudioBuffer.hpp"
 #include "core/audiodata/AudioInfo.hpp"
+#include "core/util/action_ptr.hpp"
 #include <vector>
 
 namespace maudio{
@@ -32,7 +33,12 @@ public:
 
 	virtual IControl *getControl();
 
+	virtual bool checkCompatible(IAudioInfo *info);
+
 protected:
+	virtual action_ptr<IAudioBuffer> getFromSlot(unsigned int slot, unsigned long pos, unsigned int length);
+	virtual action_ptr<IAudioInfo> getInfoFromSlot(unsigned int slot);
+
 	PropertyManager mProperties;
 	std::vector<IAudioGetter *> mInputs;
 };

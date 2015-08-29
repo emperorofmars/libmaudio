@@ -23,7 +23,7 @@
 
 namespace maudio{
 
-class Node : public IAudioGetter, public std::enable_shared_from_this<Node>, public UniqueID, public ISerializable{
+class Node : public IAudioGetter, public std::enable_shared_from_this<Node>, public UniqueID, public ISerializable, public BaseObservable{
 public:
 	virtual ~Node();
 

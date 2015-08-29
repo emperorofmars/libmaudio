@@ -8,15 +8,19 @@
 #define MAUDIO_SCENE
 
 #include "core/node/Node.hpp"
+#include "core/serializer/ISerializable.hpp"
 #include <memory>
 #include <string>
 
 namespace maudio{
 
-class Scene{
+class Scene : public ISerializable, public BaseObservable{
 public:
-	Scene();
+	Scene(const char *name);
 	~Scene();
+
+	void setName(const char *name);
+	const char *getName();
 
 	void addNode(std::shared_ptr<Node> node);
 	void removeNode(unsigned long id);
@@ -28,7 +32,6 @@ public:
 
 private:
 	std::string mName;
-
 	std::vector<std::shared_ptr<Node>> mEnds;
 };
 

@@ -45,6 +45,7 @@ Todo:
 - implement scene
 - implement serializer
 - save and reload scene
+- node and scene: observable
 - node: make api reasonably stable
 - export scene to svg
 - write cmakelists

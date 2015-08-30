@@ -63,7 +63,7 @@ int main(int argc, char *argv[]){
 
 	std::cerr << "Plugin:" << std::endl;
 
-	PluginManager::Instance()->addPlugin("Mixer.so");
+	PluginManager::Instance()->addPlugin("./Mixer.so");
 	std::shared_ptr<PluginNode> mix(new PluginNode(PluginManager::Instance()->createInstance("Mixer")));
 
 	mix->addInput(sgen, 0);

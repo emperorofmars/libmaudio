@@ -42,6 +42,7 @@ Todo:
 - ////IAudioInfo, property and keyableproperty: serialize and unserialize
 - ////node and iaction: serialize and unserialize
 - ////create Mixer as plugin
+- ////try meson build
 - implement scene
 - implement serializer
 - save and reload scene
@@ -50,7 +51,6 @@ Todo:
 - export scene to svg
 - write cmakelists
 - write tests
-- try meson build
 - create file reader
 - create file writer
 - qt gui

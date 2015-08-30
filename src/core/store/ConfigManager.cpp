@@ -5,6 +5,8 @@
  */
 
 #include "core/store/ConfigManager.hpp"
+#include "core/store/ConfigReader.hpp"
+#include "core/util/simple_ptr.hpp"
 #include "core/util/AudioException.hpp"
 #include <fstream>
 
@@ -16,10 +18,10 @@ ConfigManager* ConfigManager::Instance(){
 }
 
 ConfigManager::ConfigManager(){
-	mConfig.setDefaults();
+	setDefaults();
 	mPath = CONFIG_DEFAULT_PATH;
-	if(checkFile(mPath)){
-		loadFromFile(mPath);
+	if(checkFile(mPath.c_str())){
+		loadFromFile(mPath.c_str());
 	}
 	else{
 		mPath = "";
@@ -29,7 +31,7 @@ ConfigManager::ConfigManager(){
 ConfigManager::~ConfigManager(){
 }
 
-void ConfigManager::setConfigPath(const std::string &path){
+void ConfigManager::setConfigPath(const char *path){
 	if(checkFile(path)){
 		loadFromFile(path);
 		mPath = path;
@@ -37,26 +39,35 @@ void ConfigManager::setConfigPath(const std::string &path){
 	throw MaudioException("invalid config path");
 }
 
-std::string ConfigManager::getConfigPath() const{
-	return mPath;
+const char *ConfigManager::getConfigPath() const{
+	return mPath.c_str();
 }
 
-const Config &ConfigManager::getConfig() const{
-	return mConfig;
+const IKeyValueStore *ConfigManager::getConfig() const{
+	return &mConfig;
 }
 
-Config &ConfigManager::manipulate(){
-	return mConfig;
+IKeyValueStore *ConfigManager::manipulate(){
+	return &mConfig;
 }
 
-bool ConfigManager::checkFile(const std::string &path) const{
+bool ConfigManager::checkFile(const char *path) const{
 	std::ifstream ifile(path);
 	if(ifile.good()) return true;
 	return false;
 }
 
-void ConfigManager::loadFromFile(const std::string &path){
-	mConfig.parseFile(path);
+void ConfigManager::loadFromFile(const char *path){
+	ConfigReader<IKeyValueStore> reader;
+	simple_ptr<IKeyValueStore> tmp(reader.readFile(path));
+	mConfig = *tmp;
+	return;
+}
+
+void ConfigManager::setDefaults(){
+	mConfig.set("pluginconf", "res/config/plugins.conf");
+	mConfig.set("PlayerQueueSize", 1024 * 8);
+	mConfig.set("SinkBufferSize", 1024 * 8);
 	return;
 }
 

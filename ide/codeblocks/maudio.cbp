@@ -69,8 +69,8 @@
 		<Unit filename="../../include/core/serializer/ISerializable.hpp" />
 		<Unit filename="../../include/core/serializer/ISerializer.hpp" />
 		<Unit filename="../../include/core/serializer/TXTSerializer.hpp" />
-		<Unit filename="../../include/core/store/Config.hpp" />
 		<Unit filename="../../include/core/store/ConfigManager.hpp" />
+		<Unit filename="../../include/core/store/ConfigReader.hpp" />
 		<Unit filename="../../include/core/store/IKeyValueStore.hpp" />
 		<Unit filename="../../include/core/store/IMultiLevelStore.hpp" />
 		<Unit filename="../../include/core/store/IMultiStore.hpp" />
@@ -105,8 +105,8 @@
 		<Unit filename="../../src/core/property/SimpleKeyableProperty.cpp" />
 		<Unit filename="../../src/core/property/SimpleProperty.cpp" />
 		<Unit filename="../../src/core/serializer/TXTSerializer.cpp" />
-		<Unit filename="../../src/core/store/Config.cpp" />
 		<Unit filename="../../src/core/store/ConfigManager.cpp" />
+		<Unit filename="../../src/core/store/ConfigReader.cpp" />
 		<Unit filename="../../src/core/store/KeyValueStore.cpp" />
 		<Unit filename="../../src/core/store/MultiLevelStore.cpp" />
 		<Unit filename="../../src/core/store/MultiStore.cpp" />

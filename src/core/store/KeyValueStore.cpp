@@ -53,6 +53,16 @@ std::string KeyValueStore::get(unsigned int numKey) const{
 	return iter->second;
 }
 
+const char *KeyValueStore::getKey(unsigned int numKey) const{
+	if(numKey >= mData.size()) throw MaudioException("numKey out of range");
+	auto iter = mData.begin();
+	while(iter != mData.end() && numKey > 0){
+		iter++;
+		numKey--;
+	}
+	return iter->first.c_str();
+}
+
 unsigned int KeyValueStore::getSize() const{
 	return mData.size();
 }
@@ -73,6 +83,14 @@ template<>
 void KeyValueStore::set(const std::string &key, std::string value){
 	if(!checkKey(key)) return;
 	mData[key] = value;
+	return;
+}
+
+void KeyValueStore::operator=(IKeyValueStore &data){
+	mData.clear();
+    for(unsigned int i = 0; i < data.getSize(); i++){
+		mData[std::string(data.getKey(i))] = std::string(data.get(i));
+    }
 	return;
 }
 

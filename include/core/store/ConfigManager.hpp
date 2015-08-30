@@ -7,9 +7,9 @@
 #ifndef MAUDIO_CONFIGMANAGER
 #define MAUDIO_CONFIGMANAGER
 
-#define CONFIG_DEFAULT_PATH "maudio.conf"
+#define CONFIG_DEFAULT_PATH "res/config/maudio.conf"
 
-#include "core/store/Config.hpp"
+#include "core/store/KeyValueStore.hpp"
 #include <string>
 
 namespace maudio{
@@ -18,12 +18,12 @@ class ConfigManager{
 public:
 	static ConfigManager* Instance();
 
-	void setConfigPath(const std::string &path);
-	std::string getConfigPath() const;
+	void setConfigPath(const char *path);
+	const char *getConfigPath() const;
 
-	const Config &getConfig() const;
+	const IKeyValueStore *getConfig() const;
 
-	Config &manipulate();
+	IKeyValueStore *manipulate();
 
 private:
 	ConfigManager();
@@ -31,11 +31,12 @@ private:
 	ConfigManager(const ConfigManager&) = delete;
 	void operator=(const ConfigManager&) = delete;
 
-	bool checkFile(const std::string &path) const;
-	void loadFromFile(const std::string &path);
+	bool checkFile(const char *path) const;
+	void loadFromFile(const char *path);
+	void setDefaults();
 
 	std::string mPath;
-	Config mConfig;
+	KeyValueStore mConfig;
 };
 
 } // maudio

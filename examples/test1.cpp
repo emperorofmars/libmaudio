@@ -21,7 +21,6 @@
 */
 #include "core/property/SimpleProperty.hpp"
 #include "core/property/SimpleKeyableProperty.hpp"
-#include "core/store/Config.hpp"
 #include "core/store/ConfigManager.hpp"
 #include "core/store/MultiStore.hpp"
 #include "core/store/MultiLevelStore.hpp"
@@ -63,7 +62,7 @@ int main(int argc, char *argv[]){
 
 	std::cerr << "Plugin:" << std::endl;
 
-	PluginManager::Instance()->addPlugin("./Mixer.so");
+	//PluginManager::Instance()->addPlugin("./Mixer.so");
 	std::shared_ptr<PluginNode> mix(new PluginNode(PluginManager::Instance()->createInstance("Mixer")));
 
 	mix->addInput(sgen, 0);

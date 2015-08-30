@@ -29,12 +29,16 @@ public:
 	template<typename T>
 	T get(unsigned int numKey) const;
 
+	virtual const char *getKey(unsigned int numKey) const;
+
 	unsigned int getSize() const;
 
 	virtual void set(const char *key, const char *value);
 	void set(const std::string &key, const std::string &value);
 	template<typename T>
 	void set(const std::string &key, T value);
+
+	void operator=(IKeyValueStore &data);
 
 protected:
 	bool checkKey(const std::string &key) const;

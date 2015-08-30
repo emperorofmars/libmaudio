@@ -22,7 +22,8 @@ class PluginManager{
 public:
 	static PluginManager *Instance();
 
-	void readConfig(const IMultiStore &conf);
+	void parseConfig(const char *path);
+	void readConfig(const IMultiStore *conf);
 
 	void addPlugin(const char *path);
 	std::vector<std::string> listPlugins();

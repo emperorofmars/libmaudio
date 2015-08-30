@@ -18,6 +18,7 @@ public:
 
 	virtual const char *get(const char *key) const = 0;
 	virtual const char *get(unsigned int numKey) const = 0;
+	virtual const char *getKey(unsigned int numKey) const = 0;
 	virtual unsigned int getSize() const = 0;
 	virtual void set(const char *key, const char *value) = 0;
 };

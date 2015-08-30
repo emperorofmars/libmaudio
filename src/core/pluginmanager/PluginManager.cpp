@@ -5,10 +5,18 @@
  */
 
 #include "core/pluginmanager/PluginManager.hpp"
+#include "core/store/ConfigManager.hpp"
+#include "core/store/ConfigReader.hpp"
 
 namespace maudio{
 
 PluginManager::PluginManager(){
+	try{
+		parseConfig(ConfigManager::Instance()->getConfig()->get("pluginconf"));
+	}
+	catch(std::exception &e){
+		//
+	}
 	return;
 }
 
@@ -21,7 +29,21 @@ PluginManager *PluginManager::Instance(){
 	return &mPluginManager;
 }
 
-void PluginManager::readConfig(const IMultiStore &conf){
+void PluginManager::parseConfig(const char *path){
+	ConfigReader<IMultiStore> reader;
+	readConfig(reader.readFile(path));
+	return;
+}
+
+void PluginManager::readConfig(const IMultiStore *conf){
+	for(unsigned int i = 0; i < conf->getSize("plugin"); i++){
+		try{
+			addPlugin(conf->get("plugin", i));
+		}
+		catch(std::exception &e){
+			//
+		}
+	}
 	return;
 }
 

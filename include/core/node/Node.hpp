@@ -14,7 +14,7 @@
 #include "core/property/IProperty.hpp"
 #include "core/property/IKeyableProperty.hpp"
 #include "core/property/IPropertyManager.hpp"
-#include "core/store/Config.hpp"
+#include "core/store/IKeyValueStore.hpp"
 #include "core/store/IMultiLevelStore.hpp"
 #include "core/node/IControl.hpp"
 #include "core/serializer/ISerializable.hpp"

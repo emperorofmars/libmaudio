@@ -43,6 +43,8 @@ Todo:
 - ////node and iaction: serialize and unserialize
 - ////create Mixer as plugin
 - ////try meson build
+- ////create *StoreReader
+- ////redo ConfigManager
 - implement scene
 - implement serializer
 - save and reload scene

@@ -110,6 +110,7 @@ void ActionNode::deserialize(const IMultiLevelStore *data){
 		if(mAction){
 			mAction->deserialize(data->getLevel("action"));
 		}
+		notifyObservers(ON_CHANGE, "deserialize");
 	}
 	catch(std::exception &e){
 		throw e;

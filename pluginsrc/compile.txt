@@ -1,1 +1,1 @@
-g++ -std=c++11 -I../../include/ -I../../src -Wl,--whole-archive ../../res/lib/libmaudio.a -Wl,-rpath=../lib -fpic --shared Mixer.cpp -o Mixer.so -Wl,--no-whole-archive -ldl -lportaudio
+g++ -std=c++11 -I../../include/ -I../../src -L../../res/lib/ -Wl,-rpath=./res/lib -fpic --shared Mixer.cpp -o Mixer.so -lmaudio -ldl -lportaudio

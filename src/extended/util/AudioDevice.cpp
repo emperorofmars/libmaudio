@@ -19,6 +19,8 @@ AudioDevice::AudioDevice(int device){
 	mID = device;
 	mPlaying = false;
 	mPaused = false;
+	auto devlist = listDevices();
+	if((int)devlist.size() > mID) mName = listDevices()[mID];
 }
 
 AudioDevice::~AudioDevice(){

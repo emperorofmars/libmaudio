@@ -35,7 +35,9 @@ int main(int argc, char *argv[]){
 	std::cerr << "test" << std::endl;
 
 	std::shared_ptr<ActionNode> sgen(new ActionNode(std::unique_ptr<SinusGenerator>(new SinusGenerator())));
+	sgen->setName("sgen");
 	std::shared_ptr<ActionNode> sgen2(new ActionNode(std::unique_ptr<SinusGenerator>(new SinusGenerator())));
+	sgen2->setName("sgen2");
 
 	IPropertyManager *sinprop = sgen->getProperties();
 	if(sinprop){
@@ -64,6 +66,7 @@ int main(int argc, char *argv[]){
 
 	PluginManager::Instance()->addPlugin("./res/plugins/Mixer.so");
 	std::shared_ptr<PluginNode> mix(new PluginNode(PluginManager::Instance()->createInstance("Mixer")));
+	mix->setName("mix");
 
 	mix->addInput(sgen, 0);
 	mix->addInput(sgen2, 1);
@@ -81,11 +84,12 @@ int main(int argc, char *argv[]){
 	std::cerr << "Player:" << std::endl;
 
 	std::shared_ptr<ActionNode> player(new ActionNode(std::unique_ptr<Player>(new Player())));
+	player->setName("player");
 	player->addInput(mix, 0);
 	IControl *playerCntl = player->getControl();
 
 	playerCntl->callFunction("play");
-	std::this_thread::sleep_for(std::chrono::milliseconds(6000));
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	playerCntl->callFunction("stop");
 
 	std::cerr << "closing main" << std::endl;

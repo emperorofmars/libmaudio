@@ -117,6 +117,7 @@ static_library('maudio',
 
 executable('maudio_test',
 	sources: testsrc,
+	#sources:[maudiosrc, testsrc],
 	include_directories: [headerdir, srcdir],
 	link_with: maudiolib,
 	dependencies: maudiodep,

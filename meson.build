@@ -9,7 +9,7 @@ maudiodep = [dynlib, palib]
 headerdir = include_directories('include')
 srcdir = include_directories('src')
 
-src = [
+maudiosrc = [
 './include/core/store/MultiLevelStore.hpp',
 './include/core/store/MultiStore.hpp',
 './include/core/store/IMultiStore.hpp',
@@ -62,7 +62,6 @@ src = [
 './include/extended/audiosink/Player.hpp',
 './include/extended/audiosource/BulkReader.hpp',
 './include/extended/audiosource/StreamReader.hpp',
-'./examples/test1.cpp',
 './src/core/store/MultiLevelStore.cpp',
 './src/core/store/MultiStore.cpp',
 './src/core/store/KeyValueStore.cpp',
@@ -98,10 +97,35 @@ src = [
 './src/extended/audiosource/StreamReader.cpp',
 ]
 
-executable('maudio_test',
-	sources: src,
+testsrc = [
+'./examples/test1.cpp',
+]
+
+maudiolib = shared_library('maudio',
+	sources: maudiosrc,
 	include_directories: [headerdir, srcdir],
-	dependencies: maudiodep)
+	dependencies: maudiodep,
+	install_dir: './res/lib',
+	install: true)
+
+static_library('maudio',
+	sources: maudiosrc,
+	include_directories: [headerdir, srcdir],
+	dependencies: maudiodep,
+	install_dir: './res/lib',
+	install: true)
+
+executable('maudio_test',
+	sources: testsrc,
+	include_directories: [headerdir, srcdir],
+	link_with: maudiolib,
+	dependencies: maudiodep,
+	install_rpath: './res/lib',
+	install_dir: '.',
+	install: true)
+
+
+
 
 
 

@@ -48,12 +48,23 @@ int main(int argc, char *argv[]){
 
 	PluginManager::Instance()->addPlugin("./res/plugins/Mixer.so");
 	auto mixer = PluginManager::Instance()->createInstance("Mixer");
-	mixer->addInput(source1.get(), 0);
-	mixer->addInput(source2.get(), 1);
+	if(!mixer->addInput(source1.get(), 0)) std::cerr << "addinput 01 failed" << std::endl;
+	if(!mixer->addInput(source2.get(), 1)) std::cerr << "addinput 02 failed" << std::endl;
 
 	sptr<IAction> sink(new Player());
-	sink->addInput(mixer.get(), 0);
+	if(!sink->addInput(mixer.get(), 0)) std::cerr << "addinput 03 failed" << std::endl;
 	IControl *sinkCntl = sink->getControl();
+
+	if(!mixer->addInput(sink.get(), 0)) std::cerr << "addinput 04 failed" << std::endl;
+	if(!sink->addInput(sink.get(), 0)) std::cerr << "addinput 05 failed" << std::endl;
+	if(!source1->addInput(sink.get(), 0)) std::cerr << "addinput 06 failed" << std::endl;
+	if(!source1->addInput(source2.get(), 0)) std::cerr << "addinput 07 failed" << std::endl;
+	if(!mixer->addInput(mixer.get(), 0)) std::cerr << "addinput 08 failed" << std::endl;
+
+	std::cerr << "source1 ID: " << source1->getID() << std::endl;
+	std::cerr << "source2 ID: " << source2->getID() << std::endl;
+	std::cerr << "mixer ID: " << mixer->getID() << std::endl;
+	std::cerr << "sink ID: " << sink->getID() << std::endl;
 
 	//source1.reset();
 	//source2.reset();

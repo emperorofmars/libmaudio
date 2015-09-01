@@ -9,8 +9,9 @@
 
 #include "core/serializer/ISerializable.hpp"
 #include "core/util/BaseObservable.hpp"
-#include <memory>
+#include "core/util/sptr.hpp"
 #include <string>
+#include <map>
 
 namespace maudio{
 
@@ -22,20 +23,21 @@ public:
 	void setName(const char *name);
 	const char *getName();
 
-	//int addNode(std::shared_ptr<Node> node);
-	void removeNode(unsigned int id);
-	//std::shared_ptr<Node> getEnd(unsigned int num);
-	//std::shared_ptr<Node> getNode(unsigned int id);
+	long addNode(sptr<IAction> node);
+	void removeNode(unsigned long id);
+	sptr<IAction> getEnd(unsigned long num);
+	sptr<IAction> getNode(unsigned long id);
 
-	void connect(unsigned int source, unsigned int sink);
-	void disconnect(unsigned int source, unsigned int sink);
+	void connect(unsigned long source, unsigned long sink);
+	void disconnect(unsigned long source, unsigned long sink);
 
 private:
-	bool isPartOfScene(unsigned int id);
+	bool isPartOfScene(unsigned long id);
 
 
 	std::string mName;
-	//std::vector<std::shared_ptr<Node>> mEnds;
+	std::map<unsigned long, sptr<IAction>> mNodes;
+	std::unordered_map<unsigned long, std::vector<unsigned long>> mAdjacencyList;
 };
 
 } // maudio

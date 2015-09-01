@@ -6,6 +6,8 @@
 
 #include "core/action/BaseAction.hpp"
 
+#include <iostream>
+
 namespace maudio{
 
 BaseAction::~BaseAction(){
@@ -30,8 +32,12 @@ void BaseAction::deleteData(ISample *data) noexcept{
 	return;
 }
 
-void BaseAction::addInput(IAction *input, int slot){
-	if(slot < 0 && (MaxInputs() < 0 || NumInputs() < MaxInputs())){
+bool BaseAction::addInput(IAction *input, int slot){
+	if(!input) return false;
+	if(!checkCompatible(sptr<IAudioInfo>(input->getInfo()).get())) return false;
+	if(checkCycles(input)) return false;
+
+	if(slot < 0 && (MaxInputs() < 0 || (int)NumInputs() < MaxInputs())){
 		mInputs.push_back(input);
 	}
 	else if(slot < MaxInputs() || MaxInputs() < 0){
@@ -42,10 +48,10 @@ void BaseAction::addInput(IAction *input, int slot){
 		mInputs[slot] = input;
 	}
 	else{
-		return; // fail
+		return false;
 	}
 	input->addObserver(this);
-	return;
+	return true;
 }
 
 void BaseAction::removeInput(IAction *input){
@@ -63,12 +69,12 @@ void BaseAction::removeInput(int slot){
 	return;
 }
 
-int BaseAction::NumInputs() const{
-	/*int ret = 0;
-	for(unsigned int i = 0; i < mInputs.size(); i++){
-		if(mInputs[i]) ret++;
-	}
-	return ret;*/
+IAction *BaseAction::getInput(int slot){
+	if((unsigned int)slot >= mInputs.size()) return NULL;
+	return mInputs[slot];
+}
+
+unsigned int BaseAction::NumInputs() const{
 	return mInputs.size();
 }
 
@@ -83,6 +89,17 @@ IControl *BaseAction::getControl(){
 bool BaseAction::checkCompatible(IAudioInfo *info){
 	if(!info) return false;
 	return true;
+}
+
+bool BaseAction::checkCycles(IAction *node) const{
+	if(!node) return false;
+	if(node == this) return true;
+	for(unsigned int i = 0; i < node->NumInputs(); i++){
+		if(checkCycles(node->getInput(i))){
+			return true;
+		}
+	}
+	return false;
 }
 
 void BaseAction::notify(const IObservable *origin, NoticeType type, const char *message){

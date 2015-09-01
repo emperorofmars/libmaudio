@@ -33,11 +33,12 @@ public:
 	virtual void deleteData(IAudioInfo *data) noexcept = 0;
 	virtual void deleteData(ISample *data) noexcept = 0;
 
-	virtual void addInput(IAction *input, int slot) = 0;
+	virtual bool addInput(IAction *input, int slot) = 0;
 	virtual void removeInput(IAction *input) = 0;
 	virtual void removeInput(int slot) = 0;
+	virtual IAction *getInput(int slot) = 0;
 
-	virtual int NumInputs() const = 0;
+	virtual unsigned int NumInputs() const = 0;
 	virtual int MaxInputs() const = 0;
 	virtual bool HasOutputs() const = 0;
 
@@ -48,6 +49,9 @@ public:
 	virtual IControl *getControl() = 0;
 
 	virtual bool checkCompatible(IAudioInfo *info) = 0;
+
+protected:
+	virtual bool checkCycles(IAction *node) const = 0;
 };
 
 } // maudio

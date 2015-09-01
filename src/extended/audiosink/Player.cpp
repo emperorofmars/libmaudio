@@ -167,6 +167,7 @@ IControl *Player::getControl(){
 }
 
 bool Player::checkCompatible(IAudioInfo *info){
+	if(info) return true;
 	return false;
 }
 

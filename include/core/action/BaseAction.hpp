@@ -24,11 +24,12 @@ public:
 	virtual void deleteData(IAudioInfo *data) noexcept final;
 	virtual void deleteData(ISample *data) noexcept final;
 
-	virtual void addInput(IAction *input, int slot) final;
+	virtual bool addInput(IAction *input, int slot) final;
 	virtual void removeInput(IAction *input) final;
 	virtual void removeInput(int slot) final;
+	virtual IAction *getInput(int slot) final;
 
-	virtual int NumInputs() const final;
+	virtual unsigned int NumInputs() const final;
 
 	virtual IPropertyManager *getProperties() final;
 
@@ -39,6 +40,8 @@ public:
 	virtual void notify(const IObservable *origin, NoticeType type, const char *message);
 
 protected:
+	virtual bool checkCycles(IAction *node) const final;
+
 	virtual bool InputOk(unsigned int slot) final;
 	virtual sptr<IAudioBuffer> getFromSlot(unsigned int slot, unsigned long pos, unsigned int length) final;
 	virtual sptr<IAudioInfo> getInfoFromSlot(unsigned int slot) final;

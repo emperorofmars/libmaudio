@@ -46,9 +46,10 @@ Todo:
 - ////create *StoreReader
 - ////redo ConfigManager
 - ////write cmakelists
-- implement scene
-- implement serializer
+- ////implement scene
+- make node obsolete with observable and ovserving IActions
 - save and reload scene
+- implement serializer
 - node and scene: observable
 - node: make api reasonably stable
 - export scene to svg

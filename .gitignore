@@ -8,3 +8,4 @@ bin
 meson-build
 cmake-build
 doxygen
+sources.txt

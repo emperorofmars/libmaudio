@@ -82,7 +82,7 @@ int main(int argc, char *argv[]){
 	}
 
 	std::cerr << "Player:" << std::endl;
-
+/*
 	std::shared_ptr<ActionNode> player(new ActionNode(std::unique_ptr<Player>(new Player())));
 	player->setName("player");
 	player->addInput(mix, 0);
@@ -91,6 +91,16 @@ int main(int argc, char *argv[]){
 	playerCntl->callFunction("play");
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	playerCntl->callFunction("stop");
+*/
+
+	IAction *source = new SinusGenerator();
+	IAction *sink = new Player();
+	sink->addSocket(source, 0);
+	IControl *sinkCntl = sink->getControl();
+
+	sinkCntl->callFunction("play");
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	sinkCntl->callFunction("stop");
 
 	std::cerr << "closing main" << std::endl;
 	return 0;

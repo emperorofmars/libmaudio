@@ -22,15 +22,18 @@ public:
 	void setName(const char *name);
 	const char *getName();
 
-	void addNode(std::shared_ptr<Node> node);
-	void removeNode(unsigned long id);
+	int addNode(std::shared_ptr<Node> node);
+	void removeNode(unsigned int id);
 	std::shared_ptr<Node> getEnd(unsigned int num);
-	std::shared_ptr<Node> getNode(unsigned long id);
+	std::shared_ptr<Node> getNode(unsigned int id);
 
-	void connect(unsigned long source, unsigned long sink);
-	void disconnect(unsigned long source, unsigned long sink);
+	void connect(unsigned int source, unsigned int sink);
+	void disconnect(unsigned int source, unsigned int sink);
 
 private:
+	bool isPartOfScene(unsigned int id);
+
+
 	std::string mName;
 	std::vector<std::shared_ptr<Node>> mEnds;
 };

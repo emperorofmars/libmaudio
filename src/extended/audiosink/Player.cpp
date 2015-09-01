@@ -58,8 +58,8 @@ std::vector<std::string> Player::listDevices(){
 }
 
 void Player::play(){
-	if(!mDevice) throw InvalidAudioDeviceException();
-	if(mInputs.size() < 1 || !mInputs[0]) throw MaudioException("no or invalid input");
+	if(!mDevice) return;
+	if(mInputs.size() < 1 || !mInputs[0]) return;
 
 	mQueue.reset(new AudioQueue(*getInfoFromSlot(0)));
 	feed();
@@ -69,21 +69,21 @@ void Player::play(){
 }
 
 void Player::pause(){
-	if(!mDevice) throw InvalidAudioDeviceException();
+	if(!mDevice) return;
 	stopFeed();
 	mDevice->pause();
 	return;
 }
 
 void Player::unpause(){
-	if(!mDevice) throw InvalidAudioDeviceException();
+	if(!mDevice) return;
 	startFeed();
 	mDevice->unpause();
 	return;
 }
 
 void Player::stop(){
-	if(!mDevice) throw InvalidAudioDeviceException();
+	if(!mDevice) return;
 	stopFeed();
 	mDevice->stop();
 	return;
@@ -184,7 +184,6 @@ void Player::deserialize(const IMultiLevelStore *data){
 		mDeviceName = data->get("devicename");
 	}
 	catch(std::exception &e){
-		throw e;
 	}
 	return;
 }

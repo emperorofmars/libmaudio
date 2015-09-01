@@ -6,3 +6,5 @@ bin
 *.flac
 *.wav
 meson-build
+cmake-build
+doxygen

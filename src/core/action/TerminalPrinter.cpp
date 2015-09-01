@@ -7,7 +7,7 @@
 #include "core/action/TerminalPrinter.hpp"
 #include "core/util/Util.hpp"
 #include "core/util/AudioException.hpp"
-#include "core/util/action_ptr.hpp"
+#include "core/util/sptr.hpp"
 #include <iostream>
 #include <cstring>
 

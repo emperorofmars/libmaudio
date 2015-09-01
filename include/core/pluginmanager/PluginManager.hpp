@@ -9,7 +9,7 @@
 
 #include "core/pluginmanager/PluginLoader.hpp"
 #include "core/action/IAction.hpp"
-#include "core/util/plugin_ptr.hpp"
+#include "core/util/sptr.hpp"
 #include "core/store/IMultiStore.hpp"
 #include "core/util/AudioException.hpp"
 #include <vector>
@@ -27,8 +27,8 @@ public:
 
 	void addPlugin(const char *path);
 	std::vector<std::string> listPlugins();
-	plugin_ptr<IAction> createInstance(unsigned int plugin);
-	plugin_ptr<IAction> createInstance(const char *plugin);
+	sptr<IAction> createInstance(unsigned int plugin);
+	sptr<IAction> createInstance(const char *plugin);
 
 private:
 	PluginManager();

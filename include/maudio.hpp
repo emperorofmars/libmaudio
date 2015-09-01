@@ -14,8 +14,7 @@
 #include "core/store/KeyValueStore.hpp"
 #include "core/store/MultiLevelStore.hpp"
 #include "core/util/Util.hpp"
-#include "core/util/simple_ptr.hpp"
-#include "core/util/action_ptr.hpp"
+#include "core/util/sptr.hpp"
 
 #endif // MAUDIO_INCLUDE
 

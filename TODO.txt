@@ -49,8 +49,8 @@ Todo:
 - ////implement scene
 - ////make node obsolete with observable and observing IActions
 - ////get rid of IAudioGetter
+- ////fix ptrs
 - redo scene
-- fix ptrs
 - save and reload scene
 - implement serializer
 - node and scene: observable

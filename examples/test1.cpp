@@ -23,16 +23,16 @@
 #include "core/store/MultiStore.hpp"
 #include "core/store/MultiLevelStore.hpp"
 #include "core/util/String.hpp"
-#include "core/util/simple_ptr.hpp"
 #include "core/pluginmanager/PluginManager.hpp"
 #include "core/util/BaseObserver.hpp"
+#include "core/util/sptr.hpp"
 
 using namespace maudio;
 
 int main(int argc, char *argv[]){
 	std::cerr << "test" << std::endl;
 
-	std::shared_ptr<IAction> source1(new SinusGenerator());
+	sptr<IAction> source1(new SinusGenerator());
 	IPropertyManager *propm = source1->getProperties();
 	IKeyableProperty *propsin = propm->getKeyableProperty("Frequency");
 	propsin->setKey("500", 0);
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]){
 	propsin->addKey("700", 0.7);
 	propsin->addKey("500", 0.700001);
 
-	std::shared_ptr<IAction> source2(new SinusGenerator());
+	sptr<IAction> source2(new SinusGenerator());
 	IPropertyManager *propm2 = source2->getProperties();
 	IKeyableProperty *propsin2 = propm2->getKeyableProperty("Frequency");
 	propsin2->setKey("1100", 0);
@@ -51,7 +51,7 @@ int main(int argc, char *argv[]){
 	mixer->addInput(source1.get(), 0);
 	mixer->addInput(source2.get(), 1);
 
-	std::shared_ptr<IAction> sink(new Player());
+	sptr<IAction> sink(new Player());
 	sink->addInput(mixer.get(), 0);
 	IControl *sinkCntl = sink->getControl();
 

@@ -81,10 +81,9 @@
 		<Unit filename="../../include/core/util/String.hpp" />
 		<Unit filename="../../include/core/util/UniqueID.hpp" />
 		<Unit filename="../../include/core/util/Util.hpp" />
-		<Unit filename="../../include/core/util/action_ptr.hpp" />
-		<Unit filename="../../include/core/util/plugin_ptr.hpp" />
-		<Unit filename="../../include/core/util/simple_ptr.hpp" />
+		<Unit filename="../../include/core/util/sptr.hpp" />
 		<Unit filename="../../include/extended/audiosink/Player.hpp" />
+		<Unit filename="../../include/maudio.hpp" />
 		<Unit filename="../../src/core/action/BaseAction.cpp" />
 		<Unit filename="../../src/core/action/SinusGenerator.cpp" />
 		<Unit filename="../../src/core/action/TerminalPrinter.cpp" />
@@ -108,7 +107,7 @@
 		<Unit filename="../../src/core/util/String.cpp" />
 		<Unit filename="../../src/core/util/UniqueID.cpp" />
 		<Unit filename="../../src/core/util/Util.cpp" />
-		<Unit filename="../../src/core/util/action_ptr.cpp" />
+		<Unit filename="../../src/core/util/sptr.cpp" />
 		<Unit filename="../../src/extended/audiosink/Player.cpp" />
 		<Unit filename="../../src/extended/util/AudioDevice.cpp" />
 		<Unit filename="../../src/extended/util/AudioDevice.hpp" />

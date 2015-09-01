@@ -6,8 +6,6 @@
 
 #include "core/action/BaseAction.hpp"
 
-#include <iostream>
-
 namespace maudio{
 
 BaseAction::~BaseAction(){
@@ -107,25 +105,25 @@ bool BaseAction::InputOk(unsigned int slot){
 	return false;
 }
 
-action_ptr<IAudioBuffer> BaseAction::getFromSlot(unsigned int slot, unsigned long pos, unsigned int length){
+sptr<IAudioBuffer> BaseAction::getFromSlot(unsigned int slot, unsigned long pos, unsigned int length){
 	if(mInputs.size() < slot || !mInputs[slot]){
 		return NULL;
 	}
-	return action_ptr<IAudioBuffer>(mInputs[slot]->get(pos, length), mInputs[slot]);
+	return sptr<IAudioBuffer>(mInputs[slot]->get(pos, length), mInputs[slot]);
 }
 
-action_ptr<IAudioInfo> BaseAction::getInfoFromSlot(unsigned int slot){
+sptr<IAudioInfo> BaseAction::getInfoFromSlot(unsigned int slot){
 	if(mInputs.size() < slot || !mInputs[slot]){
 		return NULL;
 	}
-	return action_ptr<IAudioInfo>(mInputs[slot]->getInfo(), mInputs[slot]);
+	return sptr<IAudioInfo>(mInputs[slot]->getInfo(), mInputs[slot]);
 }
 
-action_ptr<ISample> BaseAction::getSampleFromBuffer(unsigned int numSample, action_ptr<IAudioBuffer> buffer){
+sptr<ISample> BaseAction::getSampleFromBuffer(unsigned int numSample, sptr<IAudioBuffer> buffer){
 	if(!buffer){
 		return NULL;
 	}
-	action_ptr<ISample> ret(buffer->get(numSample), buffer.getDeleter());
+	sptr<ISample> ret(buffer->get(numSample), buffer.getActionDeleter());
 	return ret;
 }
 

@@ -5,7 +5,7 @@
  */
 
 #include "extended/audiosink/Player.hpp"
-#include "core/util/simple_ptr.hpp"
+#include "core/util/sptr.hpp"
 #include "core/util/AudioException.hpp"
 #include "core/util/Util.hpp"
 #include <iostream>
@@ -102,7 +102,7 @@ unsigned long Player::getPosition(){
 
 void Player::setPosition(float seconds){
 	if(InputOk(0) > 0){
-		simple_ptr<IAudioInfo> info(getInfo());
+		sptr<IAudioInfo> info(getInfo());
 		mPosition =  seconds * (float)info->getSamplerate();
 	}
 	return;
@@ -110,7 +110,7 @@ void Player::setPosition(float seconds){
 
 float Player::getPosition_sek(){
 	if(InputOk(0) > 0){
-		simple_ptr<IAudioInfo> info(getInfo());
+		sptr<IAudioInfo> info(getInfo());
 		return (float)mPosition / (float)info->getSamplerate();
 	}
 	return 0;

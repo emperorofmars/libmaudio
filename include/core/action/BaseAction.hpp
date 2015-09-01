@@ -11,7 +11,7 @@
 #include "core/property/PropertyManager.hpp"
 #include "core/audiodata/AudioBuffer.hpp"
 #include "core/audiodata/AudioInfo.hpp"
-#include "core/util/action_ptr.hpp"
+#include "core/util/sptr.hpp"
 #include <vector>
 
 namespace maudio{
@@ -40,9 +40,9 @@ public:
 
 protected:
 	virtual bool InputOk(unsigned int slot) final;
-	virtual action_ptr<IAudioBuffer> getFromSlot(unsigned int slot, unsigned long pos, unsigned int length) final;
-	virtual action_ptr<IAudioInfo> getInfoFromSlot(unsigned int slot) final;
-	virtual action_ptr<ISample> getSampleFromBuffer(unsigned int numSample, action_ptr<IAudioBuffer> buffer) final;
+	virtual sptr<IAudioBuffer> getFromSlot(unsigned int slot, unsigned long pos, unsigned int length) final;
+	virtual sptr<IAudioInfo> getInfoFromSlot(unsigned int slot) final;
+	virtual sptr<ISample> getSampleFromBuffer(unsigned int numSample, sptr<IAudioBuffer> buffer) final;
 
 	PropertyManager mProperties;
 

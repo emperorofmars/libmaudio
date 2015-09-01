@@ -27,7 +27,7 @@ set(MAUDIO_SOURCE_FILES
 	./src/core/util/BaseObservable.cpp
 	./src/core/util/Util.cpp
 	./src/core/util/BaseObserver.cpp
-	./src/core/util/action_ptr.cpp
+	./src/core/util/sptr.cpp
 	./src/core/scene/Scene.cpp
 	./src/core/serializer/TXTSerializer.cpp
 	./src/core/audiodata/AudioQueue.cpp
@@ -61,16 +61,14 @@ set(MAUDIO_SOURCE_FILES
 	./include/core/action/IAction.hpp
 	./include/core/action/IControl.hpp
 	./include/core/util/BaseObservable.hpp
-	./include/core/util/simple_ptr.hpp
 	./include/core/util/IObserver.hpp
 	./include/core/util/String.hpp
 	./include/core/util/AudioException.hpp
-	./include/core/util/plugin_ptr.hpp
 	./include/core/util/UniqueID.hpp
-	./include/core/util/action_ptr.hpp
 	./include/core/util/BaseObserver.hpp
 	./include/core/util/IObservable.hpp
 	./include/core/util/Util.hpp
+	./include/core/util/sptr.hpp
 	./include/core/scene/Scene.hpp
 	./include/core/serializer/ISerializable.hpp
 	./include/core/serializer/TXTSerializer.hpp

@@ -6,8 +6,6 @@
 
 #include "maudio.hpp"
 
-#include <iostream>
-
 using namespace maudio;
 
 class Mixer : public BaseAction{
@@ -16,7 +14,7 @@ public:
 	virtual ~Mixer(){};
 	
 	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept{
-		simple_ptr<IAudioInfo> info(getInfo());
+		sptr<IAudioInfo> info(getInfo());
 		AudioBuffer *ret = new AudioBuffer(info->getChannels(), length, pos, info->getSamplerate());
 		unsigned int validInputs = 0;
 		if(NumInputs() > 0){
@@ -25,14 +23,14 @@ public:
 				validInputs++;
 				auto tmp = getFromSlot(i, pos, length);
 				for(unsigned int j = 0; j < length; j++){
-					simple_ptr<ISample> smp1(ret->get(j));
+					sptr<ISample> smp1(ret->get(j));
 					auto smp2 = getSampleFromBuffer(j, tmp);
 					*smp1 += *smp2;
 					ret->set(*smp1, j);
 				}
 			}
 			for(unsigned int j = 0; j < length; j++){
-				simple_ptr<ISample> smp(ret->get(j));
+				sptr<ISample> smp(ret->get(j));
 				if(validInputs > 0) *smp /= (float)validInputs;
 				ret->set(*smp, j);
 			}
@@ -52,7 +50,7 @@ public:
 	virtual bool checkCompatible(IAudioInfo *info){
 		if(!info) return false;
 		if(NumInputs() == 0) return true;
-		simple_ptr<IAudioInfo> minfo(getInfo());
+		sptr<IAudioInfo> minfo(getInfo());
 		if(minfo->getChannels() == info->getChannels() &&
 			minfo->getSamplerate() == info->getSamplerate())
 		{

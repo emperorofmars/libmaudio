@@ -4,7 +4,7 @@
  * See LICENSE.txt for the full license
  */
 
-#include "core/actions/SinusGenerator.hpp"
+#include "core/action/SinusGenerator.hpp"
 #include "core/audiodata/AudioBuffer.hpp"
 #include "core/util/AudioException.hpp"
 #include "core/util/Util.hpp"

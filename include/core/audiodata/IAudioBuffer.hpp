@@ -19,6 +19,8 @@ public:
 
 	virtual ISample *operator[](unsigned long pos) const = 0;
 	virtual ISample *get(unsigned long pos) const = 0;
+	virtual void deleteSample(ISample *data) = 0;
+
 	virtual void set(const ISample &data, unsigned long pos) = 0;
 
 	virtual void resize(unsigned long samples) = 0;

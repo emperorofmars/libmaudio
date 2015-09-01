@@ -7,7 +7,7 @@
 #ifndef MAUDIO_ISERIALIZER
 #define MAUDIO_ISERIALIZER
 
-#include "core/node/Scene.hpp"
+#include "core/scene/Scene.hpp"
 #include "core/serializer/ISerializable.hpp"
 #include "core/store/IMultiLevelStore.hpp"
 

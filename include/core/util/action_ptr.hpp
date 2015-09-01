@@ -8,7 +8,7 @@
 #define MAUDIO_ACTIONPTR
 
 #include <cstddef>
-#include "core/node/IAudioGetter.hpp"
+#include "core/action/IAction.hpp"
 
 namespace maudio{
 
@@ -22,11 +22,11 @@ Warning: its not thread save!
 template<typename T>
 class action_ptr{
 public:
-	action_ptr(T *data = NULL, IAudioGetter *deleter = NULL);
+	action_ptr(T *data = NULL, IAction *deleter = NULL);
 	action_ptr(const action_ptr<T> &data);
 	~action_ptr();
 
-	void reset(T *data = NULL, IAudioGetter *deleter = NULL);
+	void reset(T *data = NULL, IAction *deleter = NULL);
 	void reset(const action_ptr<T> &data);
 	T *release();
 
@@ -40,19 +40,21 @@ public:
 	operator bool() const;
 	bool operator!() const;
 
+	IAction *getDeleter() const;
+
 private:
 	struct RefCount{
 		int mRefs = 0;
 	};
 
 	T *mData = NULL;
-	IAudioGetter *mDeleter = NULL;
+	IAction *mDeleter = NULL;
 	RefCount *mRefCount = NULL;
 };
 
 
 template<typename T>
-action_ptr<T>::action_ptr(T *data, IAudioGetter *deleter){
+action_ptr<T>::action_ptr(T *data, IAction *deleter){
 	reset(data);
 	return;
 }
@@ -70,7 +72,7 @@ action_ptr<T>::~action_ptr(){
 }
 
 template<typename T>
-void action_ptr<T>::reset(T *data, IAudioGetter *deleter){
+void action_ptr<T>::reset(T *data, IAction *deleter){
 	if(mData != NULL){
 		if(mRefCount){
 			mRefCount->mRefs--;
@@ -165,6 +167,11 @@ template<typename T>
 bool action_ptr<T>::operator!() const{
 	if(mData) return false;
 	return true;
+}
+
+template<typename T>
+IAction *action_ptr<T>::getDeleter() const{
+	return mDeleter;
 }
 
 } // maudio

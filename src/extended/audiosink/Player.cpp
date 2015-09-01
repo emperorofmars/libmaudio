@@ -59,9 +59,11 @@ std::vector<std::string> Player::listDevices(){
 
 void Player::play(){
 	if(!mDevice) return;
-	if(mInputs.size() < 1 || !mInputs[0]) return;
+	if(!InputOk(0)) return;
 
-	mQueue.reset(new AudioQueue(*getInfoFromSlot(0)));
+	auto info = getInfoFromSlot(0);
+	if(!info) return;
+	mQueue.reset(new AudioQueue(*info));
 	feed();
 	startFeed();
 	mDevice->play(mQueue);
@@ -99,7 +101,7 @@ unsigned long Player::getPosition(){
 }
 
 void Player::setPosition(float seconds){
-	if(NumInputs() > 0){
+	if(InputOk(0) > 0){
 		simple_ptr<IAudioInfo> info(getInfo());
 		mPosition =  seconds * (float)info->getSamplerate();
 	}
@@ -107,7 +109,7 @@ void Player::setPosition(float seconds){
 }
 
 float Player::getPosition_sek(){
-	if(NumInputs() > 0){
+	if(InputOk(0) > 0){
 		simple_ptr<IAudioInfo> info(getInfo());
 		return (float)mPosition / (float)info->getSamplerate();
 	}
@@ -190,7 +192,7 @@ void Player::deserialize(const IMultiLevelStore *data){
 
 void Player::feed(){
 	if(!mQueue) return;
-	if(NumInputs() == 0) return;
+	if(!InputOk(0)) return;
 	if(mQueueSize <= mQueue->size()) return;
 
 	for(unsigned int i = 0; i < mQueueSize - mQueue->size(); i++){

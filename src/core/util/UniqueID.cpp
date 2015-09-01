@@ -6,14 +6,14 @@
 
 namespace maudio{
 
-unsigned int UniqueID::mGlobalID = 0;
+unsigned long UniqueID::mGlobalID = 0;
 
 UniqueID::UniqueID(){
 	mGlobalID++;
 	mID = mGlobalID;
 }
 
-unsigned int UniqueID::getID() const{
+unsigned long UniqueID::getID() const{
 	return mID;
 }
 

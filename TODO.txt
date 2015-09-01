@@ -47,7 +47,10 @@ Todo:
 - ////redo ConfigManager
 - ////write cmakelists
 - ////implement scene
-- make node obsolete with observable and ovserving IActions
+- ////make node obsolete with observable and observing IActions
+- ////get rid of IAudioGetter
+- redo scene
+- fix ptrs
 - save and reload scene
 - implement serializer
 - node and scene: observable

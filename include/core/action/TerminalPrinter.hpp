@@ -7,7 +7,7 @@
 #ifndef MAUDIO_TERMINALPRINTER
 #define MAUDIO_TERMINALPRINTER
 
-#include "core/actions/BaseAction.hpp"
+#include "core/action/BaseAction.hpp"
 #include <memory>
 
 namespace maudio{

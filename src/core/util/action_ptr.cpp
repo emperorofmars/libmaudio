@@ -9,13 +9,13 @@
 namespace maudio{
 
 template<>
-void action_ptr<IAudioBuffer>::reset(IAudioBuffer *data, IAudioGetter *deleter){
+void action_ptr<IAudioBuffer>::reset(IAudioBuffer *data, IAction *deleter){
 	if(mData != NULL){
 		if(mRefCount){
 			mRefCount->mRefs--;
 			if(mRefCount->mRefs == 0){
 				if(mDeleter != NULL){
-					mDeleter->deleteBuffer(mData);
+					mDeleter->deleteData(mData);
 				}
 				else{
 					delete mData;
@@ -28,7 +28,7 @@ void action_ptr<IAudioBuffer>::reset(IAudioBuffer *data, IAudioGetter *deleter){
 		}
 		else{
 			if(mDeleter != NULL){
-				mDeleter->deleteBuffer(mData);
+				mDeleter->deleteData(mData);
 			}
 			else{
 				delete mData;
@@ -44,13 +44,13 @@ void action_ptr<IAudioBuffer>::reset(IAudioBuffer *data, IAudioGetter *deleter){
 }
 
 template<>
-void action_ptr<IAudioInfo>::reset(IAudioInfo *data, IAudioGetter *deleter){
+void action_ptr<IAudioInfo>::reset(IAudioInfo *data, IAction *deleter){
 	if(mData != NULL){
 		if(mRefCount){
 			mRefCount->mRefs--;
 			if(mRefCount->mRefs == 0){
 				if(mDeleter != NULL){
-					mDeleter->deleteInfo(mData);
+					mDeleter->deleteData(mData);
 				}
 				else{
 					delete mData;
@@ -63,7 +63,7 @@ void action_ptr<IAudioInfo>::reset(IAudioInfo *data, IAudioGetter *deleter){
 		}
 		else{
 			if(mDeleter != NULL){
-				mDeleter->deleteInfo(mData);
+				mDeleter->deleteData(mData);
 			}
 			else{
 				delete mData;
@@ -79,13 +79,13 @@ void action_ptr<IAudioInfo>::reset(IAudioInfo *data, IAudioGetter *deleter){
 }
 
 template<>
-void action_ptr<ISample>::reset(ISample *data, IAudioGetter *deleter){
+void action_ptr<ISample>::reset(ISample *data, IAction *deleter){
 	if(mData != NULL){
 		if(mRefCount){
 			mRefCount->mRefs--;
 			if(mRefCount->mRefs == 0){
 				if(mDeleter != NULL){
-					mDeleter->deleteSample(mData);
+					mDeleter->deleteData(mData);
 				}
 				else{
 					delete mData;
@@ -98,7 +98,7 @@ void action_ptr<ISample>::reset(ISample *data, IAudioGetter *deleter){
 		}
 		else{
 			if(mDeleter != NULL){
-				mDeleter->deleteSample(mData);
+				mDeleter->deleteData(mData);
 			}
 			else{
 				delete mData;
@@ -120,7 +120,7 @@ void action_ptr<IAudioBuffer>::reset(const action_ptr<IAudioBuffer> &data){
 			mRefCount->mRefs--;
 			if(mRefCount->mRefs == 0){
 				if(mDeleter != NULL){
-					mDeleter->deleteBuffer(mData);
+					mDeleter->deleteData(mData);
 				}
 				else{
 					delete mData;
@@ -133,7 +133,7 @@ void action_ptr<IAudioBuffer>::reset(const action_ptr<IAudioBuffer> &data){
 		}
 		else{
 			if(mDeleter != NULL){
-				mDeleter->deleteBuffer(mData);
+				mDeleter->deleteData(mData);
 			}
 			else{
 				delete mData;
@@ -153,7 +153,7 @@ void action_ptr<IAudioInfo>::reset(const action_ptr<IAudioInfo> &data){
 			mRefCount->mRefs--;
 			if(mRefCount->mRefs == 0){
 				if(mDeleter != NULL){
-					mDeleter->deleteInfo(mData);
+					mDeleter->deleteData(mData);
 				}
 				else{
 					delete mData;
@@ -166,7 +166,7 @@ void action_ptr<IAudioInfo>::reset(const action_ptr<IAudioInfo> &data){
 		}
 		else{
 			if(mDeleter != NULL){
-				mDeleter->deleteInfo(mData);
+				mDeleter->deleteData(mData);
 			}
 			else{
 				delete mData;
@@ -186,7 +186,7 @@ void action_ptr<ISample>::reset(const action_ptr<ISample> &data){
 			mRefCount->mRefs--;
 			if(mRefCount->mRefs == 0){
 				if(mDeleter != NULL){
-					mDeleter->deleteSample(mData);
+					mDeleter->deleteData(mData);
 				}
 				else{
 					delete mData;
@@ -199,7 +199,7 @@ void action_ptr<ISample>::reset(const action_ptr<ISample> &data){
 		}
 		else{
 			if(mDeleter != NULL){
-				mDeleter->deleteSample(mData);
+				mDeleter->deleteData(mData);
 			}
 			else{
 				delete mData;

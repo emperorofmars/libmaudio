@@ -47,6 +47,11 @@ ISample *AudioBuffer::get(unsigned long pos) const{
 	return createSample(pos);
 }
 
+void AudioBuffer::deleteSample(ISample *data){
+	if(data) delete data;
+	return;
+}
+
 void AudioBuffer::set(const ISample &data, unsigned long pos){
 	if(pos >= mData.size()) return;
 	if(data.getChannels() != mInfo.getChannels()) return;

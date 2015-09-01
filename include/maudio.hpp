@@ -7,7 +7,7 @@
 #ifndef MAUDIO_INCLUDE
 #define MAUDIO_INCLUDE
 
-#include "core/actions/BaseAction.hpp"
+#include "core/action/BaseAction.hpp"
 #include "core/audiodata/AudioBuffer.hpp"
 #include "core/property/SimpleKeyableProperty.hpp"
 #include "core/property/SimpleProperty.hpp"

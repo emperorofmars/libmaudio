@@ -11,6 +11,36 @@ SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
 set(CMAKE_INSTALL_RPATH "./res/lib")
 
 set(MAUDIO_SOURCE_FILES
+	./src/core/store/MultiLevelStore.cpp
+	./src/core/store/MultiStore.cpp
+	./src/core/store/KeyValueStore.cpp
+	./src/core/store/ConfigManager.cpp
+	./src/core/store/ConfigReader.cpp
+	./src/core/property/PropertyManager.cpp
+	./src/core/property/SimpleProperty.cpp
+	./src/core/property/SimpleKeyableProperty.cpp
+	./src/core/action/TerminalPrinter.cpp
+	./src/core/action/SinusGenerator.cpp
+	./src/core/action/BaseAction.cpp
+	./src/core/util/String.cpp
+	./src/core/util/UniqueID.cpp
+	./src/core/util/BaseObservable.cpp
+	./src/core/util/Util.cpp
+	./src/core/util/BaseObserver.cpp
+	./src/core/util/action_ptr.cpp
+	./src/core/scene/Scene.cpp
+	./src/core/serializer/TXTSerializer.cpp
+	./src/core/audiodata/AudioQueue.cpp
+	./src/core/audiodata/Sample.cpp
+	./src/core/audiodata/AudioInfo.cpp
+	./src/core/audiodata/AudioBuffer.cpp
+	./src/core/pluginmanager/PluginManager.cpp
+	./src/extended/util/AudioDevice.hpp
+	./src/extended/util/AudioDevice.cpp
+	./src/extended/audiosink/Player.cpp
+	./src/extended/audiosink/FileWriter.cpp
+	./src/extended/audiosource/BulkReader.cpp
+	./src/extended/audiosource/StreamReader.cpp
 	./include/core/store/MultiLevelStore.hpp
 	./include/core/store/MultiStore.hpp
 	./include/core/store/IMultiStore.hpp
@@ -25,6 +55,11 @@ set(MAUDIO_SOURCE_FILES
 	./include/core/property/IKeyableProperty.hpp
 	./include/core/property/PropertyManager.hpp
 	./include/core/property/SimpleKeyableProperty.hpp
+	./include/core/action/SinusGenerator.hpp
+	./include/core/action/BaseAction.hpp
+	./include/core/action/TerminalPrinter.hpp
+	./include/core/action/IAction.hpp
+	./include/core/action/IControl.hpp
 	./include/core/util/BaseObservable.hpp
 	./include/core/util/simple_ptr.hpp
 	./include/core/util/IObserver.hpp
@@ -36,19 +71,10 @@ set(MAUDIO_SOURCE_FILES
 	./include/core/util/BaseObserver.hpp
 	./include/core/util/IObservable.hpp
 	./include/core/util/Util.hpp
+	./include/core/scene/Scene.hpp
 	./include/core/serializer/ISerializable.hpp
 	./include/core/serializer/TXTSerializer.hpp
 	./include/core/serializer/ISerializer.hpp
-	./include/core/node/Scene.hpp
-	./include/core/node/PluginNode.hpp
-	./include/core/node/IAction.hpp
-	./include/core/node/ActionNode.hpp
-	./include/core/node/IAudioGetter.hpp
-	./include/core/node/IControl.hpp
-	./include/core/node/Node.hpp
-	./include/core/actions/SinusGenerator.hpp
-	./include/core/actions/BaseAction.hpp
-	./include/core/actions/TerminalPrinter.hpp
 	./include/core/audiodata/AudioInfo.hpp
 	./include/core/audiodata/IAudioInfo.hpp
 	./include/core/audiodata/Sample.hpp
@@ -64,39 +90,6 @@ set(MAUDIO_SOURCE_FILES
 	./include/extended/audiosink/Player.hpp
 	./include/extended/audiosource/BulkReader.hpp
 	./include/extended/audiosource/StreamReader.hpp
-	./src/core/store/MultiLevelStore.cpp
-	./src/core/store/MultiStore.cpp
-	./src/core/store/KeyValueStore.cpp
-	./src/core/store/ConfigManager.cpp
-	./src/core/store/ConfigReader.cpp
-	./src/core/property/PropertyManager.cpp
-	./src/core/property/SimpleProperty.cpp
-	./src/core/property/SimpleKeyableProperty.cpp
-	./src/core/util/String.cpp
-	./src/core/util/UniqueID.cpp
-	./src/core/util/BaseObservable.cpp
-	./src/core/util/Util.cpp
-	./src/core/util/BaseObserver.cpp
-	./src/core/util/action_ptr.cpp
-	./src/core/serializer/TXTSerializer.cpp
-	./src/core/node/Scene.cpp
-	./src/core/node/ActionNode.cpp
-	./src/core/node/Node.cpp
-	./src/core/node/PluginNode.cpp
-	./src/core/actions/TerminalPrinter.cpp
-	./src/core/actions/SinusGenerator.cpp
-	./src/core/actions/BaseAction.cpp
-	./src/core/audiodata/AudioQueue.cpp
-	./src/core/audiodata/Sample.cpp
-	./src/core/audiodata/AudioInfo.cpp
-	./src/core/audiodata/AudioBuffer.cpp
-	./src/core/pluginmanager/PluginManager.cpp
-	./src/extended/util/AudioDevice.hpp
-	./src/extended/util/AudioDevice.cpp
-	./src/extended/audiosink/Player.cpp
-	./src/extended/audiosink/FileWriter.cpp
-	./src/extended/audiosource/BulkReader.cpp
-	./src/extended/audiosource/StreamReader.cpp
 )
 
 set(TESTBIN_SOURCE_FILES

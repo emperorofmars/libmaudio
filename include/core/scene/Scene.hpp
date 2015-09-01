@@ -7,8 +7,8 @@
 #ifndef MAUDIO_SCENE
 #define MAUDIO_SCENE
 
-#include "core/node/Node.hpp"
 #include "core/serializer/ISerializable.hpp"
+#include "core/util/BaseObservable.hpp"
 #include <memory>
 #include <string>
 
@@ -22,10 +22,10 @@ public:
 	void setName(const char *name);
 	const char *getName();
 
-	int addNode(std::shared_ptr<Node> node);
+	//int addNode(std::shared_ptr<Node> node);
 	void removeNode(unsigned int id);
-	std::shared_ptr<Node> getEnd(unsigned int num);
-	std::shared_ptr<Node> getNode(unsigned int id);
+	//std::shared_ptr<Node> getEnd(unsigned int num);
+	//std::shared_ptr<Node> getNode(unsigned int id);
 
 	void connect(unsigned int source, unsigned int sink);
 	void disconnect(unsigned int source, unsigned int sink);
@@ -35,7 +35,7 @@ private:
 
 
 	std::string mName;
-	std::vector<std::shared_ptr<Node>> mEnds;
+	//std::vector<std::shared_ptr<Node>> mEnds;
 };
 
 } // maudio

@@ -15,15 +15,21 @@ namespace maudio{
 
 class BaseObservable{
 public:
+	BaseObservable();
 	virtual ~BaseObservable();
 
-	virtual void addObserver(IObserver *observer);
-	virtual void removeObserver(IObserver *observer);
-	virtual void notifyObservers(NoticeType type, const char *message = NULL);
+	virtual void addObserver(IObserver *observer) final;
+	virtual void removeObserver(IObserver *observer) final;
+	virtual void notifyObservers(NoticeType type, const char *message = NULL) final;
+
+	virtual unsigned long getObservableID() const final;
 
 private:
 	std::vector<IObserver *> mObservers;
 	std::mutex mMutex;
+
+	unsigned long mObservableID;
+	static unsigned long mGlobalObservableID;
 };
 
 } // maudio

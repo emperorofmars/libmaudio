@@ -19,6 +19,8 @@ public:
 	virtual void addObserver(IObserver *observer) = 0;
 	virtual void removeObserver(IObserver *observer) = 0;
 	virtual void notifyObservers(NoticeType type, const char *message = NULL) = 0;
+
+	virtual unsigned long getObservableID() const = 0;
 };
 
 } // maudio

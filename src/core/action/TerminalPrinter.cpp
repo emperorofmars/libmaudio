@@ -4,7 +4,7 @@
  * See LICENSE.txt for the full license
  */
 
-#include "core/actions/TerminalPrinter.hpp"
+#include "core/action/TerminalPrinter.hpp"
 #include "core/util/Util.hpp"
 #include "core/util/AudioException.hpp"
 #include "core/util/action_ptr.hpp"
@@ -60,7 +60,7 @@ void TerminalPrinter::print(unsigned long pos){
 		std::cout << "invalid or no Input" << std::endl;
 		return;
 	}
-	action_ptr<IAudioInfo> tmpInfo(mInputs[0]->getInfo(), mInputs[0]);
+	auto tmpInfo = getInfoFromSlot(0);
 	if(!tmpInfo){
 		std::cout << "failed retrieving info" << std::endl;
 		return;
@@ -71,7 +71,7 @@ void TerminalPrinter::print(unsigned long pos){
 			std::cout << "failed retrieving buffer" << std::endl;
 			return;
 		}
-		action_ptr<ISample> tmpSmp(tmpBuf->get(0), mInputs[0]);
+		auto tmpSmp = getSampleFromBuffer(0, tmpBuf);
 		if(!tmpSmp){
 			std::cout << "failed retrieving sample" << std::endl;
 			return;

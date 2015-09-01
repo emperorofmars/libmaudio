@@ -7,8 +7,10 @@
 #ifndef MAUDIO_PLUGINPTR
 #define MAUDIO_PLUGINPTR
 
-#include <cstddef>
 #include "core/pluginmanager/PluginLoader.hpp"
+#include <cstddef>
+
+#include <iostream>
 
 namespace maudio{
 

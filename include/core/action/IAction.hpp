@@ -7,8 +7,10 @@
 #ifndef MAUDIO_IACTION
 #define MAUDIO_IACTION
 
-#include "core/node/IAudioGetter.hpp"
-#include "core/node/IControl.hpp"
+#include "core/util/UniqueID.hpp"
+#include "core/action/IControl.hpp"
+#include "core/util/BaseObserver.hpp"
+#include "core/util/BaseObservable.hpp"
 #include "core/audiodata/IAudioBuffer.hpp"
 #include "core/audiodata/IAudioInfo.hpp"
 #include "core/property/IProperty.hpp"
@@ -20,12 +22,20 @@
 
 namespace maudio{
 
-class IAction : public IAudioGetter, public ISerializable{
+class IAction : public UniqueID, public ISerializable, public BaseObserver, public BaseObservable{
 public:
 	virtual ~IAction(){};
 
-	virtual void addSocket(IAudioGetter *socket, int slot) = 0;
-	virtual void removeSocket(int slot) = 0;
+	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept = 0;
+	virtual IAudioInfo *getInfo() noexcept = 0;
+
+	virtual void deleteData(IAudioBuffer *data) noexcept = 0;
+	virtual void deleteData(IAudioInfo *data) noexcept = 0;
+	virtual void deleteData(ISample *data) noexcept = 0;
+
+	virtual void addInput(IAction *input, int slot) = 0;
+	virtual void removeInput(IAction *input) = 0;
+	virtual void removeInput(int slot) = 0;
 
 	virtual int NumInputs() const = 0;
 	virtual int MaxInputs() const = 0;
@@ -36,6 +46,8 @@ public:
 	virtual IPropertyManager *getProperties() = 0;
 
 	virtual IControl *getControl() = 0;
+
+	virtual bool checkCompatible(IAudioInfo *info) = 0;
 };
 
 } // maudio

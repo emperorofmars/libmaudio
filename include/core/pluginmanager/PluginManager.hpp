@@ -8,7 +8,7 @@
 #define MAUDIO_PLUGINMANAGER
 
 #include "core/pluginmanager/PluginLoader.hpp"
-#include "core/node/IAction.hpp"
+#include "core/action/IAction.hpp"
 #include "core/util/plugin_ptr.hpp"
 #include "core/store/IMultiStore.hpp"
 #include "core/util/AudioException.hpp"

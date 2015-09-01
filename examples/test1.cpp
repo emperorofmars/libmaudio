@@ -7,12 +7,10 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
-#include "core/node/ActionNode.hpp"
-#include "core/node/PluginNode.hpp"
 #include "core/audiodata/Sample.hpp"
 #include "core/audiodata/AudioBuffer.hpp"
-#include "core/actions/SinusGenerator.hpp"
-#include "core/actions/TerminalPrinter.hpp"
+#include "core/action/SinusGenerator.hpp"
+#include "core/action/TerminalPrinter.hpp"
 #include "extended/audiosink/Player.hpp"
 /*
 #include "core/manipulator/Mixer.hpp"
@@ -34,69 +32,33 @@ using namespace maudio;
 int main(int argc, char *argv[]){
 	std::cerr << "test" << std::endl;
 
-	std::shared_ptr<ActionNode> sgen(new ActionNode(std::unique_ptr<SinusGenerator>(new SinusGenerator())));
-	sgen->setName("sgen");
-	std::shared_ptr<ActionNode> sgen2(new ActionNode(std::unique_ptr<SinusGenerator>(new SinusGenerator())));
-	sgen2->setName("sgen2");
+	std::shared_ptr<IAction> source1(new SinusGenerator());
+	IPropertyManager *propm = source1->getProperties();
+	IKeyableProperty *propsin = propm->getKeyableProperty("Frequency");
+	propsin->setKey("500", 0);
+	propsin->addKey("500", 0.2);
+	propsin->addKey("700", 0.200001);
+	propsin->addKey("700", 0.7);
+	propsin->addKey("500", 0.700001);
 
-	IPropertyManager *sinprop = sgen->getProperties();
-	if(sinprop){
-		IKeyableProperty *freqprop = sinprop->getKeyableProperty("Frequency");
-		if(freqprop){
-			double mul = 0.83;
-			double shift = 0.11;
-
-			freqprop->setKey("600", 0);
-			freqprop->addKey("600", 0 *mul+shift);
-			freqprop->addKey("900", 0.000001 *mul+shift);
-			freqprop->addKey("900", 1 *mul+shift);
-			freqprop->addKey("600", 1.000001 *mul+shift);
-			freqprop->addKey("600", 2 *mul+shift);
-			freqprop->addKey("900", 2.000001 *mul+shift);
-			freqprop->addKey("900", 3 *mul+shift);
-			freqprop->addKey("600", 3.000001 *mul+shift);
-			freqprop->addKey("600", 4 *mul+shift);
-			freqprop->addKey("900", 4.000001 *mul+shift);
-			freqprop->addKey("900", 5 *mul+shift);
-			freqprop->addKey("600", 5.000001 *mul+shift);
-		}
-	}
-
-	std::cerr << "Plugin:" << std::endl;
+	std::shared_ptr<IAction> source2(new SinusGenerator());
+	IPropertyManager *propm2 = source2->getProperties();
+	IKeyableProperty *propsin2 = propm2->getKeyableProperty("Frequency");
+	propsin2->setKey("1100", 0);
 
 	PluginManager::Instance()->addPlugin("./res/plugins/Mixer.so");
-	std::shared_ptr<PluginNode> mix(new PluginNode(PluginManager::Instance()->createInstance("Mixer")));
-	mix->setName("mix");
+	auto mixer = PluginManager::Instance()->createInstance("Mixer");
+	mixer->addInput(source1.get(), 0);
+	mixer->addInput(source2.get(), 1);
 
-	mix->addInput(sgen, 0);
-	mix->addInput(sgen2, 1);
-
-	std::cerr << "Plugin Inputs: " << mix->NumInputs() << std::endl;
-
-	action_ptr<IAudioInfo> info(mix->getInfo(), mix.get());
-	if(info){
-		std::cerr << "Plugin Info: " << info->getSamplerate() << std::endl;
-	}
-	else{
-		std::cerr << "Plugin Fail" << std::endl;
-	}
-
-	std::cerr << "Player:" << std::endl;
-/*
-	std::shared_ptr<ActionNode> player(new ActionNode(std::unique_ptr<Player>(new Player())));
-	player->setName("player");
-	player->addInput(mix, 0);
-	IControl *playerCntl = player->getControl();
-
-	playerCntl->callFunction("play");
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-	playerCntl->callFunction("stop");
-*/
-
-	IAction *source = new SinusGenerator();
-	IAction *sink = new Player();
-	sink->addSocket(source, 0);
+	std::shared_ptr<IAction> sink(new Player());
+	sink->addInput(mixer.get(), 0);
 	IControl *sinkCntl = sink->getControl();
+
+	//source1.reset();
+	//source2.reset();
+
+	std::cerr << "play" << std::endl;
 
 	sinkCntl->callFunction("play");
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));

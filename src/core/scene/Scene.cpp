@@ -4,7 +4,7 @@
  * See LICENSE.txt for the full license
  */
 
-#include "core/node/Scene.hpp"
+#include "core/scene/Scene.hpp"
 #include "core/util/AudioException.hpp"
 
 namespace maudio{
@@ -24,7 +24,7 @@ void Scene::setName(const char *name){
 const char *Scene::getName(){
 	return mName.c_str();
 }
-
+/*
 int Scene::addNode(std::shared_ptr<Node> node){
 	if(!node) return -1;
 	if(isPartOfScene(node->getID())) return node->getID();
@@ -85,7 +85,7 @@ bool Scene::isPartOfScene(unsigned int id){
 	}
 	return false;
 }
-
+*/
 } // maudio
 
 

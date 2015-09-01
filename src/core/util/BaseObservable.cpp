@@ -6,7 +6,16 @@
 
 #include "core/util/BaseObservable.hpp"
 
+#include <iostream>
+
 namespace maudio{
+
+unsigned long BaseObservable::mGlobalObservableID = 0;
+
+BaseObservable::BaseObservable(){
+	mGlobalObservableID++;
+	mObservableID = mGlobalObservableID;
+}
 
 BaseObservable::~BaseObservable(){
 	notifyObservers(ON_DELETE);
@@ -14,6 +23,7 @@ BaseObservable::~BaseObservable(){
 
 void BaseObservable::addObserver(IObserver *observer){
 	if(!observer) return;
+
 	mMutex.lock();
 	for(unsigned int i = 0; i < mObservers.size(); i++){
 		if(mObservers[i] == observer){
@@ -41,17 +51,23 @@ void BaseObservable::removeObserver(IObserver *observer){
 }
 
 void BaseObservable::notifyObservers(NoticeType type, const char *message){
-	mMutex.lock();
-	for(unsigned int i = 0; i < mObservers.size(); i++){
-		mObservers[i]->notify((const IObservable *)this, type, message);
-	}
 	if(type == ON_DELETE){
 		for(unsigned int i = 0; i < mObservers.size(); i++){
 			mObservers[i]->onRemove((IObservable *)this);
 		}
 	}
-	mMutex.unlock();
+	for(unsigned int i = 0; i < mObservers.size(); i++){
+		unsigned int tmpsize = mObservers.size();
+		mObservers[i]->notify((const IObservable *)this, type, message);
+		if(type == ON_DELETE && tmpsize > mObservers.size()){
+			i--;
+		}
+	}
 	return;
+}
+
+unsigned long BaseObservable::getObservableID() const{
+	return mObservableID;
 }
 
 } // maudio

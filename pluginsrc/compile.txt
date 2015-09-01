@@ -1,1 +1,1 @@
-g++ -std=c++11 -I../../include/ -I../../src -L../../res/lib/ -Wl,-rpath=./res/lib -fpic --shared Mixer.cpp -o Mixer.so -lmaudio -ldl -lportaudio
+g++ -std=c++11 -I../../include/ -I../../src -L../../res/lib/ -Wl,-rpath=./res/lib -fpic --shared Mixer.cpp -o Mixer.so -lmaudio -ldl -lportaudio && cp Mixer.so ../../res/plugins

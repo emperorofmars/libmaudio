@@ -7,7 +7,7 @@
 #ifndef MAUDIO_SINUSGENERATOR
 #define MAUDIO_SINUSGENERATOR
 
-#include "core/actions/BaseAction.hpp"
+#include "core/action/BaseAction.hpp"
 #include "core/property/SimpleProperty.hpp"
 #include "core/property/SimpleKeyableProperty.hpp"
 #include <memory>

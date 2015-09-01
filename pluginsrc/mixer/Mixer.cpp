@@ -6,6 +6,8 @@
 
 #include "maudio.hpp"
 
+#include <iostream>
+
 using namespace maudio;
 
 class Mixer : public BaseAction{
@@ -16,19 +18,22 @@ public:
 	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept{
 		simple_ptr<IAudioInfo> info(getInfo());
 		AudioBuffer *ret = new AudioBuffer(info->getChannels(), length, pos, info->getSamplerate());
+		unsigned int validInputs = 0;
 		if(NumInputs() > 0){
 			for(int i = 0; i < NumInputs(); i++){
+				if(!InputOk(i)) continue;
+				validInputs++;
 				auto tmp = getFromSlot(i, pos, length);
 				for(unsigned int j = 0; j < length; j++){
 					simple_ptr<ISample> smp1(ret->get(j));
-					action_ptr<ISample> smp2(tmp->get(j), mInputs[i]);
+					auto smp2 = getSampleFromBuffer(j, tmp);
 					*smp1 += *smp2;
 					ret->set(*smp1, j);
 				}
 			}
 			for(unsigned int j = 0; j < length; j++){
 				simple_ptr<ISample> smp(ret->get(j));
-				*smp /= (float)NumInputs();
+				if(validInputs > 0) *smp /= (float)validInputs;
 				ret->set(*smp, j);
 			}
 		}
@@ -44,6 +49,18 @@ public:
 		return ret;
 	};
 
+	virtual bool checkCompatible(IAudioInfo *info){
+		if(!info) return false;
+		if(NumInputs() == 0) return true;
+		simple_ptr<IAudioInfo> minfo(getInfo());
+		if(minfo->getChannels() == info->getChannels() &&
+			minfo->getSamplerate() == info->getSamplerate())
+		{
+			return true;
+		}
+		return false;
+	};
+	
 	virtual int MaxInputs() const{
 		return -1;
 	};

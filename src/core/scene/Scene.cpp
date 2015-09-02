@@ -65,22 +65,22 @@ sptr<IAction> Scene::getEnd(unsigned int num){
 sptr<IAction> Scene::getNode(unsigned long id){
 	return mNodes[id];
 }
-/*
+
 void Scene::connect(unsigned long source, unsigned long sink){
-	std::shared_ptr<Node> sourceNode = getNode(source);
-	std::shared_ptr<Node> sinkNode = getNode(sink);
+	sptr<IAction> sourceNode = getNode(source);
+	sptr<IAction> sinkNode = getNode(sink);
 	if(sourceNode && sinkNode){
-		sinkNode->addInput(sourceNode);
+		sinkNode->addInput(sourceNode.get(), -1);
 	}
 	notifyObservers(ON_CHANGE, "node connected");
 	return;
 }
 
 void Scene::disconnect(unsigned long source, unsigned long sink){
-	std::shared_ptr<Node> sourceNode = getNode(source);
-	std::shared_ptr<Node> sinkNode = getNode(sink);
+	sptr<IAction> sourceNode = getNode(source);
+	sptr<IAction> sinkNode = getNode(sink);
 	if(sourceNode && sinkNode){
-		sinkNode->removeInput(sourceNode);
+		sinkNode->removeInput(sourceNode.get());
 	}
 	notifyObservers(ON_CHANGE, "node disconnected");
 	return;
@@ -88,18 +88,21 @@ void Scene::disconnect(unsigned long source, unsigned long sink){
 
 std::vector<unsigned long> Scene::getOutputs(unsigned long id){
 	std::vector<unsigned long> ret;
+	for(auto iter = mAdjacencyList.begin(); iter != mAdjacencyList.end(); iter++){
+		if(iter->first && iter->second.size() > 0){
+			for(unsigned int i = 0; i < iter->second.size(); i++){
+				if(iter->second[i] == id) ret.push_back(iter->first);
+			}
+		}
+	}
 	return ret;
 }
 
 bool Scene::isPartOfScene(unsigned long id){
-	for(unsigned int i = 0; i < mEnds.size(); i++){
-		if(mEnds[i]->getByID(id) != NULL){
-			return true;
-		}
-	}
+	if(mNodes[id]) return true;
 	return false;
 }
-*/
+
 } // maudio
 
 

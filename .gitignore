@@ -12,3 +12,5 @@ cmake-codeblocks
 cmake-kdevelop
 doxygen
 sources.txt
+res/lib/libmaudio.a
+res/lib/libmaudio.so

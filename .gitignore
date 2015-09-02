@@ -1,5 +1,6 @@
 maudio.depend
 maudio.layout
+maudio.kdev4
 .directory
 obj
 bin
@@ -8,5 +9,6 @@ bin
 meson-build
 cmake-build
 cmake-codeblocks
+cmake-kdevelop
 doxygen
 sources.txt

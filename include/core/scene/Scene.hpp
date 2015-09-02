@@ -26,18 +26,20 @@ public:
 	long addNode(IAction *node);
 	long addNode(sptr<IAction> node);
 	void removeNode(unsigned long id);
-	sptr<IAction> getEnd(unsigned long num);
+	sptr<IAction> getEnd(unsigned int num);
 	sptr<IAction> getNode(unsigned long id);
 
 	void connect(unsigned long source, unsigned long sink);
 	void disconnect(unsigned long source, unsigned long sink);
 
+	std::vector<unsigned long> getOutputs(unsigned long id);
+	
 private:
 	bool isPartOfScene(unsigned long id);
 
 	std::string mName;
 	std::map<unsigned long, sptr<IAction>> mNodes;
-	std::unordered_map<unsigned long, std::vector<unsigned long>> mAdjacencyList;
+	std::map<unsigned long, std::vector<unsigned long>> mAdjacencyList;
 };
 
 } // maudio

@@ -24,40 +24,49 @@ void Scene::setName(const char *name){
 const char *Scene::getName(){
 	return mName.c_str();
 }
-/*
-int Scene::addNode(std::shared_ptr<Node> node){
+
+long Scene::addNode(IAction *node){
+	return addNode(sptr<IAction>(node));
+}
+
+long Scene::addNode(sptr<IAction> node){
 	if(!node) return -1;
 	if(isPartOfScene(node->getID())) return node->getID();
-	mEnds.push_back(node);
+	mNodes[node->getID()] = node;
+	mAdjacencyList[node->getID()] = std::vector<unsigned long>();
 	notifyObservers(ON_CHANGE, "node added");
 	return node->getID();
 }
 
-void Scene::removeNode(unsigned int id){
-	std::shared_ptr<Node> tmp = getNode(id);
-	if(tmp){
-		tmp->disconnect();
+void Scene::removeNode(unsigned long id){
+	if(!isPartOfScene(id)) return;
+	std::vector<unsigned long> outputs = getOutputs(id);
+	for(unsigned int i = 0; i < outputs.size(); i++){
+		disconnect(id, outputs[i]);
 	}
+	for(unsigned int i = 0; i < mNodes[id]->NumInputs(); i++){
+		disconnect(mNodes[id]->getInput(i)->getID(), id);
+	}
+	mNodes[id].reset();
+	mAdjacencyList[id].clear();
 	notifyObservers(ON_CHANGE, "node removed");
 	return;
 }
 
-std::shared_ptr<Node> Scene::getEnd(unsigned int num){
-	if(num >= mEnds.size()) return NULL;
-	return mEnds[num];
-}
-
-std::shared_ptr<Node> Scene::getNode(unsigned int id){
-	for(unsigned int i = 0; i < mEnds.size(); i++){
-		std::shared_ptr<Node> tmp = mEnds[i]->getByID(id);
-		if(tmp != NULL){
-			return tmp;
-		}
+sptr<IAction> Scene::getEnd(unsigned int num){
+	if(num >= mAdjacencyList.size()) return NULL;
+	for(auto iter = mAdjacencyList.begin(); iter != mAdjacencyList.end(); iter ++){
+		if(iter->second.size() == 0 && mNodes[iter->first] > 0 && num == 0) return mNodes[iter->first];
+		if(num == 0) return NULL;
 	}
 	return NULL;
 }
 
-void Scene::connect(unsigned int source, unsigned int sink){
+sptr<IAction> Scene::getNode(unsigned long id){
+	return mNodes[id];
+}
+/*
+void Scene::connect(unsigned long source, unsigned long sink){
 	std::shared_ptr<Node> sourceNode = getNode(source);
 	std::shared_ptr<Node> sinkNode = getNode(sink);
 	if(sourceNode && sinkNode){
@@ -67,7 +76,7 @@ void Scene::connect(unsigned int source, unsigned int sink){
 	return;
 }
 
-void Scene::disconnect(unsigned int source, unsigned int sink){
+void Scene::disconnect(unsigned long source, unsigned long sink){
 	std::shared_ptr<Node> sourceNode = getNode(source);
 	std::shared_ptr<Node> sinkNode = getNode(sink);
 	if(sourceNode && sinkNode){
@@ -77,7 +86,12 @@ void Scene::disconnect(unsigned int source, unsigned int sink){
 	return;
 }
 
-bool Scene::isPartOfScene(unsigned int id){
+std::vector<unsigned long> Scene::getOutputs(unsigned long id){
+	std::vector<unsigned long> ret;
+	return ret;
+}
+
+bool Scene::isPartOfScene(unsigned long id){
 	for(unsigned int i = 0; i < mEnds.size(); i++){
 		if(mEnds[i]->getByID(id) != NULL){
 			return true;

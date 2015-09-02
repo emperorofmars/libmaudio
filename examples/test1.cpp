@@ -7,26 +7,17 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
-#include "core/audiodata/Sample.hpp"
-#include "core/audiodata/AudioBuffer.hpp"
 #include "core/action/SinusGenerator.hpp"
 #include "core/action/TerminalPrinter.hpp"
 #include "extended/audiosink/Player.hpp"
+#include "core/store/ConfigManager.hpp"
+#include "core/pluginmanager/PluginManager.hpp"
+#include "core/scene/Scene.hpp"
 /*
 #include "core/manipulator/Mixer.hpp"
 #include "core/manipulator/Resampler.hpp"
 #include "core/audiosink/Performance.hpp"
 */
-#include "core/property/SimpleProperty.hpp"
-#include "core/property/SimpleKeyableProperty.hpp"
-#include "core/store/ConfigManager.hpp"
-#include "core/store/MultiStore.hpp"
-#include "core/store/MultiLevelStore.hpp"
-#include "core/util/String.hpp"
-#include "core/pluginmanager/PluginManager.hpp"
-#include "core/util/BaseObserver.hpp"
-#include "core/util/sptr.hpp"
-#include "core/scene/Scene.hpp"
 
 using namespace maudio;
 

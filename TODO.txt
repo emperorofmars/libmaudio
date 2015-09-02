@@ -51,7 +51,7 @@ Todo:
 - ////get rid of IAudioGetter
 - ////fix ptrs
 - ////IAction: checkCycles
-- redo scene
+- ////redo scene
 - save and reload scene
 - implement serializer
 - node and scene: observable

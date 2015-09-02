@@ -6,8 +6,6 @@
 
 #include "core/action/BaseAction.hpp"
 
-#include <iostream>
-
 namespace maudio{
 
 BaseAction::~BaseAction(){

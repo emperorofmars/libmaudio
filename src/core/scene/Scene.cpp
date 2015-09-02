@@ -25,11 +25,11 @@ const char *Scene::getName(){
 	return mName.c_str();
 }
 
-long Scene::addNode(IAction *node){
-	return addNode(sptr<IAction>(node));
+long Scene::add(IAction *node){
+	return add(sptr<IAction>(node));
 }
 
-long Scene::addNode(sptr<IAction> node){
+long Scene::add(sptr<IAction> node){
 	if(!node) return -1;
 	if(isPartOfScene(node->getID())) return node->getID();
 	mNodes[node->getID()] = node;
@@ -38,7 +38,7 @@ long Scene::addNode(sptr<IAction> node){
 	return node->getID();
 }
 
-void Scene::removeNode(unsigned long id){
+void Scene::remove(unsigned long id){
 	if(!isPartOfScene(id)) return;
 	std::vector<unsigned long> outputs = getOutputs(id);
 	for(unsigned int i = 0; i < outputs.size(); i++){
@@ -62,25 +62,33 @@ sptr<IAction> Scene::getEnd(unsigned int num){
 	return NULL;
 }
 
-sptr<IAction> Scene::getNode(unsigned long id){
+sptr<IAction> Scene::get(unsigned long id){
 	return mNodes[id];
 }
 
 void Scene::connect(unsigned long source, unsigned long sink){
-	sptr<IAction> sourceNode = getNode(source);
-	sptr<IAction> sinkNode = getNode(sink);
+	sptr<IAction> sourceNode = get(source);
+	sptr<IAction> sinkNode = get(sink);
 	if(sourceNode && sinkNode){
-		sinkNode->addInput(sourceNode.get(), -1);
+		if(!sinkNode->addInput(sourceNode.get(), -1)){
+			throw MaudioException("cant connect");
+		}
+		mAdjacencyList[sink].push_back(source);
 	}
 	notifyObservers(ON_CHANGE, "node connected");
 	return;
 }
 
 void Scene::disconnect(unsigned long source, unsigned long sink){
-	sptr<IAction> sourceNode = getNode(source);
-	sptr<IAction> sinkNode = getNode(sink);
+	sptr<IAction> sourceNode = get(source);
+	sptr<IAction> sinkNode = get(sink);
 	if(sourceNode && sinkNode){
 		sinkNode->removeInput(sourceNode.get());
+		for(unsigned int i = 0; i < mAdjacencyList[sink].size(); i++){
+			if(mAdjacencyList[sink][i] == source){
+				mAdjacencyList[sink].erase(mAdjacencyList[sink].begin() + i);
+			}
+		}
 	}
 	notifyObservers(ON_CHANGE, "node disconnected");
 	return;
@@ -96,6 +104,13 @@ std::vector<unsigned long> Scene::getOutputs(unsigned long id){
 		}
 	}
 	return ret;
+}
+void Scene::serialize(IMultiLevelStore *data) const{
+	return;
+}
+
+void Scene::deserialize(const IMultiLevelStore *data){
+	return;
 }
 
 bool Scene::isPartOfScene(unsigned long id){

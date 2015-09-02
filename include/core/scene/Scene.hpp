@@ -23,16 +23,19 @@ public:
 	void setName(const char *name);
 	const char *getName();
 
-	long addNode(IAction *node);
-	long addNode(sptr<IAction> node);
-	void removeNode(unsigned long id);
+	long add(IAction *node);
+	long add(sptr<IAction> node);
+	void remove(unsigned long id);
 	sptr<IAction> getEnd(unsigned int num);
-	sptr<IAction> getNode(unsigned long id);
+	sptr<IAction> get(unsigned long id);
 
 	void connect(unsigned long source, unsigned long sink);
 	void disconnect(unsigned long source, unsigned long sink);
 
 	std::vector<unsigned long> getOutputs(unsigned long id);
+	
+	virtual void serialize(IMultiLevelStore *data) const;
+	virtual void deserialize(const IMultiLevelStore *data);
 	
 private:
 	bool isPartOfScene(unsigned long id);

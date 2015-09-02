@@ -26,55 +26,49 @@
 #include "core/pluginmanager/PluginManager.hpp"
 #include "core/util/BaseObserver.hpp"
 #include "core/util/sptr.hpp"
+#include "core/scene/Scene.hpp"
 
 using namespace maudio;
 
 int main(int argc, char *argv[]){
 	std::cerr << "test" << std::endl;
-
-	sptr<IAction> source1(new SinusGenerator());
-	IPropertyManager *propm = source1->getProperties();
-	IKeyableProperty *propsin = propm->getKeyableProperty("Frequency");
-	propsin->setKey("500", 0);
-	propsin->addKey("500", 0.2);
-	propsin->addKey("700", 0.200001);
-	propsin->addKey("700", 0.7);
-	propsin->addKey("500", 0.700001);
-
-	sptr<IAction> source2(new SinusGenerator());
-	IPropertyManager *propm2 = source2->getProperties();
-	IKeyableProperty *propsin2 = propm2->getKeyableProperty("Frequency");
-	propsin2->setKey("1100", 0);
-
-	PluginManager::Instance()->addPlugin("./res/plugins/Mixer.so");
-	auto mixer = PluginManager::Instance()->createInstance("Mixer");
-	if(!mixer->addInput(source1.get(), 0)) std::cerr << "addinput 01 failed" << std::endl;
-	if(!mixer->addInput(source2.get(), 1)) std::cerr << "addinput 02 failed" << std::endl;
-
-	sptr<IAction> sink(new Player());
-	if(!sink->addInput(mixer.get(), 0)) std::cerr << "addinput 03 failed" << std::endl;
-	IControl *sinkCntl = sink->getControl();
-
-	if(!mixer->addInput(sink.get(), 0)) std::cerr << "addinput 04 failed" << std::endl;
-	if(!sink->addInput(sink.get(), 0)) std::cerr << "addinput 05 failed" << std::endl;
-	if(!source1->addInput(sink.get(), 0)) std::cerr << "addinput 06 failed" << std::endl;
-	if(!source1->addInput(source2.get(), 0)) std::cerr << "addinput 07 failed" << std::endl;
-	if(!mixer->addInput(mixer.get(), 0)) std::cerr << "addinput 08 failed" << std::endl;
-
-	std::cerr << "source1 ID: " << source1->getID() << std::endl;
-	std::cerr << "source2 ID: " << source2->getID() << std::endl;
-	std::cerr << "mixer ID: " << mixer->getID() << std::endl;
-	std::cerr << "sink ID: " << sink->getID() << std::endl;
-
-	//source1.reset();
-	//source2.reset();
-
+	
+	Scene scene("test_scene");
+	long sin1 = scene.add(new SinusGenerator());
+	long sin2 = scene.add(new SinusGenerator());
+	long mix = scene.add(PluginManager::Instance()->createInstance("Mixer"));
+	long play = scene.add(new Player());
+	
+	scene.connect(sin1, mix);
+	scene.connect(sin2, mix);
+	scene.connect(mix, play);
+	
+	auto sin1Prop = scene.get(sin1)->getProperties();
+	auto sin1Freq = sin1Prop->getKeyableProperty("Frequency");
+	sin1Freq->setKey("500", 0);
+	sin1Freq->addKey("500", 0.2);
+	sin1Freq->addKey("700", 0.200001);
+	sin1Freq->addKey("700", 0.7);
+	sin1Freq->addKey("500", 0.700001);
+	
+	auto sin2Prop = scene.get(sin2)->getProperties();
+	auto sin2Freq = sin2Prop->getKeyableProperty("Frequency");
+	sin2Freq->setKey("1100", 0);
+	
+	auto playCtrl = scene.get(play)->getControl();
+	
+	//scene.disconnect(sin1, mix);
+	//scene.disconnect(sin2, mix);
+	
+	//scene.remove(sin1);
+	//scene.remove(sin2);
+	
 	std::cerr << "play" << std::endl;
-
-	sinkCntl->callFunction("play");
+	
+	playCtrl->callFunction("play");
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-	sinkCntl->callFunction("stop");
-
+	playCtrl->callFunction("stop");
+	
 	std::cerr << "closing main" << std::endl;
 	return 0;
 }

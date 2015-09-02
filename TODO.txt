@@ -50,7 +50,7 @@ Todo:
 - ////make node obsolete with observable and observing IActions
 - ////get rid of IAudioGetter
 - ////fix ptrs
-- IAction: checkCycles
+- ////IAction: checkCycles
 - redo scene
 - save and reload scene
 - implement serializer

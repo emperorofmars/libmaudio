@@ -17,12 +17,13 @@ namespace maudio{
 
 class Scene : public ISerializable, public BaseObservable{
 public:
-	Scene(const char *name);
+	Scene(const char *name = "default_scene");
 	~Scene();
 
 	void setName(const char *name);
 	const char *getName();
 
+	long addNode(IAction *node);
 	long addNode(sptr<IAction> node);
 	void removeNode(unsigned long id);
 	sptr<IAction> getEnd(unsigned long num);
@@ -33,7 +34,6 @@ public:
 
 private:
 	bool isPartOfScene(unsigned long id);
-
 
 	std::string mName;
 	std::map<unsigned long, sptr<IAction>> mNodes;

@@ -106,10 +106,39 @@ std::vector<unsigned long> Scene::getOutputs(unsigned long id){
 	return ret;
 }
 void Scene::serialize(IMultiLevelStore *data) const{
+	if(!data) return;
+	data->add("name", mName.c_str());
+	for(auto iter = mNodes.begin(); iter != mNodes.end(); iter++){
+		if(iter->second) iter->second->serialize(data->addLevel("node"));
+	}
+	IMultiLevelStore *adjacencyStore = data->addLevel("adjacencylist");
+	for(auto iter = mAdjacencyList.begin(); iter != mAdjacencyList.end(); iter++){
+		if(iter->second.size() > 0){
+			std::string value;
+			for(unsigned int i = 0; i < iter->second.size(); i++){
+				value.append(std::to_string(iter->second[i])).append(" ");
+			}
+			adjacencyStore->add(std::to_string(iter->first).c_str(), value.c_str());
+		}
+	}
 	return;
 }
 
 void Scene::deserialize(const IMultiLevelStore *data){
+	if(!data) return;
+	try{
+		/*mFreq->deserialize(data->getLevel("Frequency"));
+		mSamplerate->deserialize(data->getLevel("Samplerate"));
+		mChannels->deserialize(data->getLevel("Channels"));
+
+		mAudioInfo.setChannels(mChannels->get());
+		mAudioInfo.setOffset(0);
+		mAudioInfo.setSamplerate(mSamplerate->get());
+		mAudioInfo.setSamples(-1);*/
+	}
+	catch(std::exception &e){
+		throw e;
+	}
 	return;
 }
 

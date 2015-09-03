@@ -49,12 +49,12 @@ Todo:
 - ////implement scene
 - ////make node obsolete with observable and observing IActions
 - ////get rid of IAudioGetter
+- ////node and scene: observable
 - ////fix ptrs
 - ////IAction: checkCycles
 - ////redo scene
 - save and reload scene
 - implement serializer
-- node and scene: observable
 - node: make api reasonably stable
 - export scene to svg
 - write tests

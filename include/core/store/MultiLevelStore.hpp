@@ -27,13 +27,15 @@ public:
 	virtual const char *get(unsigned int numKey, unsigned int numElm = 0) const;
 	template<typename T>
 	T get(unsigned int numKey, unsigned int numElm = 0) const;
-	virtual IMultiLevelStore *getLevel(const char *key) const;
-	virtual IMultiLevelStore *getLevel(unsigned int numKey) const;
+	virtual IMultiLevelStore *getLevel(const char *key, unsigned int numElm = 0) const;
+	virtual IMultiLevelStore *getLevel(unsigned int numKey, unsigned int numElm = 0) const;
 
 	virtual unsigned int getSize() const;
 	virtual unsigned int getSize(const char *key) const;
 	virtual unsigned int getSize(unsigned int numKey) const;
 	virtual unsigned int getNumLevels() const;
+	virtual unsigned int getNumLevels(const char *key) const;
+	virtual unsigned int getNumLevels(unsigned int numKey) const;
 
 	virtual void add(const char *key, const char *value);
 	template<typename T>
@@ -44,7 +46,7 @@ private:
 	bool checkKey(const std::string &key) const;
 
 	std::multimap<std::string, std::string> mData;
-	std::map<std::string, std::unique_ptr<MultiLevelStore>> mLevels;
+	std::multimap<std::string, std::unique_ptr<MultiLevelStore>> mLevels;
 };
 
 template<typename T>

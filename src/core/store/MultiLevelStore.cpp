@@ -46,17 +46,33 @@ const char *MultiLevelStore::get(unsigned int numKey, unsigned int numElm) const
 	return iter->second.c_str();
 }
 
-IMultiLevelStore *MultiLevelStore::getLevel(const char *key) const{
-	return mLevels.at(key).get();
+IMultiLevelStore *MultiLevelStore::getLevel(const char *key, unsigned int numElm) const{
+	if(!key) throw MaudioException("key doesn't exist");
+	std::string tmpKey(key);
+	if(mLevels.find(tmpKey) == mLevels.end()) throw MaudioException("key doesn't exist");
+	auto iter = mLevels.lower_bound(tmpKey);
+	auto iterUp = mLevels.upper_bound(tmpKey);
+	while(iter != iterUp && numElm != 0){
+		iter++;
+		numElm--;
+	}
+	if(numElm != 0) throw MaudioException("numElm out of range");
+	return iter->second.get();
 }
 
-IMultiLevelStore *MultiLevelStore::getLevel(unsigned int numKey) const{
+IMultiLevelStore *MultiLevelStore::getLevel(unsigned int numKey, unsigned int numElm) const{
 	if(numKey >= mLevels.size()) throw MaudioException("numKey out of range");
 	auto iter = mLevels.begin();
 	while(iter != mLevels.end() && numKey != 0){
 		iter++;
 		numKey--;
 	}
+	auto iterUp = mLevels.upper_bound(iter->first);
+	while(iter != iterUp && numElm != 0){
+		iter++;
+		numElm--;
+	}
+	if(numElm != 0) throw MaudioException("numElm out of range");
 	return iter->second.get();
 }
 
@@ -82,6 +98,20 @@ unsigned int MultiLevelStore::getNumLevels() const{
 	return mLevels.size();
 }
 
+unsigned int MultiLevelStore::getNumLevels(const char *key) const{
+	return mLevels.count(std::string(key));
+}
+
+unsigned int MultiLevelStore::getNumLevels(unsigned int numKey) const{
+	if(numKey >= mLevels.size()) return 0;
+	auto iter = mLevels.begin();
+	while(iter != mLevels.end() && numKey != 0){
+		iter++;
+		numKey--;
+	}
+	return mLevels.count(iter->first);
+}
+
 void MultiLevelStore::add(const char *key, const char *value){
 	std::string tmpKey(key);
 	if(!checkKey(tmpKey)) return;
@@ -91,8 +121,9 @@ void MultiLevelStore::add(const char *key, const char *value){
 
 IMultiLevelStore *MultiLevelStore::addLevel(const char *key){
 	std::string tmpKey(key);
-	mLevels[tmpKey] = std::unique_ptr<MultiLevelStore>(new MultiLevelStore());
-	return mLevels[tmpKey].get();
+	MultiLevelStore *ret = new MultiLevelStore();
+	mLevels.insert(std::make_pair(tmpKey, std::unique_ptr<MultiLevelStore>(ret)));
+	return ret;
 }
 
 bool MultiLevelStore::checkKey(const std::string &key) const{

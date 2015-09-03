@@ -53,6 +53,7 @@ Todo:
 - ////fix ptrs
 - ////IAction: checkCycles
 - ////redo scene
+- create typemanager
 - save and reload scene
 - implement serializer
 - node: make api reasonably stable

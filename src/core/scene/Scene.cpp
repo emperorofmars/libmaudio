@@ -5,7 +5,10 @@
  */
 
 #include "core/scene/Scene.hpp"
+#include "core/pluginmanager/PluginManager.hpp"
+#include "core/util/Util.hpp"
 #include "core/util/AudioException.hpp"
+#include <sstream>
 
 namespace maudio{
 
@@ -109,16 +112,22 @@ void Scene::serialize(IMultiLevelStore *data) const{
 	if(!data) return;
 	data->add("name", mName.c_str());
 	for(auto iter = mNodes.begin(); iter != mNodes.end(); iter++){
-		if(iter->second) iter->second->serialize(data->addLevel("node"));
+		if(iter->second){
+			IMultiLevelStore *nodeStore = data->addLevel("node");
+			iter->second->serialize(nodeStore->addLevel("node"));
+			nodeStore->add("id", std::to_string(iter->second->getID()).c_str());
+		}
 	}
 	IMultiLevelStore *adjacencyStore = data->addLevel("adjacencylist");
 	for(auto iter = mAdjacencyList.begin(); iter != mAdjacencyList.end(); iter++){
 		if(iter->second.size() > 0){
 			std::string value;
+			value.append(std::to_string(iter->first)).append(" ");
+			
 			for(unsigned int i = 0; i < iter->second.size(); i++){
 				value.append(std::to_string(iter->second[i])).append(" ");
 			}
-			adjacencyStore->add(std::to_string(iter->first).c_str(), value.c_str());
+			adjacencyStore->add("inputs", value.c_str());
 		}
 	}
 	return;
@@ -127,14 +136,43 @@ void Scene::serialize(IMultiLevelStore *data) const{
 void Scene::deserialize(const IMultiLevelStore *data){
 	if(!data) return;
 	try{
-		/*mFreq->deserialize(data->getLevel("Frequency"));
-		mSamplerate->deserialize(data->getLevel("Samplerate"));
-		mChannels->deserialize(data->getLevel("Channels"));
-
-		mAudioInfo.setChannels(mChannels->get());
-		mAudioInfo.setOffset(0);
-		mAudioInfo.setSamplerate(mSamplerate->get());
-		mAudioInfo.setSamples(-1);*/
+		mName = data->get("name");
+		
+		std::map<unsigned long, unsigned long> idConversion;
+		
+		for(unsigned int i = 0; i < data->getNumLevels("node"); i++){
+			IMultiLevelStore *nodeStore = data->getLevel("node", i);
+			IMultiLevelStore *innerNodeStore = nodeStore->getLevel("node");
+			std::string type = innerNodeStore->get("type");
+			try{
+				//use typemanager instead
+				sptr<IAction> action = PluginManager::Instance()->createInstance(type.c_str());
+				action->deserialize(innerNodeStore);
+				idConversion[string_to<unsigned long>(std::string(nodeStore->get("id")))] = action->getID();
+				add(action);
+			}
+			catch(std::exception &e){
+				//
+			}
+		}
+		IMultiLevelStore *adjacencyStore = data->getLevel("adjacencylist");
+		for(unsigned int i = 0; i < adjacencyStore->getSize("inputs"); i++){
+			try{
+				std::string strValues = adjacencyStore->get("inputs", i);
+				std::stringstream ss(strValues);
+				unsigned int key = 0;
+				ss >> key;
+				std::vector<unsigned long> numValues;
+				unsigned int tmp = 0;
+				while(ss >> tmp){
+					numValues.push_back(idConversion[tmp]);
+				}
+				mAdjacencyList[idConversion[key]] = numValues;
+			}
+			catch(std::exception &e){
+				//
+			}
+		}
 	}
 	catch(std::exception &e){
 		throw e;

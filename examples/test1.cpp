@@ -27,15 +27,10 @@ int main(int argc, char *argv[]){
 	std::cerr << "test" << std::endl;
 	
 	Scene scene("test_scene");
-	long sin1 = scene.add(TypeManager::create("SinusGenerator"));
-	long sin2 = scene.add(TypeManager::create("SinusGenerator"));
-	long mix = scene.add(TypeManager::create("Mixer"));
-	long play = scene.add(TypeManager::create("Player"));
-	
-	scene.get(sin1)->setName("sin1");
-	scene.get(sin2)->setName("sin2");
-	scene.get(mix)->setName("mix");
-	scene.get(play)->setName("play");
+	long sin1 = scene.add(TypeManager::create("SinusGenerator", "sin1"));
+	long sin2 = scene.add(TypeManager::create("SinusGenerator", "sin2"));
+	long mix = scene.add(TypeManager::create("Mixer", "mix"));
+	long play = scene.add(TypeManager::create("Player", "play"));
 	
 	scene.connect(sin1, mix);
 	scene.connect(sin2, mix);
@@ -52,14 +47,6 @@ int main(int argc, char *argv[]){
 	auto sin2Prop = scene.get(sin2)->getProperties();
 	auto sin2Freq = sin2Prop->getKeyableProperty("Frequency");
 	sin2Freq->setKey("1100", 0);
-	
-	std::cerr << "scene: " << scene.getName() << " :: ends: " << scene.getNumEnds() << std::endl;
-	
-	auto sink01 = scene.getEnd(0);
-	if(sink01){
-		std::cerr << "sink01 ID: " << sink01->getID() << std::endl;
-		std::cerr << "sink01 Name: " << sink01->getName() << std::endl;
-	}
 	
 	/*
 	auto playCtrl = scene.get(play)->getControl();
@@ -103,6 +90,14 @@ int main(int argc, char *argv[]){
 	else{
 		std::cerr << "sink02 fail!" << std::endl;
 	}
+	
+	auto playCtrl2 = scene2.get(sink02->getID())->getControl();
+	
+	std::cerr << "play" << std::endl;
+	
+	playCtrl2->callFunction("play");
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	playCtrl2->callFunction("stop");
 	
 	std::cerr << "closing main" << std::endl;
 	return 0;

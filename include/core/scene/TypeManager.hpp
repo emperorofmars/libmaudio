@@ -14,7 +14,7 @@ namespace maudio{
 
 class TypeManager{
 public:
-	static sptr<IAction> create(const char *type);
+	static sptr<IAction> create(const char *type, const char *name = NULL);
 };
 
 } // maudio

@@ -213,6 +213,14 @@ std::cerr << "SCENE DESERIALIZE EXCEPT 02" << std::endl;
 				//
 			}
 		}
+		for(auto iter = mAdjacencyList.begin(); iter != mAdjacencyList.end(); iter++){
+			for(unsigned int i = 0; i < iter->second.size(); i++){
+				if(!mNodes[iter->first] || !mNodes[iter->second[i]]){
+					continue;
+				}
+				mNodes[iter->first]->addInput(mNodes[iter->second[i]].get(), -1);
+			}
+		}
 	}
 	catch(std::exception &e){
 		throw e;

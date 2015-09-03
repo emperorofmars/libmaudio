@@ -13,30 +13,30 @@
 
 namespace maudio{
 
-sptr<IAction> TypeManager::create(const char *type){
+sptr<IAction> TypeManager::create(const char *type, const char *name){
 	sptr<IAction> ret;
 	try{
 		ret = PluginManager::Instance()->createInstance(type);
-		if(ret) return ret;
 	}
 	catch(std::exception &e){
 		
 	}
 	std::string mtype(type);
-	
-	if(mtype == "SinusGenerator"){
-		ret.reset(new SinusGenerator());
-		return ret;
+	if(!ret){
+		if(mtype == "SinusGenerator"){
+			ret.reset(new SinusGenerator());
+		}
+		else if(mtype == "TerminalPrinter"){
+			ret.reset(new TerminalPrinter());
+		}
+		else if(mtype == "Player"){
+			ret.reset(new Player());
+		}
 	}
-	if(mtype == "TerminalPrinter"){
-		ret.reset(new TerminalPrinter());
-		return ret;
+	if(ret && name){
+		ret->setName(name);
 	}
-	if(mtype == "Player"){
-		ret.reset(new Player());
-		return ret;
-	}
-	return NULL;
+	return ret;
 }
 
 } // maudio

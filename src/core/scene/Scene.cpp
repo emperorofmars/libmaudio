@@ -5,7 +5,7 @@
  */
 
 #include "core/scene/Scene.hpp"
-#include "core/pluginmanager/PluginManager.hpp"
+#include "core/scene/TypeManager.hpp"
 #include "core/util/Util.hpp"
 #include "core/util/AudioException.hpp"
 #include <sstream>
@@ -146,7 +146,8 @@ void Scene::deserialize(const IMultiLevelStore *data){
 			std::string type = innerNodeStore->get("type");
 			try{
 				//use typemanager instead
-				sptr<IAction> action = PluginManager::Instance()->createInstance(type.c_str());
+				sptr<IAction> action = TypeManager::create(type.c_str());
+				if(!action) break;
 				action->deserialize(innerNodeStore);
 				idConversion[string_to<unsigned long>(std::string(nodeStore->get("id")))] = action->getID();
 				add(action);

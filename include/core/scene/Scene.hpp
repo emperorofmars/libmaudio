@@ -28,6 +28,8 @@ public:
 	void remove(unsigned long id);
 	sptr<IAction> getEnd(unsigned int num);
 	sptr<IAction> get(unsigned long id);
+	
+	unsigned int getNumEnds();
 
 	void connect(unsigned long source, unsigned long sink);
 	void disconnect(unsigned long source, unsigned long sink);

@@ -10,6 +10,8 @@
 #include "core/util/AudioException.hpp"
 #include <sstream>
 
+#include <iostream>
+
 namespace maudio{
 
 Scene::Scene(const char *name){
@@ -58,15 +60,51 @@ void Scene::remove(unsigned long id){
 
 sptr<IAction> Scene::getEnd(unsigned int num){
 	if(num >= mAdjacencyList.size()) return NULL;
-	for(auto iter = mAdjacencyList.begin(); iter != mAdjacencyList.end(); iter ++){
-		if(iter->second.size() == 0 && mNodes[iter->first] > 0 && num == 0) return mNodes[iter->first];
-		if(num == 0) return NULL;
+	for(auto iter1 = mAdjacencyList.begin(); iter1 != mAdjacencyList.end(); iter1 ++){
+		unsigned long tmp = iter1->first;
+		bool isEnd = true;
+		for(auto iter2 = mAdjacencyList.begin(); iter2 != mAdjacencyList.end(); iter2 ++){
+			for(unsigned int i = 0; i < iter2->second.size(); i++){
+				if(tmp == iter2->first) continue;
+				if(tmp == iter2->second[i]){
+					isEnd = false;
+					break;
+				}
+			}
+			if(!isEnd) break;
+		}
+		if(isEnd){
+			if(num == 0) return mNodes[tmp];
+			num--;
+		}
 	}
 	return NULL;
 }
 
 sptr<IAction> Scene::get(unsigned long id){
 	return mNodes[id];
+}
+
+unsigned int Scene::getNumEnds(){
+	unsigned int ret = 0;
+	for(auto iter1 = mAdjacencyList.begin(); iter1 != mAdjacencyList.end(); iter1 ++){
+		unsigned long tmp = iter1->first;
+		bool isEnd = true;
+		for(auto iter2 = mAdjacencyList.begin(); iter2 != mAdjacencyList.end(); iter2 ++){
+			for(unsigned int i = 0; i < iter2->second.size(); i++){
+				if(tmp == iter2->first) continue;
+				if(tmp == iter2->second[i]){
+					isEnd = false;
+					break;
+				}
+			}
+			if(!isEnd) break;
+		}
+		if(isEnd){
+			ret++;
+		}
+	}
+	return ret;
 }
 
 void Scene::connect(unsigned long source, unsigned long sink){
@@ -143,16 +181,16 @@ void Scene::deserialize(const IMultiLevelStore *data){
 		for(unsigned int i = 0; i < data->getNumLevels("node"); i++){
 			IMultiLevelStore *nodeStore = data->getLevel("node", i);
 			IMultiLevelStore *innerNodeStore = nodeStore->getLevel("node");
-			std::string type = innerNodeStore->get("type");
 			try{
-				//use typemanager instead
+				std::string type = innerNodeStore->get("type");
 				sptr<IAction> action = TypeManager::create(type.c_str());
-				if(!action) break;
+				if(!action) continue;
 				action->deserialize(innerNodeStore);
 				idConversion[string_to<unsigned long>(std::string(nodeStore->get("id")))] = action->getID();
 				add(action);
 			}
 			catch(std::exception &e){
+std::cerr << "SCENE DESERIALIZE EXCEPT 01" << std::endl;
 				//
 			}
 		}
@@ -171,6 +209,7 @@ void Scene::deserialize(const IMultiLevelStore *data){
 				mAdjacencyList[idConversion[key]] = numValues;
 			}
 			catch(std::exception &e){
+std::cerr << "SCENE DESERIALIZE EXCEPT 02" << std::endl;
 				//
 			}
 		}

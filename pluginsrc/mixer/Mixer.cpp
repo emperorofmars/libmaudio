@@ -71,10 +71,20 @@ public:
 	};
 
 	virtual void serialize(IMultiLevelStore *data) const{
+		if(!data) return;
+		data->add("type", "Mixer");
+		data->add("name", mName.c_str());
 		return;
 	};
 	
 	virtual void deserialize(const IMultiLevelStore *data){
+		if(!data) return;
+		try{
+			mName = data->get("name");
+		}
+		catch(std::exception &e){
+			throw e;
+		}
 		return;
 	};
 	

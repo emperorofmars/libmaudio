@@ -13,12 +13,16 @@
 #include "core/audiodata/AudioInfo.hpp"
 #include "core/util/sptr.hpp"
 #include <vector>
+#include <string>
 
 namespace maudio{
 
 class BaseAction : public IAction{
 public:
 	virtual ~BaseAction();
+
+	virtual void setName(const char *name);
+	virtual const char *getName() const;
 
 	virtual void deleteData(IAudioBuffer *data) noexcept final;
 	virtual void deleteData(IAudioInfo *data) noexcept final;
@@ -50,6 +54,8 @@ protected:
 	PropertyManager mProperties;
 
 //private:
+	std::string mName;
+	
 	std::vector<IAction *> mInputs;
 };
 

@@ -84,6 +84,8 @@ void SinusGenerator::setChannels(unsigned int channels){
 
 void SinusGenerator::serialize(IMultiLevelStore *data) const{
 	if(!data) return;
+	data->add("type", "SinusGenerator");
+	data->add("name", mName.c_str());
 	mFreq->serialize(data->addLevel("Frequency"));
 	mSamplerate->serialize(data->addLevel("Samplerate"));
 	mChannels->serialize(data->addLevel("Channels"));
@@ -93,6 +95,8 @@ void SinusGenerator::serialize(IMultiLevelStore *data) const{
 void SinusGenerator::deserialize(const IMultiLevelStore *data){
 	if(!data) return;
 	try{
+		mName = data->get("name");
+		
 		mFreq->deserialize(data->getLevel("Frequency"));
 		mSamplerate->deserialize(data->getLevel("Samplerate"));
 		mChannels->deserialize(data->getLevel("Channels"));

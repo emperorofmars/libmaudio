@@ -26,6 +26,9 @@ class IAction : public UniqueID, public ISerializable, public BaseObserver, publ
 public:
 	virtual ~IAction(){};
 
+	virtual void setName(const char *name) = 0;
+	virtual const char *getName() const = 0;
+
 	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept = 0;
 	virtual IAudioInfo *getInfo() noexcept = 0;
 

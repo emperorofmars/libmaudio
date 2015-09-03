@@ -15,6 +15,15 @@ BaseAction::~BaseAction(){
 	return;
 }
 
+void BaseAction::setName(const char *name){
+	mName = name;
+	return;
+}
+
+const char *BaseAction::getName() const{
+	return mName.c_str();
+}
+
 void BaseAction::deleteData(IAudioBuffer *data) noexcept{
 	if(data) delete data;
 	return;

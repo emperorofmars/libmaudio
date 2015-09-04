@@ -20,6 +20,8 @@ public:
 	Player(int device);
 	Player(std::string &device);
 	virtual ~Player();
+	
+	virtual const char *getType() const;
 
 	void open();
 	void open(int device);

@@ -17,8 +17,10 @@ public:
 
 	virtual const char *get(const char *key, unsigned int numElm = 0) const = 0;
 	virtual const char *get(unsigned int numKey, unsigned int numElm = 0) const = 0;
+	virtual const char *getKey(unsigned int numKey) const = 0;
 	virtual IMultiLevelStore *getLevel(const char *key, unsigned int numElm = 0) const = 0;
 	virtual IMultiLevelStore *getLevel(unsigned int numKey, unsigned int numElm = 0) const = 0;
+	virtual const char *getLevelKey(unsigned int numKey) const = 0;
 	virtual unsigned int getSize() const = 0;
 	virtual unsigned int getSize(const char *key) const = 0;
 	virtual unsigned int getSize(unsigned int numKey) const = 0;

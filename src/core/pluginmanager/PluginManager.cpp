@@ -50,6 +50,9 @@ void PluginManager::readConfig(const IMultiStore *conf){
 void PluginManager::addPlugin(const char *path){
 	std::shared_ptr<PluginLoader<IAction>> tmp(new PluginLoader<IAction>(path));
 	if(tmp->loaded()){
+		if(checkNameCollisions(std::string(path)) || checkNameCollisions(tmp->getName())){
+			throw MaudioException("plugin name collision!");
+		}
 		mPlugins.push_back(tmp);
 	}
 	return;
@@ -71,7 +74,7 @@ sptr<IAction> PluginManager::createInstance(unsigned int plugin){
 }
 
 sptr<IAction> PluginManager::createInstance(const char *plugin){
-	int index = nameToNum(plugin);
+	int index = nameToNum(std::string(plugin));
 	if(index < 0) throw MaudioException("Invalid Name!");
 	if((unsigned int)index >= mPlugins.size()) throw MaudioException("Out of Bounds!");
 	sptr<IAction> ret;
@@ -79,11 +82,18 @@ sptr<IAction> PluginManager::createInstance(const char *plugin){
 	return ret;
 }
 
-int PluginManager::nameToNum(const char *name){
+int PluginManager::nameToNum(std::string name){
 	for(unsigned int i = 0; i < mPlugins.size(); i++){
 		if(mPlugins[i]->getName() == std::string(name)) return i;
 	}
 	return -1;
+}
+
+bool PluginManager::checkNameCollisions(std::string name){
+	for(unsigned int i = 0; i < mPlugins.size(); i++){
+		if(mPlugins[i]->getName() == name) return true;
+	}
+	return false;
 }
 
 } // maudio

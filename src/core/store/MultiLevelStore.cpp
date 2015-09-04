@@ -46,6 +46,16 @@ const char *MultiLevelStore::get(unsigned int numKey, unsigned int numElm) const
 	return iter->second.c_str();
 }
 
+const char *MultiLevelStore::getKey(unsigned int numKey) const{
+	if(numKey >= mData.size()) throw MaudioException("numKey out of range");
+	auto iter = mData.begin();
+	while(iter != mData.end() && numKey != 0){
+		iter++;
+		numKey--;
+	}
+	return iter->first.c_str();
+}
+
 IMultiLevelStore *MultiLevelStore::getLevel(const char *key, unsigned int numElm) const{
 	if(!key) throw MaudioException("key doesn't exist");
 	std::string tmpKey(key);
@@ -74,6 +84,16 @@ IMultiLevelStore *MultiLevelStore::getLevel(unsigned int numKey, unsigned int nu
 	}
 	if(numElm != 0) throw MaudioException("numElm out of range");
 	return iter->second.get();
+}
+
+const char *MultiLevelStore::getLevelKey(unsigned int numKey) const{
+	if(numKey >= mLevels.size()) throw MaudioException("numKey out of range");
+	auto iter = mLevels.begin();
+	while(iter != mLevels.end() && numKey != 0){
+		iter++;
+		numKey--;
+	}
+	return iter->first.c_str();
 }
 
 unsigned int MultiLevelStore::getSize() const{
@@ -127,6 +147,8 @@ IMultiLevelStore *MultiLevelStore::addLevel(const char *key){
 }
 
 bool MultiLevelStore::checkKey(const std::string &key) const{
+	if(key.size() == 0) return false;
+	if(key[0] == '!') return false;
 	for(unsigned int i = 0; i < key.size(); i++){
 		if(key[i] == ' ' || key[i] == '\t') return false;
 	}

@@ -21,7 +21,7 @@ public:
 	~Scene();
 
 	void setName(const char *name);
-	const char *getName();
+	const char *getName() const;
 
 	long add(IAction *node);
 	long add(sptr<IAction> node);

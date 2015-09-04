@@ -19,6 +19,10 @@ TerminalPrinter::TerminalPrinter(){
 TerminalPrinter::~TerminalPrinter(){
 }
 
+const char *TerminalPrinter::getType() const{
+	return "TerminalPrinter";
+}
+
 IAudioBuffer *TerminalPrinter::get(unsigned long pos, unsigned int length) noexcept{
 	return NULL;
 }

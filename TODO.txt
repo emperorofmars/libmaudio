@@ -53,9 +53,13 @@ Todo:
 - ////fix ptrs
 - ////IAction: checkCycles
 - ////redo scene
-- create typemanager
-- save and reload scene
+- ////create typemanager
+- ////save and reload scene
+- ////IAction: add getType
+- store: disallow '!' as first character in key
 - implement serializer
+- serializer project name
+- create Project
 - node: make api reasonably stable
 - export scene to svg
 - write tests

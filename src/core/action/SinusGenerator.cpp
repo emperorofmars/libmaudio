@@ -30,6 +30,10 @@ SinusGenerator::SinusGenerator(){
 SinusGenerator::~SinusGenerator(){
 }
 
+const char *SinusGenerator::getType() const{
+	return "SinusGenerator";
+}
+
 IAudioBuffer *SinusGenerator::get(unsigned long pos, unsigned int length) noexcept{
 	mAudioInfo.setChannels(mChannels->get());
 	mAudioInfo.setSamplerate(mSamplerate->get());

@@ -28,6 +28,10 @@ Player::~Player(){
     close();
 }
 
+const char *Player::getType() const{
+	return "Player";
+}
+
 void Player::open(){
 	mDevice = AudioDevice::open();
 	return;

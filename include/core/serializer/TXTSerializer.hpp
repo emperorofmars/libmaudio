@@ -8,15 +8,38 @@
 #define MAUDIO_TXTSERIALIZER
 
 #include "core/serializer/ISerializer.hpp"
+#include "core/store/MultiLevelStore.hpp"
+#include <fstream>
 
 namespace maudio{
 
 class TXTSerializer : public ISerializer{
 public:
-	TXTSerializer();
+	TXTSerializer(const char *name = "default_project");
 	~TXTSerializer();
 
-	//load and save scene
+	virtual void setName(const char *name);
+	virtual const char *getName() const;
+
+	virtual bool addScene(std::shared_ptr<Scene> data);
+	virtual std::vector<std::shared_ptr<Scene>> getScenes(const char *name);
+
+	virtual void writeFile(const char *path);
+	virtual void parseFile(const char *path);
+
+	virtual std::shared_ptr<IMultiLevelStore> getStore();
+	
+private:
+	void writeHeader(std::ofstream &file);
+	void writeLevel(std::ofstream &file, IMultiLevelStore *store, unsigned int indentLevel = 0);
+	void writeCurrentLevel(std::ofstream &file, IMultiLevelStore *store, unsigned int indentLevel = 0);
+	void readLevel(std::ifstream &file, IMultiLevelStore *store);
+	
+	std::string printIndent(unsigned int indentLevel);
+	
+	std::string mName;
+	std::shared_ptr<MultiLevelStore> mStore;
+	std::vector<std::shared_ptr<Scene>> mScenes;
 };
 
 } // maudio

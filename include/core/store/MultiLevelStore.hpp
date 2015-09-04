@@ -27,8 +27,10 @@ public:
 	virtual const char *get(unsigned int numKey, unsigned int numElm = 0) const;
 	template<typename T>
 	T get(unsigned int numKey, unsigned int numElm = 0) const;
+	virtual const char *getKey(unsigned int numKey) const;
 	virtual IMultiLevelStore *getLevel(const char *key, unsigned int numElm = 0) const;
 	virtual IMultiLevelStore *getLevel(unsigned int numKey, unsigned int numElm = 0) const;
+	virtual const char *getLevelKey(unsigned int numKey) const;
 
 	virtual unsigned int getSize() const;
 	virtual unsigned int getSize(const char *key) const;

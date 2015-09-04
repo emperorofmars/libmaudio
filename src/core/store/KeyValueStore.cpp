@@ -95,6 +95,8 @@ void KeyValueStore::operator=(IKeyValueStore &data){
 }
 
 bool KeyValueStore::checkKey(const std::string &key) const{
+	if(key.size() == 0) return false;
+	if(key[0] == '!') return false;
 	for(unsigned int i = 0; i < key.size(); i++){
 		if(key[i] == ' ' || key[i] == '\t') return false;
 	}

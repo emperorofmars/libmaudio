@@ -10,8 +10,6 @@
 #include "core/util/AudioException.hpp"
 #include <sstream>
 
-#include <iostream>
-
 namespace maudio{
 
 Scene::Scene(const char *name){
@@ -26,7 +24,7 @@ void Scene::setName(const char *name){
 	return;
 }
 
-const char *Scene::getName(){
+const char *Scene::getName() const{
 	return mName.c_str();
 }
 
@@ -153,6 +151,7 @@ void Scene::serialize(IMultiLevelStore *data) const{
 		if(iter->second){
 			IMultiLevelStore *nodeStore = data->addLevel("node");
 			iter->second->serialize(nodeStore->addLevel("node"));
+			nodeStore->add("type", iter->second->getType());
 			nodeStore->add("id", std::to_string(iter->second->getID()).c_str());
 		}
 	}
@@ -182,7 +181,7 @@ void Scene::deserialize(const IMultiLevelStore *data){
 			IMultiLevelStore *nodeStore = data->getLevel("node", i);
 			IMultiLevelStore *innerNodeStore = nodeStore->getLevel("node");
 			try{
-				std::string type = innerNodeStore->get("type");
+				std::string type = nodeStore->get("type");
 				sptr<IAction> action = TypeManager::create(type.c_str());
 				if(!action) continue;
 				action->deserialize(innerNodeStore);
@@ -190,7 +189,6 @@ void Scene::deserialize(const IMultiLevelStore *data){
 				add(action);
 			}
 			catch(std::exception &e){
-std::cerr << "SCENE DESERIALIZE EXCEPT 01" << std::endl;
 				//
 			}
 		}
@@ -209,7 +207,6 @@ std::cerr << "SCENE DESERIALIZE EXCEPT 01" << std::endl;
 				mAdjacencyList[idConversion[key]] = numValues;
 			}
 			catch(std::exception &e){
-std::cerr << "SCENE DESERIALIZE EXCEPT 02" << std::endl;
 				//
 			}
 		}

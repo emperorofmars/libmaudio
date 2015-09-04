@@ -13,6 +13,10 @@ public:
 	Mixer(){};
 	virtual ~Mixer(){};
 	
+	virtual const char *getType() const{
+		return "Mixer";
+	};
+	
 	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept{
 		sptr<IAudioInfo> info(getInfo());
 		AudioBuffer *ret = new AudioBuffer(info->getChannels(), length, pos, info->getSamplerate());

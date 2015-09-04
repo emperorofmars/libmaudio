@@ -15,4 +15,5 @@ sources.txt
 res/lib/libmaudio.a
 res/lib/libmaudio.so
 *.swp
+*.maup
 

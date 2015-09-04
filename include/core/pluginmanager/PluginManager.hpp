@@ -36,7 +36,8 @@ private:
 	PluginManager(const PluginManager&) = delete;
 	void operator=(const PluginManager&) = delete;
 
-	int nameToNum(const char *name);
+	int nameToNum(std::string name);
+	bool checkNameCollisions(std::string name);
 
 	std::vector<std::shared_ptr<PluginLoader<IAction>>> mPlugins;
 };

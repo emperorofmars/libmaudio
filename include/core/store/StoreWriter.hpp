@@ -4,8 +4,8 @@
  * See LICENSE.txt for the full license
  */
 
-#ifndef MAUDIO_CONFIGREADER
-#define MAUDIO_CONFIGREADER
+#ifndef MAUDIO_STOREWRITER
+#define MAUDIO_STOREWRITER
 
 #include "core/store/KeyValueStore.hpp"
 #include "core/store/MultiStore.hpp"
@@ -58,7 +58,7 @@ StoreWriter<T>::~StoreWriter(){
 
 } // maudio
 
-#endif // MAUDIO_CONFIGREADER
+#endif // MAUDIO_STOREWRITER
 
 
 

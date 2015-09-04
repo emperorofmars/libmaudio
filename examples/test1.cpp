@@ -16,6 +16,8 @@
 #include "core/scene/TypeManager.hpp"
 #include "core/store/MultiLevelStore.hpp"
 #include "core/serializer/TXTSerializer.hpp"
+#include "core/store/StoreWriter.hpp"
+#include "core/store/StoreReader.hpp"
 /*
 #include "core/manipulator/Resampler.hpp"
 #include "core/audiosink/Performance.hpp"
@@ -65,20 +67,35 @@ int main(int argc, char *argv[]){
 		return 0;
 	}
 	
-	auto playCtrl2 = scene2->get(scene2->getEnd(0)->getID())->getControl();
+	auto playCtrl = scene2->get(scene2->getEnd(0)->getID())->getControl();
+	//auto playCtrlx = scene2->get(play)->getControl();
+	//auto playCtrl = scene1->get(play)->getControl();
 	
 	std::cerr << "play" << std::endl;
 	
 	std::cerr << "debug: " << scene2->getNumEnds() << std::endl;
-	if(!playCtrl2) throw MaudioException("FUUU");
+	if(!playCtrl) throw MaudioException("FUUU");
 	
-	playCtrl2->callFunction("play");
+	playCtrl->callFunction("play");
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-	playCtrl2->callFunction("stop");
+	playCtrl->callFunction("stop");
 	
 	TXTSerializer serializer;
 	serializer.addScene(scene2);
 	serializer.writeFile("testfile.maup");
+	
+	std::cerr << "parseFile" << std::endl;
+	
+	TXTSerializer parser;
+	parser.parseFile("testfile.maup");
+	
+	
+	auto maupstore = parser.getStore();
+	StoreWriter<IMultiLevelStore> writer;
+	writer.writeFile("testfile2.maup", maupstore.get());
+	
+	
+	//parser.writeFile("testfile2.maup");
 	
 	std::cerr << "closing main" << std::endl;
 	return 0;

@@ -8,6 +8,8 @@
 #include "core/util/AudioException.hpp"
 #include <fstream>
 
+#include <iostream>
+
 namespace maudio{
 
 template<>
@@ -126,6 +128,8 @@ void StoreReader<IMultiLevelStore>::readLevel(std::istream &stream, IMultiLevelS
 			}
 			else if(values.first.size() > 0 && values.second.size() > 0){
 				store->add(values.first.c_str(), values.second.c_str());
+			}
+			else{
 			}
 		}
 		catch(std::exception &e){

@@ -61,7 +61,18 @@ void TXTSerializer::writeFile(const char *path){
 }
 
 void TXTSerializer::parseFile(const char *path){
-	//TODO
+	std::ifstream file(path);
+	if(!file.is_open()) throw MaudioException("couldn't open file!");
+	
+	mName.clear();
+	mStore.reset();
+	mScenes.clear();
+	
+	if(!parseHeader(file)) throw MaudioException("invalid fileheader!");
+	
+	StoreReader<IMultiLevelStore> reader;
+	mStore.reset(reader.readStream(file));
+	
 	return;
 }
 
@@ -78,6 +89,31 @@ void TXTSerializer::writeHeader(std::ofstream &file){
 	file << "|TXTSerializer" << std::endl;
 	//filestandard version
 	return;
+}
+
+bool TXTSerializer::parseHeader(std::ifstream &file){
+	if(!file.is_open()) throw MaudioException("writing file failed!");
+	//TODO
+	std::string line;
+	bool hasName = false, hasType = false, hasProject = false;
+	while(std::getline(file, line)){
+		if(line.size() > 1 && line[0] == '|'){
+			if(line.substr(0, 15) == "|maudio_project"){
+				hasProject = true;
+			}
+			else if(line.substr(0, 5) == "|name"){
+				mName = line.substr(line.find_first_of(' ') + 1, line.size());
+				hasName = true;
+			}
+			else if(line.substr(0, 14) == "|TXTSerializer"){
+				hasType = true;
+				break;
+			}
+		}
+		else break;
+	}
+	if(hasName && hasProject && hasType) return true;
+	return false;
 }
 
 } // maudio

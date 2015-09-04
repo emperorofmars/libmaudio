@@ -59,10 +59,11 @@ Todo:
 - ////store: disallow '!' as first character in key
 - ////serializer project name
 - ////fix MultiLevelStore
+- ////finish StoreReader
+- finish StoreWriter
 - implement serializer
 - create InvalidAction
 - create Project
-- finish ConfigReader
 - node: make api reasonably stable
 - export scene to svg
 - write tests

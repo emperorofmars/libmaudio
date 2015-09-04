@@ -24,6 +24,7 @@ public:
 	template<typename T>
 	T get(const char *key, unsigned int numElm = 0) const;
 	virtual const char *get(unsigned int numKey) const;
+	virtual const char *getKey(unsigned int numKey) const;
 	template<typename T>
 	T get(unsigned int numKey) const;
 	virtual unsigned int getSize() const;

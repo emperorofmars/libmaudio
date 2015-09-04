@@ -4,14 +4,16 @@
  * See LICENSE.txt for the full license
  */
 
-#ifndef MAUDIO_CONFIGREADER
-#define MAUDIO_CONFIGREADER
+#ifndef MAUDIO_STOREREADER
+#define MAUDIO_STOREREADER
 
 #include "core/store/KeyValueStore.hpp"
 #include "core/store/MultiStore.hpp"
 #include "core/store/MultiLevelStore.hpp"
 #include <string>
 #include <istream>
+
+#include <iostream>
 
 namespace maudio{
 
@@ -59,11 +61,11 @@ template<typename T>
 std::pair<std::string, std::string> StoreReader<T>::parseLine(std::string &line){
 	std::pair<std::string, std::string> ret;
 
-	while(line.size() > 0 && (line[0] == ' ' || line[0] == '\t')){
-		line.erase(0);
+	while((line.size() > 0) && (line[0] == ' ' || line[0] == '\t')){
+		line.erase(0, 1);
 	}
 	if(line.size() == 0 || line[0] == '\n' || line[0] == '\0' || line[0] == '#' || line[0] == '|'){
-		throw;
+		throw MaudioException("error parsing line!");
 	}
 
 	ret.first = line.substr(0, line.find_first_of(' '));
@@ -74,7 +76,7 @@ std::pair<std::string, std::string> StoreReader<T>::parseLine(std::string &line)
 
 } // maudio
 
-#endif // MAUDIO_CONFIGREADER
+#endif // MAUDIO_STOREREADER
 
 
 

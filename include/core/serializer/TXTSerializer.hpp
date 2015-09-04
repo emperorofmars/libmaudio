@@ -31,9 +31,10 @@ public:
 	
 private:
 	void writeHeader(std::ofstream &file);
+	bool parseHeader(std::ifstream &file);
 	
 	std::string mName;
-	std::shared_ptr<MultiLevelStore> mStore;
+	std::shared_ptr<IMultiLevelStore> mStore;
 	std::vector<std::shared_ptr<Scene>> mScenes;
 };
 

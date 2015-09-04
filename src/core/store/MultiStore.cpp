@@ -40,6 +40,16 @@ const char *MultiStore::get(unsigned int numKey) const{
 	return iter->second.c_str();
 }
 
+const char *MultiStore::getKey(unsigned int numKey) const{
+	if(numKey >= mData.size()) throw MaudioException("numKey out of range");
+	auto iter = mData.begin();
+	while(iter != mData.end() && numKey != 0){
+		iter++;
+		numKey--;
+	}
+	return iter->first.c_str();
+}
+
 unsigned int MultiStore::getSize() const{
 	return mData.size();
 }

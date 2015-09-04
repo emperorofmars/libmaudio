@@ -29,6 +29,12 @@ void StoreWriter<IKeyValueStore>::writeStream(std::ostream &stream, IKeyValueSto
 	
 	stream << "|IKeyValueStore" << std::endl;
 	
+	for(unsigned int i = 0; i < store->getSize(); i++){
+		const char *key = store->getKey(i);
+		const char *value = store->get(i);
+		if(!key || !value) continue;
+		stream << key  << " " << value << std::endl;
+	}
 	return;
 }
 
@@ -51,6 +57,12 @@ void StoreWriter<IMultiStore>::writeStream(std::ostream &stream, IMultiStore *st
 	
 	stream << "|IMultiStore" << std::endl;
 	
+	for(unsigned int i = 0; i < store->getSize(); i++){
+		const char *key = store->getKey(i);
+		const char *value = store->get(i);
+		if(!key || !value) continue;
+		stream << key  << " " << value << std::endl;
+	}
 	return;
 }
 

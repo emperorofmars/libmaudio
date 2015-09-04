@@ -36,7 +36,7 @@ bool TXTSerializer::addScene(std::shared_ptr<Scene> data){
 	return true;
 }
 
-std::vector<std::shared_ptr<Scene>> TXTSerializer::getScenes(const char *name){
+std::vector<std::shared_ptr<Scene>> TXTSerializer::getScenes(){
 	return mScenes;
 }
 
@@ -72,6 +72,12 @@ void TXTSerializer::parseFile(const char *path){
 	
 	StoreReader<IMultiLevelStore> reader;
 	mStore.reset(reader.readStream(file));
+	
+	for(unsigned int i = 0; i < mStore->getNumLevels("scene"); i++){
+		std::shared_ptr<Scene> tmp(new Scene());
+		tmp->deserialize(mStore->getLevel("scene", i));
+		mScenes.push_back(tmp);
+	}
 	
 	return;
 }

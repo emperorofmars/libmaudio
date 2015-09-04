@@ -22,7 +22,7 @@ public:
 	virtual const char *getName() const;
 
 	virtual bool addScene(std::shared_ptr<Scene> data);
-	virtual std::vector<std::shared_ptr<Scene>> getScenes(const char *name);
+	virtual std::vector<std::shared_ptr<Scene>> getScenes();
 
 	virtual void writeFile(const char *path);
 	virtual void parseFile(const char *path);

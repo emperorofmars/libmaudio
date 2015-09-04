@@ -90,12 +90,20 @@ int main(int argc, char *argv[]){
 	parser.parseFile("testfile.maup");
 	
 	
-	auto maupstore = parser.getStore();
-	StoreWriter<IMultiLevelStore> writer;
-	writer.writeFile("testfile2.maup", maupstore.get());
+	auto playCtrl2 = parser.getScenes()[0]->getEnd(0)->getControl();
+	//auto playCtrlx = scene2->get(play)->getControl();
+	//auto playCtrl = scene1->get(play)->getControl();
+	
+	std::cerr << "play" << std::endl;
+	
+	if(!playCtrl2) throw MaudioException("FUUU");
+	
+	playCtrl2->callFunction("play");
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	playCtrl2->callFunction("stop");
 	
 	
-	//parser.writeFile("testfile2.maup");
+	parser.writeFile("testfile2.maup");
 	
 	std::cerr << "closing main" << std::endl;
 	return 0;

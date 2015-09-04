@@ -14,6 +14,7 @@
 #include "core/pluginmanager/PluginManager.hpp"
 #include "core/scene/Scene.hpp"
 #include "core/scene/TypeManager.hpp"
+#include "core/scene/Project.hpp"
 #include "core/store/MultiLevelStore.hpp"
 #include "core/serializer/TXTSerializer.hpp"
 #include "core/store/StoreWriter.hpp"
@@ -28,7 +29,13 @@ using namespace maudio;
 int main(int argc, char *argv[]){
 	std::cerr << "test" << std::endl;
 	
+	Project proj1("test_project");
+	proj1.setSaveFile("testfile.maup");
+	
 	std::shared_ptr<Scene> scene1(new Scene("test_scene"));
+	
+	proj1.addScene(scene1);
+	
 	long sin1 = scene1->add(TypeManager::create("SinusGenerator", "sin1"));
 	long sin2 = scene1->add(TypeManager::create("SinusGenerator", "sin2"));
 	long mix = scene1->add(TypeManager::create("Mixer", "mix"));
@@ -52,11 +59,47 @@ int main(int argc, char *argv[]){
 	sin1Freq->addKey("700", 1.9);
 	sin1Freq->addKey("500", 1.900001);
 	
-	
 	auto sin2Prop = scene1->get(sin2)->getProperties();
 	auto sin2Freq = sin2Prop->getKeyableProperty("Frequency");
 	sin2Freq->setKey("1100", 0);
 	
+	auto playCtrl1 = proj1.getScene((unsigned int)0)->getEnd(0)->getControl();
+	
+	if(!playCtrl1) throw MaudioException("FUUU");
+	
+	std::cerr << "play" << std::endl;
+	
+	playCtrl1->callFunction("play");
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	playCtrl1->callFunction("stop");
+	
+	std::cerr << "serialize" << std::endl;
+	
+	proj1.save();
+	proj1.save();
+	
+	std::cerr << "deserialize" << std::endl;
+	
+	Project proj2;
+	proj2.load("testfile.maup");
+	proj2.setSaveFile("testfile2.maup");
+	
+	auto playCtrl2 = proj2.getScene((unsigned int)0)->getEnd(0)->getControl();
+	
+	if(!playCtrl2) throw MaudioException("FUUU");
+	
+	std::cerr << "play" << std::endl;
+	
+	playCtrl2->callFunction("play");
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	playCtrl2->callFunction("stop");
+	
+	proj2.save();
+	
+	
+	
+	
+	/*
 	std::cerr << "serialize" << std::endl;
 	
 	IMultiLevelStore *sceneStore = new MultiLevelStore();
@@ -110,7 +153,7 @@ int main(int argc, char *argv[]){
 	
 	
 	parser.writeFile("testfile2.maup");
-	
+	*/
 	std::cerr << "closing main" << std::endl;
 	return 0;
 }

@@ -63,6 +63,7 @@ Todo:
 - ////finish StoreWriter
 - ////implement serializer
 - create Project
+- create getGeneralInfo
 - create ErrorAction
 - node: make api reasonably stable
 - export scene to svg

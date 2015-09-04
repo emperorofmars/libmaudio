@@ -25,23 +25,26 @@ public:
 	void addScene(std::shared_ptr<Scene> scene);
 	void removeScene(unsigned int num);
 	void removeScene(const char *name);
-	void getScene(unsigned int num);
-	void getScene(const char *name);
+	std::shared_ptr<Scene> getScene(unsigned int num) const;
+	std::shared_ptr<Scene> getScene(const char *name) const;
+	unsigned int getNumScenes() const;
 	
-	void save();
+	void save() const;
 	void load(const char *file);
 	
 	void setSaveFile(const char *file);
-	void setSaveHistory(unsigned int len = 2);
-	const char *getSaveFile();
-	unsigned int getSaveHistory();
+	const char *getSaveFile() const;
+	void setPreservePrevious(bool preserve);
+	bool getPreservePrevious() const;
 	
 	void readConfig(const IKeyValueStore *conf);
 	
 private:
+	int getSceneNum(const char *name) const;
+	
 	std::string mName;
 	std::string mSaveFile;
-	unsigned int mSaveHistory = 2;
+	bool mPreservePrevious = true;
 	std::vector<std::shared_ptr<Scene>> mScenes;
 };
 

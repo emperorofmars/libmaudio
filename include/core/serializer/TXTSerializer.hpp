@@ -22,15 +22,15 @@ public:
 	virtual const char *getName() const;
 
 	virtual bool addScene(std::shared_ptr<Scene> data);
-	virtual std::vector<std::shared_ptr<Scene>> getScenes();
+	virtual std::vector<std::shared_ptr<Scene>> getScenes() const;
 
 	virtual void writeFile(const char *path);
 	virtual void parseFile(const char *path);
 
-	virtual std::shared_ptr<IMultiLevelStore> getStore();
+	virtual std::shared_ptr<IMultiLevelStore> getStore() const;
 	
 private:
-	void writeHeader(std::ofstream &file);
+	void writeHeader(std::ofstream &file) const;
 	bool parseHeader(std::ifstream &file);
 	
 	std::string mName;

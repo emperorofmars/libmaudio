@@ -34,6 +34,7 @@ set(MAUDIO_SOURCE_FILES
 	./src/core/scene/TypeManager.cpp
 	./src/core/scene/Project.cpp
 	./src/core/serializer/TXTSerializer.cpp
+	./src/core/serializer/SerializerInfo.cpp
 	./src/core/audiodata/AudioQueue.cpp
 	./src/core/audiodata/Sample.cpp
 	./src/core/audiodata/AudioInfo.cpp
@@ -80,6 +81,7 @@ set(MAUDIO_SOURCE_FILES
 	./include/core/scene/Project.hpp
 	./include/core/serializer/ISerializable.hpp
 	./include/core/serializer/TXTSerializer.hpp
+	./include/core/serializer/SerializerInfo.hpp
 	./include/core/serializer/ISerializer.hpp
 	./include/core/audiodata/AudioInfo.hpp
 	./include/core/audiodata/IAudioInfo.hpp

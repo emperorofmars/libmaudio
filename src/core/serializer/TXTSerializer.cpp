@@ -5,11 +5,9 @@
  */
 
 #include "core/serializer/TXTSerializer.hpp"
-#include "core/util/AudioException.hpp"
 #include "core/store/StoreWriter.hpp"
 #include "core/store/StoreReader.hpp"
-
-#include <iostream>
+#include "core/util/AudioException.hpp"
 
 namespace maudio{
 
@@ -36,7 +34,7 @@ bool TXTSerializer::addScene(std::shared_ptr<Scene> data){
 	return true;
 }
 
-std::vector<std::shared_ptr<Scene>> TXTSerializer::getScenes(){
+std::vector<std::shared_ptr<Scene>> TXTSerializer::getScenes() const{
 	return mScenes;
 }
 
@@ -82,11 +80,11 @@ void TXTSerializer::parseFile(const char *path){
 	return;
 }
 
-std::shared_ptr<IMultiLevelStore> TXTSerializer::getStore(){
+std::shared_ptr<IMultiLevelStore> TXTSerializer::getStore() const{
 	return mStore;
 }
 
-void TXTSerializer::writeHeader(std::ofstream &file){
+void TXTSerializer::writeHeader(std::ofstream &file) const{
 	if(!file.is_open()) throw MaudioException("writing file failed!");
 	//TODO
 	file << "|maudio_project" << std::endl;

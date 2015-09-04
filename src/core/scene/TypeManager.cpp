@@ -15,22 +15,23 @@ namespace maudio{
 
 sptr<IAction> TypeManager::create(const char *type, const char *name){
 	sptr<IAction> ret;
-	try{
-		ret = PluginManager::Instance()->createInstance(type);
-	}
-	catch(std::exception &e){
-		
-	}
 	std::string mtype(type);
+	
+	if(mtype == "SinusGenerator"){
+		ret.reset(new SinusGenerator());
+	}
+	else if(mtype == "TerminalPrinter"){
+		ret.reset(new TerminalPrinter());
+	}
+	else if(mtype == "Player"){
+		ret.reset(new Player());
+	}
 	if(!ret){
-		if(mtype == "SinusGenerator"){
-			ret.reset(new SinusGenerator());
+		try{
+			ret = PluginManager::Instance()->createInstance(type);
 		}
-		else if(mtype == "TerminalPrinter"){
-			ret.reset(new TerminalPrinter());
-		}
-		else if(mtype == "Player"){
-			ret.reset(new Player());
+		catch(std::exception &e){
+			
 		}
 	}
 	if(ret && name){

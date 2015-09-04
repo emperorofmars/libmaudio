@@ -9,6 +9,7 @@
 
 #include "core/action/IAction.hpp"
 #include "core/pluginmanager/PluginLoader.hpp"
+#include "core/util/TypeIdConverter.hpp"
 #include <cstddef>
 
 namespace maudio{
@@ -36,28 +37,30 @@ public:
 	sptr(const sptr<T> &data);
 	~sptr();
 
-	void reset(T *data = NULL, DefaultDeleter<T> *deleter = NULL);
-	void reset(T *data, IAction *deleter);
-	void reset(T *data, PluginLoader<T> *deleter);
-	void reset(const sptr<T> &data);
-	T *release();
+	inline void reset(T *data = NULL, DefaultDeleter<T> *deleter = NULL);
+	inline void reset(T *data, IAction *deleter);
+	inline void reset(T *data, PluginLoader<T> *deleter);
+	inline void reset(const sptr<T> &data);
+	inline T *release();
 
-	T *get() const;
-	T *operator->() const;
-	T &operator*() const;
+	inline T *get() const;
+	inline T *operator->() const;
+	inline T &operator*() const;
 
-	void operator=(T &data);
-	void operator=(const sptr<T> &data);
-	bool operator==(const sptr<T> &data) const;
-	operator bool() const;
-	bool operator!() const;
+	inline void operator=(T &data);
+	inline void operator=(const sptr<T> &data);
+	inline bool operator==(const sptr<T> &data) const;
+	inline operator bool() const;
+	inline bool operator!() const;
 
-	DefaultDeleter<T> *getDefaultDeleter() const;
-	IAction *getActionDeleter() const;
-	PluginLoader<T> *getPluginDeleter() const;
+	inline DefaultDeleter<T> *getDefaultDeleter() const;
+	inline IAction *getActionDeleter() const;
+	inline PluginLoader<T> *getPluginDeleter() const;
+	
+	inline const char *getType() const;
 
 private:
-	void clear();
+	inline void clear();
 
 	struct RefCount{
 		int mRefs = 0;
@@ -70,6 +73,16 @@ private:
 	bool mDeleterOwned = false;
 	RefCount *mRefCount = new RefCount();
 };
+
+
+template<>
+void sptr<IAction>::clear();
+template<>
+void sptr<IAudioBuffer>::clear();
+template<>
+void sptr<IAudioInfo>::clear();
+template<>
+void sptr<ISample>::clear();
 
 
 template<typename T>
@@ -279,6 +292,16 @@ void sptr<T>::clear(){
 	mPluginDeleter = NULL;
 	mRefCount = NULL;
 	return;
+}
+
+template<typename T>
+const char *sptr<T>::getType() const{
+	if(mData){
+		const char *ret = TypeIdConverter::getName(typeid(*mData));
+		if(ret) return ret;
+		return typeid(*mData).name();
+	}
+	return "Invalid";
 }
 
 } // maudio

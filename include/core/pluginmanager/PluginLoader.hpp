@@ -1,8 +1,8 @@
 /*
- * Project Maudio
- * Copyright (C) 2015 Martin Schwarz
- * See LICENSE.txt for the full license
- */
+* Project Maudio
+* Copyright (C) 2015 Martin Schwarz
+* See LICENSE.txt for the full license
+*/
 
 #ifndef MAUDIO_PLUGINLOADER
 #define MAUDIO_PLUGINLOADER
@@ -12,6 +12,8 @@
 #include "core/util/AudioException.hpp"
 #include <dlfcn.h>
 #include <string>
+
+#include <iostream>
 
 namespace maudio{
 
@@ -39,9 +41,10 @@ public:
 private:
 	std::string mName;
 	std::string mPath;
-    void *mHandle = NULL;
-    create_t *mCreateFunc = NULL;
-    destroy_t *mDestroyFunc = NULL;
+	
+	void *mHandle = NULL;
+	create_t *mCreateFunc = NULL;
+	destroy_t *mDestroyFunc = NULL;
 };
 
 

@@ -16,8 +16,6 @@ class TerminalPrinter : public BaseAction{
 public:
 	TerminalPrinter();
 	virtual ~TerminalPrinter();
-	
-	virtual const char *getType() const;
 
 	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept;
 	virtual IAudioInfo *getInfo() noexcept;

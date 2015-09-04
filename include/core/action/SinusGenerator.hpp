@@ -18,8 +18,6 @@ class SinusGenerator : public BaseAction{
 public:
 	SinusGenerator();
 	virtual ~SinusGenerator();
-
-	virtual const char *getType() const;
 	
 	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept;
 	virtual IAudioInfo *getInfo() noexcept;

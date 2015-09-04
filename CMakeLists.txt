@@ -28,6 +28,7 @@ set(MAUDIO_SOURCE_FILES
 	./src/core/util/Util.cpp
 	./src/core/util/BaseObserver.cpp
 	./src/core/util/sptr.cpp
+	./src/core/util/TypeIdConverter.cpp
 	./src/core/scene/Scene.cpp
 	./src/core/scene/TypeManager.cpp
 	./src/core/serializer/TXTSerializer.cpp
@@ -70,6 +71,7 @@ set(MAUDIO_SOURCE_FILES
 	./include/core/util/IObservable.hpp
 	./include/core/util/Util.hpp
 	./include/core/util/sptr.hpp
+	./include/core/util/TypeIdConverter.hpp
 	./include/core/scene/Scene.hpp
 	./include/core/scene/TypeManager.hpp
 	./include/core/serializer/ISerializable.hpp

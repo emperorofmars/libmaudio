@@ -7,6 +7,7 @@
 #include "core/pluginmanager/PluginManager.hpp"
 #include "core/store/ConfigManager.hpp"
 #include "core/store/ConfigReader.hpp"
+#include "core/util/TypeIdConverter.hpp"
 
 namespace maudio{
 
@@ -79,6 +80,8 @@ sptr<IAction> PluginManager::createInstance(const char *plugin){
 	if((unsigned int)index >= mPlugins.size()) throw MaudioException("Out of Bounds!");
 	sptr<IAction> ret;
 	ret.reset(mPlugins[index]->createInstance(), mPlugins[index].get());
+	
+	TypeIdConverter::addType(typeid(*ret), mPlugins[index]->getName().c_str());
 	return ret;
 }
 

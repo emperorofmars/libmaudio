@@ -60,7 +60,9 @@ Todo:
 - ////serializer project name
 - ////fix MultiLevelStore
 - implement serializer
+- create InvalidAction
 - create Project
+- finish ConfigReader
 - node: make api reasonably stable
 - export scene to svg
 - write tests

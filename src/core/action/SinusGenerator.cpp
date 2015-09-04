@@ -6,10 +6,10 @@
 
 #include "core/action/SinusGenerator.hpp"
 #include "core/audiodata/AudioBuffer.hpp"
-#include "core/util/AudioException.hpp"
 #include "core/util/Util.hpp"
+#include "core/util/sptr.hpp"
+#include "core/util/AudioException.hpp"
 #include <cmath>
-#include <iostream>
 
 namespace maudio{
 
@@ -28,10 +28,6 @@ SinusGenerator::SinusGenerator(){
 }
 
 SinusGenerator::~SinusGenerator(){
-}
-
-const char *SinusGenerator::getType() const{
-	return "SinusGenerator";
 }
 
 IAudioBuffer *SinusGenerator::get(unsigned long pos, unsigned int length) noexcept{

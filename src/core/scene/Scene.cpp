@@ -151,7 +151,7 @@ void Scene::serialize(IMultiLevelStore *data) const{
 		if(iter->second){
 			IMultiLevelStore *nodeStore = data->addLevel("node");
 			iter->second->serialize(nodeStore->addLevel("node"));
-			nodeStore->add("type", iter->second->getType());
+			nodeStore->add("type", iter->second.getType());
 			nodeStore->add("id", std::to_string(iter->second->getID()).c_str());
 		}
 	}
@@ -183,7 +183,7 @@ void Scene::deserialize(const IMultiLevelStore *data){
 			try{
 				std::string type = nodeStore->get("type");
 				sptr<IAction> action = TypeManager::create(type.c_str());
-				if(!action) continue;
+				if(!action) continue; //TODO: replace with invalid
 				action->deserialize(innerNodeStore);
 				idConversion[string_to<unsigned long>(std::string(nodeStore->get("id")))] = action->getID();
 				add(action);

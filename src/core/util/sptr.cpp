@@ -5,6 +5,10 @@
  */
 
 #include "core/util/sptr.hpp"
+#include "core/action/SinusGenerator.hpp"
+#include "core/action/TerminalPrinter.hpp"
+#include "extended/audiosink/Player.hpp"
+#include <typeinfo>
 
 namespace maudio{
 
@@ -58,6 +62,7 @@ void sptr<IAudioBuffer>::clear(){
 
 template<>
 void sptr<IAudioInfo>::clear(){
+	
 	if(mData != NULL){
 		mRefCount->mRefs--;
 		if(mRefCount->mRefs == 0){
@@ -105,6 +110,13 @@ void sptr<ISample>::clear(){
 }
 
 } // maudio
+
+
+
+
+
+
+
 
 
 

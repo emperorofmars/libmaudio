@@ -28,22 +28,27 @@ Player::~Player(){
     close();
 }
 
-const char *Player::getType() const{
-	return "Player";
-}
-
 void Player::open(){
 	mDevice = AudioDevice::open();
+	if(mDevice){
+		mDeviceName = mDevice->getName();
+	}
 	return;
 }
 
 void Player::open(int device){
 	mDevice = AudioDevice::open(device);
+	if(mDevice){
+		mDeviceName = mDevice->getName();
+	}
 	return;
 }
 
 void Player::open(std::string &device){
 	mDevice = AudioDevice::open(device);
+	if(mDevice){
+		mDeviceName = mDevice->getName();
+	}
 	return;
 }
 

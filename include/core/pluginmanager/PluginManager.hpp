@@ -38,7 +38,7 @@ private:
 
 	int nameToNum(std::string name);
 	bool checkNameCollisions(std::string name);
-
+	
 	std::vector<std::shared_ptr<PluginLoader<IAction>>> mPlugins;
 };
 

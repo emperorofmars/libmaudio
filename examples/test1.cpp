@@ -17,7 +17,6 @@
 #include "core/store/MultiLevelStore.hpp"
 #include "core/serializer/TXTSerializer.hpp"
 /*
-#include "core/manipulator/Mixer.hpp"
 #include "core/manipulator/Resampler.hpp"
 #include "core/audiosink/Performance.hpp"
 */
@@ -45,14 +44,6 @@ int main(int argc, char *argv[]){
 	sin1Freq->addKey("700", 0.7);
 	sin1Freq->addKey("500", 0.700001);
 	
-	/*
-	MultiLevelStore mstore;
-	sin1Freq->serialize(&mstore);
-	std::cerr << "mstore: " << mstore.getSize() << std::endl;
-	for(unsigned int i = 0; i < mstore.getSize(); i++){
-		std::cerr << mstore.getKey(i) << " " << mstore.get(i) << std::endl;
-	}
-	*/
 	
 	auto sin2Prop = scene1->get(sin2)->getProperties();
 	auto sin2Freq = sin2Prop->getKeyableProperty("Frequency");
@@ -71,6 +62,7 @@ int main(int argc, char *argv[]){
 	}
 	catch(std::exception &e){
 		std::cerr << e.what() << std::endl;
+		return 0;
 	}
 	
 	auto playCtrl2 = scene2->get(scene2->getEnd(0)->getID())->getControl();
@@ -82,7 +74,7 @@ int main(int argc, char *argv[]){
 	playCtrl2->callFunction("stop");
 	
 	TXTSerializer serializer;
-	serializer.addScene(scene1);
+	serializer.addScene(scene2);
 	serializer.writeFile("testfile.maup");
 	
 	std::cerr << "closing main" << std::endl;

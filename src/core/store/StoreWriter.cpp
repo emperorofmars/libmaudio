@@ -16,6 +16,9 @@ void StoreWriter<IKeyValueStore>::writeFile(const char *file, IKeyValueStore *st
 	std::ofstream ofile(file);
 	if(!ofile.is_open()) throw MaudioException("couldn't open file!");
 	
+	writeStream(ofile, store);
+	
+	ofile.flush();
 	return;
 }
 
@@ -23,6 +26,8 @@ template<>
 void StoreWriter<IKeyValueStore>::writeStream(std::ostream &stream, IKeyValueStore *store){
 	if(!store) throw MaudioException("invalid store");
 	if(!stream.good()) throw MaudioException("invalid stream");
+	
+	stream << "|IKeyValueStore" << std::endl;
 	
 	return;
 }
@@ -33,6 +38,9 @@ void StoreWriter<IMultiStore>::writeFile(const char *file, IMultiStore *store){
 	std::ofstream ofile(file);
 	if(!ofile.is_open()) throw MaudioException("couldn't open file!");
 	
+	writeStream(ofile, store);
+	
+	ofile.flush();
 	return;
 }
 
@@ -40,6 +48,8 @@ template<>
 void StoreWriter<IMultiStore>::writeStream(std::ostream &stream, IMultiStore *store){
 	if(!store) throw MaudioException("invalid store");
 	if(!stream.good()) throw MaudioException("invalid stream");
+	
+	stream << "|IMultiStore" << std::endl;
 	
 	return;
 }
@@ -60,6 +70,8 @@ template<>
 void StoreWriter<IMultiLevelStore>::writeStream(std::ostream &stream, IMultiLevelStore *store){
 	if(!store) throw MaudioException("invalid store");
 	if(!stream.good()) throw MaudioException("invalid stream");
+	
+	stream << "|IMultiLevelStore" << std::endl;
 	
 	writeLevel(stream, store);
 	

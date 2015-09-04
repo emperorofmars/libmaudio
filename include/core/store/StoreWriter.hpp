@@ -29,7 +29,6 @@ private:
 	std::string printIndent(unsigned int indentLevel);
 };
 
-
 template<>
 void StoreWriter<IKeyValueStore>::writeFile(const char *file, IKeyValueStore *store);
 template<>
@@ -47,6 +46,15 @@ template<>
 void StoreWriter<IMultiLevelStore>::writeLevel(std::ostream &stream, IMultiLevelStore *store, unsigned int indentLevel);
 template<>
 std::string StoreWriter<IMultiLevelStore>::printIndent(unsigned int indentLevel);
+
+
+template<typename T>
+StoreWriter<T>::StoreWriter(){
+}
+
+template<typename T>
+StoreWriter<T>::~StoreWriter(){
+}
 
 } // maudio
 

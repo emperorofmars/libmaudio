@@ -32,7 +32,11 @@ PluginManager *PluginManager::Instance(){
 
 void PluginManager::parseConfig(const char *path){
 	StoreReader<IMultiStore> reader;
-	readConfig(reader.readFile(path));
+	try{
+		readConfig(reader.readFile(path));
+	}
+	catch(std::exception &e){
+	}
 	return;
 }
 
@@ -42,7 +46,6 @@ void PluginManager::readConfig(const IMultiStore *conf){
 			addPlugin(conf->get("plugin", i));
 		}
 		catch(std::exception &e){
-			//
 		}
 	}
 	return;

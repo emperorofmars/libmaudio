@@ -6,6 +6,8 @@
 
 #include "core/serializer/TXTSerializer.hpp"
 #include "core/util/AudioException.hpp"
+#include "core/store/StoreWriter.hpp"
+#include "core/store/StoreReader.hpp"
 
 #include <iostream>
 
@@ -48,7 +50,11 @@ void TXTSerializer::writeFile(const char *path){
 		mScenes[i]->serialize(mStore->addLevel("scene"));
 	}
 	writeHeader(file);
-	writeLevel(file, mStore.get());
+	
+	StoreWriter<IMultiLevelStore> writer;
+	writer.writeStream(file, mStore.get());
+	
+	//writeLevel(file, mStore.get());
 	
 	file.flush();
 	return;
@@ -72,46 +78,6 @@ void TXTSerializer::writeHeader(std::ofstream &file){
 	file << "|TXTSerializer" << std::endl;
 	//filestandard version
 	return;
-}
-
-void TXTSerializer::writeLevel(std::ofstream &file, IMultiLevelStore *store, unsigned int indentLevel){
-	if(!store || !file.is_open()) throw MaudioException("writing file failed!");
-	writeCurrentLevel(file, store, indentLevel);
-	
-	for(unsigned int i = 0; i < store->getNumLevels(); i++){
-		//std::cerr << "writeLevel: " << indentLevel << " : " << i << std::endl;
-		file << printIndent(indentLevel) << "!level " << store->getLevelKey(i) << std::endl;
-		writeLevel(file, store->getLevel(i), indentLevel + 1);
-		file << printIndent(indentLevel) << "!end" << std::endl;
-		//std::cerr << "writeLevel END" << std::endl;
-	}
-	return;
-}
-
-void TXTSerializer::writeCurrentLevel(std::ofstream &file, IMultiLevelStore *store, unsigned int indentLevel){
-	if(!store || !file.is_open()) throw MaudioException("writing file failed!");
-	
-	if(store->getSize() == 0) return;
-	for(unsigned int i = 0; i < store->getSize(); i++){
-		const char *key = store->getKey(i);
-		const char *value = store->get(i);
-		if(!key || !value) continue;
-		file << printIndent(indentLevel) << key  << " " << value << std::endl;
-	}
-	return;
-}
-
-void TXTSerializer::readLevel(std::ifstream &file, IMultiLevelStore *store){
-	//TODO
-	return;
-}
-
-std::string TXTSerializer::printIndent(unsigned int indentLevel){
-	std::string ret;
-	for(unsigned int ind = 0; ind < indentLevel; ind++){
-		ret += '\t';
-	}
-	return ret;
 }
 
 } // maudio

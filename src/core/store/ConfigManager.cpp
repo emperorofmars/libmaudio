@@ -59,8 +59,12 @@ bool ConfigManager::checkFile(const char *path) const{
 
 void ConfigManager::loadFromFile(const char *path){
 	StoreReader<IKeyValueStore> reader;
-	sptr<IKeyValueStore> tmp(reader.readFile(path));
-	mConfig = *tmp;
+	try{
+		sptr<IKeyValueStore> tmp(reader.readFile(path));
+		mConfig = *tmp;
+	}
+	catch(std::exception &e){
+	}
 	return;
 }
 

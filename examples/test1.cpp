@@ -69,6 +69,9 @@ int main(int argc, char *argv[]){
 	
 	std::cerr << "play" << std::endl;
 	
+	std::cerr << "debug: " << scene2->getNumEnds() << std::endl;
+	if(!playCtrl2) throw MaudioException("FUUU");
+	
 	playCtrl2->callFunction("play");
 	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 	playCtrl2->callFunction("stop");

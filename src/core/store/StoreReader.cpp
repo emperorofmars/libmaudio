@@ -24,6 +24,15 @@ IKeyValueStore *StoreReader<IKeyValueStore>::readStream(std::istream &stream){
 	IKeyValueStore *ret = new KeyValueStore();
 
 	std::string line;
+	bool correctType = false;
+	while(std::getline(stream, line)){
+		if(line == "|IKeyValueStore"){
+			correctType = true;
+			break;
+		}
+	}
+	if(!correctType) throw MaudioException("invalid storetype");
+	
 	while(std::getline(stream, line)){
 		try{
 			std::pair<std::string, std::string> values = parseLine(line);
@@ -39,6 +48,7 @@ template<>
 IMultiStore *StoreReader<IMultiStore>::readFile(const char *file){
 	std::ifstream ifile(file);
 	if(!ifile.good()) throw MaudioException("cant open file");
+	
 	return readStream(ifile);
 }
 
@@ -48,6 +58,15 @@ IMultiStore *StoreReader<IMultiStore>::readStream(std::istream &stream){
 	IMultiStore *ret = new MultiStore();
 
 	std::string line;
+	bool correctType = false;
+	while(std::getline(stream, line)){
+		if(line == "|IMultiStore"){
+			correctType = true;
+			break;
+		}
+	}
+	if(!correctType) throw MaudioException("invalid storetype");
+	
 	while(std::getline(stream, line)){
 		try{
 			std::pair<std::string, std::string> values = parseLine(line);
@@ -63,6 +82,7 @@ template<>
 IMultiLevelStore *StoreReader<IMultiLevelStore>::readFile(const char *file){
 	std::ifstream ifile(file);
 	if(!ifile.good()) throw MaudioException("cant open file");
+	
 	return readStream(ifile);
 }
 
@@ -70,6 +90,16 @@ template<>
 IMultiLevelStore *StoreReader<IMultiLevelStore>::readStream(std::istream &stream){
 	IMultiLevelStore *ret = new MultiLevelStore();
 	if(!stream.good()) throw MaudioException("invalid stream");
+	
+	std::string line;
+	bool correctType = false;
+	while(std::getline(stream, line)){
+		if(line == "|IMultiLevelStore"){
+			correctType = true;
+			break;
+		}
+	}
+	if(!correctType) throw MaudioException("invalid storetype");
 	
 	readLevel(stream, ret);
 	
@@ -85,10 +115,16 @@ void StoreReader<IMultiLevelStore>::readLevel(std::istream &stream, IMultiLevelS
 	while(std::getline(stream, line)){
 		try{
 			std::pair<std::string, std::string> values = parseLine(line);
-			if(values.first.size() > 1 && values.first[0] == '!' && values.second.size() > 0){
+			if(values.first == "!level" && values.second.size() > 0){
 				readLevel(stream, store->addLevel(values.second.c_str()));
 			}
-			else if(values.first.size() > 1 && values.second.size() > 0){
+			else if(values.first == "!end"){
+				return;
+			}
+			else if(values.first[0] == '!'){
+				return;
+			}
+			else if(values.first.size() > 0 && values.second.size() > 0){
 				store->add(values.first.c_str(), values.second.c_str());
 			}
 		}

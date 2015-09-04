@@ -32,6 +32,7 @@ set(MAUDIO_SOURCE_FILES
 	./src/core/util/sptr.cpp
 	./src/core/scene/Scene.cpp
 	./src/core/scene/TypeManager.cpp
+	./src/core/scene/Project.cpp
 	./src/core/serializer/TXTSerializer.cpp
 	./src/core/audiodata/AudioQueue.cpp
 	./src/core/audiodata/Sample.cpp
@@ -76,6 +77,7 @@ set(MAUDIO_SOURCE_FILES
 	./include/core/util/TypeIdConverter.hpp
 	./include/core/scene/Scene.hpp
 	./include/core/scene/TypeManager.hpp
+	./include/core/scene/Project.hpp
 	./include/core/serializer/ISerializable.hpp
 	./include/core/serializer/TXTSerializer.hpp
 	./include/core/serializer/ISerializer.hpp

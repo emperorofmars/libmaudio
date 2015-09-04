@@ -45,7 +45,7 @@ public:
 	virtual int MaxInputs() const = 0;
 	virtual bool HasOutputs() const = 0;
 
-	virtual void readConfig(const IKeyValueStore &conf) = 0;
+	virtual void readConfig(const IKeyValueStore *conf) = 0;
 
 	virtual IPropertyManager *getProperties() = 0;
 

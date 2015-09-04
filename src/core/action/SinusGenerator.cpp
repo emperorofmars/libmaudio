@@ -66,7 +66,7 @@ bool SinusGenerator::HasOutputs() const{
 	return true;
 }
 
-void SinusGenerator::readConfig(const IKeyValueStore &conf){
+void SinusGenerator::readConfig(const IKeyValueStore *conf){
 	return;
 }
 

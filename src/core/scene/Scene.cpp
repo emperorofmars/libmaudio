@@ -144,6 +144,15 @@ std::vector<unsigned long> Scene::getOutputs(unsigned long id){
 	}
 	return ret;
 }
+
+void Scene::readConfig(const IKeyValueStore *conf){
+	if(!conf) return;
+	for(auto iter = mNodes.begin(); iter != mNodes.end(); iter++){
+		if(iter->second) iter->second->readConfig(conf);
+	}
+	return;
+}
+
 void Scene::serialize(IMultiLevelStore *data) const{
 	if(!data) return;
 	data->add("name", mName.c_str());

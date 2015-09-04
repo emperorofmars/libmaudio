@@ -23,7 +23,7 @@ public:
 	virtual int MaxInputs() const;
 	virtual bool HasOutputs() const;
 
-	virtual void readConfig(const IKeyValueStore &conf);
+	virtual void readConfig(const IKeyValueStore *conf);
 
 	virtual IControl *getControl();
 

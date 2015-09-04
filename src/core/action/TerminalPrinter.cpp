@@ -35,7 +35,7 @@ bool TerminalPrinter::HasOutputs() const{
 	return false;
 }
 
-void TerminalPrinter::readConfig(const IKeyValueStore &conf){
+void TerminalPrinter::readConfig(const IKeyValueStore *conf){
 	return;
 }
 

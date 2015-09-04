@@ -70,7 +70,7 @@ public:
 		return true;
 	};
 
-	virtual void readConfig(const IKeyValueStore &conf){
+	virtual void readConfig(const IKeyValueStore *conf){
 		return;
 	};
 

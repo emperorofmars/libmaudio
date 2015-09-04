@@ -25,7 +25,7 @@ public:
 	virtual int MaxInputs() const;
 	virtual bool HasOutputs() const;
 
-	virtual void readConfig(const IKeyValueStore &conf);
+	virtual void readConfig(const IKeyValueStore *conf);
 
 	virtual void setFrequency(float freq);
 	virtual void setSamplerate(unsigned int samplerate);

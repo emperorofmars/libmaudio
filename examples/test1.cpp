@@ -46,6 +46,12 @@ int main(int argc, char *argv[]){
 	sin1Freq->addKey("700", 0.7);
 	sin1Freq->addKey("500", 0.700001);
 	
+	sin1Freq->setKey("500", 1.2);
+	sin1Freq->addKey("500", 1.4);
+	sin1Freq->addKey("700", 1.400001);
+	sin1Freq->addKey("700", 1.9);
+	sin1Freq->addKey("500", 1.900001);
+	
 	
 	auto sin2Prop = scene1->get(sin2)->getProperties();
 	auto sin2Freq = sin2Prop->getKeyableProperty("Frequency");

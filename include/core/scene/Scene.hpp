@@ -36,6 +36,8 @@ public:
 
 	std::vector<unsigned long> getOutputs(unsigned long id);
 	
+	virtual void readConfig(const IKeyValueStore *conf);
+	
 	virtual void serialize(IMultiLevelStore *data) const;
 	virtual void deserialize(const IMultiLevelStore *data);
 	

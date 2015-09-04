@@ -160,7 +160,7 @@ bool Player::HasOutputs() const{
 	return false;
 }
 
-void Player::readConfig(const IKeyValueStore &conf){
+void Player::readConfig(const IKeyValueStore *conf){
 	try{
 	//unsigned int tmpQueueSize = conf.get<unsigned int>("PlayerQueueSize");
 	//if(tmpQueueSize >= 1024 && tmpQueueSize <= 1024 * 16)

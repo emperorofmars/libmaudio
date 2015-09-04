@@ -66,10 +66,10 @@ std::shared_ptr<IMultiLevelStore> TXTSerializer::getStore(){
 void TXTSerializer::writeHeader(std::ofstream &file){
 	if(!file.is_open()) throw MaudioException("writing file failed!");
 	//TODO
-	file << "!maudio project" << std::endl;
-	file << "!name "  << mName << std::endl;
+	file << "|maudio_project" << std::endl;
+	file << "|name "  << mName << std::endl;
 	//maudio version
-	file << "!TXTSerializer" << std::endl;
+	file << "|TXTSerializer" << std::endl;
 	//filestandard version
 	return;
 }

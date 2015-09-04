@@ -5,7 +5,7 @@
  */
 
 #include "core/store/ConfigManager.hpp"
-#include "core/store/ConfigReader.hpp"
+#include "core/store/StoreReader.hpp"
 #include "core/util/sptr.hpp"
 #include "core/util/AudioException.hpp"
 #include <fstream>
@@ -58,7 +58,7 @@ bool ConfigManager::checkFile(const char *path) const{
 }
 
 void ConfigManager::loadFromFile(const char *path){
-	ConfigReader<IKeyValueStore> reader;
+	StoreReader<IKeyValueStore> reader;
 	sptr<IKeyValueStore> tmp(reader.readFile(path));
 	mConfig = *tmp;
 	return;

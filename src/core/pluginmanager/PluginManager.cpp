@@ -6,7 +6,7 @@
 
 #include "core/pluginmanager/PluginManager.hpp"
 #include "core/store/ConfigManager.hpp"
-#include "core/store/ConfigReader.hpp"
+#include "core/store/StoreReader.hpp"
 #include "core/util/TypeIdConverter.hpp"
 
 namespace maudio{
@@ -31,7 +31,7 @@ PluginManager *PluginManager::Instance(){
 }
 
 void PluginManager::parseConfig(const char *path){
-	ConfigReader<IMultiStore> reader;
+	StoreReader<IMultiStore> reader;
 	readConfig(reader.readFile(path));
 	return;
 }

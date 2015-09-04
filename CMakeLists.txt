@@ -13,9 +13,10 @@ set(CMAKE_INSTALL_RPATH "./res/lib")
 set(MAUDIO_SOURCE_FILES
 	./src/core/store/MultiLevelStore.cpp
 	./src/core/store/MultiStore.cpp
+	./src/core/store/StoreWriter.cpp
 	./src/core/store/KeyValueStore.cpp
+	./src/core/store/StoreReader.cpp
 	./src/core/store/ConfigManager.cpp
-	./src/core/store/ConfigReader.cpp
 	./src/core/property/PropertyManager.cpp
 	./src/core/property/SimpleProperty.cpp
 	./src/core/property/SimpleKeyableProperty.cpp
@@ -27,8 +28,8 @@ set(MAUDIO_SOURCE_FILES
 	./src/core/util/BaseObservable.cpp
 	./src/core/util/Util.cpp
 	./src/core/util/BaseObserver.cpp
-	./src/core/util/sptr.cpp
 	./src/core/util/TypeIdConverter.cpp
+	./src/core/util/sptr.cpp
 	./src/core/scene/Scene.cpp
 	./src/core/scene/TypeManager.cpp
 	./src/core/serializer/TXTSerializer.cpp
@@ -43,12 +44,13 @@ set(MAUDIO_SOURCE_FILES
 	./src/extended/audiosink/FileWriter.cpp
 	./src/extended/audiosource/BulkReader.cpp
 	./src/extended/audiosource/StreamReader.cpp
+	./include/core/store/StoreWriter.hpp
 	./include/core/store/MultiLevelStore.hpp
+	./include/core/store/StoreReader.hpp
 	./include/core/store/MultiStore.hpp
 	./include/core/store/IMultiStore.hpp
 	./include/core/store/ConfigManager.hpp
 	./include/core/store/KeyValueStore.hpp
-	./include/core/store/ConfigReader.hpp
 	./include/core/store/IKeyValueStore.hpp
 	./include/core/store/IMultiLevelStore.hpp
 	./include/core/property/SimpleProperty.hpp

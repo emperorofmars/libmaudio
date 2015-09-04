@@ -30,19 +30,13 @@ const char *MultiStore::get(const char *key, unsigned int numElm) const{
 	return iter->second.c_str();
 }
 
-const char *MultiStore::get(unsigned int numKey, unsigned int numElm) const{
+const char *MultiStore::get(unsigned int numKey) const{
 	if(numKey >= mData.size()) throw MaudioException("numKey out of range");
 	auto iter = mData.begin();
 	while(iter != mData.end() && numKey != 0){
 		iter++;
 		numKey--;
 	}
-	auto iterUp = mData.upper_bound(iter->first);
-	while(iter != iterUp && numElm != 0){
-		iter++;
-		numElm--;
-	}
-	if(numElm != 0) throw MaudioException("numElm out of range");
 	return iter->second.c_str();
 }
 
@@ -52,16 +46,6 @@ unsigned int MultiStore::getSize() const{
 
 unsigned int MultiStore::getSize(const char *key) const{
 	return mData.count(std::string(key));
-}
-
-unsigned int MultiStore::getSize(unsigned int numKey) const{
-	if(numKey >= mData.size()) return 0;
-	auto iter = mData.begin();
-	while(iter != mData.end() && numKey != 0){
-		iter++;
-		numKey--;
-	}
-	return mData.count(iter->first);
 }
 
 void MultiStore::add(const char *key, const char *value){

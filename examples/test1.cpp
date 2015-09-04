@@ -45,6 +45,15 @@ int main(int argc, char *argv[]){
 	sin1Freq->addKey("700", 0.7);
 	sin1Freq->addKey("500", 0.700001);
 	
+	/*
+	MultiLevelStore mstore;
+	sin1Freq->serialize(&mstore);
+	std::cerr << "mstore: " << mstore.getSize() << std::endl;
+	for(unsigned int i = 0; i < mstore.getSize(); i++){
+		std::cerr << mstore.getKey(i) << " " << mstore.get(i) << std::endl;
+	}
+	*/
+	
 	auto sin2Prop = scene1->get(sin2)->getProperties();
 	auto sin2Freq = sin2Prop->getKeyableProperty("Frequency");
 	sin2Freq->setKey("1100", 0);

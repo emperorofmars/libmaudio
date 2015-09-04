@@ -30,19 +30,13 @@ const char *MultiLevelStore::get(const char *key, unsigned int numElm) const{
 	return iter->second.c_str();
 }
 
-const char *MultiLevelStore::get(unsigned int numKey, unsigned int numElm) const{
+const char *MultiLevelStore::get(unsigned int numKey) const{
 	if(numKey >= mData.size()) throw MaudioException("numKey out of range");
 	auto iter = mData.begin();
 	while(iter != mData.end() && numKey != 0){
 		iter++;
 		numKey--;
 	}
-	auto iterUp = mData.upper_bound(iter->first);
-	while(iter != iterUp && numElm != 0){
-		iter++;
-		numElm--;
-	}
-	if(numElm != 0) throw MaudioException("numElm out of range");
 	return iter->second.c_str();
 }
 
@@ -70,19 +64,13 @@ IMultiLevelStore *MultiLevelStore::getLevel(const char *key, unsigned int numElm
 	return iter->second.get();
 }
 
-IMultiLevelStore *MultiLevelStore::getLevel(unsigned int numKey, unsigned int numElm) const{
+IMultiLevelStore *MultiLevelStore::getLevel(unsigned int numKey) const{
 	if(numKey >= mLevels.size()) throw MaudioException("numKey out of range");
 	auto iter = mLevels.begin();
 	while(iter != mLevels.end() && numKey != 0){
 		iter++;
 		numKey--;
 	}
-	auto iterUp = mLevels.upper_bound(iter->first);
-	while(iter != iterUp && numElm != 0){
-		iter++;
-		numElm--;
-	}
-	if(numElm != 0) throw MaudioException("numElm out of range");
 	return iter->second.get();
 }
 
@@ -104,32 +92,12 @@ unsigned int MultiLevelStore::getSize(const char *key) const{
 	return mData.count(std::string(key));
 }
 
-unsigned int MultiLevelStore::getSize(unsigned int numKey) const{
-	if(numKey >= mData.size()) return 0;
-	auto iter = mData.begin();
-	while(iter != mData.end() && numKey != 0){
-		iter++;
-		numKey--;
-	}
-	return mData.count(iter->first);
-}
-
 unsigned int MultiLevelStore::getNumLevels() const{
 	return mLevels.size();
 }
 
 unsigned int MultiLevelStore::getNumLevels(const char *key) const{
 	return mLevels.count(std::string(key));
-}
-
-unsigned int MultiLevelStore::getNumLevels(unsigned int numKey) const{
-	if(numKey >= mLevels.size()) return 0;
-	auto iter = mLevels.begin();
-	while(iter != mLevels.end() && numKey != 0){
-		iter++;
-		numKey--;
-	}
-	return mLevels.count(iter->first);
 }
 
 void MultiLevelStore::add(const char *key, const char *value){

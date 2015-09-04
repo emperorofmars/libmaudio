@@ -64,7 +64,7 @@ std::shared_ptr<IMultiLevelStore> TXTSerializer::getStore(){
 }
 
 void TXTSerializer::writeHeader(std::ofstream &file){
-	//if(!file.is_open()) throw MaudioException("writing file failed!");
+	if(!file.is_open()) throw MaudioException("writing file failed!");
 	//TODO
 	file << "!maudio project" << std::endl;
 	file << "!name "  << mName << std::endl;
@@ -75,38 +75,29 @@ void TXTSerializer::writeHeader(std::ofstream &file){
 }
 
 void TXTSerializer::writeLevel(std::ofstream &file, IMultiLevelStore *store, unsigned int indentLevel){
-	//if(!store || !file.is_open()) throw MaudioException("writing file failed!");
+	if(!store || !file.is_open()) throw MaudioException("writing file failed!");
 	writeCurrentLevel(file, store, indentLevel);
 	
 	for(unsigned int i = 0; i < store->getNumLevels(); i++){
-		for(unsigned int j = 0; j < store->getNumLevels(i); j++){
-			std::cerr << "writeLevel: " << i << " : " << j << std::endl;
-			file << printIndent(indentLevel) << "!level " << store->getLevelKey(i) << std::endl;
-			writeLevel(file, store->getLevel(i, j), indentLevel + 1);
-			file << printIndent(indentLevel) << "!end" << std::endl;
-			std::cerr << "writeLevel END" << std::endl;
-		}
+		//std::cerr << "writeLevel: " << indentLevel << " : " << i << std::endl;
+		file << printIndent(indentLevel) << "!level " << store->getLevelKey(i) << std::endl;
+		writeLevel(file, store->getLevel(i), indentLevel + 1);
+		file << printIndent(indentLevel) << "!end" << std::endl;
+		//std::cerr << "writeLevel END" << std::endl;
 	}
 	return;
 }
 
 void TXTSerializer::writeCurrentLevel(std::ofstream &file, IMultiLevelStore *store, unsigned int indentLevel){
-	//if(!store || !file.is_open()) throw MaudioException("writing file failed!");
+	if(!store || !file.is_open()) throw MaudioException("writing file failed!");
 	
-	std::cerr << "writeCurrentLevel" << std::endl;
 	if(store->getSize() == 0) return;
 	for(unsigned int i = 0; i < store->getSize(); i++){
-	std::cerr << "writeCurrentLevel INNER" << std::endl;
-		if(store->getSize(i) == 0) return;
-		for(unsigned int j = 0; j < store->getSize(i); j++){
-			const char *key = store->getKey(i);
-	std::cerr << "writeCurrentLevel INNER 2: " << key << " : " << i << " : " << j << std::endl;
-			const char *value = store->get(i, j);
-			if(!key || !value) continue;
-			file << printIndent(indentLevel) << key  << " " << value << std::endl;
-		}
+		const char *key = store->getKey(i);
+		const char *value = store->get(i);
+		if(!key || !value) continue;
+		file << printIndent(indentLevel) << key  << " " << value << std::endl;
 	}
-	std::cerr << "writeCurrentLevel END" << std::endl;
 	return;
 }
 

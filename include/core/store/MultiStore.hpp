@@ -23,12 +23,11 @@ public:
 	virtual const char *get(const char *key, unsigned int numElm = 0) const;
 	template<typename T>
 	T get(const char *key, unsigned int numElm = 0) const;
-	virtual const char *get(unsigned int numKey, unsigned int numElm = 0) const;
+	virtual const char *get(unsigned int numKey) const;
 	template<typename T>
-	T get(unsigned int numKey, unsigned int numElm = 0) const;
+	T get(unsigned int numKey) const;
 	virtual unsigned int getSize() const;
 	virtual unsigned int getSize(const char *key) const;
-	virtual unsigned int getSize(unsigned int numKey) const;
 	virtual void add(const char *key, const char *value);
 	template<typename T>
 	void add(const char *key, T value);
@@ -55,19 +54,13 @@ T MultiStore::get(const char *key, unsigned int numElm) const{
 }
 
 template<typename T>
-T MultiStore::get(unsigned int numKey, unsigned int numElm) const{
+T MultiStore::get(unsigned int numKey) const{
 	if(numKey >= mData.size()) throw MaudioException("numKey out of range");
 	auto iter = mData.begin();
 	while(iter != mData.end() && numKey != 0){
 		iter++;
 		numKey--;
 	}
-	auto iterUp = mData.upper_bound(iter->first);
-	while(iter != iterUp && numElm != 0){
-		iter++;
-		numElm--;
-	}
-	if(numElm != 0) throw MaudioException("numElm out of range");
 	return string_to<T>(iter->second);
 }
 

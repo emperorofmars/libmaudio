@@ -33,7 +33,6 @@ int main(int argc, char *argv[]){
 	proj1.setSaveFile("testfile.maup");
 	
 	std::shared_ptr<Scene> scene1(new Scene("test_scene"));
-	
 	proj1.addScene(scene1);
 	
 	long sin1 = scene1->add(TypeManager::create("SinusGenerator", "sin1"));
@@ -64,7 +63,6 @@ int main(int argc, char *argv[]){
 	sin2Freq->setKey("1100", 0);
 	
 	auto playCtrl1 = proj1.getScene((unsigned int)0)->getEnd(0)->getControl();
-	
 	if(!playCtrl1) throw MaudioException("FUUU");
 	
 	std::cerr << "play" << std::endl;
@@ -76,7 +74,6 @@ int main(int argc, char *argv[]){
 	std::cerr << "serialize" << std::endl;
 	
 	proj1.save();
-	proj1.save();
 	
 	std::cerr << "deserialize" << std::endl;
 	
@@ -85,7 +82,6 @@ int main(int argc, char *argv[]){
 	proj2.setSaveFile("testfile2.maup");
 	
 	auto playCtrl2 = proj2.getScene((unsigned int)0)->getEnd(0)->getControl();
-	
 	if(!playCtrl2) throw MaudioException("FUUU");
 	
 	std::cerr << "play" << std::endl;
@@ -96,64 +92,6 @@ int main(int argc, char *argv[]){
 	
 	proj2.save();
 	
-	
-	
-	
-	/*
-	std::cerr << "serialize" << std::endl;
-	
-	IMultiLevelStore *sceneStore = new MultiLevelStore();
-	scene1->serialize(sceneStore);
-	
-	std::cerr << "deserialize" << std::endl;
-	
-	std::shared_ptr<Scene> scene2(new Scene("serialize_test"));
-	try{
-		scene2->deserialize(sceneStore);
-	}
-	catch(std::exception &e){
-		std::cerr << e.what() << std::endl;
-		return 0;
-	}
-	
-	auto playCtrl = scene2->get(scene2->getEnd(0)->getID())->getControl();
-	//auto playCtrlx = scene2->get(play)->getControl();
-	//auto playCtrl = scene1->get(play)->getControl();
-	
-	std::cerr << "play" << std::endl;
-	
-	std::cerr << "debug: " << scene2->getNumEnds() << std::endl;
-	if(!playCtrl) throw MaudioException("FUUU");
-	
-	playCtrl->callFunction("play");
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-	playCtrl->callFunction("stop");
-	
-	TXTSerializer serializer;
-	serializer.addScene(scene2);
-	serializer.writeFile("testfile.maup");
-	
-	std::cerr << "parseFile" << std::endl;
-	
-	TXTSerializer parser;
-	parser.parseFile("testfile.maup");
-	
-	
-	auto playCtrl2 = parser.getScenes()[0]->getEnd(0)->getControl();
-	//auto playCtrlx = scene2->get(play)->getControl();
-	//auto playCtrl = scene1->get(play)->getControl();
-	
-	std::cerr << "play" << std::endl;
-	
-	if(!playCtrl2) throw MaudioException("FUUU");
-	
-	playCtrl2->callFunction("play");
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-	playCtrl2->callFunction("stop");
-	
-	
-	parser.writeFile("testfile2.maup");
-	*/
 	std::cerr << "closing main" << std::endl;
 	return 0;
 }

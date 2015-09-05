@@ -10,10 +10,14 @@ meson-build
 cmake-build
 cmake-codeblocks
 cmake-kdevelop
+cmake-qtcreator
+.kdev4
 doxygen
 sources.txt
-res/lib/libmaudio.a
-res/lib/libmaudio.so
+res/lib/*.a
+res/lib/*.so
+res/plugins/*.so
 *.swp
 *.maup
 *.maup.previous
+CMakeLists.txt.user

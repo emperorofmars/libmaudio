@@ -62,8 +62,9 @@ Todo:
 - ////finish StoreReader
 - ////finish StoreWriter
 - ////implement serializer
-- create Project
-- create getGeneralInfo
+- ////create Project
+- create LevelMutex
+- create MaudioInfo::version, usw...
 - create ErrorAction
 - node: make api reasonably stable
 - export scene to svg

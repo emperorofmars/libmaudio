@@ -6,6 +6,7 @@ obj
 bin
 *.flac
 *.wav
+ide
 meson-build
 cmake-build
 cmake-codeblocks

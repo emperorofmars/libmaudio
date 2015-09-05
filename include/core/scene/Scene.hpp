@@ -10,6 +10,7 @@
 #include "core/serializer/ISerializable.hpp"
 #include "core/util/BaseObservable.hpp"
 #include "core/util/sptr.hpp"
+#include "core/util/RecursiveSharedMutex.hpp"
 #include <string>
 #include <map>
 

@@ -5,8 +5,7 @@
  */
 
 #include "AudioDevice.hpp"
-#include "core/util/AudioException.hpp"
-#include <iostream>
+#include "maudio/util/AudioException.hpp"
 #include <cmath>
 
 namespace maudio{

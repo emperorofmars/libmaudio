@@ -11,7 +11,9 @@ using namespace maudio;
 class Mixer : public BaseAction{
 public:
 	Mixer(){};
-	virtual ~Mixer(){};
+	virtual ~Mixer(){
+		removeInput(0);
+	};
 	
 	virtual const char *getType() const{
 		return "Mixer";
@@ -98,7 +100,8 @@ extern "C" void* create(){
 }
 
 extern "C" void destroy(void *data){
-	delete (Mixer *)data;
+	if(data) delete (Mixer *)data;
+	return;
 }
 
 extern "C" const char *getName(){

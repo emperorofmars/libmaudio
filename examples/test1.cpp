@@ -8,10 +8,10 @@
 #include <chrono>
 #include <thread>
 #include <mutex>
-#include "core/scene/Scene.hpp"
-#include "core/scene/TypeManager.hpp"
-#include "core/scene/Project.hpp"
-#include "MaudioInfo.hpp"
+#include "maudio/scene/Scene.hpp"
+#include "maudio/scene/TypeManager.hpp"
+#include "maudio/scene/Project.hpp"
+#include "maudio/MaudioInfo.hpp"
 /*
 #include "core/manipulator/Resampler.hpp"
 #include "core/audiosink/Performance.hpp"
@@ -29,7 +29,7 @@ int main(int argc, char *argv[]){
 	std::cerr << "version info: " << getVersionMajor() << std::endl;
 	std::cerr << "version info: " << getVersionMinor() << std::endl;
 	std::cerr << "version info: " << getVersionPatch() << std::endl;
-	
+	/*
 	Project proj1("test_project");
 	proj1.setSaveFile("testfile.maup");
 	
@@ -41,9 +41,10 @@ int main(int argc, char *argv[]){
 	long mix = scene1->add(TypeManager::create("Mixer", "mix"));
 	long play = scene1->add(TypeManager::create("Player", "play"));
 	
+	std::cerr << "connect" << std::endl;
+	
 	scene1->connect(sin1, mix);
 	scene1->connect(sin2, mix);
-	std::cerr << "connect" << std::endl;
 	scene1->connect(mix, play);
 	
 	auto sin1Prop = scene1->get(sin1)->getProperties();
@@ -82,10 +83,14 @@ int main(int argc, char *argv[]){
 	proj1.save();
 	
 	std::cerr << "deserialize" << std::endl;
+	*/
 	
 	Project proj2;
 	proj2.load("testfile.maup");
 	proj2.setSaveFile("testfile2.maup");
+	proj2.setName("proj_2");
+	
+	proj2.getScene((unsigned int)0)->setName("scene_02");
 	
 	auto playCtrl2 = proj2.getScene((unsigned int)0)->getEnd(0)->getControl();
 	if(!playCtrl2) throw MaudioException("FUUU 02");

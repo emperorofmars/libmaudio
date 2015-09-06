@@ -6,10 +6,9 @@
 
 #include "maudio.hpp"
 #include "Player.hpp"
-#include "core/util/sptr.hpp"
-#include "core/util/AudioException.hpp"
-#include "core/util/Util.hpp"
-#include <iostream>
+#include "maudio/util/sptr.hpp"
+#include "maudio/util/Util.hpp"
+#include "maudio/util/AudioException.hpp"
 
 namespace maudio{
 

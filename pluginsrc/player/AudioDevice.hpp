@@ -7,7 +7,7 @@
 #ifndef MAUDIO_AUDIODEVICE
 #define MAUDIO_AUDIODEVICE
 
-#include "core/audiodata/AudioQueue.hpp"
+#include "maudio/audiodata/AudioQueue.hpp"
 #include "portaudio.h"
 #include <string>
 #include <vector>

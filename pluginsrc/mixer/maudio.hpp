@@ -7,14 +7,12 @@
 #ifndef MAUDIO_INCLUDE
 #define MAUDIO_INCLUDE
 
-#include "core/action/BaseAction.hpp"
-#include "core/audiodata/AudioBuffer.hpp"
-#include "core/property/SimpleKeyableProperty.hpp"
-#include "core/property/SimpleProperty.hpp"
-#include "core/store/KeyValueStore.hpp"
-#include "core/store/MultiLevelStore.hpp"
-#include "core/util/Util.hpp"
-#include "core/util/sptr.hpp"
+#include "maudio/action/BaseAction.hpp"
+#include "maudio/audiodata/AudioBuffer.hpp"
+#include "maudio/property/SimpleKeyableProperty.hpp"
+#include "maudio/property/SimpleProperty.hpp"
+#include "maudio/util/Util.hpp"
+#include "maudio/util/sptr.hpp"
 
 #endif // MAUDIO_INCLUDE
 

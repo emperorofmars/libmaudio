@@ -49,89 +49,89 @@ if(EXISTS "${PROJECT_SOURCE_DIR}/.git/HEAD")
 endif()
 
 set(MAUDIO_SOURCE_FILES
-	${PROJECT_SOURCE_DIR}/src/core/store/MultiLevelStore.cpp
-	${PROJECT_SOURCE_DIR}/src/core/store/MultiStore.cpp
-	${PROJECT_SOURCE_DIR}/src/core/store/StoreWriter.cpp
-	${PROJECT_SOURCE_DIR}/src/core/store/KeyValueStore.cpp
-	${PROJECT_SOURCE_DIR}/src/core/store/StoreReader.cpp
-	${PROJECT_SOURCE_DIR}/src/core/store/ConfigManager.cpp
-	${PROJECT_SOURCE_DIR}/src/core/property/PropertyManager.cpp
-	${PROJECT_SOURCE_DIR}/src/core/property/SimpleProperty.cpp
-	${PROJECT_SOURCE_DIR}/src/core/property/SimpleKeyableProperty.cpp
-	${PROJECT_SOURCE_DIR}/src/core/action/ErrorAction.cpp
-	${PROJECT_SOURCE_DIR}/src/core/action/BaseAction.cpp
-	${PROJECT_SOURCE_DIR}/src/core/util/String.cpp
-	${PROJECT_SOURCE_DIR}/src/core/util/UniqueID.cpp
-	${PROJECT_SOURCE_DIR}/src/core/util/BaseObservable.cpp
-	${PROJECT_SOURCE_DIR}/src/core/util/Util.cpp
-	${PROJECT_SOURCE_DIR}/src/core/util/BaseObserver.cpp
-	${PROJECT_SOURCE_DIR}/src/core/util/TypeIdConverter.cpp
-	${PROJECT_SOURCE_DIR}/src/core/util/sptr.cpp
-	${PROJECT_SOURCE_DIR}/src/core/scene/Scene.cpp
-	${PROJECT_SOURCE_DIR}/src/core/scene/TypeManager.cpp
-	${PROJECT_SOURCE_DIR}/src/core/scene/Project.cpp
-	${PROJECT_SOURCE_DIR}/src/core/serializer/TXTSerializer.cpp
-	${PROJECT_SOURCE_DIR}/src/core/serializer/SerializerInfo.cpp
-	${PROJECT_SOURCE_DIR}/src/core/audiodata/AudioQueue.cpp
-	${PROJECT_SOURCE_DIR}/src/core/audiodata/Sample.cpp
-	${PROJECT_SOURCE_DIR}/src/core/audiodata/AudioInfo.cpp
-	${PROJECT_SOURCE_DIR}/src/core/audiodata/AudioBuffer.cpp
-	${PROJECT_SOURCE_DIR}/src/core/pluginmanager/PluginManager.cpp
-	${PROJECT_SOURCE_DIR}/src/extended/action/TerminalPrinter.cpp
-	${PROJECT_SOURCE_DIR}/src/extended/action/SinusGenerator.cpp
-	${PROJECT_SOURCE_DIR}/src/MaudioInfo.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/store/MultiLevelStore.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/store/MultiStore.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/store/StoreWriter.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/store/KeyValueStore.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/store/StoreReader.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/store/ConfigManager.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/property/PropertyManager.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/property/SimpleProperty.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/property/SimpleKeyableProperty.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/action/ErrorAction.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/action/BaseAction.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/util/String.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/util/UniqueID.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/util/BaseObservable.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/util/Util.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/util/BaseObserver.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/util/TypeIdConverter.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/util/sptr.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/scene/Scene.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/scene/TypeManager.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/scene/Project.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/serializer/TXTSerializer.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/serializer/SerializerInfo.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/extended/TerminalPrinter.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/extended/SinusGenerator.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/audiodata/AudioQueue.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/audiodata/Sample.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/audiodata/AudioInfo.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/audiodata/AudioBuffer.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/pluginmanager/PluginManager.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/MaudioInfo.cpp
 ) 
 
 set(MAUDIO_INCLUDE_FILES
-	${PROJECT_SOURCE_DIR}/include/core/store/StoreWriter.hpp
-	${PROJECT_SOURCE_DIR}/include/core/store/MultiLevelStore.hpp
-	${PROJECT_SOURCE_DIR}/include/core/store/StoreReader.hpp
-	${PROJECT_SOURCE_DIR}/include/core/store/MultiStore.hpp
-	${PROJECT_SOURCE_DIR}/include/core/store/IMultiStore.hpp
-	${PROJECT_SOURCE_DIR}/include/core/store/ConfigManager.hpp
-	${PROJECT_SOURCE_DIR}/include/core/store/KeyValueStore.hpp
-	${PROJECT_SOURCE_DIR}/include/core/store/IKeyValueStore.hpp
-	${PROJECT_SOURCE_DIR}/include/core/store/IMultiLevelStore.hpp
-	${PROJECT_SOURCE_DIR}/include/core/property/SimpleProperty.hpp
-	${PROJECT_SOURCE_DIR}/include/core/property/IPropertyManager.hpp
-	${PROJECT_SOURCE_DIR}/include/core/property/IProperty.hpp
-	${PROJECT_SOURCE_DIR}/include/core/property/IKeyableProperty.hpp
-	${PROJECT_SOURCE_DIR}/include/core/property/PropertyManager.hpp
-	${PROJECT_SOURCE_DIR}/include/core/property/SimpleKeyableProperty.hpp
-	${PROJECT_SOURCE_DIR}/include/core/action/BaseAction.hpp
-	${PROJECT_SOURCE_DIR}/include/core/action/IAction.hpp
-	${PROJECT_SOURCE_DIR}/include/core/action/ErrorAction.hpp
-	${PROJECT_SOURCE_DIR}/include/core/action/IControl.hpp
-	${PROJECT_SOURCE_DIR}/include/core/util/BaseObservable.hpp
-	${PROJECT_SOURCE_DIR}/include/core/util/IObserver.hpp
-	${PROJECT_SOURCE_DIR}/include/core/util/String.hpp
-	${PROJECT_SOURCE_DIR}/include/core/util/AudioException.hpp
-	${PROJECT_SOURCE_DIR}/include/core/util/UniqueID.hpp
-	${PROJECT_SOURCE_DIR}/include/core/util/BaseObserver.hpp
-	${PROJECT_SOURCE_DIR}/include/core/util/IObservable.hpp
-	${PROJECT_SOURCE_DIR}/include/core/util/Util.hpp
-	${PROJECT_SOURCE_DIR}/include/core/util/sptr.hpp
-	${PROJECT_SOURCE_DIR}/include/core/util/TypeIdConverter.hpp
-	${PROJECT_SOURCE_DIR}/include/core/scene/Scene.hpp
-	${PROJECT_SOURCE_DIR}/include/core/scene/TypeManager.hpp
-	${PROJECT_SOURCE_DIR}/include/core/scene/Project.hpp
-	${PROJECT_SOURCE_DIR}/include/core/serializer/ISerializable.hpp
-	${PROJECT_SOURCE_DIR}/include/core/serializer/TXTSerializer.hpp
-	${PROJECT_SOURCE_DIR}/include/core/serializer/SerializerInfo.hpp
-	${PROJECT_SOURCE_DIR}/include/core/serializer/ISerializer.hpp
-	${PROJECT_SOURCE_DIR}/include/core/audiodata/AudioInfo.hpp
-	${PROJECT_SOURCE_DIR}/include/core/audiodata/IAudioInfo.hpp
-	${PROJECT_SOURCE_DIR}/include/core/audiodata/Sample.hpp
-	${PROJECT_SOURCE_DIR}/include/core/audiodata/IAudioBuffer.hpp
-	${PROJECT_SOURCE_DIR}/include/core/audiodata/FileInfo.hpp
-	${PROJECT_SOURCE_DIR}/include/core/audiodata/AudioQueue.hpp
-	${PROJECT_SOURCE_DIR}/include/core/audiodata/ISample.hpp
-	${PROJECT_SOURCE_DIR}/include/core/audiodata/AudioBuffer.hpp
-	${PROJECT_SOURCE_DIR}/include/core/pluginmanager/PluginManager.hpp
-	${PROJECT_SOURCE_DIR}/include/core/pluginmanager/PluginLoader.hpp
-	${PROJECT_SOURCE_DIR}/include/MaudioInfo.hpp
-	${PROJECT_SOURCE_DIR}/include/extended/action/SinusGenerator.hpp
-	${PROJECT_SOURCE_DIR}/include/extended/action/TerminalPrinter.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/store/StoreWriter.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/store/MultiLevelStore.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/store/StoreReader.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/store/MultiStore.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/store/IMultiStore.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/store/ConfigManager.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/store/KeyValueStore.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/store/IKeyValueStore.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/store/IMultiLevelStore.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/property/SimpleProperty.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/property/IPropertyManager.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/property/IProperty.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/property/IKeyableProperty.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/property/PropertyManager.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/property/SimpleKeyableProperty.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/action/BaseAction.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/action/IAction.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/action/ErrorAction.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/action/IControl.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/util/BaseObservable.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/util/IObserver.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/util/String.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/util/AudioException.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/util/UniqueID.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/util/BaseObserver.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/util/IObservable.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/util/Util.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/util/sptr.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/util/TypeIdConverter.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/scene/Scene.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/scene/TypeManager.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/scene/Project.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/serializer/ISerializable.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/serializer/TXTSerializer.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/serializer/SerializerInfo.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/serializer/ISerializer.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/MaudioInfo.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/extended/SinusGenerator.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/extended/TerminalPrinter.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/audiodata/AudioInfo.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/audiodata/IAudioInfo.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/audiodata/Sample.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/audiodata/IAudioBuffer.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/audiodata/FileInfo.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/audiodata/AudioQueue.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/audiodata/ISample.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/audiodata/AudioBuffer.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/pluginmanager/PluginManager.hpp
+	${PROJECT_SOURCE_DIR}/include/maudio/pluginmanager/PluginLoader.hpp
 )
 
 set(TESTBIN_SOURCE_FILES
@@ -140,7 +140,7 @@ set(TESTBIN_SOURCE_FILES
 
 add_library(maudio SHARED ${MAUDIO_SOURCE_FILES})
 target_link_libraries(maudio -ldl)
-target_link_libraries(maudio -lportaudio)
+target_link_libraries(maudio -lpthread)
 
 install(TARGETS maudio DESTINATION "${CMAKE_SOURCE_DIR}/res/lib")
 
@@ -160,7 +160,7 @@ set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt")
 set(CPACK_PACKAGE_VERSION_MAJOR "0")
 set(CPACK_PACKAGE_VERSION_MINOR "0")
 set(CPACK_PACKAGE_VERSION_PATCH "0")
- 
+
 INCLUDE(CPack)
 ]]
 

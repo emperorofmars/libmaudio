@@ -7,9 +7,9 @@
 #ifndef MAUDIO_PLAYER
 #define MAUDIO_PLAYER
 
-#include "core/action/BaseAction.hpp"
 #include "AudioDevice.hpp"
-#include "core/audiodata/AudioQueue.hpp"
+#include "maudio/action/BaseAction.hpp"
+#include "maudio/audiodata/AudioQueue.hpp"
 #include <thread>
 
 namespace maudio{

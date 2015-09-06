@@ -22,3 +22,7 @@ res/plugins/*.so
 *.maup
 *.maup.previous
 CMakeLists.txt.user
+.syntastic_cpp_config
+build
+bin
+install

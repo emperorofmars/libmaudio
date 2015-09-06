@@ -105,12 +105,13 @@ void Project::load(const char *file){
 	mScenes.clear();
 	
 	std::shared_ptr<ISerializer> serializer = SerializerInfo::getSerializer(file);
+	if(!serializer) throw MaudioException("couldn't obtain serializer!");
+	
 	serializer->parseFile(file);
 	
 	mName = serializer->getName();
 	mSaveFile = file;
 	mScenes = serializer->getScenes();
-	
 	return;
 }
 

@@ -70,12 +70,12 @@ Todo:
 - ////scene: replace
 - ////move singen and termprint to extended
 - ////restructure project, move player to a plugin
-- create file reader
 - create file writer
+- create file reader
 - node: make api reasonably stable
-- export scene to svg
 - write tests
 - qt gui
+- export scene to svg
 - create channel converter
 - player: make multiple players work on the same device
 - create renderer

@@ -30,3 +30,8 @@ for meson:
 
 echo src = [ > sources.txt && find ./src ./include \( -name "*.cpp" -o -name "*.hpp" \) | while read a; do echo \'$a\', >> sources.txt; done && echo ] >> sources.txt
 
+
+number of lines:
+
+find . -name \*.cpp -or -name \*.hpp -exec cat {} \; | wc -l
+

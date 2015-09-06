@@ -5,16 +5,16 @@
  */
 
 #include "core/util/TypeIdConverter.hpp"
-#include "core/action/SinusGenerator.hpp"
-#include "core/action/TerminalPrinter.hpp"
-#include "extended/audiosink/Player.hpp"
+#include "core/action/ErrorAction.hpp"
+#include "extended/action/SinusGenerator.hpp"
+#include "extended/action/TerminalPrinter.hpp"
 
 namespace maudio{
 
 std::unordered_map<std::type_index, std::string> TypeIdConverter::mIndex = {
+	{typeid(ErrorAction), "ErrorAction"},
 	{typeid(SinusGenerator), "SinusGenerator"},
 	{typeid(TerminalPrinter), "TerminalPrinter"},
-	{typeid(Player), "Player"},
 };
 
 const char *TypeIdConverter::getName(std::type_index type){

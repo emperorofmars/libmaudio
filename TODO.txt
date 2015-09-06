@@ -68,13 +68,13 @@ Todo:
 - ////create ErrorAction
 - ////scene: use ErrorAction in deserialize error
 - ////scene: replace
-- restructure project, move player to a plugin
-- move singen and termprint to extended
+- ////move singen and termprint to extended
+- ////restructure project, move player to a plugin
+- create file reader
+- create file writer
 - node: make api reasonably stable
 - export scene to svg
 - write tests
-- create file reader
-- create file writer
 - qt gui
 - create channel converter
 - player: make multiple players work on the same device

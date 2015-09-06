@@ -8,7 +8,7 @@
 #define MAUDIO_PLAYER
 
 #include "core/action/BaseAction.hpp"
-#include "extended/util/AudioDevice.hpp"
+#include "AudioDevice.hpp"
 #include "core/audiodata/AudioQueue.hpp"
 #include <thread>
 
@@ -91,6 +91,11 @@ private:
 };
 
 } // maudio
+
+
+extern "C" void* create();
+extern "C" void destroy(void *data);
+extern "C" const char *getName();
 
 #endif // MAUDIO_PLAYER
 

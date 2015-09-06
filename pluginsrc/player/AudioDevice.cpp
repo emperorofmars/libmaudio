@@ -4,7 +4,7 @@
  * See LICENSE.txt for the full license
  */
 
-#include "extended/util/AudioDevice.hpp"
+#include "AudioDevice.hpp"
 #include "core/util/AudioException.hpp"
 #include <iostream>
 #include <cmath>

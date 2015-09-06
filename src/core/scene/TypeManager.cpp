@@ -7,9 +7,8 @@
 #include "core/scene/TypeManager.hpp"
 #include "core/pluginmanager/PluginManager.hpp"
 #include "core/action/ErrorAction.hpp"
-#include "core/action/SinusGenerator.hpp"
-#include "core/action/TerminalPrinter.hpp"
-#include "extended/audiosink/Player.hpp"
+#include "extended/action/SinusGenerator.hpp"
+#include "extended/action/TerminalPrinter.hpp"
 #include <string>
 
 namespace maudio{
@@ -23,9 +22,6 @@ sptr<IAction> TypeManager::create(const char *type, const char *name){
 	}
 	else if(mtype == "TerminalPrinter"){
 		ret.reset(new TerminalPrinter());
-	}
-	else if(mtype == "Player"){
-		ret.reset(new Player());
 	}
 	else if(mtype == "ErrorAction"){
 		ret.reset(new ErrorAction());

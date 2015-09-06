@@ -23,7 +23,7 @@ namespace maudio{
 #endif
 	
 #ifndef MAUDIO_VERSION
-	#define MAUDIO_VERSION "v0.0.1"
+	#define MAUDIO_VERSION "v0.0.0"
 #endif
 
 const char *getGitBranch();

@@ -58,8 +58,6 @@ set(MAUDIO_SOURCE_FILES
 	${PROJECT_SOURCE_DIR}/src/core/property/PropertyManager.cpp
 	${PROJECT_SOURCE_DIR}/src/core/property/SimpleProperty.cpp
 	${PROJECT_SOURCE_DIR}/src/core/property/SimpleKeyableProperty.cpp
-	${PROJECT_SOURCE_DIR}/src/core/action/TerminalPrinter.cpp
-	${PROJECT_SOURCE_DIR}/src/core/action/SinusGenerator.cpp
 	${PROJECT_SOURCE_DIR}/src/core/action/ErrorAction.cpp
 	${PROJECT_SOURCE_DIR}/src/core/action/BaseAction.cpp
 	${PROJECT_SOURCE_DIR}/src/core/util/String.cpp
@@ -79,11 +77,8 @@ set(MAUDIO_SOURCE_FILES
 	${PROJECT_SOURCE_DIR}/src/core/audiodata/AudioInfo.cpp
 	${PROJECT_SOURCE_DIR}/src/core/audiodata/AudioBuffer.cpp
 	${PROJECT_SOURCE_DIR}/src/core/pluginmanager/PluginManager.cpp
-	${PROJECT_SOURCE_DIR}/src/extended/util/AudioDevice.cpp
-	${PROJECT_SOURCE_DIR}/src/extended/audiosink/Player.cpp
-	${PROJECT_SOURCE_DIR}/src/extended/audiosink/FileWriter.cpp
-	${PROJECT_SOURCE_DIR}/src/extended/audiosource/BulkReader.cpp
-	${PROJECT_SOURCE_DIR}/src/extended/audiosource/StreamReader.cpp
+	${PROJECT_SOURCE_DIR}/src/extended/action/TerminalPrinter.cpp
+	${PROJECT_SOURCE_DIR}/src/extended/action/SinusGenerator.cpp
 	${PROJECT_SOURCE_DIR}/src/MaudioInfo.cpp
 ) 
 
@@ -103,9 +98,7 @@ set(MAUDIO_INCLUDE_FILES
 	${PROJECT_SOURCE_DIR}/include/core/property/IKeyableProperty.hpp
 	${PROJECT_SOURCE_DIR}/include/core/property/PropertyManager.hpp
 	${PROJECT_SOURCE_DIR}/include/core/property/SimpleKeyableProperty.hpp
-	${PROJECT_SOURCE_DIR}/include/core/action/SinusGenerator.hpp
 	${PROJECT_SOURCE_DIR}/include/core/action/BaseAction.hpp
-	${PROJECT_SOURCE_DIR}/include/core/action/TerminalPrinter.hpp
 	${PROJECT_SOURCE_DIR}/include/core/action/IAction.hpp
 	${PROJECT_SOURCE_DIR}/include/core/action/ErrorAction.hpp
 	${PROJECT_SOURCE_DIR}/include/core/action/IControl.hpp
@@ -137,10 +130,8 @@ set(MAUDIO_INCLUDE_FILES
 	${PROJECT_SOURCE_DIR}/include/core/pluginmanager/PluginManager.hpp
 	${PROJECT_SOURCE_DIR}/include/core/pluginmanager/PluginLoader.hpp
 	${PROJECT_SOURCE_DIR}/include/MaudioInfo.hpp
-	${PROJECT_SOURCE_DIR}/include/extended/audiosink/FileWriter.hpp
-	${PROJECT_SOURCE_DIR}/include/extended/audiosink/Player.hpp
-	${PROJECT_SOURCE_DIR}/include/extended/audiosource/BulkReader.hpp
-	${PROJECT_SOURCE_DIR}/include/extended/audiosource/StreamReader.hpp
+	${PROJECT_SOURCE_DIR}/include/extended/action/SinusGenerator.hpp
+	${PROJECT_SOURCE_DIR}/include/extended/action/TerminalPrinter.hpp
 )
 
 set(TESTBIN_SOURCE_FILES

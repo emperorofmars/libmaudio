@@ -5,9 +5,8 @@
  */
 
 #include "core/util/sptr.hpp"
-#include "core/action/SinusGenerator.hpp"
-#include "core/action/TerminalPrinter.hpp"
-#include "extended/audiosink/Player.hpp"
+#include "extended/action/SinusGenerator.hpp"
+#include "extended/action/TerminalPrinter.hpp"
 #include <typeinfo>
 
 namespace maudio{

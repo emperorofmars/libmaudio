@@ -8,18 +8,9 @@
 #include <chrono>
 #include <thread>
 #include <mutex>
-#include "core/action/SinusGenerator.hpp"
-#include "core/action/TerminalPrinter.hpp"
-#include "extended/audiosink/Player.hpp"
-#include "core/store/ConfigManager.hpp"
-#include "core/pluginmanager/PluginManager.hpp"
 #include "core/scene/Scene.hpp"
 #include "core/scene/TypeManager.hpp"
 #include "core/scene/Project.hpp"
-#include "core/store/MultiLevelStore.hpp"
-#include "core/serializer/TXTSerializer.hpp"
-#include "core/store/StoreWriter.hpp"
-#include "core/store/StoreReader.hpp"
 #include "MaudioInfo.hpp"
 /*
 #include "core/manipulator/Resampler.hpp"

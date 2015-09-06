@@ -4,7 +4,8 @@
  * See LICENSE.txt for the full license
  */
 
-#include "extended/audiosink/Player.hpp"
+#include "maudio.hpp"
+#include "Player.hpp"
 #include "core/util/sptr.hpp"
 #include "core/util/AudioException.hpp"
 #include "core/util/Util.hpp"
@@ -299,6 +300,19 @@ void Player::Control::stop(){
 
 } // maudio
 
+
+extern "C" void* create(){
+	return new maudio::Player();
+}
+
+extern "C" void destroy(void *data){
+	delete (maudio::Player *)data;
+}
+
+extern "C" const char *getName(){
+	static const char *ret = "Player";
+	return ret;
+}
 
 
 

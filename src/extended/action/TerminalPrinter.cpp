@@ -4,7 +4,7 @@
  * See LICENSE.txt for the full license
  */
 
-#include "core/action/TerminalPrinter.hpp"
+#include "extended/action/TerminalPrinter.hpp"
 #include "core/util/Util.hpp"
 #include "core/util/AudioException.hpp"
 #include "core/util/sptr.hpp"

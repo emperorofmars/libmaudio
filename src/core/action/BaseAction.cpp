@@ -61,6 +61,7 @@ bool BaseAction::addInput(IAction *input, int slot){
 		return false;
 	}
 	input->addObserver(this);
+	onAdd(slot);
 	return true;
 }
 
@@ -78,6 +79,7 @@ void BaseAction::removeInput(int slot){
 	if(InputOk(slot)) mInputs[slot]->removeObserver(this);
 	mInputs[slot] = NULL;
 	mInputs.erase(mInputs.begin() + slot);
+	onAdd(slot);
 	return;
 }
 
@@ -127,6 +129,7 @@ void BaseAction::notify(const IObservable *origin, NoticeType type, const char *
 		}
 	}
 	if(type == ON_CHANGE){
+		onNotifyChange(origin, message);
 	}
 	return;
 }
@@ -158,7 +161,23 @@ sptr<ISample> BaseAction::getSampleFromBuffer(unsigned int numSample, sptr<IAudi
 	return ret;
 }
 
+void BaseAction::onNotifyChange(const IObservable *origin, const char *message){
+	return;
+}
+
+void BaseAction::onAdd(unsigned int slot){
+	return;
+}
+
+void BaseAction::onRemove(unsigned int slot){
+	return;
+}
+
 } // maudio
+
+
+
+
 
 
 

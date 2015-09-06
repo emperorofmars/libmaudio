@@ -182,7 +182,6 @@ bool Player::checkCompatible(IAudioInfo *info){
 
 void Player::serialize(IMultiLevelStore *data) const{
 	if(!data) return;
-	data->add("type", "Player");
 	data->add("name", getName());
 	data->add("queuesize", std::to_string(mQueueSize).c_str());
 	data->add("position", std::to_string(mPosition).c_str());
@@ -210,6 +209,7 @@ void Player::feed(){
 
 	for(unsigned int i = 0; i < mQueueSize - mQueue->size(); i++){
 		auto tmp = getFromSlot(0, mPosition, mQueueSize - mQueue->size());
+		if(!tmp) break;
 		for(unsigned int j = 0; j < tmp->getInfo()->getSamples(); j++){
 			ISample *tmpSample = tmp->get(j);
 			mQueue->push(*tmpSample);

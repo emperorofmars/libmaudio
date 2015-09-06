@@ -52,6 +52,7 @@ int main(int argc, char *argv[]){
 	
 	scene1->connect(sin1, mix);
 	scene1->connect(sin2, mix);
+	std::cerr << "connect" << std::endl;
 	scene1->connect(mix, play);
 	
 	auto sin1Prop = scene1->get(sin1)->getProperties();
@@ -76,9 +77,14 @@ int main(int argc, char *argv[]){
 	
 	std::cerr << "play" << std::endl;
 	
-	playCtrl1->callFunction("play");
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-	playCtrl1->callFunction("stop");
+	try{
+		playCtrl1->callFunction("play");
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+		playCtrl1->callFunction("stop");
+	}
+	catch(std::exception &e){
+		std::cerr << "play error: " << e.what() << std::endl;
+	}
 	
 	std::cerr << "serialize" << std::endl;
 	
@@ -95,9 +101,14 @@ int main(int argc, char *argv[]){
 	
 	std::cerr << "play" << std::endl;
 	
-	playCtrl2->callFunction("play");
-	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-	playCtrl2->callFunction("stop");
+	try{
+		playCtrl2->callFunction("play");
+		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+		playCtrl2->callFunction("stop");
+	}
+	catch(std::exception &e){
+		std::cerr << "play error: " << e.what() << std::endl;
+	}
 	
 	proj2.save();
 	

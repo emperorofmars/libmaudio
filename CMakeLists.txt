@@ -60,6 +60,7 @@ set(MAUDIO_SOURCE_FILES
 	${PROJECT_SOURCE_DIR}/src/core/property/SimpleKeyableProperty.cpp
 	${PROJECT_SOURCE_DIR}/src/core/action/TerminalPrinter.cpp
 	${PROJECT_SOURCE_DIR}/src/core/action/SinusGenerator.cpp
+	${PROJECT_SOURCE_DIR}/src/core/action/ErrorAction.cpp
 	${PROJECT_SOURCE_DIR}/src/core/action/BaseAction.cpp
 	${PROJECT_SOURCE_DIR}/src/core/util/String.cpp
 	${PROJECT_SOURCE_DIR}/src/core/util/UniqueID.cpp
@@ -106,6 +107,7 @@ set(MAUDIO_INCLUDE_FILES
 	${PROJECT_SOURCE_DIR}/include/core/action/BaseAction.hpp
 	${PROJECT_SOURCE_DIR}/include/core/action/TerminalPrinter.hpp
 	${PROJECT_SOURCE_DIR}/include/core/action/IAction.hpp
+	${PROJECT_SOURCE_DIR}/include/core/action/ErrorAction.hpp
 	${PROJECT_SOURCE_DIR}/include/core/action/IControl.hpp
 	${PROJECT_SOURCE_DIR}/include/core/util/BaseObservable.hpp
 	${PROJECT_SOURCE_DIR}/include/core/util/IObserver.hpp

@@ -42,7 +42,7 @@ public:
 
 	virtual bool checkCompatible(IAudioInfo *info);
 
-	virtual void notify(const IObservable *origin, NoticeType type, const char *message);
+	virtual void notify(const IObservable *origin, NoticeType type, const char *message) final;
 
 protected:
 	virtual bool checkCycles(IAction *node) const final;
@@ -51,7 +51,11 @@ protected:
 	virtual sptr<IAudioBuffer> getFromSlot(unsigned int slot, unsigned long pos, unsigned int length) final;
 	virtual sptr<IAudioInfo> getInfoFromSlot(unsigned int slot) final;
 	virtual sptr<ISample> getSampleFromBuffer(unsigned int numSample, sptr<IAudioBuffer> buffer) final;
-
+	
+	virtual void onNotifyChange(const IObservable *origin, const char *message);
+	virtual void onAdd(unsigned int slot);
+	virtual void onRemove(unsigned int slot);
+	
 	PropertyManager mProperties;
 	
 	mutable std::recursive_mutex mMutex;

@@ -49,7 +49,6 @@ bool TerminalPrinter::checkCompatible(IAudioInfo *info){
 
 void TerminalPrinter::serialize(IMultiLevelStore *data) const{
 	if(!data) return;
-	data->add("type", "TerminalPrinter");
 	data->add("name", getName());
 	return;
 }

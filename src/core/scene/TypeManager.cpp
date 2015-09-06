@@ -6,6 +6,7 @@
 
 #include "core/scene/TypeManager.hpp"
 #include "core/pluginmanager/PluginManager.hpp"
+#include "core/action/ErrorAction.hpp"
 #include "core/action/SinusGenerator.hpp"
 #include "core/action/TerminalPrinter.hpp"
 #include "extended/audiosink/Player.hpp"
@@ -26,6 +27,9 @@ sptr<IAction> TypeManager::create(const char *type, const char *name){
 	else if(mtype == "Player"){
 		ret.reset(new Player());
 	}
+	else if(mtype == "ErrorAction"){
+		ret.reset(new ErrorAction());
+	}
 	if(!ret){
 		try{
 			ret = PluginManager::Instance()->createInstance(type);
@@ -36,6 +40,12 @@ sptr<IAction> TypeManager::create(const char *type, const char *name){
 	}
 	if(ret && name){
 		ret->setName(name);
+	}
+	if(!ret){
+		ret.reset(new ErrorAction());
+		if(name){
+			ret->setName(name);
+		}
 	}
 	return ret;
 }

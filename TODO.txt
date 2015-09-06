@@ -64,9 +64,9 @@ Todo:
 - ////implement serializer
 - ////create Project
 - ////create LevelMutex !nope
-- create MaudioInfo::version, usw...
-- create ErrorAction
-- scene: use ErrorAction in deserialize error
+- ////create MaudioInfo::version, usw...
+- ////create ErrorAction
+- ////scene: use ErrorAction in deserialize error
 - scene: replace
 - restructure project, move player to a plugin
 - move singen and termprint to extended

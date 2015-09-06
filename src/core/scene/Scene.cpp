@@ -31,7 +31,6 @@ const char *Scene::getName() const{
 }
 
 long Scene::add(IAction *node){
-	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return add(sptr<IAction>(node));
 }
 
@@ -206,7 +205,9 @@ void Scene::deserialize(const IMultiLevelStore *data){
 			try{
 				std::string type = nodeStore->get("type");
 				sptr<IAction> action = TypeManager::create(type.c_str());
-				if(!action) continue; //TODO: replace with invalid
+				if(!action){
+					continue;
+				}
 				action->deserialize(innerNodeStore);
 				idConversion[string_to<unsigned long>(std::string(nodeStore->get("id")))] = action->getID();
 				add(action);

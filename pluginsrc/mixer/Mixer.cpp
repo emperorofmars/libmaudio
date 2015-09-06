@@ -76,7 +76,6 @@ public:
 
 	virtual void serialize(IMultiLevelStore *data) const{
 		if(!data) return;
-		data->add("type", "Mixer");
 		data->add("name", getName());
 		return;
 	};

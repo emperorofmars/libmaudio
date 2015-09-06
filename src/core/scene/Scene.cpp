@@ -36,7 +36,7 @@ long Scene::add(IAction *node){
 
 long Scene::add(sptr<IAction> node){
 	std::lock_guard<std::recursive_mutex> lock(mMutex);
-	if(!node) return -1;
+	if(!node) throw MaudioException("invalid node!");
 	if(isPartOfScene(node->getID())) return node->getID();
 	mNodes[node->getID()] = node;
 	mAdjacencyList[node->getID()] = std::vector<unsigned long>();
@@ -58,6 +58,28 @@ void Scene::remove(unsigned long id){
 	mAdjacencyList[id].clear();
 	notifyObservers(ON_CHANGE, "node removed");
 	return;
+}
+
+long Scene::replace(unsigned long oldID, IAction *newNode){
+	return replace(oldID, sptr<IAction>(newNode));
+}
+
+long Scene::replace(unsigned long oldID, sptr<IAction> newNode){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
+	if(!isPartOfScene(oldID) || !newNode || isPartOfScene(newNode->getID())){
+		throw MaudioException("cannot replace!");
+	}
+	std::vector<unsigned long> inputs = getInputs(oldID);
+	std::vector<unsigned long> outputs = getOutputs(oldID);
+	remove(oldID);
+	add(newNode);
+	for(unsigned int i = 0; i < inputs.size(); i++){
+		connect(inputs[i], newNode->getID());
+	}
+	for(unsigned int i = 0; i < outputs.size(); i++){
+		connect(newNode->getID(), outputs[i]);
+	}
+	return newNode->getID();
 }
 
 sptr<IAction> Scene::getEnd(unsigned int num){
@@ -140,6 +162,17 @@ void Scene::disconnect(unsigned long source, unsigned long sink){
 	}
 	notifyObservers(ON_CHANGE, "node disconnected");
 	return;
+}
+
+std::vector<unsigned long> Scene::getInputs(unsigned long id){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
+	std::vector<unsigned long> ret;
+	try{
+		ret = mAdjacencyList.at(id);
+	}
+	catch(std::exception &e){
+	}
+	return ret;
 }
 
 std::vector<unsigned long> Scene::getOutputs(unsigned long id){

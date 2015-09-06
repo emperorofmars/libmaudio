@@ -28,6 +28,10 @@ public:
 	long add(IAction *node);
 	long add(sptr<IAction> node);
 	void remove(unsigned long id);
+	
+	long replace(unsigned long oldID, IAction *newNode);
+	long replace(unsigned long oldID, sptr<IAction> newNode);
+	
 	sptr<IAction> getEnd(unsigned int num);
 	sptr<IAction> get(unsigned long id);
 	
@@ -36,6 +40,7 @@ public:
 	void connect(unsigned long source, unsigned long sink);
 	void disconnect(unsigned long source, unsigned long sink);
 
+	std::vector<unsigned long> getInputs(unsigned long id);
 	std::vector<unsigned long> getOutputs(unsigned long id);
 	
 	virtual void readConfig(const IKeyValueStore *conf);

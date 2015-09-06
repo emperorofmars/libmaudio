@@ -99,6 +99,13 @@ int main(int argc, char *argv[]){
 	auto playCtrl2 = proj2.getScene((unsigned int)0)->getEnd(0)->getControl();
 	if(!playCtrl2) throw MaudioException("FUUU 02");
 	
+	std::cerr << "replace: ";
+	std::cerr << proj2.getScene((unsigned int)0)->getEnd(0)->getInput(0)->getInput(0)->getID() << std::endl;
+	proj2.getScene((unsigned int)0)->replace(
+		proj2.getScene((unsigned int)0)->getEnd(0)->getInput(0)->getInput(0)->getID(),
+		TypeManager::create("SinusGenerator", "sin3")
+	);
+	
 	std::cerr << "play" << std::endl;
 	
 	try{

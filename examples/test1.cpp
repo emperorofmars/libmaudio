@@ -20,6 +20,7 @@
 #include "core/serializer/TXTSerializer.hpp"
 #include "core/store/StoreWriter.hpp"
 #include "core/store/StoreReader.hpp"
+#include "MaudioInfo.hpp"
 /*
 #include "core/manipulator/Resampler.hpp"
 #include "core/audiosink/Performance.hpp"
@@ -29,6 +30,14 @@ using namespace maudio;
 
 int main(int argc, char *argv[]){
 	std::cerr << "test" << std::endl;
+	
+	std::cerr << "version info: " << getGitCommit() << std::endl;
+	std::cerr << "version info: " << getGitBranch() << std::endl;
+	std::cerr << "version info: " << getGitDescription() << std::endl;
+	std::cerr << "version info: " << getVersionString() << std::endl;
+	std::cerr << "version info: " << getVersionMajor() << std::endl;
+	std::cerr << "version info: " << getVersionMinor() << std::endl;
+	std::cerr << "version info: " << getVersionPatch() << std::endl;
 	
 	Project proj1("test_project");
 	proj1.setSaveFile("testfile.maup");

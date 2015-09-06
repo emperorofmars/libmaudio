@@ -50,14 +50,14 @@ bool TerminalPrinter::checkCompatible(IAudioInfo *info){
 void TerminalPrinter::serialize(IMultiLevelStore *data) const{
 	if(!data) return;
 	data->add("type", "TerminalPrinter");
-	data->add("name", mName.c_str());
+	data->add("name", getName());
 	return;
 }
 
 void TerminalPrinter::deserialize(const IMultiLevelStore *data){
 	if(!data) return;
 	try{
-		mName = data->get("name");
+		setName(data->get("name"));
 	}
 	catch(std::exception &e){
 		throw e;

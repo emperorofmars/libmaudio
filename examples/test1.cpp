@@ -7,6 +7,7 @@
 #include <iostream>
 #include <chrono>
 #include <thread>
+#include <mutex>
 #include "core/action/SinusGenerator.hpp"
 #include "core/action/TerminalPrinter.hpp"
 #include "extended/audiosink/Player.hpp"
@@ -19,8 +20,6 @@
 #include "core/serializer/TXTSerializer.hpp"
 #include "core/store/StoreWriter.hpp"
 #include "core/store/StoreReader.hpp"
-#include "core/util/RecursiveSharedMutex.hpp"
-#include "core/util/SharedLockGuard.hpp"
 /*
 #include "core/manipulator/Resampler.hpp"
 #include "core/audiosink/Performance.hpp"
@@ -28,58 +27,9 @@
 
 using namespace maudio;
 
-recursive_shared_mutex mtx;
-std::mutex print;
-
-void mtx_test_shared_lock(int id){
-	print.lock();std::cerr << "attempting shared lock: " << id << std::endl;print.unlock();
-mtx.lock_shared();
-	print.lock();std::cerr << "shared locked: " << id <<  std::endl;print.unlock();
-	std::this_thread::sleep_for(std::chrono::milliseconds(10));
-mtx.unlock_shared();
-	print.lock();std::cerr << "shared unlocked: " << id <<  std::endl;print.unlock();
-	return;
-}
-void mtx_test_lock(int id){
-	print.lock();std::cerr << "attempting lock: " << id <<  std::endl;print.unlock();
-mtx.lock();
-	print.lock();std::cerr << "locked: " << id <<  std::endl;print.unlock();
-	std::this_thread::sleep_for(std::chrono::milliseconds(10));
-mtx.unlock();
-	print.lock();std::cerr << "unlocked: " << id <<  std::endl;print.unlock();
-	return;
-}
-
 int main(int argc, char *argv[]){
 	std::cerr << "test" << std::endl;
 	
-	std::cerr << "LOCKING" << std::endl;
-	std::this_thread::sleep_for(std::chrono::milliseconds(10));
-	mtx.lock();
-	std::cerr << "LOCKED" << std::endl;
-	std::thread t1(mtx_test_shared_lock, 1);
-	std::thread t2(mtx_test_shared_lock, 2);
-	std::thread t3(mtx_test_lock, 3);
-	std::thread t4(mtx_test_shared_lock, 4);
-	std::this_thread::sleep_for(std::chrono::milliseconds(10));
-	std::cerr << "UNLOCKING" << std::endl;
-	mtx.unlock();
-	std::cerr << "UNLOCKED" << std::endl;
-	std::thread t5(mtx_test_shared_lock, 5);
-	std::thread t6(mtx_test_lock, 6);
-	
-	std::this_thread::sleep_for(std::chrono::milliseconds(10));
-	std::cerr << "JOINING" << std::endl;
-	t1.join();
-	t2.join();
-	t3.join();
-	t4.join();
-	t5.join();
-	t6.join();
-	
-	
-	
-	/*
 	Project proj1("test_project");
 	proj1.setSaveFile("testfile.maup");
 	
@@ -103,10 +53,9 @@ int main(int argc, char *argv[]){
 	sin1Freq->addKey("700", 0.7);
 	sin1Freq->addKey("500", 0.700001);
 	
-	sin1Freq->setKey("500", 1.2);
 	sin1Freq->addKey("500", 1.4);
-	sin1Freq->addKey("700", 1.400001);
-	sin1Freq->addKey("700", 1.9);
+	sin1Freq->addKey("800", 1.400001);
+	sin1Freq->addKey("800", 1.9);
 	sin1Freq->addKey("500", 1.900001);
 	
 	auto sin2Prop = scene1->get(sin2)->getProperties();
@@ -142,7 +91,7 @@ int main(int argc, char *argv[]){
 	playCtrl2->callFunction("stop");
 	
 	proj2.save();
-	*/
+	
 	std::cerr << "closing main" << std::endl;
 	return 0;
 }

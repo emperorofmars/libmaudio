@@ -8,10 +8,10 @@
 #define MAUDIO_PROJECT
 
 #include "core/scene/Scene.hpp"
-#include "core/util/RecursiveSharedMutex.hpp"
 #include <memory>
 #include <string>
 #include <vector>
+#include <mutex>
 
 namespace maudio{
 
@@ -47,7 +47,7 @@ private:
 	std::string mSaveFile;
 	bool mPreservePrevious = true;
 	std::vector<std::shared_ptr<Scene>> mScenes;
-	recursive_shared_mutex mMutex;
+	mutable std::recursive_mutex mMutex;
 };
 
 } // maudio

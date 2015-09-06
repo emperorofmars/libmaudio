@@ -11,6 +11,7 @@ namespace maudio{
 //bool
 template<>
 bool SimpleKeyableProperty<bool>::interpolate(long double pos) const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	bool best = mValues.begin()->second;
 	for(auto iter = mValues.begin(); iter != mValues.end(); iter++){
 		if(iter->first <= pos){
@@ -36,6 +37,7 @@ const char *SimpleKeyableProperty<bool>::getKeyString(unsigned int keynum) const
 //string
 template<>
 std::string SimpleKeyableProperty<std::string>::interpolate(long double pos) const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	std::string best = mValues.begin()->second;
 	for(auto iter = mValues.begin(); iter != mValues.end(); iter++){
 		if(iter->first <= pos){
@@ -48,11 +50,13 @@ std::string SimpleKeyableProperty<std::string>::interpolate(long double pos) con
 
 template<>
 const char *SimpleKeyableProperty<std::string>::getString(long double pos) const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return to_chararray(interpolate(pos));
 }
 
 template<>
 std::string SimpleKeyableProperty<std::string>::get(long double pos) const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return interpolate(pos);
 }
 
@@ -68,6 +72,7 @@ std::string SimpleKeyableProperty<std::string>::getKey(unsigned int keynum) cons
 
 template<>
 void SimpleKeyableProperty<std::string>::addKey(const std::string &value, long double pos){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	mValues[pos] = value;
 	notifyObservers(ON_CHANGE);
 	return;
@@ -75,6 +80,7 @@ void SimpleKeyableProperty<std::string>::addKey(const std::string &value, long d
 
 template<>
 void SimpleKeyableProperty<std::string>::addKey(std::string value, long double pos){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	mValues[pos] = value;
 	notifyObservers(ON_CHANGE);
 	return;
@@ -82,6 +88,7 @@ void SimpleKeyableProperty<std::string>::addKey(std::string value, long double p
 
 template<>
 void SimpleKeyableProperty<std::string>::setKey(const std::string &value, unsigned int keynum){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(keynum >= mValues.size()) return;
 
 	auto iter = mValues.begin();
@@ -96,6 +103,7 @@ void SimpleKeyableProperty<std::string>::setKey(const std::string &value, unsign
 
 template<>
 void SimpleKeyableProperty<std::string>::setKey(std::string value, unsigned int keynum){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(keynum >= mValues.size()) return;
 
 	auto iter = mValues.begin();

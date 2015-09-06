@@ -14,6 +14,7 @@
 #include "core/util/sptr.hpp"
 #include <vector>
 #include <string>
+#include <mutex>
 
 namespace maudio{
 
@@ -52,10 +53,11 @@ protected:
 	virtual sptr<ISample> getSampleFromBuffer(unsigned int numSample, sptr<IAudioBuffer> buffer) final;
 
 	PropertyManager mProperties;
-
-//private:
-	std::string mName;
 	
+	mutable std::recursive_mutex mMutex;
+	
+private:
+	std::string mName;
 	std::vector<IAction *> mInputs;
 };
 

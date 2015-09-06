@@ -16,11 +16,13 @@ BaseAction::~BaseAction(){
 }
 
 void BaseAction::setName(const char *name){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	mName = name;
 	return;
 }
 
 const char *BaseAction::getName() const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return mName.c_str();
 }
 
@@ -40,6 +42,7 @@ void BaseAction::deleteData(ISample *data) noexcept{
 }
 
 bool BaseAction::addInput(IAction *input, int slot){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(!input) return false;
 	if(!checkCompatible(sptr<IAudioInfo>(input->getInfo()).get())) return false;
 	if(checkCycles(input)) return false;
@@ -62,6 +65,7 @@ bool BaseAction::addInput(IAction *input, int slot){
 }
 
 void BaseAction::removeInput(IAction *input){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	for(unsigned int i = 0; i < mInputs.size(); i++){
 		if(mInputs[i] == input) removeInput(i);
 	}
@@ -69,6 +73,7 @@ void BaseAction::removeInput(IAction *input){
 }
 
 void BaseAction::removeInput(int slot){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if((unsigned int)slot >= mInputs.size()) return;
 	if(InputOk(slot)) mInputs[slot]->removeObserver(this);
 	mInputs[slot] = NULL;
@@ -77,6 +82,7 @@ void BaseAction::removeInput(int slot){
 }
 
 IAction *BaseAction::getInput(int slot){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if((unsigned int)slot >= mInputs.size()) return NULL;
 	return mInputs[slot];
 }
@@ -110,6 +116,7 @@ bool BaseAction::checkCycles(IAction *node) const{
 }
 
 void BaseAction::notify(const IObservable *origin, NoticeType type, const char *message){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(type == ON_DELETE){
 		if(!origin) return;
 		for(unsigned int i = 0; i < mInputs.size(); i++){

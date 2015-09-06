@@ -26,7 +26,7 @@ public:
 
 private:
 	std::vector<IObserver *> mObservers;
-	std::mutex mMutex;
+	mutable std::recursive_mutex mMutex;
 
 	unsigned long mObservableID;
 	static unsigned long mGlobalObservableID;

@@ -4,7 +4,7 @@ project(maudio)
 include_directories("${PROJECT_SOURCE_DIR}/include")
 include_directories("${PROJECT_SOURCE_DIR}/src")
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wl,--no-as-needed")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/cmake-build")
 
 SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
@@ -25,12 +25,10 @@ set(MAUDIO_SOURCE_FILES
 	${PROJECT_SOURCE_DIR}/src/core/action/BaseAction.cpp
 	${PROJECT_SOURCE_DIR}/src/core/util/String.cpp
 	${PROJECT_SOURCE_DIR}/src/core/util/UniqueID.cpp
-	${PROJECT_SOURCE_DIR}/src/core/util/RecursiveSharedMutex.cpp
 	${PROJECT_SOURCE_DIR}/src/core/util/BaseObservable.cpp
 	${PROJECT_SOURCE_DIR}/src/core/util/Util.cpp
 	${PROJECT_SOURCE_DIR}/src/core/util/BaseObserver.cpp
 	${PROJECT_SOURCE_DIR}/src/core/util/TypeIdConverter.cpp
-	${PROJECT_SOURCE_DIR}/src/core/util/SharedLockGuard.cpp
 	${PROJECT_SOURCE_DIR}/src/core/util/sptr.cpp
 	${PROJECT_SOURCE_DIR}/src/core/scene/Scene.cpp
 	${PROJECT_SOURCE_DIR}/src/core/scene/TypeManager.cpp
@@ -71,7 +69,6 @@ set(MAUDIO_INCLUDE_FILES
 	${PROJECT_SOURCE_DIR}/include/core/action/IAction.hpp
 	${PROJECT_SOURCE_DIR}/include/core/action/IControl.hpp
 	${PROJECT_SOURCE_DIR}/include/core/util/BaseObservable.hpp
-	${PROJECT_SOURCE_DIR}/include/core/util/SharedLockGuard.hpp
 	${PROJECT_SOURCE_DIR}/include/core/util/IObserver.hpp
 	${PROJECT_SOURCE_DIR}/include/core/util/String.hpp
 	${PROJECT_SOURCE_DIR}/include/core/util/AudioException.hpp
@@ -81,7 +78,6 @@ set(MAUDIO_INCLUDE_FILES
 	${PROJECT_SOURCE_DIR}/include/core/util/Util.hpp
 	${PROJECT_SOURCE_DIR}/include/core/util/sptr.hpp
 	${PROJECT_SOURCE_DIR}/include/core/util/TypeIdConverter.hpp
-	${PROJECT_SOURCE_DIR}/include/core/util/RecursiveSharedMutex.hpp
 	${PROJECT_SOURCE_DIR}/include/core/scene/Scene.hpp
 	${PROJECT_SOURCE_DIR}/include/core/scene/TypeManager.hpp
 	${PROJECT_SOURCE_DIR}/include/core/scene/Project.hpp

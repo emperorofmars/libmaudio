@@ -16,23 +16,21 @@ BaseObserver::~BaseObserver(){
 }
 
 void BaseObserver::onAdd(IObservable *origin){
+	std::lock_guard<std::mutex> lock(mMutex);
 	if(!origin) return;
-	mMutex.lock();
 	mObserving.push_back(origin);
-	mMutex.unlock();
 	return;
 }
 
 void BaseObserver::onRemove(IObservable *origin){
+	std::lock_guard<std::mutex> lock(mMutex);
 	if(!origin) return;
-	mMutex.lock();
 	for(unsigned int i = 0; i < mObserving.size(); i++){
 		if(mObserving[i] == origin){
 			mObserving.erase(mObserving.begin() + i);
 			i--;
 		}
 	}
-	mMutex.unlock();
 	return;
 }
 

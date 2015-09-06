@@ -22,35 +22,33 @@ BaseObservable::~BaseObservable(){
 }
 
 void BaseObservable::addObserver(IObserver *observer){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(!observer) return;
 
-	mMutex.lock();
 	for(unsigned int i = 0; i < mObservers.size(); i++){
 		if(mObservers[i] == observer){
-			mMutex.unlock();
 			return; //if it has been already added
 		}
 	}
 	mObservers.push_back(observer);
 	observer->onAdd((IObservable *)this);
-	mMutex.unlock();
 	return;
 }
 
 void BaseObservable::removeObserver(IObserver *observer){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(!observer) return;
-	mMutex.lock();
 	for(unsigned int i = 0; i < mObservers.size(); i++){
 		if(mObservers[i] == observer){
 			mObservers.erase(mObservers.begin() + i);
 			i--;
 		}
 	}
-	mMutex.unlock();
 	return;
 }
 
 void BaseObservable::notifyObservers(NoticeType type, const char *message){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(type == ON_DELETE){
 		for(unsigned int i = 0; i < mObservers.size(); i++){
 			mObservers[i]->onRemove((IObservable *)this);
@@ -67,6 +65,7 @@ void BaseObservable::notifyObservers(NoticeType type, const char *message){
 }
 
 unsigned long BaseObservable::getObservableID() const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return mObservableID;
 }
 

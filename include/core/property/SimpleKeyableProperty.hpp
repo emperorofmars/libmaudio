@@ -15,6 +15,7 @@
 #include <map>
 #include <cmath>
 #include <string>
+#include <mutex>
 
 namespace maudio{
 
@@ -57,6 +58,7 @@ private:
 	std::map<long double, T> mValues;
 	T mBottomBound;
 	T mUpperBound;
+	mutable std::recursive_mutex mMutex;
 };
 
 typedef SimpleKeyableProperty<bool> KeyableBoolProperty;
@@ -82,16 +84,19 @@ SimpleKeyableProperty<T>::~SimpleKeyableProperty(){
 
 template<typename T>
 const char *SimpleKeyableProperty<T>::getName() const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return mName.c_str();
 }
 
 template<typename T>
 const char *SimpleKeyableProperty<T>::getString(long double pos) const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return to_chararray(interpolate(pos));
 }
 
 template<typename T>
 T SimpleKeyableProperty<T>::get(long double pos) const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return interpolate(pos);
 }
 
@@ -102,6 +107,7 @@ const char *SimpleKeyableProperty<T>::getKeyString(unsigned int keynum) const{
 
 template<typename T>
 long double SimpleKeyableProperty<T>::getKeyPos(unsigned int keynum) const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(keynum >= mValues.size()) throw MaudioException("keynum out of range");
 	auto iter = mValues.begin();
 	while(iter != mValues.end() && keynum > 0){
@@ -134,6 +140,7 @@ void SimpleKeyableProperty<T>::addKey(const std::string &value, long double pos)
 
 template<typename T>
 void SimpleKeyableProperty<T>::addKey(T value, long double pos){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(value <= mBottomBound) value = mBottomBound;
 	else if(value >= mUpperBound) value = mUpperBound;
 	mValues[pos] = value;
@@ -159,6 +166,7 @@ void SimpleKeyableProperty<T>::setKey(const std::string &value, unsigned int key
 
 template<typename T>
 void SimpleKeyableProperty<T>::setKey(T value, unsigned int keynum){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(keynum >= mValues.size()) return;
 	if(value < mBottomBound) value = mBottomBound;
 	else if(value > mUpperBound) value = mUpperBound;
@@ -181,6 +189,7 @@ void SimpleKeyableProperty<T>::setKey(const char *value, unsigned int keynum){
 
 template<typename T>
 void SimpleKeyableProperty<T>::removeKey(unsigned int keynum){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(mValues.size() <= 1) return;
 	if(keynum >= mValues.size()) return;
 
@@ -196,6 +205,7 @@ void SimpleKeyableProperty<T>::removeKey(unsigned int keynum){
 
 template<typename T>
 void SimpleKeyableProperty<T>::setBounds(T bottom, T upper){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(bottom >= upper) return;
 	mBottomBound = bottom;
 	mUpperBound = upper;
@@ -209,16 +219,19 @@ void SimpleKeyableProperty<T>::setBounds(T bottom, T upper){
 
 template<typename T>
 const char *SimpleKeyableProperty<T>::getBottomBoundsString() const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return to_chararray(mBottomBound);
 }
 
 template<typename T>
 const char *SimpleKeyableProperty<T>::getUpperBoundsString() const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return to_chararray(mUpperBound);
 }
 
 template<typename T>
 std::vector<std::string> SimpleKeyableProperty<T>::getBoundsString() const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return std::vector<std::string>{std::to_string(mBottomBound), std::to_string(mUpperBound)};
 }
 
@@ -229,6 +242,7 @@ std::vector<T> SimpleKeyableProperty<T>::getBounds() const{
 
 template<typename T>
 T SimpleKeyableProperty<T>::getElement(unsigned int pos) const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	auto iter = mValues.begin();
 	while(iter != mValues.end() && pos > 0){
 		iter++;
@@ -239,6 +253,7 @@ T SimpleKeyableProperty<T>::getElement(unsigned int pos) const{
 
 template<typename T>
 T SimpleKeyableProperty<T>::interpolate(long double pos) const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	T best = mValues.begin()->second;
 	for(auto iter = mValues.begin(); iter != mValues.end(); iter++){
 		if(iter->first <= pos){
@@ -262,6 +277,7 @@ T SimpleKeyableProperty<T>::interpolate(long double pos) const{
 
 template<typename T>
 void SimpleKeyableProperty<T>::serialize(IMultiLevelStore *data) const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(!data) return;
 	data->add("name", mName.c_str());
 	for(auto iter = mValues.begin(); iter != mValues.end(); iter++){
@@ -274,6 +290,7 @@ void SimpleKeyableProperty<T>::serialize(IMultiLevelStore *data) const{
 
 template<typename T>
 void SimpleKeyableProperty<T>::deserialize(const IMultiLevelStore *data){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(!data) return;
 	try{
 		mName = data->get("name");

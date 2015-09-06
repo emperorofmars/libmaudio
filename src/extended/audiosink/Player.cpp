@@ -183,7 +183,7 @@ bool Player::checkCompatible(IAudioInfo *info){
 void Player::serialize(IMultiLevelStore *data) const{
 	if(!data) return;
 	data->add("type", "Player");
-	data->add("name", mName.c_str());
+	data->add("name", getName());
 	data->add("queuesize", std::to_string(mQueueSize).c_str());
 	data->add("position", std::to_string(mPosition).c_str());
 	data->add("devicename", mDeviceName.c_str());
@@ -193,7 +193,7 @@ void Player::serialize(IMultiLevelStore *data) const{
 void Player::deserialize(const IMultiLevelStore *data){
 	if(!data) return;
 	try{
-		mName = data->get("name");
+		setName(data->get("name"));
 		mQueueSize = string_to<unsigned int>(std::string(data->get("queuesize")));
 		mPosition = string_to<unsigned long>(std::string(data->get("position")));
 		mDeviceName = data->get("devicename");

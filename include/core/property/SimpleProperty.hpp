@@ -12,6 +12,7 @@
 #include "core/util/AudioException.hpp"
 #include <vector>
 #include <limits>
+#include <mutex>
 
 namespace maudio{
 
@@ -42,6 +43,7 @@ private:
 	T mValue;
 	T mBottomBound;
 	T mUpperBound;
+	mutable std::recursive_mutex mMutex;
 };
 
 typedef SimpleProperty<bool> BoolProperty;
@@ -67,11 +69,13 @@ SimpleProperty<T>::~SimpleProperty(){
 
 template<typename T>
 const char *SimpleProperty<T>::getName() const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return mName.c_str();
 }
 
 template<typename T>
 const char *SimpleProperty<T>::getString() const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return to_chararray(mValue);
 }
 
@@ -82,7 +86,10 @@ T SimpleProperty<T>::get() const{
 
 template<typename T>
 void SimpleProperty<T>::set(const std::string &value){
-	try{set(string_to<T>(value));}
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
+	try{
+		set(string_to<T>(value));
+	}
 	catch(std::exception &e){
 		throw MaudioException("failed to set value");
 	}
@@ -91,12 +98,14 @@ void SimpleProperty<T>::set(const std::string &value){
 
 template<typename T>
 void SimpleProperty<T>::set(const char *value){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	set(std::string(value));
 	return;
 }
 
 template<typename T>
 void SimpleProperty<T>::set(T value){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(value < mBottomBound) mValue = mBottomBound;
 	else if(value > mUpperBound) mValue = mUpperBound;
 	else mValue = value;
@@ -106,6 +115,7 @@ void SimpleProperty<T>::set(T value){
 
 template<typename T>
 void SimpleProperty<T>::setBounds(T bottom, T upper){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(bottom >= upper) return;
 	mBottomBound = bottom;
 	mUpperBound = upper;
@@ -117,26 +127,31 @@ void SimpleProperty<T>::setBounds(T bottom, T upper){
 
 template<typename T>
 const char *SimpleProperty<T>::getBottomBoundsString() const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return to_chararray(mBottomBound);
 }
 
 template<typename T>
 const char *SimpleProperty<T>::getUpperBoundsString() const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return to_chararray(mUpperBound);
 }
 
 template<typename T>
 std::vector<std::string> SimpleProperty<T>::getBoundsString() const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return std::vector<std::string>{std::to_string(mBottomBound), std::to_string(mUpperBound)};
 }
 
 template<typename T>
 std::vector<T> SimpleProperty<T>::getBounds() const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return std::vector<T>{mBottomBound, mUpperBound};
 }
 
 template<typename T>
 void SimpleProperty<T>::serialize(IMultiLevelStore *data) const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(!data) return;
 	data->add("name", mName.c_str());
 	data->add("value", std::to_string(mValue).c_str());
@@ -147,6 +162,7 @@ void SimpleProperty<T>::serialize(IMultiLevelStore *data) const{
 
 template<typename T>
 void SimpleProperty<T>::deserialize(const IMultiLevelStore *data){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(!data) return;
 	try{
 		mName = data->get("name");

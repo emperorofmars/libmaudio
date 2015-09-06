@@ -20,19 +20,23 @@ Scene::~Scene(){
 }
 
 void Scene::setName(const char *name){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	mName = name;
 	return;
 }
 
 const char *Scene::getName() const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return mName.c_str();
 }
 
 long Scene::add(IAction *node){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return add(sptr<IAction>(node));
 }
 
 long Scene::add(sptr<IAction> node){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(!node) return -1;
 	if(isPartOfScene(node->getID())) return node->getID();
 	mNodes[node->getID()] = node;
@@ -42,6 +46,7 @@ long Scene::add(sptr<IAction> node){
 }
 
 void Scene::remove(unsigned long id){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(!isPartOfScene(id)) return;
 	std::vector<unsigned long> outputs = getOutputs(id);
 	for(unsigned int i = 0; i < outputs.size(); i++){
@@ -57,6 +62,7 @@ void Scene::remove(unsigned long id){
 }
 
 sptr<IAction> Scene::getEnd(unsigned int num){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(num >= mAdjacencyList.size()) return NULL;
 	for(auto iter1 = mAdjacencyList.begin(); iter1 != mAdjacencyList.end(); iter1 ++){
 		unsigned long tmp = iter1->first;
@@ -80,10 +86,12 @@ sptr<IAction> Scene::getEnd(unsigned int num){
 }
 
 sptr<IAction> Scene::get(unsigned long id){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	return mNodes[id];
 }
 
 unsigned int Scene::getNumEnds(){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	unsigned int ret = 0;
 	for(auto iter1 = mAdjacencyList.begin(); iter1 != mAdjacencyList.end(); iter1 ++){
 		unsigned long tmp = iter1->first;
@@ -106,6 +114,7 @@ unsigned int Scene::getNumEnds(){
 }
 
 void Scene::connect(unsigned long source, unsigned long sink){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	sptr<IAction> sourceNode = get(source);
 	sptr<IAction> sinkNode = get(sink);
 	if(sourceNode && sinkNode){
@@ -119,6 +128,7 @@ void Scene::connect(unsigned long source, unsigned long sink){
 }
 
 void Scene::disconnect(unsigned long source, unsigned long sink){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	sptr<IAction> sourceNode = get(source);
 	sptr<IAction> sinkNode = get(sink);
 	if(sourceNode && sinkNode){
@@ -134,6 +144,7 @@ void Scene::disconnect(unsigned long source, unsigned long sink){
 }
 
 std::vector<unsigned long> Scene::getOutputs(unsigned long id){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	std::vector<unsigned long> ret;
 	for(auto iter = mAdjacencyList.begin(); iter != mAdjacencyList.end(); iter++){
 		if(iter->first && iter->second.size() > 0){
@@ -146,6 +157,7 @@ std::vector<unsigned long> Scene::getOutputs(unsigned long id){
 }
 
 void Scene::readConfig(const IKeyValueStore *conf){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(!conf) return;
 	for(auto iter = mNodes.begin(); iter != mNodes.end(); iter++){
 		if(iter->second) iter->second->readConfig(conf);
@@ -154,6 +166,7 @@ void Scene::readConfig(const IKeyValueStore *conf){
 }
 
 void Scene::serialize(IMultiLevelStore *data) const{
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(!data) return;
 	data->add("name", mName.c_str());
 	for(auto iter = mNodes.begin(); iter != mNodes.end(); iter++){
@@ -180,6 +193,7 @@ void Scene::serialize(IMultiLevelStore *data) const{
 }
 
 void Scene::deserialize(const IMultiLevelStore *data){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	if(!data) return;
 	try{
 		mName = data->get("name");

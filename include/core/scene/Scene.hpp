@@ -9,10 +9,11 @@
 
 #include "core/serializer/ISerializable.hpp"
 #include "core/util/BaseObservable.hpp"
+#include "core/action/IAction.hpp"
 #include "core/util/sptr.hpp"
-#include "core/util/RecursiveSharedMutex.hpp"
 #include <string>
 #include <map>
+#include <mutex>
 
 namespace maudio{
 
@@ -48,6 +49,7 @@ private:
 	std::string mName;
 	std::map<unsigned long, sptr<IAction>> mNodes;
 	std::map<unsigned long, std::vector<unsigned long>> mAdjacencyList;
+	mutable std::recursive_mutex mMutex;
 };
 
 } // maudio

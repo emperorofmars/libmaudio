@@ -20,6 +20,7 @@ const char *SimpleProperty<bool>::getString() const{
 //string
 template<>
 void SimpleProperty<std::string>::set(std::string value){
+	std::lock_guard<std::recursive_mutex> lock(mMutex);
 	mValue = value;
 	notifyObservers(ON_CHANGE);
 	return;

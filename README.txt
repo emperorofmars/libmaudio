@@ -33,5 +33,6 @@ echo src = [ > sources.txt && find ./src ./include \( -name "*.cpp" -o -name "*.
 
 number of lines:
 
-find . -name \*.cpp -or -name \*.hpp -exec cat {} \; | wc -l
+find ./src ./include ./pluginsrc -name '*.cpp' -o -name '*.hpp' | xargs wc -l
+
 

@@ -8,15 +8,19 @@
 #include "maudio/store/ConfigManager.hpp"
 #include "maudio/store/StoreReader.hpp"
 #include "maudio/util/TypeIdConverter.hpp"
+#include "maudio/MaudioPaths.hpp"
+
+#include <iostream>
 
 namespace maudio{
 
 PluginManager::PluginManager(){
 	try{
-		parseConfig(ConfigManager::Instance()->getConfig()->get("pluginconf"));
+		const char *path = ConfigManager::Instance()->getConfig()->get("pluginconf");
+		if(!path) path = Paths::getUserPluginConfigFile();
+		parseConfig(path);
 	}
 	catch(std::exception &e){
-		//
 	}
 	return;
 }
@@ -31,6 +35,7 @@ PluginManager *PluginManager::Instance(){
 }
 
 void PluginManager::parseConfig(const char *path){
+	if(!path) throw MaudioException("invalid path!");
 	StoreReader<IMultiStore> reader;
 	try{
 		readConfig(reader.readFile(path));
@@ -41,6 +46,7 @@ void PluginManager::parseConfig(const char *path){
 }
 
 void PluginManager::readConfig(const IMultiStore *conf){
+	if(!conf) throw MaudioException("invalid store!");
 	for(unsigned int i = 0; i < conf->getSize("plugin"); i++){
 		try{
 			addPlugin(conf->get("plugin", i));
@@ -52,6 +58,7 @@ void PluginManager::readConfig(const IMultiStore *conf){
 }
 
 void PluginManager::addPlugin(const char *path){
+	if(!path) throw MaudioException("invalid path!");
 	std::shared_ptr<PluginLoader<IAction>> tmp(new PluginLoader<IAction>(path));
 	if(tmp->loaded()){
 		if(checkNameCollisions(std::string(path)) || checkNameCollisions(tmp->getName())){

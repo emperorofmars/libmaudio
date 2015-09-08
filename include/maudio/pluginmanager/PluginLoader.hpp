@@ -10,8 +10,13 @@
 #include "maudio/util/String.hpp"
 #include "maudio/util/BaseObservable.hpp"
 #include "maudio/util/AudioException.hpp"
-#include <dlfcn.h>
 #include <string>
+
+#if defined(unix) || defined(__unix__) || defined(__unix)
+	#include <dlfcn.h>
+#elif defined(_WIN32) || defined(WIN32) || defined(_WIN64)
+	//loadlibrary
+#endif
 
 namespace maudio{
 
@@ -62,6 +67,7 @@ PluginLoader<T>::~PluginLoader(){
 
 template<typename T>
 void PluginLoader<T>::loadPlugin(const char *path){
+#if defined(unix) || defined(__unix__) || defined(__unix)
 	dlerror();
 	mHandle = dlopen(path, RTLD_LAZY);
 	if(!mHandle){
@@ -89,17 +95,24 @@ void PluginLoader<T>::loadPlugin(const char *path){
 
 	mPath = path;
 	mName = nameFunc();
+#elif defined(_WIN32) || defined(WIN32) || defined(_WIN64)
+	//windows loadlibrary
+#endif
 	return;
 }
 
 template<typename T>
 void PluginLoader<T>::unloadPlugin(){
+#if defined(unix) || defined(__unix__) || defined(__unix)
 	if(loaded()){
 		dlclose(mHandle);
 		mHandle = NULL;
 		mCreateFunc = NULL;
 		mDestroyFunc = NULL;
 	}
+#elif defined(_WIN32) || defined(WIN32) || defined(_WIN64)
+	//windows
+#endif
 	return;
 }
 

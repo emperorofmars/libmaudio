@@ -1,8 +1,11 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.0)
 project(maudio)
 
 #remove to install to system
 set(CMAKE_INSTALL_PREFIX "install")
+
+#set to zero for system install
+add_definitions("-DMAUDIO_PORTABLE=1")
 
 set(MAUDIO_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
 set(MAUDIO_SOURCE_DIR "${PROJECT_SOURCE_DIR}/src")
@@ -14,7 +17,7 @@ include_directories(${MAUDIO_TEST_DIR})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wl,--no-as-needed")
 SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
-set(CMAKE_INSTALL_RPATH "./res/lib:../res/lib:.")
+set(CMAKE_INSTALL_RPATH "./res/lib:.")
 
 #set preprocessor variables for version and commit hash
 if(EXISTS "${PROJECT_SOURCE_DIR}/.git/HEAD")
@@ -84,6 +87,7 @@ set(MAUDIO_SOURCE_FILES
 	${PROJECT_SOURCE_DIR}/src/maudio/audiodata/AudioBuffer.cpp
 	${PROJECT_SOURCE_DIR}/src/maudio/pluginmanager/PluginManager.cpp
 	${PROJECT_SOURCE_DIR}/src/maudio/MaudioInfo.cpp
+	${PROJECT_SOURCE_DIR}/src/maudio/MaudioPaths.cpp
 )
 
 set(MAUDIO_TEST_FILES

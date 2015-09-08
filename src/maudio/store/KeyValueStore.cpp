@@ -15,10 +15,12 @@ KeyValueStore::~KeyValueStore(){
 }
 
 const char *KeyValueStore::get(const char *key) const{
+	if(mData.find(std::string(key)) == mData.end()) return NULL;
 	return mData.at(key).c_str();
 }
 
 std::string KeyValueStore::get(const std::string &key) const{
+	if(mData.find(std::string(key)) == mData.end()) return "";
 	return mData.at(key);
 }
 
@@ -39,6 +41,7 @@ const char *KeyValueStore::get(unsigned int numKey) const{
 		iter++;
 		numKey--;
 	}
+	if(numKey > 0) return NULL;
 	return iter->second.c_str();
 }
 
@@ -50,6 +53,7 @@ std::string KeyValueStore::get(unsigned int numKey) const{
 		iter++;
 		numKey--;
 	}
+	if(numKey > 0) return NULL;
 	return iter->second;
 }
 
@@ -60,6 +64,7 @@ const char *KeyValueStore::getKey(unsigned int numKey) const{
 		iter++;
 		numKey--;
 	}
+	if(numKey > 0) return NULL;
 	return iter->first.c_str();
 }
 
@@ -69,6 +74,7 @@ unsigned int KeyValueStore::getSize() const{
 
 void KeyValueStore::set(const char *key, const char *value){
 	if(!checkKey(key)) return;
+	if(!value) return;
 	mData[key] = value;
 	return;
 }

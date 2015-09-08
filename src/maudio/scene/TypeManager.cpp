@@ -31,7 +31,7 @@ sptr<IAction> TypeManager::create(const char *type, const char *name){
 			ret = PluginManager::Instance()->createInstance(type);
 		}
 		catch(std::exception &e){
-			
+			ret.reset(new ErrorAction());
 		}
 	}
 	if(ret && name){

@@ -10,8 +10,6 @@
 #include "maudio/store/KeyValueStore.hpp"
 #include <string>
 
-#define CONFIG_DEFAULT_PATH "res/config/maudio.conf"
-
 namespace maudio{
 
 class ConfigManager{

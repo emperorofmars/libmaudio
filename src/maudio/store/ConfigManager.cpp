@@ -8,6 +8,7 @@
 #include "maudio/store/StoreReader.hpp"
 #include "maudio/util/sptr.hpp"
 #include "maudio/util/AudioException.hpp"
+#include "maudio/MaudioPaths.hpp"
 #include <fstream>
 
 namespace maudio{
@@ -19,11 +20,26 @@ ConfigManager* ConfigManager::Instance(){
 
 ConfigManager::ConfigManager(){
 	setDefaults();
-	mPath = CONFIG_DEFAULT_PATH;
-	if(checkFile(mPath.c_str())){
-		loadFromFile(mPath.c_str());
+	unsigned int i = 0;
+	const char *conf = NULL;
+	while((conf = Paths::getSystemConfigFile(i)) != NULL){
+		try{
+			loadFromFile(conf);
+		}
+		catch(std::exception &e){
+		}
 	}
-	else{
+	const char *tmpfile = Paths::getUserConfigFile();
+	if(tmpfile) mPath = tmpfile;
+	try{
+		if(checkFile(mPath.c_str())){
+			loadFromFile(mPath.c_str());
+		}
+		else{
+			mPath = "";
+		}
+	}
+	catch(std::exception &e){
 		mPath = "";
 	}
 }
@@ -32,11 +48,12 @@ ConfigManager::~ConfigManager(){
 }
 
 void ConfigManager::setConfigPath(const char *path){
+	if(!path) throw MaudioException("invalid path!");
 	if(checkFile(path)){
 		loadFromFile(path);
 		mPath = path;
 	}
-	throw MaudioException("invalid config path");
+	return;
 }
 
 const char *ConfigManager::getConfigPath() const{
@@ -58,6 +75,7 @@ bool ConfigManager::checkFile(const char *path) const{
 }
 
 void ConfigManager::loadFromFile(const char *path){
+	if(!path) throw MaudioException("invalid path");
 	StoreReader<IKeyValueStore> reader;
 	try{
 		sptr<IKeyValueStore> tmp(reader.readFile(path));
@@ -69,9 +87,7 @@ void ConfigManager::loadFromFile(const char *path){
 }
 
 void ConfigManager::setDefaults(){
-	mConfig.set("pluginconf", "res/config/plugins.conf");
-	mConfig.set("PlayerQueueSize", 1024 * 8);
-	mConfig.set("SinkBufferSize", 1024 * 8);
+	mConfig.set("pluginconf", Paths::getUserPluginConfigFile());
 	return;
 }
 

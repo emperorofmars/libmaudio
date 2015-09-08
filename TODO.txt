@@ -72,8 +72,8 @@ Todo:
 - ////restructure project, move player to a plugin
 - create file reader
 - create file writer
-- node: make api reasonably stable
 - write tests
+- node: make api reasonably stable
 - qt gui
 - export scene to svg
 - create channel converter

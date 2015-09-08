@@ -13,7 +13,6 @@
 #include "maudio/scene/TypeManager.hpp"
 #include "maudio/scene/Project.hpp"
 #include "maudio/MaudioInfo.hpp"
-#include "maudio/audiodata/Sample.hpp"
 /*
 #include "core/manipulator/Resampler.hpp"
 #include "core/audiosink/Performance.hpp"
@@ -33,15 +32,21 @@ int main(int argc, char *argv[]){
 	std::cerr << "version info: " << getVersionPatch() << std::endl;
 	
 	
+	std::cerr << "create project" << std::endl;
+	
 	Project proj1("test_project");
 	proj1.setSaveFile("testfile.maup");
 	
 	std::shared_ptr<Scene> scene1(new Scene("test_scene"));
 	proj1.addScene(scene1);
 	
+	std::cerr << "create nodes" << std::endl;
+	
 	long sin1 = scene1->add(TypeManager::create("SinusGenerator", "sin1"));
 	long sin2 = scene1->add(TypeManager::create("SinusGenerator", "sin2"));
+	std::cerr << "create Mixer" << std::endl;
 	long mix = scene1->add(TypeManager::create("Mixer", "mix"));
+	std::cerr << "create Player" << std::endl;
 	long play = scene1->add(TypeManager::create("Player", "play"));
 	
 	std::cerr << "connect" << std::endl;
@@ -87,8 +92,6 @@ int main(int argc, char *argv[]){
 	
 	std::cerr << "deserialize" << std::endl;
 	
-	
-	std::shared_ptr<ISample> s(new Sample(2));
 	
 	Project proj2;
 	proj2.load("testfile.maup");

@@ -42,7 +42,6 @@ long Scene::add(sptr<IAction> node){
 	if(isPartOfScene(node->getID())) return node->getID();
 	mNodes[node->getID()] = node;
 	mAdjacencyList[node->getID()] = std::vector<unsigned long>();
-	notifyObservers(ON_CHANGE, "node added");
 	return node->getID();
 }
 
@@ -58,9 +57,7 @@ void Scene::remove(unsigned long id){
 	for(unsigned int i = 0; i < outputs.size(); i++){
 		disconnect(id, outputs[i]);
 	}
-	//mNodes[id].reset();
 	mNodes.erase(mNodes.find(id));
-	//mAdjacencyList[id].clear();
 	mAdjacencyList.erase(mAdjacencyList.find(id));
 	notifyObservers(ON_CHANGE, "node removed");
 	return;

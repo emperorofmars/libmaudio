@@ -13,7 +13,7 @@ Sample::Sample(unsigned int channels){
 	mData.resize(channels);
 }
 
-Sample::Sample(const std::vector<float> data){
+Sample::Sample(const std::vector<float> &data){
 	mData = data;
 }
 

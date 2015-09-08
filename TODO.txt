@@ -70,8 +70,8 @@ Todo:
 - ////scene: replace
 - ////move singen and termprint to extended
 - ////restructure project, move player to a plugin
-- create file writer
 - create file reader
+- create file writer
 - node: make api reasonably stable
 - write tests
 - qt gui

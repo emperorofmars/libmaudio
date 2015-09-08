@@ -16,7 +16,7 @@ namespace maudio{
 class Sample : public ISample{
 public:
 	Sample(unsigned int channels);
-	Sample(const std::vector<float> data);
+	Sample(const std::vector<float> &data);
 	Sample(const ISample &data);
 	virtual ~Sample();
 

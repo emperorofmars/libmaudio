@@ -8,10 +8,12 @@
 #include <chrono>
 #include <thread>
 #include <mutex>
+#include <memory>
 #include "maudio/scene/Scene.hpp"
 #include "maudio/scene/TypeManager.hpp"
 #include "maudio/scene/Project.hpp"
 #include "maudio/MaudioInfo.hpp"
+#include "maudio/audiodata/Sample.hpp"
 /*
 #include "core/manipulator/Resampler.hpp"
 #include "core/audiosink/Performance.hpp"
@@ -29,7 +31,8 @@ int main(int argc, char *argv[]){
 	std::cerr << "version info: " << getVersionMajor() << std::endl;
 	std::cerr << "version info: " << getVersionMinor() << std::endl;
 	std::cerr << "version info: " << getVersionPatch() << std::endl;
-	/*
+	
+	
 	Project proj1("test_project");
 	proj1.setSaveFile("testfile.maup");
 	
@@ -83,7 +86,9 @@ int main(int argc, char *argv[]){
 	proj1.save();
 	
 	std::cerr << "deserialize" << std::endl;
-	*/
+	
+	
+	std::shared_ptr<ISample> s(new Sample(2));
 	
 	Project proj2;
 	proj2.load("testfile.maup");

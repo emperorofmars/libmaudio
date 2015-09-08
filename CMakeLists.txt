@@ -1,18 +1,22 @@
 cmake_minimum_required(VERSION 2.8)
 project(maudio)
 
+#remove to install to system
+set(CMAKE_INSTALL_PREFIX "install")
+
 set(MAUDIO_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
 set(MAUDIO_SOURCE_DIR "${PROJECT_SOURCE_DIR}/src")
+set(MAUDIO_TEST_DIR "${PROJECT_SOURCE_DIR}/test")
 
 include_directories(${MAUDIO_INCLUDE_DIR})
 include_directories(${MAUDIO_SOURCE_DIR})
+include_directories(${MAUDIO_TEST_DIR})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wl,--no-as-needed")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/cmake-build")
-
 SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
-set(CMAKE_INSTALL_RPATH "./res/lib")
+set(CMAKE_INSTALL_RPATH "./res/lib:../res/lib:.")
 
+#set preprocessor variables for version and commit hash
 if(EXISTS "${PROJECT_SOURCE_DIR}/.git/HEAD")
 	execute_process(
 		COMMAND git rev-parse --abbrev-ref HEAD
@@ -80,91 +84,53 @@ set(MAUDIO_SOURCE_FILES
 	${PROJECT_SOURCE_DIR}/src/maudio/audiodata/AudioBuffer.cpp
 	${PROJECT_SOURCE_DIR}/src/maudio/pluginmanager/PluginManager.cpp
 	${PROJECT_SOURCE_DIR}/src/maudio/MaudioInfo.cpp
-) 
+)
 
-set(MAUDIO_INCLUDE_FILES
-	${PROJECT_SOURCE_DIR}/include/maudio/store/StoreWriter.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/store/MultiLevelStore.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/store/StoreReader.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/store/MultiStore.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/store/IMultiStore.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/store/ConfigManager.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/store/KeyValueStore.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/store/IKeyValueStore.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/store/IMultiLevelStore.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/property/SimpleProperty.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/property/IPropertyManager.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/property/IProperty.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/property/IKeyableProperty.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/property/PropertyManager.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/property/SimpleKeyableProperty.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/action/BaseAction.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/action/IAction.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/action/ErrorAction.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/action/IControl.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/util/BaseObservable.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/util/IObserver.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/util/String.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/util/AudioException.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/util/UniqueID.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/util/BaseObserver.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/util/IObservable.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/util/Util.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/util/sptr.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/util/TypeIdConverter.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/scene/Scene.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/scene/TypeManager.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/scene/Project.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/serializer/ISerializable.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/serializer/TXTSerializer.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/serializer/SerializerInfo.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/serializer/ISerializer.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/MaudioInfo.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/extended/SinusGenerator.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/extended/TerminalPrinter.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/audiodata/AudioInfo.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/audiodata/IAudioInfo.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/audiodata/Sample.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/audiodata/IAudioBuffer.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/audiodata/FileInfo.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/audiodata/AudioQueue.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/audiodata/ISample.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/audiodata/AudioBuffer.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/pluginmanager/PluginManager.hpp
-	${PROJECT_SOURCE_DIR}/include/maudio/pluginmanager/PluginLoader.hpp
+set(MAUDIO_TEST_FILES
+	${PROJECT_SOURCE_DIR}/test/maudio/audiodata/AudioQueueTest.cpp
+	${PROJECT_SOURCE_DIR}/test/maudio/audiodata/SampleTest.cpp
+	${PROJECT_SOURCE_DIR}/test/maudio/audiodata/AudioBufferTest.cpp
+	${PROJECT_SOURCE_DIR}/test/MaudioTest.cpp
 )
 
 set(TESTBIN_SOURCE_FILES
 	./examples/test1.cpp
 )
 
+#maudio library
 add_library(maudio SHARED ${MAUDIO_SOURCE_FILES})
 target_link_libraries(maudio -ldl)
-target_link_libraries(maudio -lpthread)
+target_link_libraries(maudio -pthread)
 
-install(TARGETS maudio DESTINATION "${CMAKE_SOURCE_DIR}/res/lib")
-
-#install(TARGETS maudio DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/lib")
-#install(DIRECTORY "${MAUDIO_INCLUDE_DIR}/" DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/include")
-
-add_executable(maudio_test EXCLUDE_FROM_ALL ${TESTBIN_SOURCE_FILES})
+#test binary
+add_executable(maudio_test ${MAUDIO_TEST_FILES})
 target_link_libraries(maudio_test maudio)
+target_link_libraries(maudio_test -lgtest)
+target_link_libraries(maudio_test -pthread)
 
-#[[
-set(CPACK_GENERATOR "DEB")
+#example binary
+add_executable(maudio_example ${TESTBIN_SOURCE_FILES})
+target_link_libraries(maudio_example maudio)
+
+#testing
+enable_testing()
+add_test(maudio_test maudio_test)
+
+#install lib to prefix
+install(TARGETS maudio LIBRARY DESTINATION "lib")
+
+#install headers to prefix
+install(DIRECTORY "${MAUDIO_INCLUDE_DIR}/" DESTINATION "include")
+
+#create packages
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Martin Schwarz")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "MAudio")
 set(CPACK_PACKAGE_VENDOR "Martin Schwarz")
-set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/README.txt")
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt")
+set(CPACK_PACKAGE_DESCRIPTION_FILE "${PROJECT_SOURCE_DIR}/README.txt")
+set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE.txt")
 set(CPACK_PACKAGE_VERSION_MAJOR "0")
 set(CPACK_PACKAGE_VERSION_MINOR "0")
 set(CPACK_PACKAGE_VERSION_PATCH "0")
-
+set(CPACK_OUTPUT_FILE_PREFIX "packages")
 INCLUDE(CPack)
-]]
-
-
-
-
 

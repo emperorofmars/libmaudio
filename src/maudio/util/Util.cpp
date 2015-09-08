@@ -7,6 +7,7 @@
 #include "maudio/util/Util.hpp"
 #include <algorithm>
 #include <cstring>
+#include <sstream>
 
 namespace maudio{
 
@@ -180,6 +181,16 @@ const char* to_chararray(std::string &value){
 const char* to_chararray(std::string value){
 	char *ret = new char[value.size() + 1];
 	strcpy(ret, value.c_str());
+	return ret;
+}
+
+std::vector<std::string> split(const std::string &str, char delim){
+	std::vector<std::string> ret;
+	std::stringstream ss(str);
+    std::string tmp;
+    while (std::getline(ss, tmp, delim)) {
+        ret.push_back(tmp);
+    }
 	return ret;
 }
 

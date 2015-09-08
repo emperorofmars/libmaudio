@@ -7,8 +7,6 @@
 #include "maudio/MaudioPaths.hpp"
 #include <fstream>
 
-#include <iostream>
-
 #if defined(unix) || defined(__unix__) || defined(__unix)
 	#include <unistd.h>
 	#include <sys/types.h>
@@ -147,7 +145,7 @@ void Paths::setup(){
 				else{
 					tmp = tmpconfdir.substr(0, tmpconfdir.size());
 					tmpconfdir.erase(0, tmpconfdir.size());
-					if(tmp.size() == 0) return;
+					if(tmp.size() == 0) break;
 				}
 				if(tmp[tmp.size() - 1] != '/'){
 					tmp.append("/");
@@ -164,7 +162,7 @@ void Paths::setup(){
 				else{
 					tmp = tmpplugdir.substr(0, tmpplugdir.size());
 					tmpplugdir.erase(0, tmpplugdir.size());
-					if(tmp.size() == 0) return;
+					if(tmp.size() == 0) break;
 				}
 				if(tmp[tmp.size() - 1] != '/'){
 					tmp.append("/");

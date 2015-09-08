@@ -8,6 +8,7 @@
 #define MAUDIO_UTIL
 
 #include <string>
+#include <vector>
 
 namespace maudio{
 
@@ -28,6 +29,8 @@ const char* to_chararray(long double value);
 const char* to_chararray(const char *value);
 const char* to_chararray(std::string &value);
 const char* to_chararray(std::string value);
+
+std::vector<std::string> split(const std::string &str, char delim = ' ');
 
 } // maudio
 

@@ -268,28 +268,28 @@ const char *Player::Control::getFunctionParam(unsigned int num){
 	return NULL;
 }
 
-unsigned int Player::Control::callFunction(unsigned int num, const char *param){
+const char *Player::Control::callFunction(unsigned int num, const char *param){
 	if(num == 0){
 		mData->play();
-		return 0;
+		return NULL;
 	}
 	if(num == 1){
 		mData->stop();
-		return 0;
+		return NULL;
 	}
-	return -1;
+	return NULL;
 }
 
-unsigned int Player::Control::callFunction(const char *name, const char *param){
+const char *Player::Control::callFunction(const char *name, const char *param){
 	if(std::string("play") == std::string(name)){
 		mData->play();
-		return 0;
+		return NULL;
 	}
 	if(std::string("stop") == std::string(name)){
 		mData->stop();
-		return 0;
+		return NULL;
 	}
-	return -1;
+	return NULL;
 }
 
 void Player::Control::stop(){

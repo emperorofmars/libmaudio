@@ -13,6 +13,7 @@
 #include "maudio/scene/TypeManager.hpp"
 #include "maudio/scene/Project.hpp"
 #include "maudio/MaudioInfo.hpp"
+#include "maudio/MaudioPaths.hpp"
 /*
 #include "core/manipulator/Resampler.hpp"
 #include "core/audiosink/Performance.hpp"
@@ -31,6 +32,10 @@ int main(int argc, char *argv[]){
 	std::cerr << "version info: " << getVersionMinor() << std::endl;
 	std::cerr << "version info: " << getVersionPatch() << std::endl;
 	
+	unsigned int numdirs = 0;
+	while(Paths::getSystemConfigDir(numdirs) != 0) numdirs++;
+	std::cerr << "num system config dirs: " << numdirs << std::endl;
+	
 	
 	std::cerr << "create project" << std::endl;
 	
@@ -44,16 +49,16 @@ int main(int argc, char *argv[]){
 	
 	long sin1 = scene1->add(TypeManager::create("SinusGenerator", "sin1"));
 	long sin2 = scene1->add(TypeManager::create("SinusGenerator", "sin2"));
-	std::cerr << "create Mixer" << std::endl;
 	long mix = scene1->add(TypeManager::create("Mixer", "mix"));
-	std::cerr << "create Player" << std::endl;
 	long play = scene1->add(TypeManager::create("Player", "play"));
+	long write = scene1->add(TypeManager::create("FileWriter", "writer"));
 	
 	std::cerr << "connect" << std::endl;
 	
 	scene1->connect(sin1, mix);
 	scene1->connect(sin2, mix);
 	scene1->connect(mix, play);
+	scene1->connect(mix, write);
 	
 	auto sin1Prop = scene1->get(sin1)->getProperties();
 	auto sin1Freq = sin1Prop->getKeyableProperty("Frequency");
@@ -72,7 +77,7 @@ int main(int argc, char *argv[]){
 	auto sin2Freq = sin2Prop->getKeyableProperty("Frequency");
 	sin2Freq->setKey("1100", 0);
 	
-	auto playCtrl1 = proj1.getScene((unsigned int)0)->getEnd(0)->getControl();
+	auto playCtrl1 = scene1->get(play)->getControl();
 	if(!playCtrl1) throw MaudioException("FUUU 01");
 	
 	std::cerr << "play" << std::endl;
@@ -81,6 +86,26 @@ int main(int argc, char *argv[]){
 		playCtrl1->callFunction("play");
 		std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 		playCtrl1->callFunction("stop");
+	}
+	catch(std::exception &e){
+		std::cerr << "play error: " << e.what() << std::endl;
+	}
+	
+	
+	auto writeCtrl1 = scene1->get(write)->getControl();
+	if(!writeCtrl1) throw MaudioException("FUUU WRITER");
+	
+	std::cerr << "write" << std::endl;
+	
+	try{
+		const char *writerret = NULL;
+		writerret = writeCtrl1->callFunction("setFileName", "test.ogg");
+		if(writerret) std::cerr << "writer 01: " << writerret << std::endl;
+		writerret = writeCtrl1->callFunction("write", "0;100000");
+		if(writerret) std::cerr << "writer 01: " << writerret << std::endl;
+		std::this_thread::sleep_for(std::chrono::milliseconds(200));
+		writerret = writeCtrl1->callFunction("getResult");
+		if(writerret) std::cerr << "writer 01: " << writerret << std::endl;
 	}
 	catch(std::exception &e){
 		std::cerr << "play error: " << e.what() << std::endl;

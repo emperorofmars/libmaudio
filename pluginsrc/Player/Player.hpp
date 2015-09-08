@@ -4,18 +4,43 @@
  * See LICENSE.txt for the full license
  */
 
-#ifndef MAUDIO_TERMINALPRINTER
-#define MAUDIO_TERMINALPRINTER
+#ifndef MAUDIO_PLAYER
+#define MAUDIO_PLAYER
 
+#include "AudioDevice.hpp"
 #include "maudio/action/BaseAction.hpp"
-#include <memory>
+#include "maudio/audiodata/AudioQueue.hpp"
+#include <thread>
 
 namespace maudio{
 
-class TerminalPrinter : public BaseAction{
+class Player : public BaseAction{
 public:
-	TerminalPrinter();
-	virtual ~TerminalPrinter();
+	Player();
+	Player(int device);
+	Player(std::string &device);
+	virtual ~Player();
+
+	void open();
+	void open(int device);
+	void open(std::string &device);
+	void close();
+
+	std::vector<std::string> listDevices();
+
+	void play();
+	void pause();
+	void unpause();
+	void stop();
+
+	void setPosition(unsigned long samples);
+	unsigned long getPosition();
+	void setPosition(float seconds);
+	float getPosition_sek();
+
+	std::string getStatus();
+	bool getOpened();
+	bool playing();
 
 	virtual IAudioBuffer *get(unsigned long pos, unsigned int length) noexcept;
 	virtual IAudioInfo *getInfo() noexcept;
@@ -32,12 +57,15 @@ public:
 	virtual void serialize(IMultiLevelStore *data) const;
 	virtual void deserialize(const IMultiLevelStore *data);
 
-	void print(unsigned long pos);
-
 private:
+	void feed();
+	void startFeed();
+	void stopFeed();
+	static void asyncFeed(Player *player);
+
 	class Control : public IControl{
 	public:
-		Control(TerminalPrinter *data);
+		Control(Player *data);
 		virtual ~Control();
 
 		virtual unsigned int getNumFunctions();
@@ -48,13 +76,27 @@ private:
 		virtual void stop();
 
 	private:
-		TerminalPrinter *mData = NULL;
+		Player *mData;
 	};
 	std::shared_ptr<Control> mControl = std::make_shared<Control>(this);
+
+	AudioDevice *mDevice = NULL;
+	std::string mDeviceName;
+	std::shared_ptr<AudioQueue> mQueue;
+	std::shared_ptr<std::thread> mThread;
+	bool mFeederRun = false;
+	unsigned long mPosition = 0;
+
+	unsigned int mQueueSize = 1024 * 8;
 };
 
 } // maudio
 
-#endif // MAUDIO_TERMINALPRINTER
+
+extern "C" void* create();
+extern "C" void destroy(void *data);
+extern "C" const char *getName();
+
+#endif // MAUDIO_PLAYER
 
 

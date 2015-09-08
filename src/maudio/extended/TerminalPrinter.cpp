@@ -113,20 +113,20 @@ const char *TerminalPrinter::Control::getFunctionParam(unsigned int num){
 	return NULL;
 }
 
-unsigned int TerminalPrinter::Control::callFunction(unsigned int num, const char *param){
+const char *TerminalPrinter::Control::callFunction(unsigned int num, const char *param){
 	if(num == 0){
 		mData->print(string_to<unsigned int>(std::string(param)));
-		return 0;
+		return NULL;
 	}
-	return -1;
+	return NULL;
 }
 
-unsigned int TerminalPrinter::Control::callFunction(const char *name, const char *param){
+const char *TerminalPrinter::Control::callFunction(const char *name, const char *param){
 	if(std::string("print") == std::string(name)){
 		mData->print(string_to<unsigned int>(std::string(param)));
-		return 0;
+		return NULL;
 	}
-	return -1;
+	return NULL;
 }
 
 void TerminalPrinter::Control::stop(){

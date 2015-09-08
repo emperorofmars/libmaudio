@@ -194,6 +194,13 @@ std::vector<std::string> split(const std::string &str, char delim){
 	return ret;
 }
 
+char *heapLiteral(const char *literal){
+	if(!literal) return NULL;
+	char *ret = new char[strlen(literal) + 1];
+	strcpy(ret, literal);
+	return ret;
+}
+
 } // maudio
 
 

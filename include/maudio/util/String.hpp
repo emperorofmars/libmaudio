@@ -36,6 +36,7 @@ public:
 
 	unsigned int size();
 	const char *c_str();
+	char *release();
 	void clear();
 
 	friend std::ostream& operator<<(std::ostream &out, String &str);

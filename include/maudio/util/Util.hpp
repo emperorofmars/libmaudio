@@ -31,6 +31,7 @@ const char* to_chararray(std::string &value);
 const char* to_chararray(std::string value);
 
 std::vector<std::string> split(const std::string &str, char delim = ' ');
+char *heapLiteral(const char *literal);
 
 } // maudio
 

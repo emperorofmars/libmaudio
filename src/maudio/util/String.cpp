@@ -97,6 +97,13 @@ const char *String::c_str(){
 	return mData;
 }
 
+char *String::release(){
+	char *ret = mData;
+	mData = NULL;
+	mSize = 0;
+	return ret;
+}
+
 void String::clear(){
 	if(mData != NULL) delete mData;
 	mData = NULL;

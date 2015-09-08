@@ -165,17 +165,17 @@ const char *FileWriter::Control::getFunctionParam(unsigned int num){
 
 const char *FileWriter::Control::callFunction(unsigned int num, const char *param){
 	if(num == 0){
-		if(!param) return "param is NULL!";
+		if(!param) return heapLiteral("param is NULL!");
 		std::vector<std::string> params = split(std::string(param), ';');
-		if(params.size() < 1) return "invalid number of params!";
+		if(params.size() < 1) return heapLiteral("invalid number of params!");
 		
 		mData->setFileName(params[0].c_str());
 		return NULL;
 	}
 	if(num == 1){
-		if(!param) return "param is NULL!";
+		if(!param) return heapLiteral("param is NULL!");
 		std::vector<std::string> params = split(std::string(param), ';');
-		if(params.size() < 1) return "invalid number of params!";
+		if(params.size() < 1) return heapLiteral("invalid number of params!");
 		try{
 			unsigned long param1 = string_to<unsigned long>(params[0]);
 			unsigned long param2 = 0;
@@ -183,17 +183,17 @@ const char *FileWriter::Control::callFunction(unsigned int num, const char *para
 				mData->write(param1, param2);
 			}
 		catch(std::exception &e){
-			return "invalid param!";
+			return heapLiteral("invalid param!");
 		}
 		return NULL;
 	}
 	if(num == 2){
-		if(mData->mSuccess == 0) return "not running";
-		if(mData->mSuccess == 1) return "working";
-		if(mData->mSuccess == 2) return "success";
-		else return "failure";
+		if(mData->mSuccess == 0) return heapLiteral("not running");
+		if(mData->mSuccess == 1) return heapLiteral("working");
+		if(mData->mSuccess == 2) return heapLiteral("success");
+		else return heapLiteral("failure");
 	}
-	return "invalid function number!";
+	return heapLiteral("invalid function number!");
 }
 
 const char *FileWriter::Control::callFunction(const char *name, const char *param){
@@ -206,7 +206,7 @@ const char *FileWriter::Control::callFunction(const char *name, const char *para
 	if(std::string("getResult") == std::string(name)){
 		return callFunction((unsigned int)2, param);
 	}
-	return "invalid function name!";
+	return heapLiteral("invalid function name!");
 }
 
 void FileWriter::Control::stop(){

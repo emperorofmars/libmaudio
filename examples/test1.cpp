@@ -14,6 +14,7 @@
 #include "maudio/scene/Project.hpp"
 #include "maudio/MaudioInfo.hpp"
 #include "maudio/MaudioPaths.hpp"
+#include "maudio/util/String.hpp"
 /*
 #include "core/manipulator/Resampler.hpp"
 #include "core/audiosink/Performance.hpp"
@@ -98,7 +99,7 @@ int main(int argc, char *argv[]){
 	std::cerr << "write" << std::endl;
 	
 	try{
-		const char *writerret = NULL;
+		String writerret;
 		writerret = writeCtrl1->callFunction("setFileName", "test.ogg");
 		if(writerret) std::cerr << "writer 01: " << writerret << std::endl;
 		writerret = writeCtrl1->callFunction("write", "0;100000");

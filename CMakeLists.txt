@@ -1,11 +1,18 @@
 cmake_minimum_required(VERSION 3.0)
 project(maudio)
 
-#remove to install to system
-set(CMAKE_INSTALL_PREFIX "install")
+set(MAUDIO_PORTABLE 0 CACHE BOOL "set portable install")
 
-#set to zero for system install
-add_definitions("-DMAUDIO_PORTABLE=1")
+if(MAUDIO_PORTABLE EQUAL 1)
+	message(STATUS "Using portable install")
+	
+	set(CMAKE_INSTALL_PREFIX "install")
+	add_definitions("-DMAUDIO_PORTABLE=1")
+else()
+	message(STATUS "Using system install")
+	
+	add_definitions("-DMAUDIO_PORTABLE=0")
+endif()
 
 set(MAUDIO_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
 set(MAUDIO_SOURCE_DIR "${PROJECT_SOURCE_DIR}/src")
@@ -16,7 +23,7 @@ include_directories(${MAUDIO_SOURCE_DIR})
 include_directories(${MAUDIO_TEST_DIR})
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -Wall -Wl,--no-as-needed")
-SET(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
+set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
 set(CMAKE_INSTALL_RPATH "./res/lib:.")
 
 #set preprocessor variables for version and commit hash
@@ -53,6 +60,8 @@ if(EXISTS "${PROJECT_SOURCE_DIR}/.git/HEAD")
 	if(${GIT_VERSION} MATCHES "^v%d.%d.%d")
 		add_definitions("-DMAUDIO_VERSION=\"${GIT_VERSION}\"")
 	endif()
+else()
+	message(WARNING "Couldn't retrieve version information from git!")
 endif()
 
 set(MAUDIO_SOURCE_FILES
@@ -121,12 +130,20 @@ enable_testing()
 add_test(maudio_test maudio_test)
 
 #install lib to prefix
-install(TARGETS maudio LIBRARY DESTINATION "lib")
+if(MAUDIO_PORTABLE EQUAL 1)
+	install(TARGETS maudio LIBRARY DESTINATION "res/lib")
+else()
+	install(TARGETS maudio LIBRARY DESTINATION "lib")
+	#install headers to prefix
+	install(DIRECTORY "${MAUDIO_INCLUDE_DIR}/" DESTINATION "include")
+endif()
 
-#install headers to prefix
-install(DIRECTORY "${MAUDIO_INCLUDE_DIR}/" DESTINATION "include")
 
 #create packages
+if(MAUDIO_PORTABLE EQUAL 1)
+	set(CPACK_GENERATOR "ZIP")
+endif()
+
 set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Martin Schwarz")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "MAudio")
 set(CPACK_PACKAGE_VENDOR "Martin Schwarz")

@@ -119,12 +119,12 @@ void Paths::setup(){
 				mUserPluginDir.append("/");
 			}
 			if(userconfigdir && userplugindir){
-				mUserConfigDir.append("maudio/config/");
-				mUserPluginDir.append("maudio/plugins/");
+				mUserConfigDir.append(MAUDIO_SYSTEM_CONFIGDIR);
+				mUserPluginDir.append(MAUDIO_SYSTEM_PLUGINDIR);
 			}
 			else{
-				mUserConfigDir.append(".maudio/config/");
-				mUserPluginDir.append(".maudio/plugins/");
+				mUserConfigDir.append(MAUDIO_DEFAULT_CONFIGDIR);
+				mUserPluginDir.append(MAUDIO_DEFAULT_PLUGINDIR);
 			}
 			
 			//get xdg system directories
@@ -150,7 +150,7 @@ void Paths::setup(){
 				if(tmp[tmp.size() - 1] != '/'){
 					tmp.append("/");
 				}
-				tmp.append("maudio/config/");
+				tmp.append(MAUDIO_SYSTEM_CONFIGDIR);
 				mSystemConfigDirs.push_back(tmp);
 			}
 			std::string tmpplugdir(systemplugindir);
@@ -167,7 +167,7 @@ void Paths::setup(){
 				if(tmp[tmp.size() - 1] != '/'){
 					tmp.append("/");
 				}
-				tmp.append("maudio/plugins/");
+				tmp.append(MAUDIO_SYSTEM_PLUGINDIR);
 				mSystemPluginDirs.push_back(tmp);
 			}
 		}
@@ -182,10 +182,10 @@ void Paths::setup(){
 		std::ifstream ustream1(utmp1);
 		if(ustream1.is_open()) mUserConfigFile = utmp1;
 		
-		std::string utmp2 = mUserConfigDir;
+		std::string utmp2 = mUserPluginDir;
 		utmp2.append(MAUDIO_DEFAULT_PLUGINCONFIGFILE);
 		std::ifstream ustream2(utmp2);
-		if(ustream2.is_open()) mUserPluginConfigFile = utmp1;
+		if(ustream2.is_open()) mUserPluginConfigFile = utmp2;
 		
 		//set system file paths if they exist
 		if(!getPortable()){

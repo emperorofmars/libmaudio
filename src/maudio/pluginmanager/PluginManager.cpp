@@ -17,8 +17,19 @@ namespace maudio{
 PluginManager::PluginManager(){
 	try{
 		const char *path = ConfigManager::Instance()->getConfig()->get("pluginconf");
-		if(!path) path = Paths::getUserPluginConfigFile();
-		parseConfig(path);
+		if(path) parseConfig(path);
+	}
+	catch(std::exception &e){
+	}
+	try{
+		const char *path = Paths::getUserPluginConfigFile();
+		if(path) parseConfig(path);
+	}
+	catch(std::exception &e){
+	}
+	try{
+		const char *path = Paths::getSystemPluginConfigFile();
+		if(path) parseConfig(path);
 	}
 	catch(std::exception &e){
 	}
@@ -48,11 +59,7 @@ void PluginManager::parseConfig(const char *path){
 void PluginManager::readConfig(const IMultiStore *conf){
 	if(!conf) throw MaudioException("invalid store!");
 	for(unsigned int i = 0; i < conf->getSize("plugin"); i++){
-		try{
-			addPlugin(conf->get("plugin", i));
-		}
-		catch(std::exception &e){
-		}
+		addPlugin(conf->get("plugin", i));
 	}
 	return;
 }
@@ -66,6 +73,7 @@ void PluginManager::addPlugin(const char *path){
 		}
 		mPlugins.push_back(tmp);
 	}
+	else throw MaudioException("loading plugin failed!");
 	return;
 }
 

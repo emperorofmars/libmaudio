@@ -15,10 +15,6 @@
 #include "maudio/MaudioInfo.hpp"
 #include "maudio/MaudioPaths.hpp"
 #include "maudio/util/String.hpp"
-/*
-#include "core/manipulator/Resampler.hpp"
-#include "core/audiosink/Performance.hpp"
-*/
 
 using namespace maudio;
 
@@ -116,8 +112,8 @@ int main(int argc, char *argv[]){
 	
 	proj1.save();
 	
-	std::cerr << "deserialize" << std::endl;
 	
+	std::cerr << "deserialize" << std::endl;
 	
 	Project proj2;
 	proj2.load("testfile.maup");

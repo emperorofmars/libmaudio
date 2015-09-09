@@ -22,6 +22,22 @@
 	#define MAUDIO_PORTABLE_PLUGINDIR "res/plugins/"
 #endif
 
+#ifndef MAUDIO_SYSTEM_CONFIGDIR
+	#define MAUDIO_SYSTEM_CONFIGDIR "maudio/config/"
+#endif
+
+#ifndef MAUDIO_SYSTEM_PLUGINDIR
+	#define MAUDIO_SYSTEM_PLUGINDIR "maudio/plugins/"
+#endif
+
+#ifndef MAUDIO_DEFAULT_CONFIGDIR
+	#define MAUDIO_DEFAULT_CONFIGDIR "maudio/config/"
+#endif
+
+#ifndef MAUDIO_DEFAULT_PLUGINDIR
+	#define MAUDIO_DEFAULT_PLUGINDIR "maudio/plugins/"
+#endif
+
 #ifndef MAUDIO_DEFAULT_CONFIGFILE
 	#define MAUDIO_DEFAULT_CONFIGFILE "maudio.conf"
 #endif

@@ -20,7 +20,6 @@ public:
 	virtual ~BaseObserver();
 	
 	virtual unsigned long getObserverID() const final;
-	//virtual void stopObserving(unsigned long id) final;
 	
 private:
 	virtual void onAdd(IObservable *origin) final;

@@ -25,7 +25,9 @@ public:
 	void parseConfig(const char *path);
 	void readConfig(const IMultiStore *conf);
 
-	void addPlugin(const char *path);
+	void addSearchPath(const char *path);
+	std::vector<std::string> SearchPaths();
+	void addPlugin(const char *name);
 	std::vector<std::string> listPlugins();
 	sptr<IAction> createInstance(unsigned int plugin);
 	sptr<IAction> createInstance(const char *plugin);
@@ -40,6 +42,7 @@ private:
 	bool checkNameCollisions(std::string name);
 	
 	std::vector<std::shared_ptr<PluginLoader<IAction>>> mPlugins;
+	std::vector<std::string> mSearchPaths;
 };
 
 } // maudio

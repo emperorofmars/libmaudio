@@ -10,28 +10,43 @@
 #include "maudio/util/TypeIdConverter.hpp"
 #include "maudio/MaudioPaths.hpp"
 
-#include <iostream>
-
 namespace maudio{
 
 PluginManager::PluginManager(){
 	try{
+		const char *searchpath = ConfigManager::Instance()->getConfig()->get("pluginsearchpath");
+		if(searchpath) addSearchPath(searchpath);
 		const char *path = ConfigManager::Instance()->getConfig()->get("pluginconf");
 		if(path) parseConfig(path);
 	}
 	catch(std::exception &e){
 	}
+	
 	try{
+		const char *tmp = Paths::getUserPluginDir();
+		if(tmp) addSearchPath(tmp);
 		const char *path = Paths::getUserPluginConfigFile();
 		if(path) parseConfig(path);
 	}
 	catch(std::exception &e){
 	}
-	try{
-		const char *path = Paths::getSystemPluginConfigFile();
-		if(path) parseConfig(path);
-	}
-	catch(std::exception &e){
+	
+	if(!Paths::getPortable()){
+		unsigned int i = 0;
+		const char *tmpspath = NULL;
+		while((tmpspath = Paths::getSystemPluginDir(i)) != NULL){
+			addSearchPath(tmpspath);
+			i++;
+		}
+		i = 0;
+		tmpspath = NULL;
+		while((tmpspath = Paths::getSystemPluginConfigFile(i)) != NULL){
+			try{
+				parseConfig(tmpspath);
+			}
+			catch(std::exception &e){
+			}
+		}
 	}
 	return;
 }
@@ -59,16 +74,44 @@ void PluginManager::parseConfig(const char *path){
 void PluginManager::readConfig(const IMultiStore *conf){
 	if(!conf) throw MaudioException("invalid store!");
 	for(unsigned int i = 0; i < conf->getSize("plugin"); i++){
-		addPlugin(conf->get("plugin", i));
+		try{
+			addPlugin(conf->get("plugin", i));
+		}
+		catch(std::exception &e){
+		}
 	}
 	return;
 }
 
-void PluginManager::addPlugin(const char *path){
-	if(!path) throw MaudioException("invalid path!");
-	std::shared_ptr<PluginLoader<IAction>> tmp(new PluginLoader<IAction>(path));
+void PluginManager::addSearchPath(const char *path){
+	if(path) mSearchPaths.push_back(std::string(path));
+	return;
+}
+
+std::vector<std::string> PluginManager::SearchPaths(){
+	return mSearchPaths;
+}
+
+void PluginManager::addPlugin(const char *name){
+	if(!name) throw MaudioException("invalid name!");
+	std::string sname(name);
+	
+	std::shared_ptr<PluginLoader<IAction>> tmp;
+	if((sname.size() > 0 && sname[0] == '/') ||
+		(sname.size() > 1 && sname[0] == '.' && sname[1] == '/'))
+	{
+		tmp.reset(new PluginLoader<IAction>(sname.c_str()));
+	}
+	else{
+		for(unsigned int i = 0; i < mSearchPaths.size(); i++){
+			std::string path(mSearchPaths[i]);
+			path.append(sname);
+			tmp.reset(new PluginLoader<IAction>(path.c_str()));
+			if(tmp) break;
+		}
+	}
 	if(tmp->loaded()){
-		if(checkNameCollisions(std::string(path)) || checkNameCollisions(tmp->getName())){
+		if(checkNameCollisions(sname) || checkNameCollisions(tmp->getName())){
 			throw MaudioException("plugin name collision!");
 		}
 		mPlugins.push_back(tmp);

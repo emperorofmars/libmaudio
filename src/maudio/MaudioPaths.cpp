@@ -104,9 +104,12 @@ void Paths::setup(){
 			const char *userconfigdir = getenv("XDG_CONFIG_HOME");
 			const char *userplugindir = getenv("XDG_DATA_HOME");
 			//if those arent set
-			if(!userconfigdir || !userplugindir){
+			if(!userconfigdir){
 				struct passwd *pw = getpwuid(getuid());
 				userconfigdir = pw->pw_dir;
+			}
+			if(!userplugindir){
+				struct passwd *pw = getpwuid(getuid());
 				userplugindir = pw->pw_dir;
 			}
 			//ensure '/' cahracter at the end
@@ -128,15 +131,12 @@ void Paths::setup(){
 			}
 			
 			//get xdg system directories
-			const char *systemconfigdir = getenv("XDG_CONFIG_DIRS");
-			const char *systemplugindir = getenv("XDG_DATA_DIRS");
-			if(!systemconfigdir || !systemplugindir){
-				struct passwd *pw = getpwuid(getuid());
-				systemconfigdir = pw->pw_dir;
-				systemplugindir = pw->pw_dir;
+			const char *systemdir = getenv("XDG_DATA_DIRS");
+			if(!systemdir){
+				systemdir = "/usr/share/:/usr/local/share/";
 			}
 			//ensure '/' cahracter at the end and append maudio path
-			std::string tmpconfdir(systemconfigdir);
+			std::string tmpconfdir(systemdir);
 			while(tmpconfdir.size() > 0){
 				std::string tmp = tmpconfdir.substr(0, tmpconfdir.find_first_of(':'));
 				if(tmp.size() > 0){
@@ -150,25 +150,12 @@ void Paths::setup(){
 				if(tmp[tmp.size() - 1] != '/'){
 					tmp.append("/");
 				}
-				tmp.append(MAUDIO_SYSTEM_CONFIGDIR);
-				mSystemConfigDirs.push_back(tmp);
-			}
-			std::string tmpplugdir(systemplugindir);
-			while(tmpplugdir.size() > 0){
-				std::string tmp = tmpplugdir.substr(0, tmpplugdir.find_first_of(':'));
-				if(tmp.size() > 0){
-					tmpplugdir.erase(0, tmpplugdir.find_first_of(':'));
-				}
-				else{
-					tmp = tmpplugdir.substr(0, tmpplugdir.size());
-					tmpplugdir.erase(0, tmpplugdir.size());
-					if(tmp.size() == 0) break;
-				}
-				if(tmp[tmp.size() - 1] != '/'){
-					tmp.append("/");
-				}
-				tmp.append(MAUDIO_SYSTEM_PLUGINDIR);
-				mSystemPluginDirs.push_back(tmp);
+				std::string tmpsysconf = tmp;
+				tmpsysconf.append(MAUDIO_SYSTEM_CONFIGDIR);
+				mSystemConfigDirs.push_back(tmpsysconf);
+				std::string tmpsysplug = tmp;
+				tmpsysplug.append(MAUDIO_SYSTEM_PLUGINDIR);
+				mSystemPluginDirs.push_back(tmpsysplug);
 			}
 		}
 #elif defined(_WIN32) || defined(WIN32) || defined(_WIN64)
@@ -182,7 +169,7 @@ void Paths::setup(){
 		std::ifstream ustream1(utmp1);
 		if(ustream1.is_open()) mUserConfigFile = utmp1;
 		
-		std::string utmp2 = mUserPluginDir;
+		std::string utmp2 = mUserConfigDir;
 		utmp2.append(MAUDIO_DEFAULT_PLUGINCONFIGFILE);
 		std::ifstream ustream2(utmp2);
 		if(ustream2.is_open()) mUserPluginConfigFile = utmp2;

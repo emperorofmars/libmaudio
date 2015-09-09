@@ -132,6 +132,7 @@ add_test(maudio_test maudio_test)
 #install lib to prefix
 if(MAUDIO_PORTABLE EQUAL 1)
 	install(TARGETS maudio LIBRARY DESTINATION "res/lib")
+	install(TARGETS maudio_example RUNTIME DESTINATION ".")
 else()
 	install(TARGETS maudio LIBRARY DESTINATION "lib")
 	#install headers to prefix

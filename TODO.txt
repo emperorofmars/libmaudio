@@ -71,7 +71,7 @@ Todo:
 - ////move singen and termprint to extended
 - ////restructure project, move player to a plugin
 - ////create file writer
-- create file reader
+- ////create file reader
 - write tests
 - node: make api reasonably stable
 - qt gui

@@ -87,7 +87,7 @@ int main(int argc, char *argv[]){
 	
 	try{
 		playCtrl1->callFunction("play");
-		std::this_thread::sleep_for(std::chrono::milliseconds(3500));
+		std::this_thread::sleep_for(std::chrono::milliseconds(1500));
 		playCtrl1->callFunction("stop");
 	}
 	catch(std::exception &e){
@@ -112,6 +112,8 @@ int main(int argc, char *argv[]){
 	catch(std::exception &e){
 		std::cerr << "play error: " << e.what() << std::endl;
 	}
+	
+	std::cerr << "serialize" << std::endl;
 	
 	proj1.save();
 	

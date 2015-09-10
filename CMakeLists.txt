@@ -1,15 +1,19 @@
 cmake_minimum_required(VERSION 3.0)
 project(libmaudio)
 
-set(MAUDIO_PORTABLE 0 CACHE BOOL "set portable install")
+if(NOT DEFINED MAUDIO_PARENT_PROJECT)
+	set(MAUDIO_PARENT_PROJECT 0)
+endif()
 
-if(MAUDIO_PORTABLE EQUAL 1)
-	message(STATUS "Using portable install")
+set(PORTABLE 1 CACHE BOOL "set portable install")
+
+if(PORTABLE EQUAL 1)
+	message(STATUS "libmaudio: using portable install")
 	
 	set(CMAKE_INSTALL_PREFIX "install")
 	add_definitions("-DMAUDIO_PORTABLE=1")
 else()
-	message(STATUS "Using system install")
+	message(STATUS "libmaudio: using system install")
 	
 	add_definitions("-DMAUDIO_PORTABLE=0")
 endif()
@@ -106,10 +110,6 @@ set(MAUDIO_TEST_FILES
 	${PROJECT_SOURCE_DIR}/test/MaudioTest.cpp
 )
 
-set(TESTBIN_SOURCE_FILES
-	./examples/test1.cpp
-)
-
 #maudio library
 add_library(maudio SHARED ${MAUDIO_SOURCE_FILES})
 target_link_libraries(maudio -ldl)
@@ -121,18 +121,13 @@ target_link_libraries(maudio_test maudio)
 target_link_libraries(maudio_test -lgtest)
 target_link_libraries(maudio_test -pthread)
 
-#example binary
-add_executable(maudio_example ${TESTBIN_SOURCE_FILES})
-target_link_libraries(maudio_example maudio)
-
 #testing
 enable_testing()
 add_test(maudio_test maudio_test)
 
 #install lib to prefix
-if(MAUDIO_PORTABLE EQUAL 1)
+if(PORTABLE EQUAL 1)
 	install(TARGETS maudio LIBRARY DESTINATION "res/lib")
-	install(TARGETS maudio_example RUNTIME DESTINATION ".")
 else()
 	install(TARGETS maudio LIBRARY DESTINATION "lib")
 	#install headers to prefix
@@ -140,8 +135,8 @@ else()
 endif()
 
 #create packages
-if(NOT DEFINED ${MAUDIO_PARENT_PROJECT} OR ${MAUDIO_PARENT_PROJECT} EQUAL 0)
-	if(MAUDIO_PORTABLE EQUAL 1)
+if(${MAUDIO_PARENT_PROJECT} EQUAL 0)
+	if(PORTABLE EQUAL 1)
 		set(CPACK_GENERATOR "ZIP")
 	endif()
 

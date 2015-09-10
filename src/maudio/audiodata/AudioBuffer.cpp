@@ -40,6 +40,7 @@ ISample *AudioBuffer::operator[](unsigned long pos) const{
 void AudioBuffer::operator=(const IAudioBuffer &data){
 	mInfo = *data.getInfo();
 	mData.assign(data.getRaw(), data.getRaw() + data.getInfo()->getSamples() * data.getInfo()->getChannels());
+	resize(mInfo.getSamples());
 	return;
 }
 
@@ -70,8 +71,8 @@ const IAudioInfo *AudioBuffer::getInfo() const{
 	return &mInfo;
 }
 
-const float* AudioBuffer::getRaw() const{
-	return &mData[0];
+float *AudioBuffer::getRaw() const{
+	return (float *)&mData[0];
 }
 
 Sample *AudioBuffer::createSample(unsigned long pos) const{

@@ -32,7 +32,7 @@ public:
 	virtual void resize(unsigned long samples);
 	virtual const IAudioInfo *getInfo() const;
 
-	virtual const float* getRaw() const;
+	virtual float* getRaw() const;
 
 private:
 	Sample *createSample(unsigned long pos) const;

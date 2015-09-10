@@ -26,7 +26,7 @@ public:
 	virtual void resize(unsigned long samples) = 0;
 	virtual const IAudioInfo *getInfo() const = 0;
 
-	virtual const float* getRaw() const = 0;
+	virtual float* getRaw() const = 0;
 };
 
 } // maudio

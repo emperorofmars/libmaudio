@@ -73,7 +73,7 @@ Todo:
 - ////create file writer
 - ////create file reader
 - write tests
-- node: make api reasonably stable
+- make api reasonably stable
 - qt gui
 - export scene to svg
 - create channel converter

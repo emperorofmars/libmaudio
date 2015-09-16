@@ -6,6 +6,7 @@ if(NOT DEFINED MAUDIO_PARENT_PROJECT)
 endif()
 
 set(PORTABLE 1 CACHE BOOL "set portable install")
+set(DEBIAN 0 CACHE BOOL "create Debian package")
 
 if(PORTABLE EQUAL 1)
 	message(STATUS "libmaudio: using portable install")
@@ -136,10 +137,14 @@ endif()
 
 #create packages
 if(${MAUDIO_PARENT_PROJECT} EQUAL 0)
-	if(PORTABLE EQUAL 1)
+	if(${PORTABLE} EQUAL 1)
+		message(STATUS "libmaudio: using zip package generator")
 		set(CPACK_GENERATOR "ZIP")
+	elseif(${DEBIAN} EQUAL 1)
+		message(STATUS "libmaudio: using Debian package generator")
+		set(CPACK_GENERATOR "DEB")
 	endif()
-
+	
 	set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Martin Schwarz")
 	set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "MAudio")
 	set(CPACK_PACKAGE_VENDOR "Martin Schwarz")

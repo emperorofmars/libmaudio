@@ -29,7 +29,6 @@ int main(int argc, char *argv[]){
 	std::cerr << "version info: " << getVersionMinor() << std::endl;
 	std::cerr << "version info: " << getVersionPatch() << std::endl;
 	
-	
 	std::cerr << "create project" << std::endl;
 	
 	Project proj1("test_project");

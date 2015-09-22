@@ -31,11 +31,11 @@
 #endif
 
 #ifndef MAUDIO_DEFAULT_CONFIGDIR
-	#define MAUDIO_DEFAULT_CONFIGDIR "maudio/config/"
+	#define MAUDIO_DEFAULT_CONFIGDIR ".maudio/config/"
 #endif
 
 #ifndef MAUDIO_DEFAULT_PLUGINDIR
-	#define MAUDIO_DEFAULT_PLUGINDIR "maudio/plugins/"
+	#define MAUDIO_DEFAULT_PLUGINDIR ".maudio/plugins/"
 #endif
 
 #ifndef MAUDIO_DEFAULT_CONFIGFILE
@@ -64,6 +64,7 @@ public:
 	
 private:
 	static void setup();
+	void static ensureSlash(std::string &str);
 	
 	static std::string mUserConfigDir;
 	static std::string mUserPluginDir;

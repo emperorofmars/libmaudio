@@ -43,6 +43,7 @@ PluginManager::PluginManager(){
 		while((tmpspath = Paths::getSystemPluginConfigFile(i)) != NULL){
 			try{
 				parseConfig(tmpspath);
+				i++;
 			}
 			catch(std::exception &e){
 			}

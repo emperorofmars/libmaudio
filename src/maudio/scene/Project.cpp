@@ -89,9 +89,6 @@ void Project::save() const{
 			}
 			prevIn.close();
 		}
-		else{
-			throw MaudioException("couldnt open file!");
-		}
 	}
 	
 	std::shared_ptr<ISerializer> serializer = SerializerInfo::getDefaultSerializer();

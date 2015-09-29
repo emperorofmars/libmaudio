@@ -111,7 +111,7 @@ void PluginManager::addPlugin(const char *name){
 			if(tmp) break;
 		}
 	}
-	if(tmp->loaded()){
+	if(tmp &&tmp->loaded()){
 		if(checkNameCollisions(sname) || checkNameCollisions(tmp->getName())){
 			throw MaudioException("plugin name collision!");
 		}

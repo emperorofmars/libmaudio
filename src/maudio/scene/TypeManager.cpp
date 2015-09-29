@@ -10,6 +10,7 @@
 #include "maudio/extended/SinusGenerator.hpp"
 #include "maudio/extended/TerminalPrinter.hpp"
 #include <string>
+#include <iostream>
 
 namespace maudio{
 
@@ -32,6 +33,7 @@ sptr<IAction> TypeManager::create(const char *type, const char *name){
 		}
 		catch(std::exception &e){
 			ret.reset(new ErrorAction());
+	std::cerr << e.what() << std::endl;
 		}
 	}
 	if(ret && name){
